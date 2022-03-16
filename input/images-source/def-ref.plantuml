@@ -1,0 +1,13 @@
+@startuml "def-ref"
+
+class ItemDef {
+    OID
+}
+
+class ItemRef {
+    ItemOID
+}
+
+ItemRef --> ItemDef: OID
+
+@enduml

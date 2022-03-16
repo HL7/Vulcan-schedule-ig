@@ -1,0 +1,35 @@
+# ╭─────────────────────────Commonly Used ImplementationGuide Properties───────────────────────────╮
+# │  The properties below are used to create the ImplementationGuide resource. The most commonly   │
+# │  used properties are included. For a list of all supported properties and their functions,     │
+# │  see: https://fshschool.org/docs/sushi/configuration/.                                         │
+# ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
+id: hl7.fhir.uv.vulcan-soa
+canonical: http://hl7.org/fhir/uv/vulcan-soa
+name: VulcanSofA
+title: Vulcan Schedule of Activites FHIR Implementation Guide
+description: FHIR Implementation Guide representing a Research Study Schedule of Activites
+status: draft # draft | active | retired | unknown
+version: 0.1.0
+fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+copyrightYear: 2022+
+releaseLabel: ci-build # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
+license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
+jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World" # https://www.hl7.org/fhir/valueset-jurisdiction.html
+publisher:
+  name: HL7 International - Biomedical Research & Regulation Work Group
+  url: http://hl7.org/Special/committees/rcrim
+  # email: test@example.org
+
+pages:
+  index.md:
+    title: Home
+  h2q-mc-lzzt.md:
+    title: LZZT Schedule ODM File
+  cdisc-odm.md:
+    title: CDISC ODM
+
+menu:
+  Home: index.html
+  LZZT Schedule: h2q-mc-lzzt.html
+  CDISC ODM Walkthrough: cdisc-odm.html
+  Artifacts: artifacts.html

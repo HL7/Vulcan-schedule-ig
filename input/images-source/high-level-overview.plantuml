@@ -1,0 +1,18 @@
+@startuml "high-level-overview"
+package "Design"{
+    [ResearchStudy] ..> [StudyDefinition(PlanDefinition)] : protocol
+    [StudyDefinition(PlanDefinition)] ..> [PlannedVisit(PlanDefinition)] : action[n]
+    [PlannedVisit(PlanDefinition)] ..> [PlannedActivity(PlanDefinition | ActivityDefinition)] : action[n]
+}
+
+package "H2Q-MC-LZZT" {
+    [H2Q-MC-LZZT] <- [ResearchStudy]
+    [H2Q-MC-LZZT Schedule of Activities] <- [StudyDefinition(PlanDefinition)]
+    [H2Q-MC-LZZT] ..> [H2Q-MC-LZZT Schedule of Activities]: protocol
+    [H2Q-MC-LZZT Visits] <- [PlannedVisit(PlanDefinition)]
+    [H2Q-MC-LZZT Schedule of Activities] ..> [H2Q-MC-LZZT Visits] : refers
+    [H2Q-MC-LZZT Planned Activities] <- [PlannedActivity(PlanDefinition | ActivityDefinition)]
+    [H2Q-MC-LZZT Visits] ..> [H2Q-MC-LZZT Planned Activities]: refers
+}
+
+@enduml

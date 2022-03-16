@@ -1,0 +1,25 @@
+{
+  "package-id": "hl7.fhir.uv.vulcan-soa",
+  "canonical": "http://hl7.org/fhir/uv/vulcan-soa",
+  "title": "Vulcan Schedule of Activities FHIR Implementation Guide",
+  "introduction": "A FHIR Implementation Guide that provides profiles and use cases that show how to represent a research study's Schedule of Activities in FHIR format.",
+  "list": [
+    {
+      "version": "current",
+      "desc": "Continuous Integration Build (latest in version control)",
+      "path": "https://build.fhir.org/ig/HL7/vulcan-schedule-ig",
+      "status": "ci-build",
+      "current": true
+    },
+    {
+      "version": "0.1.0",
+      "desc": "First public ballot",
+      "path": "http://hl7.org/fhir/uv/vulcan-soa/2023Jan",
+	    "date": "2023Jan",
+      "status": "ballot",
+	    "sequence": "STU 1",
+      "fhirversion": "4.0.1"
+    }
+  ],
+  "category": "Research"
+}

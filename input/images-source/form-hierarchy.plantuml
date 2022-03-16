@@ -1,0 +1,46 @@
+@startuml "form-hierarchy"
+
+package "Definition"{
+    class Protocol
+
+    class MetaDataVersion {
+        MetaDataVersionOID
+    }
+
+    class StudyEventDef
+
+    class FormDef
+
+    class ItemGroupDef
+
+    class ItemDef
+
+    MetaDataVersion -- Protocol
+    Protocol *-- StudyEventDef: StudyEventRef
+    StudyEventDef *-- FormDef : FormRef
+    FormDef *-- ItemGroupDef : ItemGroupRef
+    ItemGroupDef *-- ItemDef : ItemRef
+}
+
+package "Data" {
+    class ClinicalData
+    class SubjectData 
+    class StudyEventData
+    class FormData
+    class ItemGroupData
+    class ItemData
+
+    ClinicalData *-- SubjectData
+    SubjectData *-- StudyEventData
+    StudyEventData *-- FormData
+    FormData *-- ItemGroupData
+    ItemGroupData *-- ItemData
+
+    ClinicalData --> MetaDataVersion: MetaDataVersionOID
+    StudyEventData --> StudyEventDef: StudyEventOID
+    FormData --> FormDef: FormOID
+    ItemGroupData --> ItemGroupDef: ItemGroupOID
+    ItemData --> ItemDef: ItemOID
+
+}
+@enduml
