@@ -23,10 +23,16 @@ publisher:
 pages:
   index.md:
     title: Home
-  usecases.md:
-    title: Use Cases
+  basic-structure.md:
+    title: Core Schedule of Activites Model
+  visit-windows.md:
+    title: Visit Windowing
+  ip-administration.md:
+    title: Investigational Product Administration
+  unscheduled-activities.md:
+    title: Unscheduled Activites
   implementation.md:
-    title: Implementation
+    title: Implementations
   examples.md:
     title: Examples
   profiles.md:
@@ -42,7 +48,12 @@ pages:
 
 menu:
   Home: index.html
-  Use Cases: usecases.html
+  Core Model:
+    Core Implementation Model: basic-structure.html
+  Use Cases:
+    Visit Windows: visit-windows.html
+    Investigational Product Administration: ip-administration.html
+    Unscheduled Activites: unscheduled-activities.html
   Implementations: implementation.html
   Examples: examples.html
   Profiles: profiles.html
