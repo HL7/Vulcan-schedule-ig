@@ -23,23 +23,30 @@ publisher:
 pages:
   index.md:
     title: Home
-  usecase1.md:
-    title: Use Case 1
-  usecase2.md:
-    title: Use Case 2
+  usecases.md:
+    title: Use Cases
+  implementation.md:
+    title: Implementation
+  examples.md:
+    title: Examples
   profiles.md:
     title: Profiles
   credits.md:
     title: Credits
   downloads.md:
     title: Downloads
+  cdisc-odm.md:
+    title: CDISC ODM
+  h2q-mc-lzzt.md:
+    title: LZZT Schedule ODM File
 
 menu:
   Home: index.html
-  Use Cases:
-    Use Case 1: usecase1.html
-    Use Case 2: usecase2.html
+  Use Cases: usecases.html
+  Implementations: implementation.html
+  Examples: examples.html
   Profiles: profiles.html
   Artifacts: artifacts.html
   Downloads: downloads.html
+  CDISC ODM Walkthrough: cdisc-odm.html
   Credits: credits.html
