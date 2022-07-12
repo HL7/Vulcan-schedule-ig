@@ -3,10 +3,10 @@
 # │  used properties are included. For a list of all supported properties and their functions,     │
 # │  see: https://fshschool.org/docs/sushi/configuration/.                                         │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
-id: hl7.fhir.uv.vulcan-soa
-canonical: http://hl7.org/fhir/uv/vulcan-soa
-name: VulcanSofA
-title: Vulcan Schedule of Activites FHIR Implementation Guide
+id: hl7.fhir.uv.vulcan-schedule
+canonical: http://hl7.org/fhir/uv/vulcan-schedule
+name: VulcanSchedule
+title: Vulcan Schedule of Study Activites FHIR Implementation Guide
 description: FHIR Implementation Guide representing a Research Study Schedule of Activites
 status: draft # draft | active | retired | unknown
 version: 0.1.0
@@ -23,13 +23,23 @@ publisher:
 pages:
   index.md:
     title: Home
-  h2q-mc-lzzt.md:
-    title: LZZT Schedule ODM File
-  cdisc-odm.md:
-    title: CDISC ODM
+  usecase1.md:
+    title: Use Case 1
+  usecase2.md:
+    title: Use Case 2
+  profiles.md:
+    title: Profiles
+  credits.md:
+    title: Credits
+  downloads.md:
+    title: Downloads
 
 menu:
   Home: index.html
-  LZZT Schedule: h2q-mc-lzzt.html
-  CDISC ODM Walkthrough: cdisc-odm.html
+  Use Cases:
+    Use Case 1: usecase1.html
+    Use Case 2: usecase2.html
+  Profiles: profiles.html
   Artifacts: artifacts.html
+  Downloads: downloads.html
+  Credits: credits.html
