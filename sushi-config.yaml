@@ -23,13 +23,25 @@ publisher:
 pages:
   index.md:
     title: Home
-  h2q-mc-lzzt.md:
-    title: LZZT Schedule ODM File
+  table-of-contents.md:
+    title: Table of Contents
+  use-cases.md:
+    title: Use Cases
+  implementation.md:
+    title: Implementation
+  examples.md:
+    title: Examples
   cdisc-odm.md:
     title: CDISC ODM
+  h2q-mc-lzzt.md:
+    title: LZZT Schedule ODM File
+  
 
 menu:
   Home: index.html
+  Use Cases: use-cases.html
+  Implementation: implementation.html
   LZZT Schedule: h2q-mc-lzzt.html
-  CDISC ODM Walkthrough: cdisc-odm.html
+  Examples: examples.html
   Artifacts: artifacts.html
+  CDISC ODM Walkthrough: cdisc-odm.html
