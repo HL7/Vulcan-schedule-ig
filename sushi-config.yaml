@@ -31,12 +31,20 @@ pages:
     title: Investigational Product Administration
   unscheduled-activities.md:
     title: Unscheduled Activites
+  implementation.md:
+    title: Implementations
+  examples.md:
+    title: Examples
   profiles.md:
     title: Profiles
   credits.md:
     title: Credits
   downloads.md:
     title: Downloads
+  cdisc-odm.md:
+    title: CDISC ODM
+  h2q-mc-lzzt.md:
+    title: LZZT Schedule ODM File
 
 menu:
   Home: index.html
@@ -46,7 +54,10 @@ menu:
     Visit Windows: visit-windows.html
     Investigational Product Administration: ip-administration.html
     Unscheduled Activites: unscheduled-activities.html
+  Implementations: implementation.html
+  Examples: examples.html
   Profiles: profiles.html
   Artifacts: artifacts.html
   Downloads: downloads.html
+  CDISC ODM Walkthrough: cdisc-odm.html
   Credits: credits.html
