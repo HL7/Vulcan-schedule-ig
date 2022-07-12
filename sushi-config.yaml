@@ -23,10 +23,14 @@ publisher:
 pages:
   index.md:
     title: Home
-  usecase1.md:
-    title: Use Case 1
-  usecase2.md:
-    title: Use Case 2
+  basic-structure.md:
+    title: Core Schedule of Activites Model
+  visit-windows.md:
+    title: Visit Windowing
+  ip-administration.md:
+    title: Investigational Product Administration
+  unscheduled-activities.md:
+    title: Unscheduled Activites
   profiles.md:
     title: Profiles
   credits.md:
@@ -36,9 +40,12 @@ pages:
 
 menu:
   Home: index.html
+  Core Model:
+    Core Implementation Model: basic-structure.html
   Use Cases:
-    Use Case 1: usecase1.html
-    Use Case 2: usecase2.html
+    Visit Windows: visit-windows.html
+    Investigational Product Administration: ip-administration.html
+    Unscheduled Activites: unscheduled-activities.html
   Profiles: profiles.html
   Artifacts: artifacts.html
   Downloads: downloads.html
