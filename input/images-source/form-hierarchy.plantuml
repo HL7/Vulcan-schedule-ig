@@ -1,6 +1,6 @@
 @startuml "form-hierarchy"
 
-package "Definition"{
+package "ODM Definition"{
     class Protocol
 
     class MetaDataVersion {
@@ -22,7 +22,7 @@ package "Definition"{
     ItemGroupDef *-- ItemDef : ItemRef
 }
 
-package "Data" {
+package "ODM Data" {
     class ClinicalData
     class SubjectData 
     class StudyEventData
