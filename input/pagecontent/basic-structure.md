@@ -66,7 +66,7 @@ Usage: #example
 * action[=].relatedAction[=].offsetRange.high.value = 15
 * action[=].relatedAction[=].offsetRange.high.code = #d
 ```
-The Event `Visit-3` has an _id_ assigned to it and prior and subsequent activities use the `relatedAction.actionId` to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.
+The Event `Visit-3` has an _id_ assigned to it and prior and subsequent activities use the `relatedAction.actionId` to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targetted windows can be applied to the scheduling of study activities.
 
 # Observations on how the SoA can be implemented
 
