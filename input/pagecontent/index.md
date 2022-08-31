@@ -18,3 +18,5 @@ Examples of positive outcomes for this project include:
 * Resource planning (prospective)​
 * Logistics planning (prospective)​
 
+This iteration for the project is designed to be directional purely - as we learn more about how the different systems work and can be interfaced we will continue to improve the IG to accommodate more use cases, iteratively working towards a solution that will be both functional and scalable.
+
