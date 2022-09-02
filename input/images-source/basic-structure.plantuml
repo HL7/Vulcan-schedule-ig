@@ -1,0 +1,9 @@
+@startuml "basic-structure"
+
+package "Design"{
+    [ResearchStudy] ..> [StudyDefinition(PlanDefinition)] : protocol
+    [StudyDefinition(PlanDefinition)] ..> [PlannedEncounter(PlanDefinition)] : action[n]
+    [PlannedEncounter(PlanDefinition)] ..> [PlannedActivity(PlanDefinition | ActivityDefinition)] : action[n]
+}
+
+@enduml

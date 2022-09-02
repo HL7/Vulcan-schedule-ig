@@ -1,0 +1,56 @@
+@startuml "form-hierarchy"
+
+package "ODM"{
+    object Study
+    object Protocol
+
+    object MetaDataVersion {
+        MetaDataVersionOID
+    }
+
+    object StudyEventDef
+
+    object FormDef
+
+    object ItemGroupDef
+
+    object ItemDef
+
+    Study -- MetaDataVersion
+    MetaDataVersion -- Protocol
+    Protocol *-- StudyEventDef: StudyEventRef
+    StudyEventDef *-- FormDef : FormRef
+    FormDef *-- ItemGroupDef : ItemGroupRef
+    ItemGroupDef *-- ItemDef : ItemRef
+}
+
+package "FHIR" {
+    object ResearchStudy{
+        type ResearchStudy
+    }
+
+
+    object StudyDefinition{
+        type PlanDefinition
+    }
+
+    object PlannedEncounter{
+        type PlanDefinition
+    }
+
+    object PlannedActivity {
+        type ActivityDefinition
+    }
+
+
+    ResearchStudy -- StudyDefinition : protocol
+    StudyDefinition *-- PlannedEncounter : action[n]
+    PlannedEncounter *-- PlannedActivity : action[n]
+
+    ResearchStudy .. Study 
+    StudyDefinition .. Protocol
+    PlannedEncounter .. StudyEventDef
+    PlannedActivity .. FormDef    
+}
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml "plandef-actions"
+
+object StudyDefinition
+object Screening
+object Baseline
+object Visit1 
+object Visit2
+object EndOfStudy
+
+StudyDefinition --|> Screening : action
+StudyDefinition --|> Baseline : action, id: BSL
+StudyDefinition --|> Visit1 : action
+StudyDefinition --|> Visit2 : action
+StudyDefinition --|> EndOfStudy : action
+
+Screening --> Baseline
+Baseline --> Visit1
+Visit1 --> Visit2
+Visit2 --> EndOfStudy
+
+Screening ..> Baseline : before:BSL
+Visit1 ..> Baseline : after:BSL
+Visit2 ..> Baseline : after:BSL
+
+@enduml

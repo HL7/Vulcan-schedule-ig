@@ -1,0 +1,68 @@
+@startuml "implementation-plan-def"
+
+
+package "Definition" {
+    object ResearchStudy 
+    object PlannedStudyDefinition{
+        type = PlanDefinition
+    }
+    object PlannedScreeningVisit {
+        type = PlanDefinition
+    }
+    object VitalSignsActivity {
+        type = ActivityDefinition
+    }
+
+    ResearchStudy --> PlannedStudyDefinition : protocol
+    PlannedStudyDefinition --> PlannedScreeningVisit : action
+    PlannedScreeningVisit --> VitalSignsActivity : action
+}
+
+package "Execution" {
+    object Patient
+    object ResearchSubject
+
+    object StudyPlan {
+        type = CarePlan
+    }
+
+    object PlannedVisit {
+        type = CarePlan
+    }
+
+    object ScheduledVisit {
+        type = ServiceRequest
+    }
+
+    object ScreeningVisit {
+        type = Encounter
+    } 
+
+    object ScheduledVitalSigns {
+        type = ServiceRequest
+    }
+
+    object ConductedVitalSigns {
+        type = Procedure       
+    }
+
+    object SystolicBloodPressureValue {
+        type = Observation
+    }
+
+    ResearchSubject --> ResearchStudy : study
+    ResearchSubject --> Patient : individual
+    StudyPlan <-- PlannedVisit : instantiatesCanonical
+    PlannedVisit <-- ScheduledVisit : basedOn
+    ScheduledVisit <-- ScreeningVisit : basedOn
+    ScreeningVisit <-- ConductedVitalSigns : encounter
+    ScheduledVitalSigns --> ConductedVitalSigns : basedOn
+    ConductedVitalSigns <-- SystolicBloodPressureValue : partOf
+    Patient <-- SystolicBloodPressureValue : subject
+}
+
+PlannedStudyDefinition <.. StudyPlan : instantiatesCanonical 
+PlannedScreeningVisit <.. PlannedVisit: instantiatesCanonical
+VitalSignsActivity <.. ScheduledVitalSigns : instantiatesCanonical
+
+@enduml

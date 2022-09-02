@@ -1,4 +1,5 @@
 @startuml "high-level-overview"
+
 package "Design"{
     [ResearchStudy] ..> [StudyDefinition(PlanDefinition)] : protocol
     [StudyDefinition(PlanDefinition)] ..> [PlannedVisit(PlanDefinition)] : action[n]
