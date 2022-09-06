@@ -56,3 +56,6 @@ Standard of Care activities need to be augmented with a pre-defined set of 'extr
 * Interventions recorded as CM​
 * Adjudication by the Investigator for CS/NCS​
 * Adjudication by the Investigator that the AE related to study intervention​
+
+## Approaches
+The Unscheduled Encounters are usually prescribed with a set of expected activities; in general relating to a safety endpoint from the protocol.  Complications of investigational products can be expected as the evidence for the safety of the product develops; there are outcomes of special interest that may need to be tracked with more specificity; the extra datapoints requiring collected are present in the schedule of activities (sometimes explicitly in the matrix activities, otherwise as part of the protocol narrative).
