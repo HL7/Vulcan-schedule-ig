@@ -22,6 +22,7 @@ Define an intent for the IP administration to occur at a given time relative to 
 * define a pre-dose vitals assessment
 * for a Pharmacokinetic study define precise pre- and post-administration activities
 * define that patient is randomised before receiving study IP
+* understand whether IP administration was a continuous dosing interval or intermittant
 
 # Research 
 
