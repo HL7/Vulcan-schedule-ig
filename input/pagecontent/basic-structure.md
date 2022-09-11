@@ -1,14 +1,20 @@
 # Core Implementation Model for the Schedule of Activities (SoA)
 
 The Schedule of Activities is a key part of the Clinical Trial Protocol; it is usually a graphical representation of two key components:
-* The Encounters/Visits (any planned event that corresponds to clinical data collection)
+* The Encounters/Visits (any planned event corresponding to clinical data collection)
 * The Activities (the planned activities expected to occur at the event)
 
 This is traditionally presented using a grid structure as shown here:
 
 <img src="lzzt_soa.png" alt="H2Q-LZZT-MC Schedule of Activities" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-The Horizontal axis represents the encounters and the vertical axis represents the activities.  The cross section represents the matrix of expected activities and their encounters; this is interpreted by the Study Builder to create a set of planned data collection interfaces; traditionally Case Report Forms (CRFs), but with new approaches to data collection (such as Decentralised Trials or Sensor Informed trials) the CRF is part of the solution. 
+In this representation:
+* the horizontal axis represents the encounters
+* the vertical axis represents the activities
+
+The cross in the matrix represents the expected activities at each encounter.  The matrix is interpreted by a Study Builder to create a set of planned data collection interfaces.  
+
+Data collection has traditionally been based on Case Report Forms (CRFs); however,  with new approaches to data collection (favouring approaches such as Decentralised Trials or Sensor Informed trials) the CRF is just one part of the solution. 
 
 The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol; the CRFs used in Clinical Research are primarily an interface for recording **outcomes** of activities.  It is primarily a set of data requirements, and takes little account of the activities required to do so; this means when we transcribe the requirements from the SoA we should adopt a more 'workflow-based' approach to data management:
 * **what** activities are being done
@@ -72,7 +78,7 @@ The Event `Visit-3` has an _id_ assigned to it and prior and subsequent activiti
 
 Given the structure discussed above, we consider how best the planned activities can be manifested within an Electronic Healthcare Record System.  
 
-We have followed the FHIR Workflow paradigm, we define what needs to be done using the [Definition](https://hl7.org/fhir/definition.html) patters, which are scheduled using [Request](https://hl7.org/fhir/request.html) patterns and ultimately manifested as [Event](https://hl7.org/fhir/event.html) patterns.   We have constrained the implementation examples to the minimum requirement so we can model out the core concepts in a clinical trial protocol.
+We have followed the FHIR Workflow paradigm, we define what needs to be done using the [Definition](https://hl7.org/fhir/definition.html) patterns, which are scheduled using [Request](https://hl7.org/fhir/request.html) patterns and ultimately manifested as [Event](https://hl7.org/fhir/event.html) patterns.   We have constrained the implementation examples to the minimum requirement so we can model out the core concepts in a clinical trial protocol.
 
 Here is an example of how a defined study plan can be related to an executed activity and outcome result itself.
 
@@ -80,9 +86,8 @@ Here is an example of how a defined study plan can be related to an executed act
 
 While the diagram can look very complex; it is methodologically sound as we can build out an approach using a set of common archetypes.  There is a flow of planned -> scheduled -> performed activities that implementers can follow to build processes and software around.  This serves as a way to drive data collection (for prospective and retrospective use cases) and it provides a broad scope for current and future use cases.
 
-
 # Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
-The CDISC Operational Data Model (ODM) structure is one popular model for representing planned activities in CTMS systems - it is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found here: [CDISC-ODM](cdisc-odm.html).
+The CDISC Operational Data Model (ODM) structure is one popular model for representing planned activities in CTMS systems - it is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html) - links to the CDISC site can be found on that page.
 
 Having a standard alignment between the ODM and FHIR enables rapid and reproducible builds using standardised interfaces; each EHR system can reuse the study design as built as part of study start up activities by the Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (eg test codes, procedure codes, etc) but this forms a core model for implementation.
 
