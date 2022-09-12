@@ -14,9 +14,9 @@ In this representation:
 
 The cross in the matrix represents the expected activities at each encounter.  The matrix is interpreted by a Study Builder to create a set of planned data collection interfaces.  
 
-Data collection has traditionally been based on Case Report Forms (CRFs); however,  with new approaches to data collection (favouring approaches such as Decentralised Trials or Sensor Informed trials) the CRF is just one part of the solution. 
+Data collection has traditionally been based on Case Report Forms (CRFs).  With new approaches to data collection (favouring approaches such as Decentralised Trials or Sensor Informed trials) the CRF is just one part of the solution. 
 
-The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol; the CRFs used in Clinical Research are primarily an interface for recording **outcomes** of activities.  It is primarily a set of data requirements, and takes little account of the activities required to do so; this means when we transcribe the requirements from the SoA we should adopt a more 'workflow-based' approach to data management:
+The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are primarily an interface for recording **outcomes** of activities.  It is primarily a set of data requirements, and takes little account of the activities required to obtain the data. This means when we transcribe the requirements from the SoA we should adopt a more 'workflow-based' approach to data management:
 * **what** activities are being done
 * **when** are they being done
 * **who** are performing the activities
@@ -48,7 +48,7 @@ The high-level points are as follows:
 
 {% include plandef-actions.svg %}
 
-In Research protocols many of the activities are event based; for example - informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate; we illustrate this in the above diagram; the `Baseline` Encounter is annotated in the design; the other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here:
+In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here:
 
 ```
 Instance: H2Q-MC-LZZT-ProtocolDesign
@@ -72,7 +72,7 @@ Usage: #example
 * action[=].relatedAction[=].offsetRange.high.value = 15
 * action[=].relatedAction[=].offsetRange.high.code = #d
 ```
-The Event `Visit-3` has an _id_ assigned to it and prior and subsequent activities use the `relatedAction.actionId` to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targetted windows can be applied to the scheduling of study activities.
+The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the `relatedAction.actionId` to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targetted windows can be applied to the scheduling of study activities.
 
 # Observations on how the SoA can be implemented
 
@@ -87,14 +87,14 @@ Here is an example of how a defined study plan can be related to an executed act
 While the diagram can look very complex; it is methodologically sound as we can build out an approach using a set of common archetypes.  There is a flow of planned -> scheduled -> performed activities that implementers can follow to build processes and software around.  This serves as a way to drive data collection (for prospective and retrospective use cases) and it provides a broad scope for current and future use cases.
 
 # Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
-The CDISC Operational Data Model (ODM) structure is one popular model for representing planned activities in CTMS systems - it is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html) - links to the CDISC site can be found on that page.
+The CDISC Operational Data Model (ODM) structure is one popular model for representing planned activities in a Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems.  A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html).  Links to the CDISC site can be found on that page.
 
-Having a standard alignment between the ODM and FHIR enables rapid and reproducible builds using standardised interfaces; each EHR system can reuse the study design as built as part of study start up activities by the Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (eg test codes, procedure codes, etc) but this forms a core model for implementation.
+Having a standard alignment between the ODM and FHIR enables rapid and reproducible systme builds using standardised interfaces.  Each EHR system can reuse the study design as built as part of study start up activities by the Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but this forms a core model for implementation.
 
 The following considerations have been adopted:
 * Map _Protocol_ to _PlanDefinition_
 * Map _StudyEvent_ to _PlanDefinition_
 * Map _FormDef_ to _ActivityDefinition_
 
-These are high level mappings; when we create the _PlanDefinition_ and _ActivityDefinition_ we use business identifiers that transcribe to the corresponding Object Identifiers (OIDs) from the ODM elements.  This will be valuable for reconciling study elements, but it is important to stress that there's never going to be a complete overlap as the use cases are quite different - however, there will be a shared labelling between the platforms that can be built upon.
+These are high level mappings.  When we create the _PlanDefinition_ and _ActivityDefinition_ we use business identifiers that transcribe to the corresponding Object Identifiers (OIDs) from the ODM elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respecitve use cases differ. Shared labelling between the model platforms can be built.
 

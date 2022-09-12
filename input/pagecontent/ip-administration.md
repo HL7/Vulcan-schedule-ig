@@ -1,28 +1,28 @@
 # Investigational Product (IP) Administration
 
-* In order to appropriately represent relationships between datapoints in an study we need to be able to record pivotal IP events (e.g. Dose Exposure, Procedure time and Outcome, etc)​
+* In order to appropriately represent relationships between datapoints in a study, we need to be able to define and record pivotal IP events (e.g., Dose Exposure plus procedures and outcomes associated with the patient's exposure to the investigational product.)​
 * IP Administration is core to prospective research protocols​
 * All other observations support the efficacy and safety of the IP administration​
 * IP administration activities must be well defined in the SOA​
-* __Note__: the following do not address immunization trials. Separate resources.​
+* __Note__: the following do not address immunization trials. Separate FHIR resources are available to define those trial activities.
 
 ## Scenarios
 
-IP scheduled to be: ​
+Investigational Product scenarios include, but are not limited to, IP: ​
 * Administered at clinical encounter by HCP​
   * As explicitly directed per protocol​
   * With permissible changes in amount administered​
   * With permissible timing change​
     * For more complex example where IP admin may be dose delayed due to observation results
-  * where clinical encounter might be "in office" or other locations (at patient's home by a mobile healthcare provider or infusion center)​
+  * where clinical encounter might be "in office" or other locations (e.g., at patient's home by a mobile healthcare provider or at an ascillary location such as an infusion center)​
 * Self-administered in between clinical encounters 
 
 ## The need
-Define an intent for the IP administration to occur at a given time relative to the Schedule of Activities; and be able to utilise the intent as a reference point for other activities to occur.  Examples include:
+* Define the intent for the IP administration to occur at a given time relative to the Schedule of Activities and to utilise that intent as a reference point for other activities scheduled to occur.  Examples include:
 * define a pre-dose vitals assessment
-* for a Pharmacokinetic study define precise pre- and post-administration activities
-* define that patient is randomised before receiving study IP
-* understand whether IP administration was a continuous dosing interval or intermittant
+* for a Pharmacokinetic study, precisly define pre- and post-administration activities that will be used to determine how the IP is absorbed, distributed, metabolised, and excreted.
+* assert the timing relationship between patient consent and randomisation with that of the IP administration
+
 
 # Research 
 
