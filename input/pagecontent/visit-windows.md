@@ -1,12 +1,16 @@
 ### Visit Windows
 
-Further to the basic scenario presented previously, there is a refinement required to the concept of windowing as interpreted in a clinical trial protocol.  The existing structure for specifying ranges over which a related action can occur uses the [Period](https://hl7.org/fhir/datatypes.html#Period) datatype; this has a _lower_ and _upper_ range and allows for the event to occur at any point between.
+Further to the basic scenario presented previously, there is a refinement required to the concept of windowing as interpreted in a clinical trial protocol.  The existing structure for specifying ranges over which a related action can occur uses the [Period](https://hl7.org/fhir/datatypes.html#Period) datatype; which has a _lower_ and _upper_ attribute defining the Range of dates/times that an encounter and activities can occur. 
 
 ### Target Date
 
+<<<<<<< HEAD
 In Clinical Research it is often important to be more rigorous about when activities can occur; this broadly comes under the heading of Visit Windows.  In conduct, it is important to be able to specify when an encounter (and the related observations) should occur, but allow some flexibility to deal with logistical issues arising.  The flexibility can be asymmetrically arranged around a target date (e.g., no more than 2 days before and up to 4 days after the target date).  
+=======
+In Clinical Research it is often important to be more rigorous about when activities can occur; this broadly comes under the heading of Visit Windows.  In conduct, it is important to be able to specify when an encounter (and the related observations) should occur, but allow some flexibility to deal with logistical issues arising (such as a public holiday, device maintenance, study participant travel arrangements).  The flexibility can be asymmetrically arranged around a target date (e.g., no more than 2 days before and up to 4 days after the target date).  
+>>>>>>> e0b5db43f8fe4424d57d9fa5b941bda1a1396067
 
-These are often evaluated against an investigational site's performance to get a 'site quality' metric by evaluating the actual dates for encounters and activities as compared to the expected offsets.  
+The adherence of an investigational site to these windows often constitutes one measure of 'site quality'.
 
 ### Research
 
