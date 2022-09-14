@@ -24,13 +24,13 @@ pages:
   index.md:
     title: Home
   basic-structure.md:
-    title: Core Schedule of Activites Model
+    title: Core Schedule of Activities Model
   visit-windows.md:
     title: Visit Windowing
   ip-administration.md:
     title: Investigational Product Administration
   unscheduled-activities.md:
-    title: Unscheduled Activites
+    title: Unscheduled Activities
   implementation.md:
     title: Implementations
   examples.md:

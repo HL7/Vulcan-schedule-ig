@@ -1,11 +1,11 @@
 # CDISC Operational Data Model (ODM)
-This document is a light touch overview of the ODM - the CDISC repository for the ODM found [here](https://bitbucket.cdisc.org/projects/XML/repos/odm/browse).  We recommend checking out the official docs in that repository.
+The ODM is a model defined for the transport and storage of Study Data for Clinical Studies.  The landing page for the standard can be found here:  [https://www.cdisc.org/standards/data-exchange/odm](https://www.cdisc.org/standards/data-exchange/odm)
 
 Note: the CDISC ODM is owned by [CDISC](https://cdisc.org).  A free CDISC website account is required to access the material - [create an account here](https://www.cdisc.org/user/registration).
 
-## TLDR: Show me the schema!
-
-The ODM Schema is available at: [ODM Schema](https://bitbucket.cdisc.org/projects/XML/repos/odm/browse/schema)
+This document is a light touch overview of the ODM - more information can be found on the CDISC GitHub site:
+* The CDISC repository for the ODM found [here](https://github.com/cdisc-org/DataExchange-ODM). 
+* [ODM Schema](https://github.com/cdisc-org/DataExchange-ODM/tree/main/schema)
 
 
 ## What is the ODM
