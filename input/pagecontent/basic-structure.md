@@ -1,22 +1,25 @@
-# Core Implementation Model for the Schedule of Activities (SoA)
+# Core Implementation Model for Clinical Study Schedule of Activities (SoA)
 
-The Schedule of Activities is a key part of the Clinical Trial Protocol; it is usually a graphical representation of two key components:
-* The Encounters/Visits (any planned event corresponding to clinical data collection)
-* The Activities (the planned activities expected to occur at the event)
-
-This is traditionally presented using a grid structure as shown here:
+The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit and is key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
 
 <img src="lzzt_soa.png" alt="H2Q-LZZT-MC Schedule of Activities" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-In this representation:
-* the horizontal axis represents the encounters
-* the vertical axis represents the activities
+* The Encounters/Visits (any planned event corresponding to clinical data collection) are represented along the horizontal axis
+* The Activities (the planned activities expected to occur at the event) are represented vertically
+* ... with the required Activities at each Encounter shown by a cross (X) in the matrix.
 
-The cross in the matrix represents the expected activities at each encounter.  The matrix is interpreted by a Study Builder to create a set of planned data collection interfaces.  
+The SoA in this form represents the basic activities required at each Encounter and is usually accompianed by the details of the timings of the events (weeks) and an Encounter identifier (in the example the visit numbers... V1, V2... etc.)
 
-Data collection has traditionally been based on Case Report Forms (CRFs).  With new approaches to data collection (favouring approaches such as Decentralised Trials or Sensor Informed trials) the CRF is just one part of the solution. 
+The SoA table is then used as the basic building block for configuring the necessary tools and applications required to manage the progress of study participants during the study. This includes detailing actvities such as when study interventions are to occur (e.g drug adminstration), and when required study evaluations are be made and the data collected and recorded.  
+
+These SoA specifications form the basis for developing study specific Case Report Forms (CRFs): the primary data collection instrument.  Direct data collection and collation approaches such as the use of medical devices (Sensor Informed trials), or  remote study management (e.g. Decentralised Trials), and direct data transfer from service providers such as central laboratories require confirmed syntactic, structural and semantic interoperability.     
+
+The FHIR standard (Fast Healthcare Interoperability Resources) is designed to support the exchange of electronic health records. The 'Definitional Artifacts' section of the 'Specialized' FHIR Resources category provides a set of FHIR Resources that are designed to enable research specifications such as those in a SoA to be represented in a standard format that can consumed by  eHR systems to plan and execute research protocols directly. 
+
+---
 
 The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are primarily an interface for recording **outcomes** of activities.  It is primarily a set of data requirements, and takes little account of the activities required to obtain the data. This means when we transcribe the requirements from the SoA we should adopt a more 'workflow-based' approach to data management:
+
 * **what** activities are being done
 * **when** are they being done
 * **who** are performing the activities
