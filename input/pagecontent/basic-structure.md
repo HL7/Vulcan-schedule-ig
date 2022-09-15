@@ -51,7 +51,7 @@ The high-level points are as follows:
 
 {% include plandef-actions.svg %}
 
-In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here:
+In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here (using FSH syntax - INSERT LINK TO FSH LINK):
 
 ```
 Instance: H2Q-MC-LZZT-ProtocolDesign
