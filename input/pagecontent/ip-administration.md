@@ -26,7 +26,7 @@ Investigational Product scenarios include, but are not limited to, IP: ​
 
 # Research 
 
-## IP Administration at site under HCP supervision (no changes)
+## IP Administration at site under HCP (Health Care Provider) supervision (no changes)
 
 <img src="ip-admin-no-change.png" alt="No Dose Change" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 

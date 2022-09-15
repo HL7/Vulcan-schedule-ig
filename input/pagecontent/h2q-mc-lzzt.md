@@ -1,10 +1,10 @@
 # H2Q-MC-LZZT Study Design
 
-Herein is the ODM for the study design for the H2Q-MC-LZZT study.
+The ODM/XML shown below is the study design for the H2Q-MC-LZZT study.
 
 A couple of notes:
-* the `sdm` namespace is for the study design model.  It has not been a primary focus for the team up to now
-* the `cdash` namespace is an extension for accomodating CDASH elements.  It can be ignored for the moment
+* the `sdm` namespace is for the CDISC ODM study design model extenstion. It has not been a primary focus for the team up to now
+* the `cdash` namespace is an extension for incorporating CDISC CDASH elements into an ODM/XML specification. It can be ignored for the moment
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
