@@ -4,11 +4,7 @@ Further to the basic scenario presented previously, there is a refinement requir
 
 ## Target Date
 
-<<<<<<< HEAD
-In Clinical Research it is often important to be more rigorous about when activities can occur; this broadly comes under the heading of Visit Windows.  In conduct, it is important to be able to specify when an encounter (and the related observations) should occur, but allow some flexibility to deal with logistical issues arising.  The flexibility can be asymmetrically arranged around a target date (e.g., no more than 2 days before and up to 4 days after the target date).  
-=======
 In Clinical Research it is often important to be more rigorous about when activities can occur; this broadly comes under the heading of Visit Windows.  In conduct, it is important to be able to specify when an encounter (and the related observations) should occur, but allow some flexibility to deal with logistical issues arising (such as a public holiday, device maintenance, study participant travel arrangements).  The flexibility can be asymmetrically arranged around a target date (e.g., no more than 2 days before and up to 4 days after the target date).  
->>>>>>> e0b5db43f8fe4424d57d9fa5b941bda1a1396067
 
 The adherence of an investigational site to these windows often constitutes one measure of 'site quality'.
 
