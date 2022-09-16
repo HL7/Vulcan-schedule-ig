@@ -43,6 +43,7 @@ The CarePlan for a patient will need to be adapted to incorporate the changes in
 ## Common 'Unscheduled' Scenarios 
 
 ### Scenario - Common Activities
+
 * Patients are queried at each encounter as to whether they have taken any medications, had changes to existing medications, or experienced any changes in health status or emergent events​. The answers require further 'unscheduled' investigations.
 
 * The medical record contains events are not part of an scheduled visit/encounter (i.e. did not occur within the planned SoA time periods). The activities undertaken are recorded, but the records of the events have their own occurrence (ID) and period (start/end or ongoing)​.
