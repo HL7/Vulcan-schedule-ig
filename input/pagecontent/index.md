@@ -1,6 +1,6 @@
-## Background
+# Background
 
-### Vulcan Schedule of Activities (SoA) Project
+## Vulcan Schedule of Activities (SoA) Project
 
 This IG is intended to provide a roadmap for adopters looking to use FHIR resources in order to support the planning and implementing Clinical Research designs.  The Schedule of Activities is defined ​in a clinical trial as a standardised representation of planned activities, including interventions (e.g., administering drug, surgery), studying administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomisation) and assessments.​
 

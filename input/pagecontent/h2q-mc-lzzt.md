@@ -1,10 +1,13 @@
 # H2Q-MC-LZZT Study Design
 
-The ODM/XML shown below is the study design for the H2Q-MC-LZZT study.
+The Lilly ( *Eli Lilly & Company* ) H2Q-MC-LZZT study has been made publically available interested parties for proof of concept and similar testing exercises. It has been used to explore and develop the use of the CDISC ODM/XML model (see CDISC-ODM page) and the study protocol, blank CRFs and example (anonymised) data are available. It is being used here to review, test and develop the concepts and requirements for a FHIR specificied SoA 
 
-A couple of notes:
-* the `sdm` namespace is for the CDISC ODM study design model extenstion. It has not been a primary focus for the team up to now
-* the `cdash` namespace is an extension for incorporating CDISC CDASH elements into an ODM/XML specification. It can be ignored for the moment
+The ODM/XML shown below is the study design for the H2Q-MC-LZZT study. It is included here as it has been used both as a source (ODM/XML>FHIR), a target (FHIR>ODM/XML), and for testing SoA concepts. 
+
+Note:
+* the `sdm` namespace is the reference for the CDISC ODM study design model extenstion. [Study/Trial Design Model-XML](https://www.cdisc.org/standards/data-exchange/sdm-xml). It has not a primary focus for the SoA work described here.
+
+* the `cdash` namespace is an ODM extension for incorporating CDISC CDASH (elements into an ODM/XML specification. [CDASH](https://www.cdisc.org/standards/foundational/cdash). It it not referenced in the current SoA work.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

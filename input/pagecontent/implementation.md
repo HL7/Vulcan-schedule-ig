@@ -1,3 +1,5 @@
+# Implementation
+
 ## Basic Structure
 
 ## Visit Windowing

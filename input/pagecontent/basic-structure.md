@@ -1,6 +1,6 @@
 # Core Implementation Model for Clinical Study Schedule of Activities (SoA)
 
-The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit and is key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
+The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit, and they are key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
 
 <img src="lzzt_soa.png" alt="H2Q-LZZT-MC Schedule of Activities" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
@@ -18,18 +18,21 @@ The FHIR standard (Fast Healthcare Interoperability Resources) is designed to su
 
 ---
 
-The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are primarily an interface for recording **outcomes** of activities.  It is primarily a set of data requirements, and takes little account of the activities required to obtain the data. This means when we transcribe the requirements from the SoA we should adopt a more 'workflow-based' approach to data management:
+The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are the primary interface for recording **outcomes** of activities.  They are designed to record the sets of data the study requires, and usually takes little account of the practical activities required to obtain the data. For FHIR specificied SoAs to be succesful when requirements are transcribed from the SoA for eHR implementation, a more 'workflow-based' approach to data management is required.  Specically, transcription needs to be able to clearly define:  
 
 * **what** activities are being done
 * **when** are they being done
-* **who** are performing the activities
-* what are the **outcomes** from those activities
+* the **outcomes** from those activities, and potentially
 
-# Implementing a SoA using FHIR resources
+* **who** is to perform/undertake the activities
+
+
+# Implementing a SoA using FHIR Resources
 
 In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and relationships between them.  We focused on a Workflow view of data management, and we leveraged the existing FHIR workflow patterns to achieve this.  
 
 Prior to expanding upon this we review the existing research resources:
+
 * [ResearchStudy](http://hl7.org/fhir/ResearchStudy) - a representational artifact for a Research Study
 * [ResearchSubject](http://hl7.org/fhir/ResearchStudy) - an artifact used to link a Patient research to the ResearchStudy
 

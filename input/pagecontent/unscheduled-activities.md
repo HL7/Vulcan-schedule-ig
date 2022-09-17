@@ -22,11 +22,13 @@ Additional assessments may be included in the SoA in order to account for specia
 * Event/Observation Triggered Activities (e.g., extra tests based on some lab result)​
 
 ### Use Case - Unscheduled Visits
+
 Details of a study participant's "visits" (encounters) that are not planned (that is, not part of the study schedule), need to be recorded and appropriate study defined assessments undertaken to ensure subject safety to demonstrate that sponsor regulatory and study objectives are not compromised (required activities usually defined by a SoA ‘Unscheduled Visit’ option) ​
 
 Unscheduled visits may arise due to identified issues/events (e.g., an Adverse Event or clinician directed clinical care not defined by the protocol).​
 
 ### Use Case - Early Termination​
+
 According to criteria specified in the Protocol, a participant may be taken off the study or discontinued from study treatment. Reasons can include, but are not limited to:​
 * Safety Concerns – Subject had a reaction to intervention​
 * Death – Patient died while on Study (related or non-related to intervention)

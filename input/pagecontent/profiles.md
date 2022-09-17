@@ -1,4 +1,4 @@
-### Resource Profiles
+# SoA Resource Profiles
 The following profiles are defined for exchanging study schedule information.
 
 |**Resource**|**Profile Name**|**Profile Description**|
