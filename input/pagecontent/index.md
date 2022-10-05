@@ -2,11 +2,23 @@
 
 ## Vulcan Schedule of Activities (SoA) Project
 
-### Schedule of Activities Definition:
+The core of this project is to define a usable pattern for a Clinical Trial Schedule of Activities structure using FHIR Resources and Processes, such that:
+* it can be shared
+* it can be interpreted, and 
+* it can be implemented in healthcare systems (such as EHR or PHR systems)  
 
-​In a clinical trial, a standardised representation of planned activities, including interventions (e.g., administering drug, surgery), studying administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomisation) and assessments.​
+The conduct of Clinical Trials are guided by the International Conference on Harmonization (ICH) guidelines for Good Clinical Practice (GCP) E6 (R2).[^1]  Core to this is the writing of a Clinical Trial Protocol, a document intended to describe the objectives, design, methodology, statistical considerations and aspects related to the organization of the clinical trial. 
 
-A planned list of clinical trial activities to include interventions, assessments, and study administrative activities.
+Trial protocols provide the background and rationale for conducting a study, highlighting specific research questions that are addressed, and taking into consideration ethical issues. Trial protocols must meet a standard that adheres to the principles of Good Clinical Practice (as mentioned), and are used to obtain ethics approval by local Ethics Committees or Institutional Review Boards.
+
+
+The design and execution of a Clinical Trial is based on the c use a a document called a Clinical Trial Protocol to describe[^1]
+### What is the Schedule of Activities?
+
+​In a clinical trial, a standardised representation of planned activities, including interventions (e.g., administering drug, surgery), studying administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomisation) and assessments (CDISC NCI Definition).​
+
+The SoA is a component of a Clinical Trial Protocol Document and represents the set of activi
+
 
 CDISC Definition:
 A standardized representation of planned clinical trial activities including interventions (e.g., administering drug, surgery) and study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) as well as assessments.
@@ -14,8 +26,10 @@ A standardized representation of planned clinical trial activities including int
 CDISC-GLOSS Definition:
 A standardized representation of planned clinical trial activities including interventions (e.g., administering drug, surgery) and study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) as well as assessments. See also schedule of assessments. Compare to study design schematic. 
 
-​### Schedule of Activities Purpose: ​
+A planned list of clinical trial activities to include interventions, assessments, and study administrative activities.
 
+​### Schedule of Activities Purpose:
+ ​
 ​to communicate the scheduling of the planned activities required to support the research objectives of the study to enable operational implementation  ​
 
 ## Vulcan SoA Implementation Guide (IG)
@@ -39,4 +53,4 @@ Examples of positive outcomes for this project include:
 This iteration for the project is designed to be directional purely - as we learn more about how the different systems work and can be interfaced. We will continue to improve the IG to accommodate more use cases, iteratively working towards a solution that will be both functional and scalable.
 
 ## References
-TODO: Add the references for the different upstream resources.
+[^1]: https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf
