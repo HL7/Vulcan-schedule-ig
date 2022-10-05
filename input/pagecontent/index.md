@@ -1,4 +1,4 @@
-## Background
+# Background
 
 ## Vulcan Schedule of Activities (SoA) Project
 

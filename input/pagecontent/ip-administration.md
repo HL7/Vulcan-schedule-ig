@@ -1,10 +1,15 @@
 # Investigational Product (IP) Administration
 
-* In order to appropriately represent relationships between datapoints in a study, we need to be able to define and record pivotal IP events (e.g., Dose Exposure plus procedures and outcomes associated with the patient's exposure to the investigational product.)​
+In order to correctly relate data collected in a study to the times when investigation product (drug, therapy, device etc.) has been taken or used is central tenant of any study.  
+This requires the clear specifications of when to provide, administer and record pivotal IP events (e.g., to calcualte Dose Exposure, or those procedures and outcomes associated with the patient's exposure to the investigational product.)​
+
 * IP Administration is core to prospective research protocols​
 * All other observations support the efficacy and safety of the IP administration​
-* IP administration activities must be well defined in the SOA​
-* __Note__: the following do not address immunization trials. Separate FHIR resources are available to define those trial activities.
+* IP administration activities must be well defined in the SOA
+
+The set of FHIR medication resources have been used to review how to incorporate IP adminisration and record keeping into FHIR specifiied SoA.
+​
+* __Note__: to date immunization (vaccine) trials have not been considered in this section (FHIR defines resources for immunization separately from medications).
 
 ## Scenarios
 
