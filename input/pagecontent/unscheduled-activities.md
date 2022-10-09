@@ -9,7 +9,7 @@
 
 The Implementation Guide requires methods to:​
 * Define unscheduled or repeatable activities​
-* Define how to augment exisiting executable artifact (e.g. CarePlans) to accommodate unscheduled or repeatable activities​
+* Define how to augment existing executable artifacts (e.g. CarePlans) to accommodate unscheduled or repeatable activities​
 * Trigger and add extra activities to an encounter​
 
 ## Use Cases
@@ -52,7 +52,7 @@ The CarePlan for a patient will need to be adapted to incorporate the changes in
 
 * The unplanned events need to be incorporated into the participant study data record over the period the particpant is a study subject​.
 
-* The recording of so-called "common activities" (e.g., adverse events and concomitant medications) are evaluated and recorded. In Clinial Trial Management Systems (CTMS), a special mechanism is usually incorporated to manage this. //Is there a requirement for special consideration in healthcare systems//
+* The recording of so-called "common activities" (e.g., adverse events and concomitant medications) are evaluated and recorded. In Clinical Trial Management Systems (CTMS), a special mechanism is usually incorporated to manage this. //Is there a requirement for special consideration in healthcare systems//
 
 ### Scenario - Post-Study Visit Adverse Event
 
