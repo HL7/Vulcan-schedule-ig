@@ -1,5 +1,6 @@
 # CDISC Operational Data Model (ODM)
-The ODM is a model defined for the transport and storage of Study Data for Clinical Studies.  The landing page for the standard can be found here:  [https://www.cdisc.org/standards/data-exchange/odm](https://www.cdisc.org/standards/data-exchange/odm)
+
+The CDISC ODM is a model designed for the transportation and storage of Study Data for Clinical Studies.  The landing page for the standard can be found here:  [https://www.cdisc.org/standards/data-exchange/odm](https://www.cdisc.org/standards/data-exchange/odm)
 
 Note: the CDISC ODM is owned by [CDISC](https://cdisc.org).  A free CDISC website account is required to access the material - [create an account here](https://www.cdisc.org/user/registration).
 

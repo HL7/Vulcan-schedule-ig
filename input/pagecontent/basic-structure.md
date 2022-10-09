@@ -1,6 +1,6 @@
 # Core Implementation Model for Clinical Study Schedule of Activities (SoA)
 
-The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit and is key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
+The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit, and they are key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
 
 <img src="lzzt_soa.png" alt="H2Q-LZZT-MC Schedule of Activities" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
@@ -18,32 +18,33 @@ The FHIR standard (Fast Healthcare Interoperability Resources) is designed to su
 
 ---
 
-The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are primarily an interface for recording **outcomes** of activities.  It is primarily a set of data requirements, and takes little account of the activities required to obtain the data. This means when we transcribe the requirements from the SoA we should adopt a more 'workflow-based' approach to data management:
+The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are the primary interface for recording **outcomes** of activities.  They are designed to record the sets of data the study requires, and usually takes little account of the practical activities required to obtain the data. For FHIR specificied SoAs to be succesful when requirements are transcribed from the SoA for eHR implementation, a more 'workflow-based' approach to data management is required.  Specically, transcription needs to be able to clearly define:  
 
 * **what** activities are being done
 * **when** are they being done
-* **who** are performing the activities
-* what are the **outcomes** from those activities
+* the **outcomes** from those activities, and potentially
 
-# Implementing a SoA using FHIR resources
+* **who** is to perform/undertake the activities
 
-In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and relationships between them.  We focused on a Workflow view of data management, and we leveraged the existing FHIR workflow patterns to achieve this.  
+# Implementing a SoA using FHIR Resources
 
-Prior to expanding upon this we review the existing research resources:
+In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and the relationships between them.  The work to date has focused on a Workflow view of data management, and has leveraged the existing FHIR workflow patterns to achieve this.  
+
+SoAs do not (a) stand alone - they are study specific, and (b) describe planned activites expected to be executed for each [Patient](http://hl7.org/fhir/Patient) recuited to the study.  The two [Research--] resources have been used to associate SoA with the correct study and to recognise patients as being study participants:
+
 * [ResearchStudy](http://hl7.org/fhir/ResearchStudy) - a representational artifact for a Research Study
-* [ResearchSubject](http://hl7.org/fhir/ResearchStudy) - an artifact used to link a Patient research to the ResearchStudy
+* [ResearchSubject](http://hl7.org/fhir/ResearchSubject) - an artifact used to link a Patient research to the ResearchStudy
 
-At this point we have not looked at the Structured Data Collection resources (Questionnaire/QuestionnaireResponse)
+The project has also restricted its investigations and SoA IG development to using the [PlanDefinition](http://hl7.org/fhir/PlanDefinition) and [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition). Other Structured Data Collection resources (e.g. Questionnaire, EventDefinition, etc.) have not been systematically investigated for their potential to define SoA requirements. The Workflow resources are defined on the [FHIR Workflow](https://hl7.org/fhir/workflow.html) page; the key points for modeling a SoA deal with the [Definition](https://hl7.org/fhir/workflow.html#definition) and [Request](https://hl7.org/fhir/workflow.html#request) patterns.
 
-The Workflow resources are defined on the [FHIR Workflow](https://hl7.org/fhir/workflow.html) page; the key points for modeling a SoA deal with the [Definition](https://hl7.org/fhir/workflow.html#definition) and [Request](https://hl7.org/fhir/workflow.html#request) pattern.
-
-The definition elements are used to create the structure for the activities in both a defined and planned context
+The Definitional Artifacts have been used to create the structure - schedule and activities - to support bot study SoA specification (definitions) and planned contextualization. 
 
 The basic structure is summarized in the following diagram:
 
 {% include basic-structure.svg %}
 
 The high-level points are as follows:
+
 * The **ResearchStudy** has a single _protocol_  reference to a __PlanDefinition__ for the Study Definition; under which all study activities are grouped
 * Each of the activities are defined using separate resources
 * Each activity is linked to the parent Study Definition through the _action_ predicate.  The _action_ predicate:  
@@ -51,7 +52,7 @@ The high-level points are as follows:
 
 {% include plandef-actions.svg %}
 
-In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here:
+In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here (using FSH syntax - INSERT LINK TO FSH LINK):
 
 ```
 Instance: H2Q-MC-LZZT-ProtocolDesign
@@ -79,25 +80,26 @@ The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities 
 
 # Observations on how the SoA can be implemented
 
-Given the structure discussed above, we consider how best the planned activities can be manifested within an Electronic Healthcare Record System.  
+Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Healthcare Record System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.   
 
-We have followed the FHIR Workflow paradigm, we define what needs to be done using the [Definition](https://hl7.org/fhir/definition.html) patterns, which are scheduled using [Request](https://hl7.org/fhir/request.html) patterns and ultimately manifested as [Event](https://hl7.org/fhir/event.html) patterns.   We have constrained the implementation examples to the minimum requirement so we can model out the core concepts in a clinical trial protocol.
+Following the FHIR Workflow paradigm, what needs to be done has been defined using the [Definition](https://hl7.org/fhir/definition.html) patterns, which are scheduled using [Request](https://hl7.org/fhir/request.html) patterns and ultimately manifested as [Event](https://hl7.org/fhir/event.html) patterns.   The current implementation examples are constrained to the minimum requirement in order that the core concepts in a clinical trial protocol are accurately modelled
 
-Here is an example of how a defined study plan can be related to an executed activity and outcome result itself.
+The example below shows how a defined study plan can be related to an executed activity and the required outcomes/results.
 
 {% include implementation-plan-def.svg %}
 
-While the diagram can look very complex; it is methodologically sound as we can build out an approach using a set of common archetypes.  There is a flow of planned -> scheduled -> performed activities that implementers can follow to build processes and software around.  This serves as a way to drive data collection (for prospective and retrospective use cases) and it provides a broad scope for current and future use cases.
+While the diagram may look complex it is methodologically sound as it builds out an approach using a set of common archetypes.  There is a flow of planned -> scheduled -> performed activities that IG implementers can follow to build processes and software meeting the SoA objectives.  This serves as a way to drive data collection (for both prospective and retrospective use cases) and it provides a broad scope for current and future use cases.
 
 # Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
-The CDISC Operational Data Model (ODM) structure is one popular model for representing planned activities in a Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems.  A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html).  Links to the CDISC site can be found on that page.
 
-Having a standard alignment between the ODM and FHIR enables rapid and reproducible systme builds using standardised interfaces.  Each EHR system can reuse the study design as built as part of study start up activities by the Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but this forms a core model for implementation.
+The CDISC Operational Data Model (ODM) structure is a popular model for representing planned activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html), and links to the CDISC site where full details of the model can be found on that page.
 
-The following considerations have been adopted:
+Having a standard alignment between the ODM and FHIR would enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
+ 
+The following ODM/XML to FHIR Resource high level mappings have been adopted:
+
 * Map _Protocol_ to _PlanDefinition_
 * Map _StudyEvent_ to _PlanDefinition_
 * Map _FormDef_ to _ActivityDefinition_
 
-These are high level mappings.  When we create the _PlanDefinition_ and _ActivityDefinition_ we use business identifiers that transcribe to the corresponding Object Identifiers (OIDs) from the ODM elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respecitve use cases differ. Shared labelling between the model platforms can be built.
-
+The intention here is to use the _PlanDefinition_ and _ActivityDefinition_ that transcribe to the corresponding Object Identifiers (OIDs) of the ODM/XML elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respecitve use cases differ. Shared labelling between the model platforms can be built.
