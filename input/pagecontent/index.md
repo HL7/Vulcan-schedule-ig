@@ -9,28 +9,18 @@ The core of this project is to define a usable pattern for a Clinical Trial Sche
 
 The conduct of Clinical Trials are guided by the International Conference on Harmonization (ICH) guidelines for Good Clinical Practice (GCP) E6 (R2).[^1]  Core to this is the writing of a Clinical Trial Protocol, a document intended to describe the objectives, design, methodology, statistical considerations and aspects related to the organization of the clinical trial. 
 
-Trial protocols provide the background and rationale for conducting a study, highlighting specific research questions that are addressed, and taking into consideration ethical issues. Trial protocols must meet a standard that adheres to the principles of Good Clinical Practice (as mentioned), and are used to obtain ethics approval by local Ethics Committees or Institutional Review Boards.
+Trial protocols provide the background and rationale for conducting a study, highlighting specific research questions that are addressed, and taking into consideration ethical issues. Trial protocols must meet a standard that adheres to the principles of Good Clinical Practice (as mentioned above), and are used to obtain ethics approval by local Ethics Committees or Institutional Review Boards.
 
+The Clinical Trial Protocol incorporates all the aspects of what is needed to define how the study is to be conducted and reviewed; for the purposes of this first iteration of the Implementation Guide we are constraining the scope to focus just on the elements incorporated in the Schedule of Activities.
 
-The design and execution of a Clinical Trial is based on the c use a a document called a Clinical Trial Protocol to describe[^1]
 ### What is the Schedule of Activities?
 
-​In a clinical trial, a standardised representation of planned activities, including interventions (e.g., administering drug, surgery), studying administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomisation) and assessments (CDISC NCI Definition).​
+The CDISC-GLOSS definition of the Schedule of Activities is[^2]: 
+```
+A standardized representation of planned clinical trial activities including interventions (e.g., administering drug, surgery) and study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) as well as assessments. See also schedule of assessments. Compare to study design schematic.
+```
 
-The SoA is a component of a Clinical Trial Protocol Document and represents the set of activi
-
-
-CDISC Definition:
-A standardized representation of planned clinical trial activities including interventions (e.g., administering drug, surgery) and study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) as well as assessments.
-
-CDISC-GLOSS Definition:
-A standardized representation of planned clinical trial activities including interventions (e.g., administering drug, surgery) and study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) as well as assessments. See also schedule of assessments. Compare to study design schematic. 
-
-A planned list of clinical trial activities to include interventions, assessments, and study administrative activities.
-
-​### Schedule of Activities Purpose:
- ​
-​to communicate the scheduling of the planned activities required to support the research objectives of the study to enable operational implementation  ​
+It is a focused section of the Protocol Document that lays out what activities are expected, and structurally when they are expected to occur.  It is a design that is interpreted by the stakeholders to drive how the study is defined, planned and performed.
 
 ## Vulcan SoA Implementation Guide (IG)
 
@@ -54,3 +44,4 @@ This iteration for the project is designed to be directional purely - as we lear
 
 ## References
 [^1]: https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf
+[^2]: https://ncimetathesaurus.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20Metathesaurus&code=CL521320
