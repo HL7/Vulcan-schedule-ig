@@ -6,19 +6,19 @@ Contributing individuals and organisations are:
 
 Current work group co-chairs: 
 
-    **Geoff Low** - 3DS - xxx
-    **Michael Ward** - TransCelerate Biopharma / Lilly Pharmaceuticals - xxx
+**Geoff Low** - 3DS - xxx
+**Michael Ward** - TransCelerate Biopharma / Lilly Pharmaceuticals - xxx
 
 Work group members:
 
-    **Jean Duteau**  - DuteeauDesign - xxx
-    **Rebecca Baker** - CDISC - xxx
-    **Andy Richardson** - Zenetar - xxx
-    **Rahul Thandavan** - Roche - xxx
-    **Jeffrey Abolofia** - Pinacle 21 - xxx
-    **Mike Hamidi** - Pfizer - xxx
+**Jean Duteau**  - DuteeauDesign - xxx
+**Rebecca Baker** - CDISC - xxx
+**Andy Richardson** - Zenetar - xxx
+**Rahul Thandavan** - Roche - xxx
+**Jeffrey Abolofia** - Pinacle 21 - xxx
+**Mike Hamidi** - Pfizer - xxx
 
-    **Katie Warren** PHUSE - Project management,Meeting coordination 
+**Katie Warren** PHUSE - Project management,Meeting coordination 
 
 With contributions from other members who have from time to time, or quietly, participated in meetings, attended conference calls, and supported the core team during the development process.
 
