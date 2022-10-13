@@ -17,7 +17,7 @@ Need for this because:
 * Windows defined in the care plan (following the protocol)
 
 ## Persons - who is working with this?
-*Basic communication and adherence to the study care plan, otherwise known by researchers as the schedule of activies (SOA)*
+* Basic communication and adherence to the study care plan, otherwise known by researchers as the schedule of activies (SOA)*
 * Site
 * Study personnel – research coordinators, clinical trial staff
 * Clinical personnel- office staff (schedulers, nurses, medical assistants, lab personnel, EKG techs, CT staff, etc.)
