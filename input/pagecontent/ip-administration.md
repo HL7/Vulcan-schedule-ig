@@ -70,5 +70,5 @@ Many studies require IP to be self-administered, and to continue therafter 'at h
 # Complications
 * __ActivityDefinition__ for planned dosing events expect a link to a __Medication__ record as well as a reason for dosing, etc.  In the case of a blinded clinical study the __Medication__ could be the study IP or could be placebo; this introduces an issue for retrospective review of subject medication records.  
   * Solution used was to define a mock __Medication__ using the Protocol Identifier plus the Compound identifier.
-
+* In FHIR R5 the __MedicationStatement__ has been replaced by the __MedicationUsage__ resource.  This has not currently been modelled.
  

@@ -23,7 +23,7 @@ Need for this because:
 * Clinical personnel- office staff (schedulers, nurses, medical assistants, lab personnel, EKG techs, CT staff, etc.)
 * Study physician
 
-*Who is communicating what to whom?*
+Who is communicating what to whom?
 * Embedded protocol will trigger the activities to move with the visit when rescheduled
 * EHR facilitates the protocol communication with the clinic and other healthcare staff
 * Aid for clinical research coordination within the system
@@ -39,10 +39,10 @@ Need for this because:
 Research Implementation Assistance
 
 ## Problem:
-*Scheduling research visits and activities can be cumbersome.*
+Scheduling research visits and activities can be cumbersome.
 
 ## Solution:
-*Implementing the protocol SOA (in the electronic health record with visits and associated activities) as a Care Plan will enable all related activities to go with the patient should a “study visit” get rescheduled.*
+* Implementing the protocol SOA (in the electronic health record with visits and associated activities) as a CarePlan will enable all related activities to go with the patient should a “study visit” get rescheduled.
 * Ensures timely research visits within visit windows
 * Prevents protocol deviations 
 
