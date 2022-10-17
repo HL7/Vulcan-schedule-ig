@@ -15,18 +15,17 @@ Whilst the FHIR [Period] datatype is ideal for describing the Range over which p
 
 The visit window use case described above is the most commonly found in SoAs, and will describe the timing details of each visit/encounter from a defined t(zero) visit (e.g. as in the Core Model SoA example). Other timing use cases may also be specified such as "Visit-N to occur 28days from Visit-0 and no earlier than 7d after Visit-(N-1). The diagram below shows the relationship between the SoA visit descriptions, the actual times activities occur and the visit window Range. Also illustrated are the 2 principal options for calculating the visit window period:  (a) from the **target timepoint** or (b) from the **reference timepoint**.    
 
+***
+
 <img src="visit-window-research.png" alt="Visit Windows" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The diagram shows the relationship between an initial 'visit' (V1,left) and a subsequent 'visit' (V2, right) with permitted 'visit window' variances.  In the example a SoA would specify this case as V2 +/ 1 day.
-
 * [S] 'Visit' period from a protocol SoAs identified, for example, as day 'V1'. Note the start and end time of the period are implied.  
-
 * [DT] Date/time line with times when the subject might practically be expected to attend the clinic) 
-
 * [P] Study participant 'visits' illustrating the acceptable 'visit' and 'visit window' periods. Full colour - Planned visits, Shaded - Permitted variance ('visit window') 
-
 * [C] 'Window' timing and scheduling calculation options. Shown are 2 cases: (a) calculation relative to the visit, and (b) relative to the previous visit.  
 
+***
 
 ### Requirements
 
