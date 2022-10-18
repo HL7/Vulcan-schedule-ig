@@ -32,6 +32,21 @@ Who is communicating what to whom?
 * Patient has a family emergency and has to reschedule study visit.  Calls office to reschedule the visit.  Not all of the visit tests for the research study get rescheduled because they are not yet associated with the research study in the care plan.  On the rescheduled visit, the CT scanner is not available so there is a protocol deviation. CT san performed out of window.
 * Doctor has vacation during research study patient visit. Same thing happens.
 
+## Technical Aspects
+* The ResearchStudy resource describes essential information about the study, including the purpose, objective, sponsor, investigator, therapy, condition being studied, schedule of activities, and other key items.
+
+* In the context of a research study, the PlanDefinition resource identifies
+** all the activities (defined in ActivityDefinition) to be undertaken during the conduct of that ResearchStudy
+** the visits
+** all the activities to be associated with each visit
+** the relative timing relationship of an activity as associated to another activity (whether it is to occur before or after the "anchoring" activity)
+** the expected time and unit of time lapse between visits or activities within a visit (i.e., "Visit Window")
+
+* the CarePlan resource associates the activities and visits defined in PlanDefinition to an individual patient. In the context of clinical care, it is possible for planned activities be conducted in the absence of a care plan. In the context of protocol driven research, the use of CarePlan is essential to ensure all PlanDefinition (visits and activities) are scheduled and executed for that ResearchStudy.
+
+* to keep the patient anonymized from the sponsor, the ResearchSubject resource is used to create identifiers visible to the sponsor that contain no personally identifiable information.
+
+
 
 
 # Example 2
@@ -46,6 +61,7 @@ Scheduling research visits and activities can be cumbersome.
 * Ensures timely research visits within visit windows
 * Prevents protocol deviations 
 
-
+## Technical Aspects
+* Same as Example 1
 
 
