@@ -42,5 +42,6 @@ Examples of positive outcomes for this project include:
 This iteration for the project is designed to be directional purely - as we learn more about how the different systems work and can be interfaced. We will continue to improve the IG to accommodate more use cases, iteratively working towards a solution that will be both functional and scalable.
 
 ## References
-[^1]: https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf
-[^2]: https://ncimetathesaurus.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20Metathesaurus&code=CL521320
+[^1]: [https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf](https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf)
+[^2]: [https://ncimetathesaurus.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20Metathesaurus&code=CL521320](https://ncimetathesaurus.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20Metathesaurus&code=CL521320)
+
