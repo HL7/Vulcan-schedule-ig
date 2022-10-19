@@ -15,7 +15,7 @@ The Clinical Trial Protocol incorporates all the aspects of what is needed to de
 
 ### What is the Schedule of Activities?
 
-The CDISC-GLOSS definition of the Schedule of Activities is[^2]: 
+The NCI Controlled Vocabulary definition of the Schedule of Activities is: [^2] 
 
 > A standardized representation of planned clinical trial activities including interventions (e.g., administering drug, surgery) and study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) as well as assessments. See also schedule of assessments. Compare to study design schematic.
 
