@@ -8,7 +8,7 @@ The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; 
 * The Activities (the planned activities expected to occur at the event) are represented vertically
 * ... with the required Activities at each Encounter shown by a cross (X) in the matrix.
 
-The SoA in this form represents the basic activities required at each Encounter and is usually accompianed by the details of the timings of the events (weeks) and an Encounter identifier (in the example the visit numbers... V1, V2... etc.)
+The SoA in this form represents the basic activities required at each Encounter and is usually accompanied by the details of the timings of the events (weeks) and an Encounter identifier (in the example the visit numbers... V1, V2... etc.)
 
 The SoA table is then used as the basic building block for configuring the necessary tools and applications required to manage the progress of study participants during the study. This includes detailing activities such as when study interventions are to occur (e.g drug administration), and when required study evaluations are be made and the data collected and recorded.  
 
@@ -29,8 +29,7 @@ The key consideration for the SoA is the collection of data to support the hypot
 
 In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and the relationships between them.  The work to date has focused on a Workflow view of data management, and has leveraged the existing FHIR workflow patterns to achieve this.  
 
-SoAs do not (a) stand alone - they are study specific, and (b) describe planned activities expected to be executed for each [Patient](http://hl7.org/fhir/Patient) recruited to the study.  The two [Research--] resources have been used to associate SoA with the correct study and to recognise patients as being study participants:
-
+SoAs do not (a) stand alone - they are study specific, and (b) describe planned activities expected to be executed for each [Patient](http://hl7.org/fhir/Patient) recruited to the study.  Two Research-oriented resources have been used to associate SoA with the correct study and to recognise patients as being study participants:
 * [ResearchStudy](http://hl7.org/fhir/ResearchStudy) - a representational artifact for a Research Study
 * [ResearchSubject](http://hl7.org/fhir/ResearchSubject) - an artifact used to link a Patient research to the ResearchStudy
 
@@ -44,14 +43,14 @@ The basic structure is summarized in the following diagram:
 
 The high-level points are as follows:
 
-* The **ResearchStudy** has a single _protocol_  reference to a __PlanDefinition__ for the Study Definition; under which all study activities are grouped
+* The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) has a single _protocol_  reference to a [PlanDefinition](https://hl7.org/fhir/plandefinition.html) for the Study Definition; under which all study activities are grouped
 * Each of the activities are defined using separate resources
 * Each activity is linked to the parent Study Definition through the _action_ predicate.  The _action_ predicate:  
   * defines the relationships between the activities, at the least when activities should occur relative to each other 
 
 {% include plandef-actions.svg %}
 
-In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here (using FSH syntax - INSERT LINK TO FSH LINK):
+In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here:
 
 ```
 Instance: H2Q-MC-LZZT-ProtocolDesign
@@ -75,7 +74,8 @@ Usage: #example
 * action[=].relatedAction[=].offsetRange.high.value = 15
 * action[=].relatedAction[=].offsetRange.high.code = #d
 ```
-The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the `relatedAction.actionId` to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targetted windows can be applied to the scheduling of study activities.
+
+The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
 
 # Observations on how the SoA can be implemented
 
@@ -87,7 +87,11 @@ The example below shows how a defined study plan can be related to an executed a
 
 {% include implementation-plan-def.svg %}
 
-While the diagram may look complex it is methodologically sound as it builds out an approach using a set of common archetypes.  There is a flow of planned -> scheduled -> performed activities that IG implementers can follow to build processes and software meeting the SoA objectives.  This serves as a way to drive data collection (for both prospective and retrospective use cases) and it provides a broad scope for current and future use cases.
+While the diagram may look complex it is methodologically sound as it builds out an approach using a set of common archetypes.  There is a flow of planned -> scheduled -> performed activities that IG implementers can follow to build processes and software meeting the SoA objectives.  This serves as a way to drive data collection (for both prospective and retrospective use cases) and it provides a broad scope for current and future use cases.  Please note, that much of the workflow is not shown in this representation; there are no references to scheduling and orchestration resources (eg [Appointment](https://hl7.org/fhir/appointment.html), [AppointmentResponse](https://hl7.org/fhir/appointmentresponse.html) )
+
+**Note:** The SoA Working group team has relied heavily on the Workflow patterns as mentioned in the core specification as a how the process of data collection _could_ proceed, without being prescriptive about how activities _should_ be manifested in the many systems that are involved in the day to day execution of healthcare.  
+
+The SoA FHIR IG assumes that how activities/tasks get executed is dependent on their respective services, procedures, and administrative mechanisms. The working group has assumed that it will vary dependent on the scenario and how each system, application, device, etc. are setup.
 
 # Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
 
