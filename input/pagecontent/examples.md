@@ -17,7 +17,7 @@ Need for this because:
 * Windows defined in the care plan (following the protocol)
 
 ## Persons - who is working with this?
-* Basic communication and adherence to the study care plan, otherwise known by researchers as the schedule of activies (SOA)*
+* Basic communication and adherence to the study care plan, otherwise known by researchers as the schedule of activities (SOA)*
 * Site
 * Study personnel – research coordinators, clinical trial staff
 * Clinical personnel- office staff (schedulers, nurses, medical assistants, lab personnel, EKG techs, CT staff, etc.)
@@ -33,20 +33,18 @@ Who is communicating what to whom?
 * Doctor has vacation during research study patient visit. Same thing happens.
 
 ## Technical Aspects
-* The ResearchStudy resource describes essential information about the study, including the purpose, objective, sponsor, investigator, therapy, condition being studied, schedule of activities, and other key items.
+* The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) resource describes essential information about the study, including the purpose, objective, sponsor, investigator, therapy, condition being studied, schedule of activities, and other key items.
 
-* In the context of a research study, the PlanDefinition resource identifies
-** all the activities (defined in ActivityDefinition) to be undertaken during the conduct of that ResearchStudy
+* In the context of a research study, the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource identifies
+** all the activities (defined in [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)) to be undertaken during the conduct of that [ResearchStudy](https://hl7.org/fhir/researchstudy.html)
 ** the visits
 ** all the activities to be associated with each visit
 ** the relative timing relationship of an activity as associated to another activity (whether it is to occur before or after the "anchoring" activity)
 ** the expected time and unit of time lapse between visits or activities within a visit (i.e., "Visit Window")
 
-* the CarePlan resource associates the activities and visits defined in PlanDefinition to an individual patient. In the context of clinical care, it is possible for planned activities be conducted in the absence of a care plan. In the context of protocol driven research, the use of CarePlan is essential to ensure all PlanDefinition (visits and activities) are scheduled and executed for that ResearchStudy.
+* the [CarePlan](https://hl7.org/fhir/careplan.html) resource associates the activities and visits defined in [PlanDefinition](https://hl7.org/fhir/plandefinition.html) to an individual patient. In the context of clinical care, it is possible for planned activities be conducted in the absence of a care plan. In the context of protocol driven research, the use of [CarePlan](https://hl7.org/fhir/careplan.html) is essential to ensure all [PlanDefinition](https://hl7.org/fhir/plandefinition.html) (visits and activities) are scheduled and executed for that ResearchStudy.
 
-* to keep the patient anonymized from the sponsor, the ResearchSubject resource is used to create identifiers visible to the sponsor that contain no personally identifiable information.
-
-
+* to keep the patient anonymized from the sponsor, the [ResearchSubject](https://hl7.org/fhir/researchsubject.html) resource is used to create identifiers visible to the sponsor that contain no personally identifiable information.
 
 
 # Example 2

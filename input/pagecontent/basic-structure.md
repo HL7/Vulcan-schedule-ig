@@ -97,8 +97,8 @@ Having a standard alignment between the ODM and FHIR would enable rapid and repr
  
 The following ODM/XML to FHIR Resource high level mappings have been adopted:
 
-* Map _Protocol_ to _PlanDefinition_
-* Map _StudyEvent_ to _PlanDefinition_
-* Map _FormDef_ to _ActivityDefinition_
+* Map _Protocol_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
+* Map _StudyEvent_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
+* Map _FormDef_ to [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)
 
-The intention here is to use the _PlanDefinition_ and _ActivityDefinition_ that transcribe to the corresponding Object Identifiers (OIDs) of the ODM/XML elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respecitve use cases differ. Shared labelling between the model platforms can be built.
+The intention here is to use the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) and [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) that transcribe to the corresponding Object Identifiers (OIDs) of the ODM/XML elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respective use cases differ. Shared labelling between the model platforms can be built.
