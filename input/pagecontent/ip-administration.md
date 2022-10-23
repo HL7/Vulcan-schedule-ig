@@ -7,7 +7,7 @@ This requires the clear specifications of when to provide, administer and record
 * All other observations support the efficacy and safety of the IP administration​
 * IP administration activities must be well defined in the SOA
 
-The set of FHIR medication resources have been used to review how to incorporate IP administration and record keeping into FHIR specifiied SoA.
+The set of FHIR medication resources have been used to review how to incorporate IP administration and record keeping into FHIR specified SoA.
 ​
 * __Note__: to date immunization (vaccine) trials have not been considered in this section (FHIR defines resources for immunization separately from medications).
 
@@ -63,7 +63,7 @@ Illustrated here is the relationship between a clinical event (in this case an *
 
 <img src="ip-admin-home-dose.png" alt="Home Dosing" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-Many studies require IP to be self-administered, and to continue therafter 'at home'. The diagram here shows how IP self-administration might be recorded in an eHR.  In this case the IP is initially taken during the clinic visit generating a *MedicationAdminstration.status* record of 'completed' (solid circle) and four 'in progress' records reflecting the protocol expectation.  [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) resources can then be used to confirm compliance.   
+Many studies require IP to be self-administered, and to continue thereafter 'at home'. The diagram here shows how IP self-administration might be recorded in an eHR.  In this case the IP is initially taken during the clinic visit generating a *MedicationAdminstration.status* record of 'completed' (solid circle) and four 'in progress' records reflecting the protocol expectation.  [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) resources can then be used to confirm compliance.   
 
 ***
 
