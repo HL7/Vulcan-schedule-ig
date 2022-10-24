@@ -8,7 +8,6 @@ This document is a light touch overview of the ODM - more information can be fou
 * The CDISC repository for the ODM found [here](https://github.com/cdisc-org/DataExchange-ODM). 
 * [ODM Schema](https://github.com/cdisc-org/DataExchange-ODM/tree/main/schema)
 
-
 ## What is the ODM
 The CDISC Operational Data Model (ODM) is a XML-based model defined for the transport and archival of Clinical Trials Data; it is broadly made up of the following top-level elements
 * Clinical Data - actual datapoints gathered on study participants
