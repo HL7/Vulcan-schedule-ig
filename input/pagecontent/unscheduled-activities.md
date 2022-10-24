@@ -50,7 +50,7 @@ The CarePlan for a patient will need to be adapted to incorporate the changes in
 
 * The medical record contains events are not part of an scheduled visit/encounter (i.e. did not occur within the planned SoA time periods). The activities undertaken are recorded, but the records of the events have their own occurrence (ID) and period (start/end or ongoing)​.
 
-* The unplanned events need to be incorporated into the participant study data record over the period the particpant is a study subject​.
+* The unplanned events need to be incorporated into the participant study data record over the period the participant is a study subject​.
 
 * The recording of so-called "common activities" (e.g., adverse events and concomitant medications) are evaluated and recorded. In Clinical Trial Management Systems (CTMS), a special mechanism is usually incorporated to manage this. //Is there a requirement for special consideration in healthcare systems//
 
