@@ -38,6 +38,16 @@ Examples of positive outcomes for this project include:
 * Audit/Inspection – regulatory oversight period identification ​
 * Resource planning (prospective)​
 * Logistics planning (prospective)​
+* Protocol adherence – streamlined deployment of protocol updates
+* Portfolio management – reporting consistency across sites
+* Site operational efficiency – task automation (e.g. order entry, reminders, etc) based on SoA
+* Digital SOA can "serve as single source of truth" and be re-purposed downstream 
+    * Automate creation of EDC specification 
+    * Automate creation of SDTM datasets (especially trial design domains) 
+* Help/automate sites set up a study leading a reduced site burden 
+* Help sites run a study (scheduling, procedures to be performed) 
+* Help ensure compliance with a protocol 
+* Ensure SOA/protocol is implemented uniformly across sites 
 
 This iteration for the project is designed to be directional purely - as we learn more about how the different systems work and can be interfaced. We will continue to improve the IG to accommodate more use cases, iteratively working towards a solution that will be both functional and scalable.
 
