@@ -39,7 +39,8 @@ The following diagrams illustrate how the FHIR medications resources may be used
 
 <img src="ip-admin-no-change.png" alt="No Dose Change" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-This case shows how the medication resources can be used to model 'at visit' IP administration, where the medication details (dose, form, etc.) remain the same at each visit. In this case two methods of using the [MedicationRequest](https://hl7.org/fhir/medicationrequest.html) resource is shown based on the *dispenseRequest.numberOfRepeatsAllowed* option. 
+This case shows how the medication resources can be used to model 'at visit' IP administration, where the medication details (dose, form, etc.) remain the same at each visit. In this case two methods of using the [MedicationRequest](https://hl7.org/fhir/medicationrequest.html) resource is shown based on the *dispenseRequest.numberOfRepeatsAllowed* option. The *numberOfRepeatsAllowed=0* option implies individual 
+[MedicationRequest](https://hl7.org/fhir/medicationrequest.html) would be created prior to each visit; *numberOfRepeatsAllowed=4* option implies that a single [MedicationRequest](https://hl7.org/fhir/medicationrequest.html) is created with instructions that the IP can be dispensed 4 times.
 
 ***
 
