@@ -18,7 +18,7 @@ The Implementation Guide requires methods to:​
 
 Protocols routinely describe assessments that are only to be undertaken under certain circumstances (e.g., a pregnancy test)​
 Additional assessments may be included in the SoA in order to account for special events that may arise. They may include:​
-* A need to repeated an Activity (e.g., additional blood draws)​
+* A need to repeat an Activity (e.g., additional blood draws)​
 * Event/Observation Triggered Activities (e.g., extra tests based on some lab result)​
 
 ### Use Case - Unscheduled Visits
@@ -32,7 +32,7 @@ Unscheduled visits may arise due to identified issues/events (e.g., an Adverse E
 According to criteria specified in the Protocol, a participant may be taken off the study or discontinued from study treatment. Reasons can include, but are not limited to:​
 * Safety Concerns – Subject had a reaction to intervention​
 * Death – Patient died while on Study (related or non-related to intervention)
-* Protocol violations - Inability of patient to follow or completed protocol required visits, assessments, or IP administration requirements​
+* Protocol violations - Inability of patient to follow or complete protocol required visits, assessments, or IP administration requirements​
 * Study or Arm close – Intervention was either too successful or not successful enough then the sponsor may close out the study​ whole or selected arms (usually initiated through a Protocol Amendment.
 
 This represents a branch in the normal participant path through the study. This type of encounter may not be defined *per se* as 'unscheduled visits' but, as with unscheduled visits, when they might occur cannot be pre-determined.
