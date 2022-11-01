@@ -1,5 +1,4 @@
-# Core Implementation Model for Clinical Study Schedule of Activities (SoA)
-
+### Core Implementation Model for Clinical Study Schedule of Activities (SoA)
 The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit, and they are key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
 
 <img src="lzzt_soa.png" alt="H2Q-LZZT-MC Schedule of Activities" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
@@ -25,8 +24,7 @@ The key consideration for the SoA is the collection of data to support the hypot
 * the **outcomes** from those activities, and potentially
 * **who** is to perform/undertake the activities
 
-# Implementing a SoA using FHIR Resources
-
+### Implementing a SoA using FHIR Resources
 In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and the relationships between them.  The work to date has focused on a Workflow view of data management, and has leveraged the existing FHIR workflow patterns to achieve this.  
 
 SoAs do not (a) stand alone - they are study specific, and (b) describe planned activities expected to be executed for each [Patient](http://hl7.org/fhir/Patient) recruited to the study.  Two Research-oriented resources have been used to associate SoA with the correct study and to recognise patients as being study participants:
