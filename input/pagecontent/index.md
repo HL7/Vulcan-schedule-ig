@@ -4,7 +4,7 @@
 The core of this project is to define a usable pattern for a Clinical Trial Schedule of Activities structure using FHIR Resources and Processes, such that:
 * it can be shared
 * it can be interpreted, and 
-* it can be implemented in healthcare systems (such as EHR or PHR systems)  
+* it can be implemented in healthcare systems (such as EHR or PHR systems) and/or clinical research systems 
 
 The conduct of Clinical Trials are guided by the International Conference on Harmonization (ICH) guidelines for Good Clinical Practice (GCP) E6 (R2).[^1]  Core to this is the writing of a Clinical Trial Protocol, a document intended to describe the objectives, design, methodology, statistical considerations and aspects related to the organization of the clinical trial. 
 
