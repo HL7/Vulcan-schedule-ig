@@ -7,20 +7,6 @@ Description: "Planned Visit [Visit-3]"
   * value = "VISIT-3"
   * type = #PLAC
   * use = #usual
-* identifier[+]
-  * value = "SE.RANDOMIZATION_VISIT"
-  * system = "http://www.cdisc.org/ns/odm/v1.3/StudyDef#"
-  * type.coding[0]
-    * system = "http://www.cdisc.org/ns/odm/v1.3#"
-    * display = "OID"
-  * use = #secondary
-* identifier[+]
-  * value = "3.0"
-  * system = "http://www.cdisc.org/ns/sdtm/TV#"
-  * type.coding[0]
-    * system = "http://www.cdisc.org/ns/sdtm/TV#"
-    * display = "VISNUM"
-  * use = #secondary
 * status = #active
 * action[+]
   * title = "Record Visit Date"
