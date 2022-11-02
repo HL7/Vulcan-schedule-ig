@@ -1,4 +1,4 @@
-### Unscheduled Activities
+### Unscheduled Activities - to be canned
 
 ​Unscheduled assessments may be included in the SoA in order to prospectively account for special events or visits that fall outside the planned SoA visit and visit window timings. These may include, but are not limited to: ​
 
