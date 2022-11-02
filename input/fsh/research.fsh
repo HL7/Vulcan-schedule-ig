@@ -3,7 +3,28 @@ Parent: ResearchStudy
 Description: "A profile that lists the data elements of a Research Study that must be supported when used to schedule activities."
 * identifier MS
 * title MS
+* protocol MS
+* protocol only Reference(StudyProtocolSoa)
+* status MS
+* primaryPurposeType MS
+* phase MS
+* category MS
+* focus MS
+* condition MS
+* contact MS
+* relatedArtifact MS
+* keyword MS
 * description MS
+* sponsor MS
+* principalInvestigator MS
+* reasonStopped MS
+* arm MS
+  * name MS
+  * type MS
+  * description MS
+* objective MS
+  * name MS
+  * type MS
 
 Profile: StudyProtocolSoa
 Parent: PlanDefinition
