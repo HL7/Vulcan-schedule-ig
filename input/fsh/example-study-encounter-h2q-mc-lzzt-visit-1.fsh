@@ -11,19 +11,6 @@ Usage: #example
   * value = "VISIT-1"
   * type = #PLAC
   * use = #usual
-* identifier[+]
-  * value = "SE.SCREENING_VISIT"
-  * system = "http://www.cdisc.org/ns/odm/v1.3/StudyDef#"
-  * type.coding[+]
-    * system = "http://www.cdisc.org/ns/odm/v1.3#"
-    * display = "OID"
-  * use = #secondary
-* identifier[+]
-  * value = "1.0"
-  * type.coding[+]
-    * system = "http://www.cdisc.org/ns/sdtm/TV#"
-    * display = "VISNUM"
-  * use = #secondary
 * status = #active
 * action[+]
   * id = "VISIT-1-H2Q-MC-LZZT-Visit-Date"
