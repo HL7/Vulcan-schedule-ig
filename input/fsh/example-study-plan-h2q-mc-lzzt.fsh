@@ -3,7 +3,12 @@ InstanceOf: StudyProtocolSoa
 Description: "H2Q-MC-LZZT-Protocol Schedule of Activities"
 Usage: #example
 * status = #active
+* title = "H2Q-MC-LZZT Protocol Schedule of Activities"
+* name = "H2Q-MC-LZZT-ProtocolDesign"
+* type = #clinical-protocol
+* date = "2022-11-02"
 * version = "LZZT_1"
+* purpose = "The purpose of this PlanDefinition is to illustrate the planned study encounters."
 * identifier[+]
   * value = "H2Q-MC-LZZT-ProtocolDesign-1"
   * type = #PLAC
