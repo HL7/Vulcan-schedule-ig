@@ -110,7 +110,7 @@ Usage: #example
         * value = 58
         * code = #d
 * action[+]
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-8-1"
+  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-8T"
   * title = "Visit-8.1"
   * description = "Telephone Contact [Post Visit-8]"
   * relatedAction[+] 
@@ -138,7 +138,7 @@ Usage: #example
         * value = 86
         * code = #d
 * action[+]
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-9-1"
+  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-9T"
   * title = "Visit-9.1"
   * description = "Telephone Contact Visit [Post Visit-9]"
   * relatedAction[+] 
@@ -166,7 +166,7 @@ Usage: #example
         * value = 112
         * code = #d
 * action[+]
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-10-1"
+  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-10T"
   * title = "Visit-10.1"
   * description = "Telephone Contact Visit [Post Visit-10]"
   * relatedAction[+] 
@@ -194,7 +194,7 @@ Usage: #example
         * value = 142
         * code = #d
 * action[+]
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-11-1"
+  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-11T"
   * title = "Visit-11.1"
   * description = "Telephone Contact Visit [Post Visit-11]"
   * relatedAction[+] 
