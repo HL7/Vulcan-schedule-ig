@@ -1,5 +1,5 @@
 Instance: H2Q-MC-LZZT-ProtocolDesign
-InstanceOf: PlanDefinition
+InstanceOf: StudyProtocolSoa
 Description: "H2Q-MC-LZZT-Protocol Schedule of Activities"
 Usage: #example
 * status = #active
@@ -15,13 +15,9 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #before
-    * offsetRange
-      * low
-        * value = 12
-        * code = #d
-      * high
-        * value = 15
-        * code = #d
+    * offsetDuration = 13 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 12 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 15 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-2"
   * title = "Visit-2"
@@ -30,10 +26,7 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #before
-    * offsetRange
-      * low
-        * value = 1
-        * code = #d
+    * offsetDuration = 1 'd'
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-3"
   * id = "Index-Activity-Event"
@@ -46,13 +39,9 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 12
-        * code = #d
-      * high
-        * value = 15
-        * code = #d
+    * offsetDuration = 14 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 12 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 15 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-5"
   * title = "Visit-5"
@@ -60,13 +49,9 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 26
-        * code = #d
-      * high
-        * value = 30
-        * code = #d
+    * offsetDuration = 28 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 26 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 30 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-6"
   * title = "Visit-6"
@@ -74,13 +59,9 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 33
-        * code = #d
-      * high
-        * value = 37
-        * code = #d
+    * offsetDuration = 35 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 33 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 37 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-7"
   * title = "Visit-7"
@@ -88,125 +69,85 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 40
-        * code = #d
-      * high
-        * value = 44
-        * code = #d
+    * offsetDuration = 42 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 40 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 44 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-8"
+  * id = "H2Q-MC-LZZT-Study-Visit-8"
   * title = "Visit-8"
   * description = "Planned Visit [Visit-8]"
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 54
-        * code = #d
-      * high
-        * value = 58
-        * code = #d
+    * offsetDuration = 56 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 54 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 58 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-8T"
   * title = "Visit-8.1"
   * description = "Telephone Contact [Post Visit-8]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * actionId = "H2Q-MC-LZZT-Study-Visit-8"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 68
-        * code = #d
-      * high
-        * value = 72
-        * code = #d
+    * offsetDuration = 14 'd'
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-9"
+  * id = "H2Q-MC-LZZT-Study-Visit-9"
   * title = "Visit-9"
   * description = "Planned Visit [Visit-9]"
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 82
-        * code = #d
-      * high
-        * value = 86
-        * code = #d
+    * offsetDuration = 84 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 82 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 86 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-9T"
   * title = "Visit-9.1"
   * description = "Telephone Contact Visit [Post Visit-9]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * actionId = "H2Q-MC-LZZT-Study-Visit-9"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 96
-        * code = #d
-      * high
-        * value = 100
-        * code = #d
+    * offsetDuration = 14 'd'
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-10"
+  * id = "H2Q-MC-LZZT-Study-Visit-10"
   * title = "Visit-10"
   * description = "Planned Visit [Visit-10]"
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 110
-        * code = #d
-      * high
-        * value = 112
-        * code = #d
+    * offsetDuration = 112 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 110 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 114 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-10T"
   * title = "Visit-10.1"
   * description = "Telephone Contact Visit [Post Visit-10]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * actionId = "H2Q-MC-LZZT-Study-Visit-10"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 124
-        * code = #d
-      * high
-        * value = 126
-        * code = #d
+    * offsetDuration = 14 'd'
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-11"
+  * id = "H2Q-MC-LZZT-Study-Visit-11"
   * title = "Visit-11"
   * description = "Planned Visit [Visit-11]"
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 138
-        * code = #d
-      * high
-        * value = 142
-        * code = #d
+    * offsetDuration = 140 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 138 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 142 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-11T"
   * title = "Visit-11.1"
   * description = "Telephone Contact Visit [Post Visit-11]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * actionId = "H2Q-MC-LZZT-Study-Visit-11"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 152
-        * code = #d
-      * high
-        * value = 156
-        * code = #d
+    * offsetDuration = 14 'd'
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-12"
   * title = "Visit-12"
@@ -214,13 +155,9 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 166
-        * code = #d
-      * high
-        * value = 170
-        * code = #d
+    * offsetDuration = 168 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 166 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 170 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-13"
   * title = "Visit-13"
@@ -228,13 +165,9 @@ Usage: #example
   * relatedAction[+] 
     * actionId = "Index-Activity-Event"
     * relationship = #after
-    * offsetRange
-      * low
-        * value = 180
-        * code = #d
-      * high
-        * value = 184
-        * code = #d
+    * offsetDuration = 182 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 180 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 184 'd'    
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-ET-14"
   * title = "ET-14"
