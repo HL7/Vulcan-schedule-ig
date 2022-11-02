@@ -29,8 +29,6 @@ pages:
     title: Visit Windowing
   ip-administration.md:
     title: Investigational Product Administration
-  unscheduled-activities.md:
-    title: Unscheduled Activities
   implementation.md:
     title: Implementations
   examples.md:
@@ -42,9 +40,7 @@ pages:
   downloads.md:
     title: Downloads
   cdisc-odm.md:
-    title: CDISC ODM
-  h2q-mc-lzzt.md:
-    title: LZZT Schedule ODM File
+    title: Use case for integration using CDISC ODM
 
 menu:
   Home: index.html
@@ -53,7 +49,7 @@ menu:
   Use Cases:
     Visit Windows: visit-windows.html
     Investigational Product Administration: ip-administration.html
-    Unscheduled Activites: unscheduled-activities.html
+    Integration Opportunities - CDISC ODM: cdisc-odm.html
   Implementations: implementation.html
   Examples: examples.html
   Profiles: profiles.html
