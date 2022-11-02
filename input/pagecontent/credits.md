@@ -1,4 +1,4 @@
-# Credits
+### Credits
 
 This Implementation Guide was developed under the auspices of the HL7 Vulcan Schedule of Activities work group, and builds on the unballoted IG work published previously [Vulcan Schedule of Study Activities FHIR Implementation Guide](index.html). 
 

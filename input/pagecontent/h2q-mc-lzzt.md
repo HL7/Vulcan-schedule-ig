@@ -1,4 +1,4 @@
-# H2Q-MC-LZZT Study Design
+### H2Q-MC-LZZT Study Design
 
 The Lilly ( *Eli Lilly & Company* ) H2Q-MC-LZZT study has been made publically available interested parties for proof of concept and similar testing exercises. It has been used to explore and develop the use of the CDISC ODM/XML model (see CDISC-ODM page) and the study protocol, blank CRFs and example (anonymised) data are available. It is being used here to review, test and develop the concepts and requirements for a FHIR specificied SoA 
 

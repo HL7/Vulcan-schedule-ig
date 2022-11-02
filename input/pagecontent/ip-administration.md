@@ -29,13 +29,13 @@ Investigational Product scenarios include, but are not limited to, IP: ​
 * assert the timing relationship between patient consent and randomisation with that of the IP administration
 
 
-# Research 
+### Research 
 
 The following diagrams illustrate how the FHIR medications resources may be used to record investigational or other drug product use within an EHR.  Four common administration or drug use scenarios are illustrated showing how the 5 medication resources might be used to manage and record IP use.  These diagrams are designed as templates to (a) enable study SoA definitions to recognise when, where and which resources will be required in scheduling plans, and (b) guide to those resources where searches for study medication details may be found. It is expected that individual studies will select and define only those resources and relationships necessary to ensure accuracy/compliance with the protocol objectives; for example, the [MedicationDispense](https://hl7.org/fhir/medicationdispense.html) resource might only be defined by FHIR SoAs if dispensing the IP is time-critical with respect to the administration.  In each case the details of the IP itself are considered to have a [Medication](https://hl7.org/fhir/medication.html) resource record, with the red line(s) showing the *medication.medicationReference* references. All of the resources in these diagrams are **definitional resources** but rather the targets for IP administration definitional resources (e.g. [PlanDefinition](https://hl7.org/fhir/plandefinition.html), [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html), etc.) that would be specified in a SoA.   
 
 ***
 
-## IP Administration at site under HCP (Health Care Provider) supervision (no changes)
+#### IP Administration at site under HCP (Health Care Provider) supervision (no changes)
 
 <img src="ip-admin-no-change.png" alt="No Dose Change" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
@@ -44,7 +44,7 @@ This case shows how the medication resources can be used to model 'at visit' IP 
 
 ***
 
-## IP Administration at site under HCP supervision (dose change permissible, no delay)
+#### IP Administration at site under HCP supervision (dose change permissible, no delay)
 
 <img src="ip-admin-permissible-change.png" alt="Permitted Dose Change" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
@@ -52,7 +52,7 @@ The case here illustrates the use of the medication resources when changes in IP
 
 ***
 
-## IP Administration at site under HCP supervision (delay permissible)
+#### IP Administration at site under HCP supervision (delay permissible)
 
 <img src="ip-admin-permissible-obs.png" alt="Permitted Delay" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
@@ -60,7 +60,7 @@ Illustrated here is the relationship between a clinical event (in this case an *
 
 ***
 
-## IP Administration at home 
+#### IP Administration at home 
 
 <img src="ip-admin-home-dose.png" alt="Home Dosing" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
 
@@ -68,7 +68,7 @@ Many studies require IP to be self-administered, and to continue thereafter 'at 
 
 ***
 
-# Complications
+#### Complications
 * [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) for planned dosing events expect a link to a [Medication](https://hl7.org/fhir/medication.html) record as well as a reason for dosing, etc.  In the case of a blinded clinical study the [Medication](https://hl7.org/fhir/medication.html) could be the study IP or could be placebo; this introduces an issue for retrospective review of subject medication records.  
   * Solution used was to define a mock [Medication](https://hl7.org/fhir/medication.html) using the Protocol Identifier plus the Compound identifier.
 * In FHIR R5 the [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) has been replaced by the [MedicationUsage](https://hl7.org/fhir/medicationusage.html) resource.  This has not currently been modelled.
