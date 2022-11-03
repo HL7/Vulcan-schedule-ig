@@ -3,6 +3,11 @@ InstanceOf: StudyVisitSoa
 Title: "Visit-1"
 Description: "Planned Visit [Visit-1]"
 Usage: #example
+* status = #active
+* title = "H2Q-MC-LZZT Screening Visit"
+* name = "H2Q-MC-LZZT-Study-Visit-1"
+* type = #clinical-protocol
+* date = "2022-11-03"
 * identifier[+]
   * value = "H2Q-MC-LZZT-Study-Visit-1"
   * type = #PLAC
@@ -11,7 +16,6 @@ Usage: #example
   * value = "VISIT-1"
   * type = #PLAC
   * use = #usual
-* status = #active
 * action[+]
   * id = "VISIT-1-H2Q-MC-LZZT-Visit-Date"
   * title = "Record Visit Date"
@@ -79,25 +83,25 @@ Usage: #example
     * relationship = #after
 * action[+]
   * title = "Vital signs: Height"
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Vital-Signs-Height-PD"
+  * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Vital-Signs-Height-PD"
   * relatedAction[+]
     * actionId = "H2Q-MC-LZZT-Informed-Consent"
     * relationship = #after
 * action[+]
   * title = "Vital signs: Weight"
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Vital-Signs-Weight-PD"
+  * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Vital-Signs-Weight-PD"
   * relatedAction[+]
     * actionId = "H2Q-MC-LZZT-Informed-Consent"
     * relationship = #after
 * action[+]
   * title = "Vital Signs: Temperature"
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Vital-Signs-Temperature-PD"
+  * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Vital-Signs-Temperature-PD"
   * relatedAction[+]
     * actionId = "H2Q-MC-LZZT-Informed-Consent"
     * relationship = #after
 * action[+]
   * title = "Vital Signs: Heart Rate and Blood Pressure"
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Vital-Signs-HeartRate-BloodPressure"
+  * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Vital-Signs-HeartRate-BloodPressure"
   * relatedAction[+]
     * actionId = "H2Q-MC-LZZT-Informed-Consent"
     * relationship = #after

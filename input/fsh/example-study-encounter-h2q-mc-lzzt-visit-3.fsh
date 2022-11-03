@@ -3,6 +3,10 @@ InstanceOf: PlanDefinition
 Usage: #example
 Title: "Visit-3"
 Description: "Planned Visit [Visit-3]"
+* title = "H2Q-MC-LZZT Baseline/First Study Treatment Visit"
+* name = "H2Q-MC-LZZT-Study-Visit-3"
+* type = #clinical-protocol
+* date = "2022-11-03"
 * identifier[+]
   * value = "VISIT-3"
   * type = #PLAC
@@ -26,7 +30,7 @@ Description: "Planned Visit [Visit-3]"
     * relationship = #after
 * action[+]
   * title = "Vital Signs: Heart Rate and Blood Pressure"
-  * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Vital-Signs-HeartRate-BloodPressure"
+  * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Vital-Signs-HeartRate-BloodPressure"
   * relatedAction[+]
     * actionId = "VISIT-3-H2Q-MC-LZZT-Visit-Date"
     * relationship = #after
