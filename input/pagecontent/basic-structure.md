@@ -48,10 +48,15 @@ The high-level points are as follows:
 
 {% include plandef-actions.svg %}
 
-In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated in the [example](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html).
+In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  
 
+It is also possible to define the interval between these actions as illustrated in the [Protocol Design Example](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html).  The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
 
-The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
+This is also illustrated within an encounter in the [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) and [Visit 3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) examples.  Within an encounter tasks are defined using [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) resources, and key tasks have a _action.id_ attribute; tasks that should occur relative to the key task reference the task via the _action.relatedAction_ attribute.  In the H2Q-MC-LZZT study within-encounter activities are not as structured as they would be for say a Phase I Pharmacokinetic study, so the activities are defined as being before or after the key task (a specific example includes study data collection activities strictly occurring after collection of informed consent).
+
+#### Conditional Activities
+
+In the current iteration of the IG we have not applied any conditionality on activities occurring; in Research protocols many activities are inherently conditional; an example being carrying out a Pregnancy Test being predicated on the patient having ovaries or specification of a set of activities that should occur at ED visit for an emergent condition.  This is an active topic of consideration and will be addressed in a later version of the IG.
 
 #### Observations on how the SoA can be implemented
 
