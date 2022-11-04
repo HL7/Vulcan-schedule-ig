@@ -54,10 +54,6 @@ It is also possible to define the interval between these actions as illustrated 
 
 This is also illustrated within an encounter in the [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) and [Visit 3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) examples.  Within an encounter tasks are defined using [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) resources, and key tasks have a _action.id_ attribute; tasks that should occur relative to the key task reference the task via the _action.relatedAction_ attribute.  In the H2Q-MC-LZZT study within-encounter activities are not as structured as they would be for say a Phase I Pharmacokinetic study, so the activities are defined as being before or after the key task (a specific example includes study data collection activities strictly occurring after collection of informed consent).
 
-#### Conditional Activities
-
-In the current iteration of the IG we have not applied any conditionality on activities occurring; in Research protocols many activities are inherently conditional; an example being carrying out a Pregnancy Test being predicated on the patient having ovaries or specification of a set of activities that should occur at ED visit for an emergent condition.  This is an active topic of consideration and will be addressed in a later version of the IG.
-
 #### Observations on how the SoA can be implemented
 
 Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Healthcare Record System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.   
