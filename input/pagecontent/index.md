@@ -48,6 +48,28 @@ Examples of positive outcomes for this project include:
 
 This iteration for the project is designed to be directional purely - as we learn more about how the different systems work and can be interfaced. We will continue to improve the IG to accommodate more use cases, iteratively working towards a solution that will be both functional and scalable.
 
+#### Future elements for the Implementation Guide
+
+The scope for the IG has been constrained to deliver a minimal viable solution for representation of a SoA.  The following topics will be or have been evaluated for incorporation in the IG: 
+
+* Unscheduled or Conditional Activities
+* Management of protocol compliance (deviations, violations, etc.)
+* Complex protocols (e.g., adaptive, umbrella, basket)
+* Non-trial integrations (e.g., use of RWD such as a vital statistic registry that determines a patients death via f/up period)
+* How adjudications are managed
+* Patient site transfers (i.e., relocations)
+* Patients re-enrolling multiples times
+* Inclusion/Exclusion criteria 
+** Evaluable and computabel
+** Complex inclusion/exclusion criterions
+* Enhanced SoA headers (e.g., that include visit type such as home health, satellite site, virtual)
+* How to better describe more complex activities (multi-omics, digital therapeutics, etc.)
+* Tracking of primary, secondary, tertiary, and exploratory endpoints
+* Instructional guidance in other protocol sections/footers that provide additional detail
+* Managing multiple sub-study consents that can occur throughout the trial (some voluntary and others conditional-based)
+
+Note, many of these expand the existing scope of the SoA project and will work best in a collaboration with other research-aware IGs (such as the Vulcan Real World Evidence Project, Vulcan Adverse Events, etc).  We have a rigorous process for evaluating and incorporating use cases into the development process.
+
 #### References
 [^1]: [https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf](https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf)
 [^2]: [https://ncimetathesaurus.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20Metathesaurus&code=CL521320](https://ncimetathesaurus.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20Metathesaurus&code=CL521320)
