@@ -60,7 +60,7 @@ The scope for the IG has been constrained to deliver a minimal viable solution f
 * Patient site transfers (i.e., relocations)
 * Patients re-enrolling multiples times
 * Inclusion/Exclusion criteria 
-** Evaluable and computabel
+** Computable and Evaluable criteria that can be defined and processed by electronic systems
 ** Complex inclusion/exclusion criterions
 * Enhanced SoA headers (e.g., that include visit type such as home health, satellite site, virtual)
 * How to better describe more complex activities (multi-omics, digital therapeutics, etc.)
