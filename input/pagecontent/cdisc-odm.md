@@ -1,4 +1,18 @@
-# CDISC Operational Data Model (ODM)
+### Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
+
+The CDISC Operational Data Model (ODM) structure is a popular model for representing planned activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html), and links to the CDISC site where full details of the model can be found on that page.
+
+Having a standard alignment between the ODM and FHIR would enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
+ 
+The following ODM/XML to FHIR Resource high level mappings have been adopted:
+
+* Map _Protocol_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
+* Map _StudyEvent_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
+* Map _FormDef_ to [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)
+
+The intention here is to use the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) and [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) that transcribe to the corresponding Object Identifiers (OIDs) of the ODM/XML elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respective use cases differ. Shared labelling between the model platforms can be built.
+
+#### CDISC Operational Data Model (ODM)
 
 The CDISC ODM is a model designed for the transportation and storage of Study Data for Clinical Studies.  The landing page for the standard can be found here:  [https://www.cdisc.org/standards/data-exchange/odm](https://www.cdisc.org/standards/data-exchange/odm)
 
@@ -8,7 +22,7 @@ This document is a light touch overview of the ODM - more information can be fou
 * The CDISC repository for the ODM found [here](https://github.com/cdisc-org/DataExchange-ODM). 
 * [ODM Schema](https://github.com/cdisc-org/DataExchange-ODM/tree/main/schema)
 
-## What is the ODM
+#### What is the ODM
 The CDISC Operational Data Model (ODM) is a XML-based model defined for the transport and archival of Clinical Trials Data; it is broadly made up of the following top-level elements
 * Clinical Data - actual datapoints gathered on study participants
 * Metadata - definitions used to capture and report the data collected
@@ -20,7 +34,7 @@ Structures within the ODM have little semantic meaning; it is a format focused o
 Data collection is driven by Forms; forms group activities by type (ie all the Vital Signs observations for a single visit are usually grouped in a single form, irrespective of multiple planned timepoints for the elements).  Individual fields on a form are Items in ODM parlance and have associated metadata pertaining to the allowable content (eg datatype, length, constrained values or allowable units for a value)
 
 
-## Structural Overview
+#### Structural Overview
 
 Broadly the structure is as follows (for ODM 1.3.2):
 * ODM
@@ -67,14 +81,14 @@ The *OID* is the key here; it serves as the unique id (for a given --Def element
 
 *OID* are the best key to share data with clinical research systems.
 
-## How the schedule of activities implemented in ODM 
+#### How the schedule of activities implemented in ODM 
 The linking of Data Elements (outcomes of Observations) and Definitions is illustrated here:
 
 {%include form-hierarchy.svg%}
 
 The top-level element for the definitions for the Study are contained within the **MetaDataVersion** element
 
-### MetaDataVersion
+##### MetaDataVersion
 The **MetaDataVersion** is a set of study definition configuration; studies can have multiple versions of a study definition (sometimes in parallel); the version is identified by the *OID*
 
 ```xml
@@ -87,7 +101,7 @@ The **MetaDataVersion** is a set of study definition configuration; studies can 
 </MetaDataVersion>
 ```
 
-### Protocol
+##### Protocol
 The **Protocol** lists the study events that can occur within a Study. 
 ```xml
 <Protocol>
@@ -100,7 +114,7 @@ The **Protocol** lists the study events that can occur within a Study.
 ```
 This is mostly a container element.
 
-### StudyEvent
+###### StudyEvent
 The StudyEvent is the archetype for a Encounters or Study Visits.  
 ```xml
 <StudyEventDef OID="SE.SCREENING_VISIT" Name="Screening Visit (Visit 1)" Repeating="No" Type="Scheduled">
@@ -113,7 +127,7 @@ The StudyEvent is the archetype for a Encounters or Study Visits.
 ...
 ```
 
-### Form
+##### Form
 The Form is an archetype for activities within a Visit.  
 
 
@@ -134,7 +148,7 @@ The Form is an archetype for activities within a Visit.
 ```
 Form designs are often driven by other business considerations that are not necessariy aligned with data domains.  As such a single **Form** may match to multiple resources in the source system.
 
-### ItemGroup
+##### ItemGroup
 **ItemGroup** could be considered as primarily a stuctural concept; it links fields to the form.  Rather than attaching directly to the form, the **ItemGroup** is used to group fields within the form. In the current iteration it is primarily used to represent both repeating and non-repeating sets of fields in a CRF.  
 
 An example of this would be a series of assessments done around a dosing event (eg Vitals Pre-dose, 1h Post-Dose, 2h Post-Dose, etc); the observations are repeated using an ItemGroup with the *Repeating* attribute set to `Yes`
@@ -147,7 +161,7 @@ An example of this would be a series of assessments done around a dosing event (
 </ItemGroupDef>
 ```
 
-### Item
+##### Item
 The **Item** represents an individual data collection element on a Form.
 ```xml
 <ItemDef OID="I.BRTHDAT" SASFieldName="BRTHDAT" Name="Birth Date" DataType="date">
@@ -182,7 +196,7 @@ As can be seen from the examples, the attributes on the Item element are aimed a
 
 The **ItemDef** can have two data related child elements; the *CodeListRef* (zero or one) and *MeasurementUnitRef* (zero or more).  These are links to **CodeList** and **MeasurementUnit** elements.
 
-### CodeList
+##### CodeList
 A **CodeList** is used to constrain the permitted values for a field.  Each **CodeListItem** represents a permissible value for the field; these have a *CodedValue* and a *Decode*: the *CodedValue* is the value intended to be written to the backing store and the *Decode* is the representation of the *CodedValue* that is shown to the user. 
 ```xml
 <CodeList OID="CL.SEX" Name="Sex" DataType="text">
@@ -199,7 +213,7 @@ A **CodeList** is used to constrain the permitted values for a field.  Each **Co
 </CodeList>
 ```
 
-### MeasurementUnit
+##### MeasurementUnit
 The **MeasurementUnit** is used to represent the possible units for a physical quantity with a Unit; the Unit can be reused across many elements.
 ```xml
 <MeasurementUnit OID="mmHg" Name="mmHg">

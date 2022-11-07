@@ -1,5 +1,4 @@
-# Core Implementation Model for Clinical Study Schedule of Activities (SoA)
-
+### Core Implementation Model for Clinical Study Schedule of Activities (SoA)
 The Schedule of Activities (SoA) forms a key part of a Clinical Trial Protocol; it is usually presented as a table with the columns detailing planned study 'visits' (Encounters) and the rows the details of study activities (Activities) that are to be undertaken at that visit, and they are key to understanding how the objectives of the study are to be implemented. The table below shows a typical example SoA:
 
 <img src="lzzt_soa.png" alt="H2Q-LZZT-MC Schedule of Activities" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
@@ -25,8 +24,7 @@ The key consideration for the SoA is the collection of data to support the hypot
 * the **outcomes** from those activities, and potentially
 * **who** is to perform/undertake the activities
 
-# Implementing a SoA using FHIR Resources
-
+### Implementing a SoA using FHIR Resources
 In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and the relationships between them.  The work to date has focused on a Workflow view of data management, and has leveraged the existing FHIR workflow patterns to achieve this.  
 
 SoAs do not (a) stand alone - they are study specific, and (b) describe planned activities expected to be executed for each [Patient](http://hl7.org/fhir/Patient) recruited to the study.  Two Research-oriented resources have been used to associate SoA with the correct study and to recognise patients as being study participants:
@@ -39,45 +37,25 @@ The Definitional Artifacts have been used to create the structure - schedule and
 
 The basic structure is summarized in the following diagram:
 
-{% include basic-structure.svg %}
+<img src="Vulcan-Soa-basic-structure.png" alt="Schedule of Activities Basic Structure" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The high-level points are as follows:
 
-* The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) has a single _protocol_  reference to a [PlanDefinition](https://hl7.org/fhir/plandefinition.html) for the Study Definition; under which all study activities are grouped
-* Each of the activities are defined using separate resources
-* Each activity is linked to the parent Study Definition through the _action_ predicate.  The _action_ predicate:  
-  * defines the relationships between the activities, at the least when activities should occur relative to each other 
+* The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) has at least one _protocol_ reference to a [PlanDefinition](https://hl7.org/fhir/plandefinition.html) for the Study Definition,
+* Under the Study Definition there are references to each of the planned encounters/visits through the _action_ predicate,  
+* Each planned encounter/visit has references to each of the planned activities through the _action_ predicate
+
+Th _action_ predicate defines the relationships between activities, such as what activities are to be done and when they are planned to be done.
 
 {% include plandef-actions.svg %}
 
-In Research protocols many of the activities are event based. For example;  informed consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  It is also possible to define the interval between these actions as illustrated here:
+In Research protocols many of the activities are event based. For example;  Informed Consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  
 
-```
-Instance: H2Q-MC-LZZT-ProtocolDesign
-InstanceOf: PlanDefinition
-Description: "H2Q-MC-LZZT-Protocol Schedule of Activities"
-Usage: #example
-* status = #active
-* version = "LZZT_1"
-...
-* action[+].definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-3"
-* action[=].id = "Index-Activity-Event"
-* action[=].title = "Visit-3"
-* action[=].description = "Planned Visit [Visit-3]"
-* action[+].definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-Visit-4"
-* action[=].title = "Visit-4"
-* action[=].description = "Planned Visit [Visit-4]"
-* action[=].relatedAction[+].actionId = "Index-Activity-Event"
-* action[=].relatedAction[=].relationship = #after
-* action[=].relatedAction[=].offsetRange.low.value = 12
-* action[=].relatedAction[=].offsetRange.low.code = #d
-* action[=].relatedAction[=].offsetRange.high.value = 15
-* action[=].relatedAction[=].offsetRange.high.code = #d
-```
+It is also possible to define the interval between these actions as illustrated in the [Protocol Design Example](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html).  The planned event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
 
-The Event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
+This is also illustrated within an encounter in the [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) and [Visit 3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) examples.  Within an encounter tasks are defined using [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) resources, and key tasks have a _action.id_ attribute; tasks that should occur relative to the key task reference the task via the _action.relatedAction_ attribute.  In the H2Q-MC-LZZT study within-encounter activities are not as structured as they would be for say a Phase I Pharmacokinetic study, so the activities are defined as being before or after the key task (a specific example includes study data collection activities strictly occurring after collection of informed consent).
 
-# Observations on how the SoA can be implemented
+#### Observations on how the SoA can be implemented
 
 Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Healthcare Record System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.   
 
@@ -93,16 +71,3 @@ While the diagram may look complex it is methodologically sound as it builds out
 
 The SoA FHIR IG assumes that how activities/tasks get executed is dependent on their respective services, procedures, and administrative mechanisms. The working group has assumed that it will vary dependent on the scenario and how each system, application, device, etc. are setup.
 
-# Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
-
-The CDISC Operational Data Model (ODM) structure is a popular model for representing planned activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html), and links to the CDISC site where full details of the model can be found on that page.
-
-Having a standard alignment between the ODM and FHIR would enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
- 
-The following ODM/XML to FHIR Resource high level mappings have been adopted:
-
-* Map _Protocol_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
-* Map _StudyEvent_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
-* Map _FormDef_ to [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)
-
-The intention here is to use the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) and [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) that transcribe to the corresponding Object Identifiers (OIDs) of the ODM/XML elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respective use cases differ. Shared labelling between the model platforms can be built.
