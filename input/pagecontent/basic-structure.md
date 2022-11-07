@@ -37,7 +37,7 @@ The Definitional Artifacts have been used to create the structure - schedule and
 
 The basic structure is summarized in the following diagram:
 
-<img src="Vulcan-Soa-basic-structure.png" alt="Schedule of Activities Basic Structure" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
+<img src="Vulcan-SoA-basic-structure.png" alt="Schedule of Activities Basic Structure" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The high-level points are as follows:
 
