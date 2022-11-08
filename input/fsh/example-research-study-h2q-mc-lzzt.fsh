@@ -35,7 +35,7 @@ Usage: #example
 
 
 Instance: H2Q-MC-LZZT-ResearchStudy
-InstanceOf: ResearchStudy
+InstanceOf: ResearchStudySoa
 Title: "H2Q-MC-LZZT Research Study"
 Usage: #example
 * identifier[+]
@@ -49,7 +49,7 @@ Usage: #example
   * type = #PUBCHEM
   * value = "60809"
 * title = "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease"
-* protocol[PlanDefinition] = Reference(PlanDefinition/H2Q-MC-LZZT-ProtocolDesign)
+* protocol[StudyProtocolSoa] = Reference(PlanDefinition/H2Q-MC-LZZT-ProtocolDesign)
 * status = #completed
 * primaryPurposeType = #treatment
 * phase = #phase-3
