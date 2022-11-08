@@ -50,7 +50,7 @@ This iteration for the project is designed to be directional purely - as we lear
 
 #### Future elements for the Implementation Guide
 
-The scope for the IG has been constrained to deliver a minimal viable solution for representation of a SoA.  The following topics will be or have been evaluated for incorporation in the IG: 
+There are different levels of complexity of SoA, which may not be fully represented in the current iteration of this IG. For example, how the design of an SoA may be implemented concerning different protocol types (e.g., adaptive, master, umbrella, basket, etc.). Furthermore, the type of research can vary across SoA designs, such as randomized vs. observational clinical trials, including the different data modalities to collect data (e.g., electronic data capture vs. direct data capture).  The scope for the IG has been constrained to deliver a minimal viable solution for representation of a SoA.  The following topics will be or have been evaluated for incorporation in the IG: 
 
 * Unscheduled or Conditional Activities
 * Management of protocol compliance (deviations, violations, etc.)
@@ -60,7 +60,7 @@ The scope for the IG has been constrained to deliver a minimal viable solution f
 * Patient site transfers (i.e., relocations)
 * Patients re-enrolling multiples times
 * Inclusion/Exclusion criteria 
-** Evaluable and computabel
+** Computable and Evaluable criteria that can be defined and processed by electronic systems
 ** Complex inclusion/exclusion criterions
 * Enhanced SoA headers (e.g., that include visit type such as home health, satellite site, virtual)
 * How to better describe more complex activities (multi-omics, digital therapeutics, etc.)

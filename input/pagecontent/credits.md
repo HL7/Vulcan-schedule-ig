@@ -9,8 +9,7 @@ Current work group co-chairs:
 * **Michael Ward** - TransCelerate Biopharma / Lilly Pharmaceuticals - xxx
 * **Geoff Low** - Medidata/3DS - xxx
 
-
-Work group members:
+Core work group members:
 
 * **Jean Duteau**  - Duteau Design - xxx
 * **Rebecca Baker** - CDISC - xxx

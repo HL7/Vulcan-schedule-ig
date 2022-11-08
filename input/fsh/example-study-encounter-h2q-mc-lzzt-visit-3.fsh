@@ -51,7 +51,7 @@ Description: "Planned Visit [Visit-3]"
   * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Patient-randomized"
   * id = "VISIT-3-H2Q-MC-LZZT-Patient-randomized"
 * action[+]
-  * title = "Plasma Specimen (Xanomeline) "
+  * title = "Plasma Specimen (Xanomeline)"
   * definitionUri = "ActivityDefinition/H2Q-MC-LZZT-Plasma-Specimen"
   * relatedAction[+]
     * actionId = "VISIT-3-H2Q-MC-LZZT-Patient-randomized"

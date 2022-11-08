@@ -49,10 +49,8 @@ menu:
   Use Cases:
     Visit Windows: visit-windows.html
     Investigational Product Administration: ip-administration.html
-    Integration Opportunities - CDISC ODM: cdisc-odm.html
-  Implementations: implementation.html
-  Examples: examples.html
+    CDISC ODM Integration: cdisc-odm.html
   Profiles: profiles.html
+  Examples: examples.html
   Downloads: downloads.html
-  CDISC ODM Walkthrough: cdisc-odm.html
   Credits: credits.html
