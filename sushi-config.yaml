@@ -50,9 +50,7 @@ menu:
     Visit Windows: visit-windows.html
     Investigational Product Administration: ip-administration.html
     CDISC ODM Integration: cdisc-odm.html
- # Implementations: implementation.html
   Profiles: profiles.html
   Examples: examples.html
   Downloads: downloads.html
-  # CDISC ODM Walkthrough: cdisc-odm.html
   Credits: credits.html
