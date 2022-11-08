@@ -31,7 +31,19 @@ Investigational Product scenarios include, but are not limited to, IP: ​
 
 ### Research 
 
-The following diagrams illustrate how the FHIR medications resources may be used to record investigational or other drug product use within an EHR.  Four common administration or drug use scenarios are illustrated showing how the 5 medication resources might be used to manage and record IP use.  These diagrams are designed as templates to (a) enable study SoA definitions to recognise when, where and which resources will be required in scheduling plans, and (b) guide to those resources where searches for study medication details may be found. It is expected that individual studies will select and define only those resources and relationships necessary to ensure accuracy/compliance with the protocol objectives; for example, the [MedicationDispense](https://hl7.org/fhir/medicationdispense.html) resource might only be defined by FHIR SoAs if dispensing the IP is time-critical with respect to the administration.  In each case the details of the IP itself are considered to have a [Medication](https://hl7.org/fhir/medication.html) resource record, with the red line(s) showing the *medication.medicationReference* references. All of the resources in these diagrams are **definitional resources** but rather the targets for IP administration definitional resources (e.g. [PlanDefinition](https://hl7.org/fhir/plandefinition.html), [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html), etc.) that would be specified in a SoA.   
+The following diagrams illustrate how the FHIR medications resources may be used to record investigational or other drug product use within an EHR.  Four common administration or drug use scenarios are illustrated showing how the 5 medication resources might be used to manage and record IP use.  These diagrams are designed as templates to (a) enable study SoA definitions to recognise when, where and which resources will be required in scheduling plans, and (b) guide to those resources where searches for study medication details may be found. It is expected that individual studies will select and define only those resources and relationships necessary to ensure accuracy/compliance with the protocol objectives; for example, the [MedicationDispense](https://hl7.org/fhir/medicationdispense.html) resource might only be defined by FHIR SoAs if dispensing the IP is time-critical with respect to the administration.  
+
+In each case the details of the IP itself are considered to have a [Medication](https://hl7.org/fhir/medication.html) resource record, with the red line(s) showing the *medication.medicationReference* references. All of the resources in these diagrams are not **definitional resources** but rather the targets for IP administration definitional resources (e.g. [PlanDefinition](https://hl7.org/fhir/plandefinition.html), [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html), etc.) that would be specified in a SoA.  The blue line(s) show the relationships between the potential reporting medication resources.  
+
+Figure Legend: 
+
+Green Circle: Start of sponsor requirement to record/review [ResearchSubject](https://hl7.org/fhir/researchsubject.html)ResearchSubject medication record
+Red Circle: End of sponsor requirement to record/review ResearchSubject medication record
+Gray Circle: eHR record recorded by study team recording a medication event - status: completed
+White Circle: eHR record reflecting protocol expectation for medication intake - status: in progress, confirmed thereafter by [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) records.
+
+Red Lines: *medication.medicationReference* relationships
+Blue Lines: *medicationXXX* relationships 
 
 ***
 
@@ -69,6 +81,7 @@ Many studies require IP to be self-administered, and to continue thereafter 'at 
 ***
 
 #### Complications
+
 * [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) for planned dosing events expect a link to a [Medication](https://hl7.org/fhir/medication.html) record as well as a reason for dosing, etc.  In the case of a blinded clinical study the [Medication](https://hl7.org/fhir/medication.html) could be the study IP or could be placebo; this introduces an issue for retrospective review of subject medication records.  
   * Solution used was to define a mock [Medication](https://hl7.org/fhir/medication.html) using the Protocol Identifier plus the Compound identifier.
 * In FHIR R5 the [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) has been replaced by the [MedicationUsage](https://hl7.org/fhir/medicationusage.html) resource.  This has not currently been modelled.
