@@ -6,7 +6,7 @@ Contributing individuals and organisations are:
 
 Current work group co-chairs: 
 
-* **Michael Ward** - TransCelerate Biopharma / Lilly Pharmaceuticals
+* **Michael Ward** - TransCelerate Biopharma / ELI Lilly 7 Company
 * **Geoff Low** - Medidata/3DS
 
 Core work group members:
