@@ -11,11 +11,11 @@ The image below shows a typical example SoA:
       <area alt="Research Study" title="Research Study" href="ResearchStudy-H2Q-MC-LZZT-ResearchStudy.html" coords="305,37,625,72" shape="rect" target="_blank">
       <area alt="Visit 3 (Study Encounter)" title="Visit 3 (Study Encounter)" href="PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html" coords="344,102,397,830" shape="rect" target="_blank">
       <area alt="Protocol Schedule of Activities " title="Protocol Schedule of Activities " href="PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html" coords="190,117,653,167" shape="rect" target="_blank">
-      <area alt="Vital Signs/Temperature (ActivityDefinition)" title="Vital Signs/Temperature (ActivityDefinition)" href="ActivityDefinition-H2Q-MC-LZZT-Vital-Signs.html" coords="541,375,602,406" shape="rect" target="_blank">
+      <area alt="Vital Signs/Temperature (ActivityDefinition)" title="Vital Signs/Temperature (ActivityDefinition)" href="ActivityDefinition-H2Q-MC-LZZT-Vital-Signs-Temperature.html" coords="541,375,602,406" shape="rect" target="_blank">
 </map>
 
 * The Encounters/Visits (any planned event corresponding to clinical data collection) are represented along the horizontal axis (for an example see [Visit 3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html))
-* The Activities (the planned activities expected to occur at the event) are represented vertically (for an example see [Vital Signs/Temperature](ActivityDefinition-H2Q-MC-LZZT-Vital-Signs.html))
+* The Activities (the planned activities expected to occur at the event) are represented vertically (for an example see [Vital Signs/Temperature](ActivityDefinition-H2Q-MC-LZZT-Vital-Signs-Temperature.html))
 * ... with the required Activities at each Encounter shown by a cross (X) in the matrix.
 
 The SoA in this form represents the basic activities required at each Encounter and is usually accompanied by the details of the timings of the events (weeks) and an Encounter identifier (in the example the visit numbers... V1, V2... etc.)
