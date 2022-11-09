@@ -6,24 +6,24 @@ Contributing individuals and organisations are:
 
 Current work group co-chairs: 
 
-* **Michael Ward** - TransCelerate Biopharma / Lilly Pharmaceuticals - xxx
-* **Geoff Low** - Medidata/3DS - xxx
+* **Michael Ward** - TransCelerate Biopharma / ELI Lilly & Company
+* **Geoff Low** - Medidata/3DS
 
 Core work group members:
 
-* **Jean Duteau**  - Duteau Design - xxx
-* **Rebecca Baker** - CDISC - xxx
-* **Andy Richardson** - Zenetar - xxx
-* **Rahul Thandavan** - Roche - xxx
-* **Jeffrey Abolofia** - Pinnacle 21 - xxx
-* **Mike Hamidi** - Pfizer - xxx
-* **Hugh Glover** - Bluewave Informatics/HL7 BR&R - xxx
+* **Jean Duteau**  - Duteau Design
+* **Rebecca Baker** - CDISC
+* **Andy Richardson** - Zenetar
+* **Rahul Thandavan** - Roche
+* **Jeffrey Abolofia** - Pinnacle 21
+* **Mike Hamidi** - Pfizer
+* **Hugh Glover** - Bluewave Informatics/HL7 BR&R
 
 Project Management:
 
-* **Katie Warren** PHUSE - Project management, Meeting coordination 
-* **Shani Sampson** Vulcan - Project management, Meeting coordination 
-* **Michael Van Campen** Vulcan - Project management, Oversight
+* **Katie Warren** PHUSE  
+* **Shani Sampson** Vulcan
+* **Michael Van Campen** Vulcan
 
 With contributions from other members who have from time to time, or quietly, participated in meetings, attended conference calls, and supported the core team during the development process.
 
