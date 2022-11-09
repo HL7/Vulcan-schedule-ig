@@ -1,16 +1,16 @@
 ### Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
 
-The CDISC Operational Data Model (ODM) structure is a popular model for representing planned activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems. A primer on the ODM can be found as part of the specification [CDISC-ODM](cdisc-odm.html), and links to the CDISC site where full details of the model can be found on that page.
+The CDISC Operational Data Model (ODM) structure is a popular model for representing planned and performed activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems. 
 
-Having a standard alignment between the ODM and FHIR would enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
+Having a standard alignment between the ODM and FHIR will enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
  
-The following ODM/XML to FHIR Resource high level mappings have been adopted:
+As part of the current iteration of the IG the following ODM/XML to FHIR Resource high level concept alignments have been adopted:
 
 * Map _Protocol_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
 * Map _StudyEvent_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
 * Map _FormDef_ to [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)
 
-The intention here is to use the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) and [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) that transcribe to the corresponding Object Identifiers (OIDs) of the ODM/XML elements.  This will be valuable for reconciling study elements.  It is important to stress that there will never going to be a complete overlap as their respective use cases differ. Shared labelling between the model platforms can be built.
+The intention here is to use the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) and [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) to represent the ODM design concepts.  In modelling the H2Q-MC-LZZT study ODM the group used a pattern for the identifier that could be used to bind the OIDs from the ODM elements to the FHIR resources.  Identifiers can be used to find resources using the common resource search patterns - this will be valuable for reconciling study elements.  Shared labelling between the model platforms can be built.
 
 #### CDISC Operational Data Model (ODM)
 
