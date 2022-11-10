@@ -35,11 +35,11 @@ Who is communicating what to whom?
 #### Technical Aspects
 * The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) resource describes essential information about the study, including the purpose, objective, sponsor, investigator, therapy, condition being studied, schedule of activities, and other key items.
 * In the context of a research study, the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource identifies
-** all the activities (defined in [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)) to be undertaken during the conduct of that [ResearchStudy](https://hl7.org/fhir/researchstudy.html)
-** the visits
-** all the activities to be associated with each visit
-** the relative timing relationship of an activity as associated to another activity (whether it is to occur before or after the "anchoring" activity)
-** the expected time and unit of time lapse between visits or activities within a visit (i.e., "Visit Window")
+  * all the activities (defined in [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)) to be undertaken during the conduct of that [ResearchStudy](https://hl7.org/fhir/researchstudy.html)
+  * the visits
+  * all the activities to be associated with each visit
+  * the relative timing relationship of an activity as associated to another activity (whether it is to occur before or after the "anchoring" activity)
+  * the expected time and unit of time lapse between visits or activities within a visit (i.e., "Visit Window")
 
 * the [CarePlan](https://hl7.org/fhir/careplan.html) resource associates the activities and visits defined in [PlanDefinition](https://hl7.org/fhir/plandefinition.html) to an individual patient. In the context of clinical care, it is possible for planned activities be conducted in the absence of a care plan. In the context of protocol driven research, the use of [CarePlan](https://hl7.org/fhir/careplan.html) is essential to ensure all [PlanDefinition](https://hl7.org/fhir/plandefinition.html) (visits and activities) are scheduled and executed for that ResearchStudy.
 
