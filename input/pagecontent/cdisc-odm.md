@@ -1,17 +1,9 @@
 ### Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
 
-The CDISC Operational Data Model (ODM) structure is a popular model for representing planned and performed activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management System (CTMS).  It is a common way for exchanging data and metadata between data management systems. 
+The CDISC Operational Data Model (ODM) structure is a common model for representing defined, planned and performed activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management Systems (CTMS).  It is the de facto standard for exchanging data and metadata between clinical data management systems. 
 
 Having a standard alignment between the ODM and FHIR will enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
  
-As part of the current iteration of the IG the following ODM/XML to FHIR Resource high level concept alignments have been adopted:
-
-* Map _Protocol_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
-* Map _StudyEvent_ to [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
-* Map _FormDef_ to [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)
-
-The intention here is to use the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) and [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) to represent the ODM design concepts.  In modelling the H2Q-MC-LZZT study ODM the group used a pattern for the identifier that could be used to bind the OIDs from the ODM elements to the FHIR resources.  Identifiers can be used to find resources using the common resource search patterns - this will be valuable for reconciling study elements.  Shared labelling between the model platforms can be built.
-
 #### CDISC Operational Data Model (ODM)
 
 The CDISC ODM is a model designed for the transportation and storage of Study Data for Clinical Studies.  The landing page for the standard can be found here:  [https://www.cdisc.org/standards/data-exchange/odm](https://www.cdisc.org/standards/data-exchange/odm)
@@ -36,23 +28,7 @@ Data collection is driven by Forms; forms group activities by type (ie all the V
 
 #### Structural Overview
 
-Broadly the structure is as follows (for ODM 1.3.2):
-* ODM
-  * Study
-    * MetaDataVersion
-      * Protocol
-        * StudyEvent
-          * Form
-            * ItemGroup
-              * Item
-  * ClinicalData
-    * SubjectData
-      * StudyEventData
-        * FormData
-          * ItemGroupData
-            * ItemData
-
-The specification is distributed as an XML document, and as such can be extended through the use of vendor namespaces; examples where this has been done include:
+The ODM specification is distributed as an XML document, and as such can be extended through the use of vendor namespaces; examples where this has been done include:
 * Study Design Model - extensions to cover topics such as workflow, study design concepts
 * Dataset-XML - extensions to use for transporting datasets
 
@@ -102,7 +78,7 @@ The **MetaDataVersion** is a set of study definition configuration; studies can 
 ```
 
 ##### Protocol
-The **Protocol** lists the study events that can occur within a Study. 
+The **Protocol** lists the study events/encounters that can occur within a Study. 
 ```xml
 <Protocol>
 	<Description>
@@ -225,3 +201,47 @@ The **MeasurementUnit** is used to represent the possible units for a physical q
 ```
 The *Symbol* is used for the representation of the Unit; the *OID* is used as the persisted value.
 
+#### Linking between ODM Elements and FHIR Resources
+
+As part of the current iteration of the IG the following ODM/XML to FHIR Resource high level concept alignments have been tested for defined activities:
+
+* Align the _Protocol_ element with [PlanDefinition](https://hl7.org/fhir/plandefinition.html)
+* Align the  _StudyEvent_ element with [PlanDefinition](https://hl7.org/fhir/plandefinition.html) (with the _kind_ driving the implementation towards an [Encounter](https://hl7.org/fhir/encounter.html) )
+* Align the _FormDef_ with [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)
+
+In modelling the H2Q-MC-LZZT study ODM the group used a pattern for the [Identifier](http://www.hl7.org/fhir/datatypes.html#Identifier) that was used to link the OIDs from the ODM elements to the FHIR resources.  Identifiers can be used to find resources using the common resource search patterns - this will be valuable for reconciling study elements.  Shared labelling between the model platforms can be built.
+
+An example is shown here:
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "H2Q-MC-LZZT-Study-Visit-1",
+  "identifier": [
+    {
+      "value": "H2Q-MC-LZZT-Study-Visit-1",
+      "type": {
+        "coding": [
+          {
+            "code": "PLAC"
+          }
+        ]
+      },
+      "use": "usual"
+    },
+    {
+      "value": "SE.SCREENING_VISIT",
+      "system": "http://www.cdisc.org/ns/odm/v1.3/StudyDef#",
+      "type": {
+        "coding": [
+          {
+            "system": "http://www.cdisc.org/ns/odm/v1.3#",
+            "display": "OID"
+          }
+        ],
+        "text": "OID"
+      },
+      "use": "secondary"
+    }
+}
+```
+A sample ODM has a __StudyEventDef__ with an OID `SE.SCREENING_VISIT`; the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) has an _identifier_ that links the planned event in the FHIR design back to the definition in the ODM.  This resource could then be requested using the following URL `/PlanDefinition?identifier=http://www.cdisc.org/ns/odm/v1.3/StudyDef|SE.SCREENING_VISIT`

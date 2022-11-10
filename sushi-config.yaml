@@ -29,18 +29,16 @@ pages:
     title: Visit Windowing
   ip-administration.md:
     title: Investigational Product Administration
-  implementation.md:
-    title: Implementations
+  cdisc-odm.md:
+    title: Use case for integration using CDISC ODM
   examples.md:
     title: Examples
   profiles.md:
     title: Profiles
-  credits.md:
-    title: Credits
   downloads.md:
     title: Downloads
-  cdisc-odm.md:
-    title: Use case for integration using CDISC ODM
+  credits.md:
+    title: Credits
 
 menu:
   Home: index.html
