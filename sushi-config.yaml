@@ -31,10 +31,10 @@ pages:
     title: Investigational Product Administration
   cdisc-odm.md:
     title: Use case for integration using CDISC ODM
-  examples.md:
-    title: Examples
   profiles.md:
     title: Profiles
+  examples.md:
+    title: Examples
   downloads.md:
     title: Downloads
   credits.md:
