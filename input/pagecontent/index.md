@@ -60,8 +60,8 @@ There are different levels of complexity of SoA, which may not be fully represen
 * Patient site transfers (i.e., relocations)
 * Patients re-enrolling multiples times
 * Inclusion/Exclusion criteria 
-** Computable and Evaluable criteria that can be defined and processed by electronic systems
-** Complex inclusion/exclusion criterions
+  * Computable and Evaluable criteria that can be defined and processed by electronic systems
+  * Complex inclusion/exclusion criterions
 * Enhanced SoA headers (e.g., that include visit type such as home health, satellite site, virtual)
 * How to better describe more complex activities (multi-omics, digital therapeutics, etc.)
 * Tracking of primary, secondary, tertiary, and exploratory endpoints
