@@ -28,4 +28,10 @@ The following extensions are defined to enable data elements that are not curren
  This IG Contains the following dependencies on other IGs.
 
  {% include dependency-table.xhtml %}
- 
+
+### Cross-Version Analysis
+{% include cross-version-analysis.xhtml %}
+
+### Intellectual Property Statements
+{% include ip-statements.xhtml %}
+

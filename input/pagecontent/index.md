@@ -1,6 +1,3 @@
-{% include cross-version-analysis.xhtml %}
-{% include ip-statements.xhtml %}
-
 ### Background
 
 #### Vulcan Schedule of Activities (SoA) Project
