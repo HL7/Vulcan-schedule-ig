@@ -1,3 +1,5 @@
+{% capture cross-version-analysis %}{% include cross-version-analysis.xhtml %}{% endcapture %} {% capture ip-statement %}{% include ip-statements.xhtml %}{% endcapture %}
+
 ### Background
 
 #### Vulcan Schedule of Activities (SoA) Project
