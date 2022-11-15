@@ -21,9 +21,7 @@ The following extensions are defined to enable data elements that are not curren
 
 ### Global Profiles
 
- There are no global profiles defined for US Core.
-
- {% include globals-table.xhtml %}
+  {% include globals-table.xhtml %}
 
 ### IG Dependencies
 
