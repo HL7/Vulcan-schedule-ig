@@ -1,4 +1,5 @@
-{% capture cross-version-analysis %}{% include cross-version-analysis.xhtml %}{% endcapture %} {% capture ip-statement %}{% include ip-statements.xhtml %}{% endcapture %}
+{% include cross-version-analysis.xhtml %}
+{% include ip-statements.xhtml %}
 
 ### Background
 
