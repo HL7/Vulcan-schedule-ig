@@ -7,7 +7,6 @@ The following profiles are defined for exchanging study schedule information.
 |PlanDefinition|[StudyProtocolSoa](StructureDefinition-StudyProtocolSoa.html)|A profile that lists the data elements of a PlanDefinition that must be supported so that it can represent an entire set of visits and activities for a given study protocol.|
 |PlanDefinition|[StudyVisitSoa](StructureDefinition-StudyVisitSoa.html)|An abstract profile that lists the data elements of a PlanDefinition that must be supported so that it can represent a Study Visit.|
 |PlanDefinition|[PlannedStudyVisitSoa](StructureDefinition-PlannedStudyVisitSoa.html)|A profile that further qualifies the StudyVisitSoa profile so that it can represent a planned visit.|
-|PlanDefinition|[UnplannedStudyVisitSoa](StructureDefinition-UnplannedStudyVisitSoa.html)|A profile that further qualifies the StudyVisitSoa profile so that it can represent an unplanned visit.|
 |ActivityDefinition|[StudyActivitySoa](StructureDefinition-StudyActivitySoa.html)|A profile lists the data elements of an ActivityDefinition that must be supported so that it can represent an activity that is being scheduled.|
 {: .grid }
 

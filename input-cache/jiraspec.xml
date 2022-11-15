@@ -27,7 +27,7 @@
 <page key="downloads" name="Downloads"/>
 <page key="examples" name="Examples"/>
 <page key="index" name="Home"/>
-<page key="implementation" name="Implementations"/>
+<page deprecated="true" key="implementation" name="Implementations"/>
 <page key="ip-administration" name="Investigational Product Administration"/>
 <page key="profiles" name="Profiles"/>
 <page key="toc" name="Table of Contents"/>

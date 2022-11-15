@@ -5,16 +5,15 @@ Description: "Planned Visit [Visit-1]"
 Usage: #example
 * status = #active
 * title = "H2Q-MC-LZZT Screening Visit"
-* name = "H2Q-MC-LZZT-Study-Visit-1"
-* type = #clinical-protocol
+* type = http://terminology.hl7.org/CodeSystem/plan-definition-type#clinical-protocol
 * date = "2022-11-03"
 * identifier[+]
   * value = "H2Q-MC-LZZT-Study-Visit-1"
-  * type = #PLAC
+  * type = http://terminology.hl7.org/CodeSystem/v2-0203#PLAC
   * use = #usual
 * identifier[+]
   * value = "VISIT-1"
-  * type = #PLAC
+  * type = http://terminology.hl7.org/CodeSystem/v2-0203#PLAC
   * use = #usual
 * action[+]
   * id = "VISIT-1-H2Q-MC-LZZT-Visit-Date"
