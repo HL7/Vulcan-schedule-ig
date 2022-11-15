@@ -18,3 +18,16 @@ The following extensions are defined to enable data elements that are not curren
 |---|---|---|
 |[AcceptableOffsetRange](StructureDefinition-AcceptableOffsetRangeSoa.html)|PlanDefinition.action.relatedAction|Provides an offset range that, along with offsetDuration, indicates an acceptable range of dates for a related action, i.e. +10-15 days|
 {: .grid }
+
+### Global Profiles
+
+ There are no global profiles defined for US Core.
+
+ {% include globals-table.xhtml %}
+
+### IG Dependencies
+
+ This IG Contains the following dependencies on other IGs.
+
+ {% include dependency-table.xhtml %}
+ 
