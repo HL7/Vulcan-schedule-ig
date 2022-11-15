@@ -1,15 +1,14 @@
 Instance: H2Q-MC-LZZT-Study-Visit-3
-InstanceOf: PlanDefinition
+InstanceOf: PlannedStudyVisitSoa
 Usage: #example
 Title: "Visit-3"
 Description: "Planned Visit [Visit-3]"
 * title = "H2Q-MC-LZZT Baseline/First Study Treatment Visit"
-* name = "H2Q-MC-LZZT-Study-Visit-3"
-* type = #clinical-protocol
+* type = http://terminology.hl7.org/CodeSystem/plan-definition-type#clinical-protocol
 * date = "2022-11-03"
 * identifier[+]
   * value = "VISIT-3"
-  * type = #PLAC
+  * type = http://terminology.hl7.org/CodeSystem/v2-0203#PLAC
   * use = #usual
 * status = #active
 * action[+]

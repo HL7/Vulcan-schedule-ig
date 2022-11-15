@@ -8,30 +8,36 @@ Instance: SamGetWell
 InstanceOf: Practitioner
 Title: "Samuel Home, M.D."
 Usage: #example
-* identifier[0].value = "ABC1234"
-* identifier[0].type = #UPIN
-* identifier[0].use = #official
+* identifier[+]
+  * value = "ABC1234"
+  * type = http://terminology.hl7.org/CodeSystem/v2-0203#UPIN
+  * use = #official
 * active = true
-* name[0].use = #usual
-* name[0].family = "Home"
-* name[0].given = "Samuel"
-* name[0].prefix = "Dr"
-* name[0].suffix[0] = "M.D."
+* name[+]
+  * use = #usual
+  * family = "Home"
+  * given = "Samuel"
+  * prefix = "Dr"
+  * suffix[0] = "M.D."
 * gender = #male
-* telecom.value = "555-123-5467"
-* telecom.system = #phone
-* telecom.use = #work
+* telecom[+]
+  * value = "555-123-5467"
+  * system = #phone
+  * use = #work
 
 Instance: EliLillyAndCompany
 InstanceOf: Organization
 Title: "Eli Lilly and Company"
 Usage: #example
-* identifier[0].value = "Eli Lilly and Company Inc"
-* identifier[0].use = #official
-* contact[+].purpose = #ADMIN
-* contact[=].telecom[+].system = #url
-* contact[=].telecom[=].value = "https://www.lilly.com"
-* type = #crs
+* identifier[+]
+  * value = "Eli Lilly and Company Inc"
+  * use = #official
+* contact[+]
+  * purpose = http://terminology.hl7.org/CodeSystem/contactentity-type#ADMIN
+  * telecom[+]
+    * system = #url
+    * value = "https://www.lilly.com"
+* type = http://terminology.hl7.org/CodeSystem/organization-type#crs
 
 
 Instance: H2Q-MC-LZZT-ResearchStudy
@@ -46,13 +52,12 @@ Usage: #example
   * value = "NCTA12313212"
   * system = "https://clinicaltrials.gov/show/"
 * identifier[+]
-  * type = #PUBCHEM
-  * value = "60809"
+  * value = PUBCHEM#60809
 * title = "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease"
 * protocol[StudyProtocolSoa] = Reference(PlanDefinition/H2Q-MC-LZZT-ProtocolDesign)
 * status = #completed
-* primaryPurposeType = #treatment
-* phase = #phase-3
+* primaryPurposeType = http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type#treatment
+* phase = http://terminology.hl7.org/CodeSystem/research-study-phase#phase-3
 * category[0] = NCIT#C98388 "Interventional Study"
 * category[1] = NCIT#C15417 "Randomized Clinical Trial"
 * category[2] = NCIT#C15228 "Double Blind Study"
@@ -92,7 +97,7 @@ Usage: #example
 Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease
 """
 * principalInvestigator[Practitioner] = Reference(Practitioner/SamGetWell)
-* reasonStopped = #accrual-goal-met 
+* reasonStopped = http://terminology.hl7.org/CodeSystem/research-study-reason-stopped#accrual-goal-met 
 * arm[+]
   * name = "Placebo"
   * type = NCIT#C49648
@@ -107,21 +112,21 @@ Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Pa
   * description = "High-dose xanomeline arm (75 cm2 TTS Formulation E, 81 mg xanomeline)"
 * objective[+]
   * name = "To determine if there is a statistically significant relationship (overall Type 1 error rate, α=.05) between the change in both ADAS-Cog and CIBIC scores, and drug dose (0, 50 cm2 [54 mg], and 75 cm2 [81 mg])."
-  * type = #primary
+  * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#primary
 * objective[+]
   * name = "To document the safety profile of the xanomeline TTS."
-  * type = #primary
+  * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#primary
 * objective[+]
   * name = "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these areas."
-  * type = #secondary
+  * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#secondary
 * objective[+]
   * name = "To assess the dose-dependent improvements in activities of daily living. Improved scores on the Disability Assessment for Dementia (DAD) will indicate improvement in these areas."
-  * type = #secondary
+  * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#secondary
 * objective[+]
   * name = "To assess the dose-dependent improvements in an extended assessment of cognition that integrates attention/concentration tasks. The Alzheimer’s Disease Assessment Scale-14 item Cognitive Subscale, hereafter referred to as ADAS-Cog (14), will be used for this assessment."
-  * type = #secondary
+  * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#secondary
 * objective[+]
   * name = "To assess the treatment response as a function of Apo E genotype."
-  * type = #secondary
+  * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#secondary
 // * inclusion/exclusion criteria
 * sponsor[Organization] = Reference(Organization/EliLillyAndCompany)
