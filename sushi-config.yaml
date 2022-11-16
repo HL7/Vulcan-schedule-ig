@@ -6,8 +6,8 @@
 id: hl7.fhir.uv.vulcan-schedule
 canonical: http://hl7.org/fhir/uv/vulcan-schedule
 name: VulcanSchedule
-title: Vulcan Schedule of Study Activites FHIR Implementation Guide
-description: FHIR Implementation Guide representing a Research Study Schedule of Activites
+title: Clinical Study Schedule of Activites FHIR Implementation Guide
+description: FHIR Implementation Guide representing a Clinical Study Schedule of Activites
 status: draft # draft | active | retired | unknown
 version: 0.1.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html

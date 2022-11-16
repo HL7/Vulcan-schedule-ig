@@ -7,6 +7,7 @@ Alias: MESH = https://id.nlm.nih.gov/mesh
 Instance: SamGetWell
 InstanceOf: Practitioner
 Title: "Samuel Home, M.D."
+Description: "Sample Practitioner: Samuel Home, M.D."
 Usage: #example
 * identifier[+]
   * value = "ABC1234"
@@ -28,6 +29,7 @@ Usage: #example
 Instance: EliLillyAndCompany
 InstanceOf: Organization
 Title: "Eli Lilly and Company"
+Description: "Sample Organization: Eli Lilly and Company"
 Usage: #example
 * identifier[+]
   * value = "Eli Lilly and Company Inc"

@@ -3,3 +3,9 @@
 # Add warning and/or information messages here after you've confirmed that they aren't really a problem
 # (And include comments like this justifying why)
 # See https://github.com/FHIR/sample-ig/blob/master/input/ignoreWarnings.txt for examples
+
+# Sample code systems that are unknown to the validator
+Code System URI 'http://ncimeta.nci.nih.gov' is unknown so the code cannot be validated
+Code System URI 'https://pubmed.ncbi.nlm.nih.gov' is unknown so the code cannot be validated
+Code System URI 'https://id.nlm.nih.gov/mesh' is unknown so the code cannot be validated
+
