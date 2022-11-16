@@ -46,7 +46,7 @@ Examples of positive outcomes for this project include:
 * Help ensure compliance with a protocol 
 * Ensure SOA/protocol is implemented uniformly across sites 
 
-This iteration for the project is designed to be directional purely - as we learn more about how the different systems work and can be interfaced. We will continue to improve the IG to accommodate more use cases, iteratively working towards a solution that will be both functional and scalable.
+This iteration of the IG is designed to provide directional guidance and not be a prescriptive instruction of how to exactly implement SOA across all systems. As we learn more about how the different systems work and can be interfaced, we will continue to improve the IG to accommodate more use cases; iteratively working towards a solution that will be both functional and scalable.
 
 #### Future elements for the Implementation Guide
 
