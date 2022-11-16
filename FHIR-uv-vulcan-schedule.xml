@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<specification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ballotUrl="http://hl7.org/fhir/uv/vulcan-soa/2023Jan" ciUrl="https://build.fhir.org/ig/HL7/vulcan-schedule-ig" defaultVersion="0.1.0" defaultWorkgroup="brr" gitUrl="https://github.com/HL7/Vulcan-schedule-ig" url="http://hl7.org/fhir/uv/vulcan-schedule">
-<version code="current" url="https://build.fhir.org/ig/HL7/vulcan-schedule-ig"/>
-<version code="0.1.0" url="http://hl7.org/fhir/uv/vulcan-soa/2023Jan"/>
+<specification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ciUrl="" defaultVersion="current" defaultWorkgroup="brr" gitUrl="https://github.com/HL7/Vulcan-schedule-ig" url="http://hl7.org/fhir/uv/vulcan-schedule">
+<version code="current" url=""/>
 <artifactPageExtension value="-definitions"/>
 <artifactPageExtension value="-examples"/>
 <artifactPageExtension value="-mappings"/>
@@ -15,7 +14,6 @@
 <artifact id="StructureDefinition/StudyActivitySoa" key="StructureDefinition-StudyActivitySoa" name="StudyActivitySoa"/>
 <artifact id="StructureDefinition/StudyProtocolSoa" key="StructureDefinition-StudyProtocolSoa" name="StudyProtocolSoa"/>
 <artifact id="StructureDefinition/StudyVisitSoa" key="StructureDefinition-StudyVisitSoa" name="StudyVisitSoa"/>
-<artifact id="StructureDefinition/UnplannedStudyVisitSoa" key="StructureDefinition-UnplannedStudyVisitSoa" name="UnplannedStudyVisitSoa"/>
 <artifact id="PlanDefinition/H2Q-MC-LZZT-Study-Visit-1" key="PlanDefinition-H2Q-MC-LZZT-Study-Visit-1" name="Visit-1"/>
 <artifact id="PlanDefinition/H2Q-MC-LZZT-Study-Visit-3" key="PlanDefinition-H2Q-MC-LZZT-Study-Visit-3" name="Visit-3"/>
 <artifact id="ActivityDefinition/H2Q-MC-LZZT-Vital-Signs-Temperature" key="ActivityDefinition-H2Q-MC-LZZT-Vital-Signs-Temperature" name="Vital Signs/Temperature"/>
@@ -27,7 +25,6 @@
 <page key="downloads" name="Downloads"/>
 <page key="examples" name="Examples"/>
 <page key="index" name="Home"/>
-<page deprecated="true" key="implementation" name="Implementations"/>
 <page key="ip-administration" name="Investigational Product Administration"/>
 <page key="profiles" name="Profiles"/>
 <page key="toc" name="Table of Contents"/>

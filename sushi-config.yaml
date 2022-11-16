@@ -52,3 +52,6 @@ menu:
   Examples: examples.html
   Downloads: downloads.html
   Credits: credits.html
+
+parameters:
+  jira-code: uv-vulcan-schedule
