@@ -53,16 +53,18 @@ The basic structure is summarized in the following diagram:
 The high-level points are as follows:
 
 * The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) has at least one _protocol_ reference to a [PlanDefinition](https://hl7.org/fhir/plandefinition.html) for the Study Definition,
-* Under the Study Definition there are references to each of the planned encounters/visits through the _action_ predicate,  
-* Each planned encounter/visit has references to each of the planned activities through the _action_ predicate
+* Under the Study Definition there are references to each of the planned encounters/visits through the _action_ predicate (linking to the [PlanDefinition](http://hl7.org/fhir/PlanDefinition) instance for the encounter),  
+* Within a planned encounter/visit, the planned activities are represented through the _action_ predicate linking to the [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) representing the activity.
 
-Th _action_ predicate defines the relationships between activities, such as what activities are to be done and when they are planned to be done.
+Many activities are event or pre-condition based. The _action.relatedAction_ predicate is used to represent the relationships between activities.  This specifies what activities are to be done and when they are planned to be done (relative to a reference or pivot event).
 
-{% include plandef-actions.svg %}
+The following example illustrates this for a flow of Study Visits:
 
-In Research protocols many of the activities are event based. For example;  Informed Consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Baseline` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action.  
+<img src="vulcan_soa_related_actions.png" alt="Related Actions" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-It is also possible to define the interval between these actions as illustrated in the [Protocol Design Example](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html).  The planned event `Visit-3` has an _id_ assigned to it. Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
+ For example;  Informed Consent is required prior to any study activities commencing.  This is modeled using the _relatedAction_ predicate on the _action_ predicate. This is illustrated in the above diagram.  The `Treatment Day 1` Encounter is annotated in the design.  The other encounters are defined as being _before_ or _after_ this action; note - in this example we are binding the relationships between encounters; where these encounters are proxies for the activity within the encounter (e.g. First Study Intervention).  
+
+It is also possible to define the interval between these actions as illustrated in the [Protocol Design Example](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html).  In this example the planned event `Visit-3` has an _id_ assigned to the _action.relatedAction_ predicate.  Prior and subsequent activities use the _relatedAction.actionId_ to reference the pivot activity.  This allows elementary sequencing of planned elements to represent the SoA.  This sample also represents a simple windowing capability for scheduling activities relative to the index event.  There is a separate use case to address how targeted windows can be applied to the scheduling of study activities.
 
 This is also illustrated within an encounter in the [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) and [Visit 3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) examples.  Within an encounter tasks are defined using [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) resources, and key tasks have a _action.id_ attribute; tasks that should occur relative to the key task reference the task via the _action.relatedAction_ attribute.  In the H2Q-MC-LZZT study within-encounter activities are not as structured as they would be for say a Phase I Pharmacokinetic study, so the activities are defined as being before or after the key task (a specific example includes study data collection activities strictly occurring after collection of informed consent).
 
