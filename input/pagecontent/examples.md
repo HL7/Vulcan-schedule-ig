@@ -1,64 +1,29 @@
-### Example 1
+### Examples
 
-Protocol Visit Activity Trigger
+#### H2Q-MC-LZZT Research Study
 
-#### Rationale:
-Need for this because:
-* Study patients change appointments
-* Study physicians change appointments
-* Studies have specific activities assigned at each “visit”
-* When appointments are changed, not all activities move with the updated appointment
+[H2Q-MC-LZZT](ResearchStudy-H2Q-MC-LZZT-ResearchStudy.html) was a study to evaluate the Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease.  It was carried out by [Eli-Lilly and Company](Organization-EliLillyAndCompany.html).  It is a commonly used sample study that features regularly in Clinical Research data modelling exercises so is advantageous for providing realistic anonymised datasets.
 
-#### Opportunity to remedy this through care plan of all visits and scheduled activities
-* Protocol to connect with patient once enrolled in study
-* Protocol contains care plan
-* Care plan has visits
-* Visits have all activities defined by the protocol
-* Windows defined in the care plan (following the protocol)
+##### Example Resource
+* [ResearchStudySoa/H2Q-MC-LZZT-ResearchStudy](ResearchStudy-H2Q-MC-LZZT-ResearchStudy.html)
+* [Organization/EliLillyAndCompany](Organization-EliLillyAndCompany.html)
 
-#### Persons - who is working with this?
-* Basic communication and adherence to the study care plan, otherwise known by researchers as the schedule of activities (SOA)*
-* Site
-* Study personnel – research coordinators, clinical trial staff
-* Clinical personnel- office staff (schedulers, nurses, medical assistants, lab personnel, EKG techs, CT staff, etc.)
-* Study physician
+#### H2Q-MC-LZZT Study Plan
 
-Who is communicating what to whom?
-* Embedded protocol will trigger the activities to move with the visit when rescheduled
-* EHR facilitates the protocol communication with the clinic and other healthcare staff
-* Aid for clinical research coordination within the system
+Patients with probable mild to moderate AD will be studied in a randomized, double-blind, parallel (3 arm), placebo-controlled trial of 26 weeks duration. The study will be conducted on an outpatient basis. Approximately 300 patients will be enrolled.
 
-#### Scenarios
-* Patient has a family emergency and has to reschedule study visit.  Calls office to reschedule the visit.  Not all of the visit tests for the research study get rescheduled because they are not yet associated with the research study in the care plan.  On the rescheduled visit, the CT scanner is not available so there is a protocol deviation. CT san performed out of window.
-* Doctor has vacation during research study patient visit. Same thing happens.
+Following informed consent, patients will be screened at [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html). At screening, patients will undergo complete neuropsychiatric assessment, psychometric testing, and general medical assessment (including medical history, pre-existing conditions, physical examination). In addition, [vital signs](ActivityDefinition-H2Q-MC-LZZT-Vital-Signs-Temperature.html), temperature, medication history, electrocardiogram (ECG), chest x-ray, and safety laboratories will be obtained. During the screening visit, patients will wear a placebo TTS to determine willingness and ability to comply with transdermal administration procedures. If patients have not had central nervous system (CNS) imaging in the previous 12 months, a computed tomography (CT) or magnetic resonance imaging (MRI) scan will be obtained. If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained. Screening exams and procedures may be performed after [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html); however, their results must be completed and available prior to randomization. The screening process should occur within 2 weeks of randomization (Visit 3 of the study).
 
-#### Technical Aspects
-* The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) resource describes essential information about the study, including the purpose, objective, sponsor, investigator, therapy, condition being studied, schedule of activities, and other key items.
-* In the context of a research study, the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource identifies
-  * all the activities (defined in [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html)) to be undertaken during the conduct of that [ResearchStudy](https://hl7.org/fhir/researchstudy.html)
-  * the visits
-  * all the activities to be associated with each visit
-  * the relative timing relationship of an activity as associated to another activity (whether it is to occur before or after the "anchoring" activity)
-  * the expected time and unit of time lapse between visits or activities within a visit (i.e., "Visit Window")
+Patients who meet enrollment criteria from [Visit 1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) will proceed to Visit 2 at which time they will undergo a 24-hour Ambulatory ECG. At [Visit 3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) the Ambulatory ECG will be removed and patients will be randomized to 1 of 3 treatment arms. The treatment arms will include a placebo arm, a low-dose xanomeline arm (50 cm2 TTS Formulation E, 54 mg xanomeline), and a high-dose xanomeline arm (75 cm2 TTS Formulation E, 81 mg xanomeline). All patients receiving xanomeline will be started at 50 cm2 TTS Formulation E. For the first 8 weeks of treatment, patients will be assessed at clinic visits every 2 weeks and, thereafter, at clinic visits every 4 weeks. Patients who discontinue prior to Visit 12 (Week 24) will be brought back for full efficacy assessments at or near to 24 weeks, whenever possible.
 
-* the [CarePlan](https://hl7.org/fhir/careplan.html) resource associates the activities and visits defined in [PlanDefinition](https://hl7.org/fhir/plandefinition.html) to an individual patient. In the context of clinical care, it is possible for planned activities be conducted in the absence of a care plan. In the context of protocol driven research, the use of [CarePlan](https://hl7.org/fhir/careplan.html) is essential to ensure all [PlanDefinition](https://hl7.org/fhir/plandefinition.html) (visits and activities) are scheduled and executed for that ResearchStudy.
+A Data Safety Monitoring Board (DSMB), chaired by an external cardiologist, will meet after 75, 150, 225, and 300 patients have completed 1 month of treatment. The DSMB will review cardiovascular findings to decide if discontinuation of the study or any treatment arm is appropriate, if additional cardiovascular monitoring is required, if further cardiovascular monitoring is unnecessary, or if adjustment of dose within a treatment arm (or arms) is appropriate.
 
-* to keep the patient anonymized from the sponsor, the [ResearchSubject](https://hl7.org/fhir/researchsubject.html) resource is used to create identifiers visible to the sponsor that contain no personally identifiable information.
+At Visits [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html), 8, 10, and 12, efficacy instruments (ADAS-Cog, CIBIC+, and DAD) will be administered. NPI-X will be administered at 2-week intervals either at clinic visits or via a telephone interview. Vital signs, temperature, and an assessment of adverse events will be obtained at all clinic visits. An electrocardiogram (ECG), and chemistry/hematology safety labs will be obtained at Visits 4, 5, 7, 8, 9, 10, 11, 12, and 13. Urinalysis will be done at Visits 4, 9, and 12. Use of concomitant medications will be collected at Visits [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html), 4, 5, 7, 8, 9, 10, 11, 12, and 13. Plasma levels of xanomeline and metabolites will be obtained at Visits [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html), 4, 5, 7, 9, and 11. At Visits [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html), 4, 5, 7, 8, 9, 10, 11, and 12, medications will be dispensed to the patients.
 
+Visits [1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) through 13 should be scheduled relative to Visit [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) (Week 0 - randomization). Visits 4, 5, 7, 8, and 13 should occur within 3 days of their scheduled date. Visits 9, 10, 11, and 12 should occur within 4 days of their scheduled date. At Visit 13 patients will be given the option to enter the open-label extension phase (see Section 3.10.3. Study Extensions).
 
-### Example 2
-
-Research Implementation Assistance
-
-#### Problem:
-Scheduling research visits and activities can be cumbersome.
-
-#### Solution:
-* Implementing the protocol SOA (in the electronic health record with visits and associated activities) as a CarePlan will enable all related activities to go with the patient should a “study visit” get rescheduled.
-* Ensures timely research visits within visit windows
-* Prevents protocol deviations 
-
-#### Technical Aspects
-* Same as Example 1
-
-
+##### Example Resources 
+* Study Plan - [StudyProtocolSoa/H2Q-MC-LZZT-ProtocolDesign](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html)
+* Visit 1 - [StudyVisitSoa/H2Q-MC-LZZT-Study-Visit-1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html)
+* Visit 3 - [StudyVisitSoa/H2Q-MC-LZZT-Study-Visit-3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html)
+* Vital Signs/Temperature - [StudyActivitySoa/H2Q-MC-LZZT-Vital-Signs-Temperature](ActivityDefinition-H2Q-MC-LZZT-Vital-Signs-Temperature.html)
