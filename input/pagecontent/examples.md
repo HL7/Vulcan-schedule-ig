@@ -1,14 +1,12 @@
-### Examples
-
-#### H2Q-MC-LZZT Research Study
+### H2Q-MC-LZZT Research Study
 
 [H2Q-MC-LZZT](ResearchStudy-H2Q-MC-LZZT-ResearchStudy.html) was a study to evaluate the Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease.  It was carried out by [Eli-Lilly and Company](Organization-EliLillyAndCompany.html).  It is a commonly used sample study that features regularly in Clinical Research data modelling exercises so is advantageous for providing realistic anonymised datasets.
 
-##### Example Resource
+#### Example Resources
 * [ResearchStudySoa/H2Q-MC-LZZT-ResearchStudy](ResearchStudy-H2Q-MC-LZZT-ResearchStudy.html)
 * [Organization/EliLillyAndCompany](Organization-EliLillyAndCompany.html)
 
-#### H2Q-MC-LZZT Study Plan
+### H2Q-MC-LZZT Study Plan
 
 Patients with probable mild to moderate AD will be studied in a randomized, double-blind, parallel (3 arm), placebo-controlled trial of 26 weeks duration. The study will be conducted on an outpatient basis. Approximately 300 patients will be enrolled.
 
@@ -22,7 +20,7 @@ At Visits [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html), 8, 10, and 12, eff
 
 Visits [1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html) through 13 should be scheduled relative to Visit [3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html) (Week 0 - randomization). Visits 4, 5, 7, 8, and 13 should occur within 3 days of their scheduled date. Visits 9, 10, 11, and 12 should occur within 4 days of their scheduled date. At Visit 13 patients will be given the option to enter the open-label extension phase (see Section 3.10.3. Study Extensions).
 
-##### Example Resources 
+#### Example Resources 
 * Study Plan - [StudyProtocolSoa/H2Q-MC-LZZT-ProtocolDesign](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html)
 * Visit 1 - [StudyVisitSoa/H2Q-MC-LZZT-Study-Visit-1](PlanDefinition-H2Q-MC-LZZT-Study-Visit-1.html)
 * Visit 3 - [StudyVisitSoa/H2Q-MC-LZZT-Study-Visit-3](PlanDefinition-H2Q-MC-LZZT-Study-Visit-3.html)
