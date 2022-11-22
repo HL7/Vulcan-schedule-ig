@@ -5,14 +5,14 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: hl7.fhir.uv.vulcan-schedule
 canonical: http://hl7.org/fhir/uv/vulcan-schedule
-name: VulcanSchedule
-title: Clinical Study Schedule of Activites FHIR Implementation Guide
+name: StudyScheduleOfActivities
+title: Clinical Study Schedule of Activites
 description: FHIR Implementation Guide representing a Clinical Study Schedule of Activites
 status: draft # draft | active | retired | unknown
-version: 0.1.0
+version: 1.0.0-ballot
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2022+
-releaseLabel: ci-build # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
+releaseLabel: ballot # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
