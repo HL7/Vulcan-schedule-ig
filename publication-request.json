@@ -5,7 +5,7 @@
   "status" : "ballot",
   "sequence" : "STU1",
   "milestone" : false,
-  "ci-build" : "http://build.fhir.org/ig/HL7/Vulcan-schedule-ig/",
+  "ci-build" : "http://build.fhir.org/ig/HL7/Vulcan-schedule-ig",
   "desc" : "This is the ballot version of the first release in the STU1 sequence.",
   "title" : "Clinical Study Schedule of Activities",
   "category" : "Research",
