@@ -5,7 +5,10 @@
 # See https://github.com/FHIR/sample-ig/blob/master/input/ignoreWarnings.txt for examples
 
 # Sample code systems that are unknown to the validator
+# NCI Meta-Thesaurus - URL is defined at http://hl7.org/fhir/ncimeta.html
 Code System URI 'http://ncimeta.nci.nih.gov' is unknown so the code cannot be validated
+# MeSH - URL is defined by HTA at https://confluence.hl7.org/pages/viewpage.action?pageId=109544219
+Code System URI 'https://www.nlm.nih.gov/mesh' is unknown so the code cannot be validated
+# PubMED - URL is not defined by HTA yet, but is taken from an actual example in the wild
 Code System URI 'https://pubmed.ncbi.nlm.nih.gov' is unknown so the code cannot be validated
-Code System URI 'https://id.nlm.nih.gov/mesh' is unknown so the code cannot be validated
 

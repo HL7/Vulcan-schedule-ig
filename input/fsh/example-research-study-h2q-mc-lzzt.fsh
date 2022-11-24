@@ -2,7 +2,7 @@ Alias: NCIT = http://ncimeta.nci.nih.gov
 Alias: SCT = http://snomed.info/sct
 Alias: PUBMED = https://pubmed.ncbi.nlm.nih.gov
 Alias: PUBCHEM = https://pubchem.ncbi.nlm.nih.gov
-Alias: MESH = https://id.nlm.nih.gov/mesh
+Alias: MESH = https://www.nlm.nih.gov/mesh
 
 Instance: SamGetWell
 InstanceOf: Practitioner
