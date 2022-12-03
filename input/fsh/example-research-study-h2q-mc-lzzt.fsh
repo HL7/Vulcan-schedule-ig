@@ -1,6 +1,5 @@
 Alias: NCIT = http://ncimeta.nci.nih.gov
 Alias: SCT = http://snomed.info/sct
-Alias: PUBMED = https://pubmed.ncbi.nlm.nih.gov
 Alias: PUBCHEM = https://pubchem.ncbi.nlm.nih.gov
 Alias: MESH = https://www.nlm.nih.gov/mesh
 
@@ -67,7 +66,7 @@ Usage: #example
 * category[4] = NCIT#C82639 "Parallel Study"
 * focus[0] = NCIT#C152926 "Xanomeline"
 * focus[1] = NCIT#C149996 "Transdermal Patch Dosage Form"
-* focus[2] = PUBMED#9109749 "Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease"
+* focus[2].text = "PUBMED#9109749 Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease"
 * condition[0] = SCT#26929004 "Alzheimer's Disease (Disorder)"
 * contact[+]
   * name = "Bob James, Ph.D."
