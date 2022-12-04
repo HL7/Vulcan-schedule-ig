@@ -1,7 +1,7 @@
 {
   "package-id" : "hl7.fhir.uv.vulcan-schedule",
   "version" : "1.0.0-ballot",
-  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/Jan2023",
+  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/2023Jan",
   "status" : "ballot",
   "sequence" : "STU1",
   "milestone" : false,
