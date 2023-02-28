@@ -68,7 +68,7 @@ There are different levels of complexity of SoA, which may not be fully represen
 * Instructional guidance in other protocol sections/footers that provide additional detail
 * Managing multiple sub-study consents that can occur throughout the trial (some voluntary and others conditional-based)
 
-Note, many of these expand the existing scope of the SoA project and will work best in a collaboration with other research-aware IGs (such as the Vulcan Real World Evidence Project, Vulcan Adverse Events, etc).  We have a rigorous process for evaluating and incorporating use cases into the development process.
+Note that many of these expand the existing scope of the SoA project and will work best in a collaboration with other research-aware IGs such as the [Vulcan Retrieval of Real World Data for Clinical Research IG](http://hl7.org/fhir/uv/vulcan-rwd/2023Jan/).  We have a rigorous process for evaluating and incorporating use cases into the development process.
 
 #### References
 [^1]: [https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf](https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf)

@@ -9,7 +9,7 @@ This requires the clear specifications of when to provide, administer and record
 
 The set of FHIR medication resources have been used to review how to incorporate IP administration and record keeping into FHIR specified SoA.
 ​
-**Note**: to date immunization (vaccine) trials have not been considered in this section (FHIR defines resources for immunization separately from medications).
+**Note**: to date immunization (vaccine) and device trials have not been considered in this section (FHIR defines resources for immunization and devices separately from medications).
 
 #### Scenarios
 
@@ -86,8 +86,6 @@ Many studies require IP to be self-administered, and to continue thereafter 'at 
 
 ---
 #### Issues for resolution
-
-#### Complications
 * [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) for planned dosing events expect a link to a [Medication](https://hl7.org/fhir/medication.html) record as well as a reason for dosing, etc.  In the case of a blinded clinical study the [Medication](https://hl7.org/fhir/medication.html) could be the study IP or could be placebo; this introduces an issue for retrospective review of subject medication records.  
   * Solution used was to define a mock [Medication](https://hl7.org/fhir/medication.html) using the Protocol Identifier plus the Compound identifier.
 * In FHIR R5 the [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) has been replaced by the [MedicationUsage](https://hl7.org/fhir/medicationusage.html) resource.  This has not currently been modelled.

@@ -24,10 +24,6 @@ The SoA table is then used as the basic building block for configuring the neces
 
 These SoA specifications form the basis for developing study specific Case Report Forms (CRFs): the primary data collection instrument.  Direct data collection and collation approaches such as the use of medical devices (Sensor Informed trials), or  remote study management (e.g. Decentralised Trials), and direct data transfer from service providers such as central laboratories require confirmed syntactic, structural and semantic interoperability.     
 
-The FHIR standard (Fast Healthcare Interoperability Resources) is designed to support the exchange of electronic health records. The 'Definitional Artifacts' section of the 'Specialized' FHIR Resources category provides a set of FHIR Resources that are designed to enable research specifications such as those in a SoA to be represented in a standard format that can consumed by  eHR systems to plan and execute research protocols directly. 
-
----
-
 The key consideration for the SoA is the collection of data to support the hypotheses presented in the Protocol. The CRFs used in Clinical Research are the primary interface for recording **outcomes** of activities.  They are designed to record the sets of data the study requires, and usually takes little account of the practical activities required to obtain the data. For FHIR specified SoAs to be successful when requirements are transcribed from the SoA for eHR implementation, a more 'workflow-based' approach to data management is required.  Specifically, transcription needs to be able to clearly define:  
 
 * **what** activities are being done
@@ -36,6 +32,8 @@ The key consideration for the SoA is the collection of data to support the hypot
 * **who** is to perform/undertake the activities
 
 ### Implementing a SoA using FHIR Resources
+The FHIR standard (Fast Healthcare Interoperability Resources) is designed to support the exchange of electronic health records. The 'Definitional Artifacts' section of the 'Specialized' FHIR Resources category provides a set of FHIR Resources that are designed to enable research specifications such as those in a SoA to be represented in a standard format that can consumed by  eHR systems to plan and execute research protocols directly. 
+
 In order to represent the SoA we needed a set of definitional FHIR resources to represent the planned activities and the relationships between them.  The work to date has focused on a Workflow view of data management, and has leveraged the existing FHIR workflow patterns to achieve this.  
 
 SoAs do not (a) stand alone - they are study specific, and (b) describe planned activities expected to be executed for each [Patient](http://hl7.org/fhir/Patient) recruited to the study.  Two Research-oriented resources have been used to associate SoA with the correct study and to recognise patients as being study participants:

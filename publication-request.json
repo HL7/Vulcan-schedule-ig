@@ -1,13 +1,9 @@
 {
   "package-id" : "hl7.fhir.uv.vulcan-schedule",
-  "version" : "1.0.0-ballot",
-  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/2023Jan",
-  "status" : "ballot",
+  "version" : "1.0.0",
+  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/",
+  "status" : "trial-use",
   "sequence" : "STU1",
-  "milestone" : false,
-  "ci-build" : "http://build.fhir.org/ig/HL7/Vulcan-schedule-ig",
-  "desc" : "This is the ballot version of the first release in the STU1 sequence.",
-  "title" : "Clinical Study Schedule of Activities",
-  "category" : "Research",
-  "introduction" : "Every research study has a number of activities that must be performed. Typically this is described in the study protocol as a succession of activities with a permissible interval between each one. For a specific Research Subject this is converted to a plan with actual dates. As the events occur a record is built up of the execution of the study for that specific subject. Less often thought about is the wider set of activities that go toward designing a study and setting it up. The mechanics of representation will be essentially the same but the consumers of the data are more likely to be the Sponsor or Agent for the Sponsor managing the study. This set of activities is likely to be completely independent of any patient record.  Currently each software package used in the study holds its own representation of that schedule. This leads to repeated entry of the schedule frequently leading to differences in naming for a given event and omission of other events. Management and reporting of data during a study and subsequent aggregation of data are made more difficult.   CTMS software packages that hold their own representation of a Study/Protocol schedule would ideally integrate with EHRs as well as other CTMS. This guide provides a set of FHIR Profiles that will allow for a schedule of activities of a clinical study to be represented using FHIR resources. It is currently restricted to the initial definition of the activities and uses the Workflow Definition resources. It provides some guidance on how to convert from the ODM-XML format to FHIR. Future iterations of the guide may include the actual implementation of the schedule and thus use the Event resources. This means of using FHIR to represent a structured schedule of activities enables interoperability between CTMS and EHRs when the subject/patient scheduling for protocol/study defined activities is initiated."
+  "milestone" : true,
+  "desc" : "This is the published version of the first release in the STU1 sequence."
 }
