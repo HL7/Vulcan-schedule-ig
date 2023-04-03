@@ -1,9 +1,10 @@
 {
   "package-id" : "hl7.fhir.uv.vulcan-schedule",
   "version" : "1.0.0",
-  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/",
+  "path" : "http://hl7.org/fhir/uv/vulcan-schedule",
   "status" : "trial-use",
   "sequence" : "STU1",
+  "mode": "milestone",
   "milestone" : true,
   "desc" : "This is the published version of the first release in the STU1 sequence."
 }
