@@ -12,6 +12,7 @@ input-cache/publisher.jar
 input-cache/jiraspec.xml
 input-cache/schemas/
 input-cache/txcache/
+input-cache/workgroups.xml
 
 # OS generated files #
 ######################
