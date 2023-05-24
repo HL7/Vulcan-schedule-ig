@@ -4,6 +4,9 @@ Description: "Planned Activity [ECG]"
 Usage: #example
 Title: "ECG"
 * meta.profile = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/StudyActivitySoa"
+* identifier[+]
+  * value = "ECG-Measurement"
+  * use = #usual
 * status = #active
 * title = "ECG"
 * intent = #order
