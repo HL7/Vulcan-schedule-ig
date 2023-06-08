@@ -44,3 +44,4 @@ Title: "ECG"
 * kind = #ServiceRequest
 * code.coding[+]
   * code = http://loinc.org#LP31916-7 "12 lead EKG panel"
+* observationResultRequirement = Reference(H2Q-MC-LZZT-ECG-ObservationDefinition)
