@@ -55,25 +55,29 @@ Usage: #example
 * identifier[+]
   * value = PUBCHEM#60809
 * title = "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease"
-* protocol[StudyProtocolSoa] = Reference(PlanDefinition/H2Q-MC-LZZT-ProtocolDesign)
 * status = #completed
 * primaryPurposeType = http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type#treatment
 * phase = http://terminology.hl7.org/CodeSystem/research-study-phase#phase-3
-* category[0] = NCIT#C98388 "Interventional Study"
-* category[1] = NCIT#C15417 "Randomized Clinical Trial"
-* category[2] = NCIT#C15228 "Double Blind Study"
-* category[3] = NCIT#C49648 "Placebo Control"
-* category[4] = NCIT#C82639 "Parallel Study"
-* focus[0] = NCIT#C152926 "Xanomeline"
-* focus[1] = NCIT#C149996 "Transdermal Patch Dosage Form"
-* focus[2].text = "PUBMED#9109749 Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease"
+* studyDesign[+] = #SEVCO:01001 "Interventional research"
+* studyDesign[+] = #SEVCO:01003 "randomized assignment"
+* studyDesign[+] = #SEVCO:01029 "Clinical trial"
+// compare with phase
+* studyDesign[+] = #SEVCO:01035 "Phase 3 Trial"
+// * category[0] = NCIT#C98388 "Interventional Study"
+// * category[1] = NCIT#C15417 "Randomized Clinical Trial"
+// * category[2] = NCIT#C15228 "Double Blind Study"
+// * category[3] = NCIT#C49648 "Placebo Control"
+// * category[4] = NCIT#C82639 "Parallel Study"
+* focus[0].concept = NCIT#C152926 "Xanomeline"
+* focus[1].concept = NCIT#C149996 "Transdermal Patch Dosage Form"
+// * focus[2].text = "PUBMED#9109749 Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease"
 * condition[0] = SCT#26929004 "Alzheimer's Disease (Disorder)"
-* contact[+]
-  * name = "Bob James, Ph.D."
-  * telecom
-    * value = "555-555-5555"
-    * system = #phone
-    * use = #work
+// * contact[+]
+//   * name = "Bob James, Ph.D."
+//   * telecom
+//     * value = "555-555-5555"
+//     * system = #phone
+//     * use = #work
 * relatedArtifact[+]
   * type = #documentation
   * label = "Arch Neurol.1997;54(4):465-473"
@@ -82,7 +86,7 @@ Usage: #example
 * relatedArtifact[+]
   * type = #documentation
   * label = "Protocol H2Q-MC-LZZT(c)"
-  * url = "https://clinicaltrials.gov/show/NCTA12313212/Lzzt_protocol_redacted.pdf"
+  * resource = "https://clinicaltrials.gov/show/NCTA12313212/Lzzt_protocol_redacted.pdf"
 // keywords
 * keyword[+]
   * coding[+] = MESH#D018721
@@ -97,20 +101,21 @@ Usage: #example
 ### Protocol H2Q-MC-LZZT(c) 
 Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease
 """
-* principalInvestigator[Practitioner] = Reference(Practitioner/SamGetWell)
-* reasonStopped = http://terminology.hl7.org/CodeSystem/research-study-reason-stopped#accrual-goal-met 
-* arm[+]
-  * name = "Placebo"
-  * type = NCIT#C49648
-  * description = "Placebo arm"
-* arm[+]
-  * name = "Low-dose xanomeline arm"
-  * type = NCIT#C174266
-  * description = "Low-dose xanomeline arm (50 cm2 TTS Formulation E, 54 mg xanomeline)"
-* arm[+]
-  * name = "High-dose xanomeline arm"
-  * type = NCIT#C174266
-  * description = "High-dose xanomeline arm (75 cm2 TTS Formulation E, 81 mg xanomeline)"
+// * principalInvestigator[Practitioner] = Reference(Practitioner/SamGetWell)
+// * reasonStopped = http://terminology.hl7.org/CodeSystem/research-study-reason-stopped#accrual-goal-met 
+// * arm[+]
+//   * name = "Placebo"
+//   * type = NCIT#C49648
+//   * description = "Placebo arm"
+// * arm[+]
+//   * name = "Low-dose xanomeline arm"
+//   * type = NCIT#C174266
+//   * description = "Low-dose xanomeline arm (50 cm2 TTS Formulation E, 54 mg xanomeline)"
+// * arm[+]
+//   * name = "High-dose xanomeline arm"
+//   * type = NCIT#C174266
+//   * type = NCIT#C174266
+//   * description = "High-dose xanomeline arm (75 cm2 TTS Formulation E, 81 mg xanomeline)"
 * objective[+]
   * name = "To determine if there is a statistically significant relationship (overall Type 1 error rate, α=.05) between the change in both ADAS-Cog and CIBIC scores, and drug dose (0, 50 cm2 [54 mg], and 75 cm2 [81 mg])."
   * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#primary
@@ -130,4 +135,5 @@ Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Pa
   * name = "To assess the treatment response as a function of Apo E genotype."
   * type = http://terminology.hl7.org/CodeSystem/research-study-objective-type#secondary
 // * inclusion/exclusion criteria
-* sponsor[Organization] = Reference(Organization/EliLillyAndCompany)
+// * sponsor[Organization] = Reference(Organization/EliLillyAndCompany)
+* protocol[StudyProtocolSoa] = Reference(PlanDefinition/H2Q-MC-LZZT-ProtocolDesign)

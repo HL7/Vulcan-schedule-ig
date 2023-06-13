@@ -8,20 +8,21 @@ Description: "A profile that lists the data elements of a Research Study that mu
 * status MS
 * primaryPurposeType MS
 * phase MS
-* category MS
+* primaryPurposeType MS
+* studyDesign MS
 * focus MS
 * condition MS
-* contact MS
+//* contact MS
 * relatedArtifact MS
 * keyword MS
 * description MS
-* sponsor MS
-* principalInvestigator MS
-* reasonStopped MS
-* arm MS
-  * name MS
-  * type MS
-  * description MS
+//* sponsor MS
+//* principalInvestigator MS
+//* reasonStopped MS
+// * arm MS
+//   * name MS
+//   * type MS
+//   * description MS
 * objective MS
   * name MS
   * type MS
@@ -40,7 +41,7 @@ Description: "A profile that lists the data elements of a PlanDefinition that mu
   * code MS
   * trigger MS
   * relatedAction MS
-    * actionId MS
+    * targetId MS
     * relationship MS
     * offset[x] MS
     * extension contains AcceptableOffsetRangeSoa named acceptableOffsetRange 0..1
@@ -63,7 +64,7 @@ Description: "An abstract profile that lists the data elements of a PlanDefiniti
   * code MS
   * trigger MS
   * relatedAction MS
-    * actionId MS
+    * targetId MS
     * relationship MS
     * offset[x] MS
     * extension contains AcceptableOffsetRangeSoa named acceptableOffsetRange 0..1
