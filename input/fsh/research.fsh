@@ -8,16 +8,17 @@ Description: "A profile that lists the data elements of a Research Study that mu
 * status MS
 * primaryPurposeType MS
 * phase MS
-// * category MS
+* primaryPurposeType MS
+* studyDesign MS
 * focus MS
 * condition MS
-// * contact MS
+//* contact MS
 * relatedArtifact MS
 * keyword MS
 * description MS
-// * sponsor MS
-// * principalInvestigator MS
-// * reasonStopped MS
+//* sponsor MS
+//* principalInvestigator MS
+//* reasonStopped MS
 // * arm MS
 //   * name MS
 //   * type MS

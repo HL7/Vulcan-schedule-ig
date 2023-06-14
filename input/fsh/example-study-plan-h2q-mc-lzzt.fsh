@@ -17,7 +17,7 @@ Usage: #example
   * title = "Visit-1"
   * description = "Planned Visit [Visit-1]"
   * relatedAction[+] 
-   * targetId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #before
     * offsetDuration = 13 'd'
     * extension[acceptableOffsetRange].valueRange.low = 12 'd'    

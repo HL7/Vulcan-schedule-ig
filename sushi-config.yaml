@@ -10,7 +10,7 @@ title: Clinical Study Schedule of Activities
 description: FHIR Implementation Guide representing a Clinical Study Schedule of Activities
 status: active # draft | active | retired | unknown
 version: 1.0.0
-fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+fhirVersion: 5.0.0 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2022+
 releaseLabel: trial-use # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
@@ -29,6 +29,8 @@ pages:
     title: Visit Windowing
   ip-administration.md:
     title: Investigational Product Administration
+  activities.md:
+    title: Implementing Study Activities
   cdisc-odm.md:
     title: Use case for integration using CDISC ODM
   profiles.md:
@@ -44,6 +46,7 @@ menu:
   Home: index.html
   Core Model:
     Core Implementation Model: basic-structure.html
+    Study Activities: activities.html
   Use Cases:
     Visit Windows: visit-windows.html
     Investigational Product Administration: ip-administration.html
