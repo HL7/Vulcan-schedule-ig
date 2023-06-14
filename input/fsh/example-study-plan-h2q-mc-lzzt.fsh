@@ -17,7 +17,7 @@ Usage: #example
   * title = "Visit-1"
   * description = "Planned Visit [Visit-1]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+   * targetId = "Index-Activity-Event"
     * relationship = #before
     * offsetDuration = 13 'd'
     * extension[acceptableOffsetRange].valueRange.low = 12 'd'    
@@ -28,7 +28,7 @@ Usage: #example
   * description = "Planned Visit [Visit-2]"
   * id = "H2Q-MC-LZZT-Study-Visit-2"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #before
     * offsetDuration = 1 'd'
 * action[+]
@@ -41,7 +41,7 @@ Usage: #example
   * title = "Visit-4"
   * description = "Planned Visit [Visit-4]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 14 'd'
     * extension[acceptableOffsetRange].valueRange.low = 12 'd'    
@@ -51,7 +51,7 @@ Usage: #example
   * title = "Visit-5"
   * description = "Planned Visit [Visit-5]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 28 'd'
     * extension[acceptableOffsetRange].valueRange.low = 26 'd'    
@@ -61,7 +61,7 @@ Usage: #example
   * title = "Visit-6"
   * description = "Planned Visit [Visit-6]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 35 'd'
     * extension[acceptableOffsetRange].valueRange.low = 33 'd'    
@@ -71,7 +71,7 @@ Usage: #example
   * title = "Visit-7"
   * description = "Planned Visit [Visit-7]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 42 'd'
     * extension[acceptableOffsetRange].valueRange.low = 40 'd'    
@@ -82,7 +82,7 @@ Usage: #example
   * title = "Visit-8"
   * description = "Planned Visit [Visit-8]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 56 'd'
     * extension[acceptableOffsetRange].valueRange.low = 54 'd'    
@@ -92,7 +92,7 @@ Usage: #example
   * title = "Visit-8.1"
   * description = "Telephone Contact [Post Visit-8]"
   * relatedAction[+] 
-    * actionId = "H2Q-MC-LZZT-Study-Visit-8"
+    * targetId = "H2Q-MC-LZZT-Study-Visit-8"
     * relationship = #after
     * offsetDuration = 14 'd'
 * action[+]
@@ -101,7 +101,7 @@ Usage: #example
   * title = "Visit-9"
   * description = "Planned Visit [Visit-9]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 84 'd'
     * extension[acceptableOffsetRange].valueRange.low = 82 'd'    
@@ -111,7 +111,7 @@ Usage: #example
   * title = "Visit-9.1"
   * description = "Telephone Contact Visit [Post Visit-9]"
   * relatedAction[+] 
-    * actionId = "H2Q-MC-LZZT-Study-Visit-9"
+    * targetId = "H2Q-MC-LZZT-Study-Visit-9"
     * relationship = #after
     * offsetDuration = 14 'd'
 * action[+]
@@ -120,7 +120,7 @@ Usage: #example
   * title = "Visit-10"
   * description = "Planned Visit [Visit-10]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 112 'd'
     * extension[acceptableOffsetRange].valueRange.low = 110 'd'    
@@ -130,7 +130,7 @@ Usage: #example
   * title = "Visit-10.1"
   * description = "Telephone Contact Visit [Post Visit-10]"
   * relatedAction[+] 
-    * actionId = "H2Q-MC-LZZT-Study-Visit-10"
+    * targetId = "H2Q-MC-LZZT-Study-Visit-10"
     * relationship = #after
     * offsetDuration = 14 'd'
 * action[+]
@@ -139,7 +139,7 @@ Usage: #example
   * title = "Visit-11"
   * description = "Planned Visit [Visit-11]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 140 'd'
     * extension[acceptableOffsetRange].valueRange.low = 138 'd'    
@@ -149,7 +149,7 @@ Usage: #example
   * title = "Visit-11.1"
   * description = "Telephone Contact Visit [Post Visit-11]"
   * relatedAction[+] 
-    * actionId = "H2Q-MC-LZZT-Study-Visit-11"
+    * targetId = "H2Q-MC-LZZT-Study-Visit-11"
     * relationship = #after
     * offsetDuration = 14 'd'
 * action[+]
@@ -157,7 +157,7 @@ Usage: #example
   * title = "Visit-12"
   * description = "Planned Visit [Visit-12]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 168 'd'
     * extension[acceptableOffsetRange].valueRange.low = 166 'd'    
@@ -167,7 +167,7 @@ Usage: #example
   * title = "Visit-13"
   * description = "Planned Visit [Visit-13]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
     * offsetDuration = 182 'd'
     * extension[acceptableOffsetRange].valueRange.low = 180 'd'    
@@ -177,13 +177,13 @@ Usage: #example
   * title = "ET-14"
   * description = "Planned Visit [ET-14]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
 * action[+]
   * definitionUri = "PlanDefinition/H2Q-MC-LZZT-Study-RT-15"
   * title = "RT-15"
   * description = "Planned Visit [RT-15]"
   * relatedAction[+] 
-    * actionId = "Index-Activity-Event"
+    * targetId = "Index-Activity-Event"
     * relationship = #after
 
