@@ -10,19 +10,22 @@ Usage: #example
 * category = http://terminology.hl7.org/CodeSystem/observation-category#procedure "Procedure"
 
 * code = http://loinc.org#LP31916-7 "12 lead EKG panel"
+* device = Reference(H2Q-MC-LZZT-ECG-DeviceDefinition)
 
 * component[+].code = http://loinc.org#44973-6 "QRS duration {Electrocardiograph lead}"
-* component[=].permittedDataType = #time
+* component[=].permittedDataType = #Quantity
 
 * component[+].code = http://loinc.org#44976-9 "P-R Interval {Electrocardiograph lead}"
-* component[=].permittedDataType = #time
+* component[=].permittedDataType = #Quantity
 
 * component[+].code = http://loinc.org#44975-1 "Q-T interval {Electrocardiograph lead}"
-* component[=].permittedDataType = #time
+* component[=].permittedDataType = #Quantity
+
+* component[+].code = http://loinc.org#8867-4 "Heart rate"
+* component[=].permittedDataType = #Ratio
 
 * component[+].code = http://loinc.org#8884-9 "Heart rate rhythm"
 * component[=].permittedDataType = #string
-
 
 * component[+].code = http://loinc.org#8601-7 "EKG impression"
 * component[=].permittedDataType = #string
