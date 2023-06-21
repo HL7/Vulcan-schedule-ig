@@ -34,7 +34,7 @@ Title: "Research Subject Randomisation"
 
 * subjectReference = Reference(ResearchStudySubject)
 
-* purpose = "Randomise [ResearchStudy] to Treatment Arm as detailed in the [ResearchStudy] Protocol"
+* purpose = "Randomise [ResearchSubjec] to Treatment Arm as detailed in the [ResearchStudy] Protocol"
 
 * code[+].coding[+].system = "https://library.cdisc.org"
 * code[=].coding[=].code = #C186212
