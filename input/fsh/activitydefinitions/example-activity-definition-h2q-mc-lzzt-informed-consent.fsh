@@ -47,3 +47,7 @@ Title: "Research Subject Informed Consent"
 * participant[=].role.coding.display = "Performer"
 
 * observationResultRequirement[+] = Canonical(InformedConsentStatus)
+
+* dynamicValue[+].path = "ResearchSubject"
+* dynamicValue[=].expression.language =  #text/fhirpath
+* dynamicValue[=].expression.expression =  "ResearchSubject.progress.milestone = #InformedConsentObtained"
