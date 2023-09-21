@@ -29,10 +29,17 @@ Title: "Vital Signs/Temperature"
 * identifier[+]
   * value = "VitalSigns-Temperature-Measurement"
   * use = #usual
+// Apply a Code that would be recognised and used by the EHR to represent the target activity and be able to provide the appropriate service and cost thereof
+// TODO-VALUE: identify and provide codes would apply based on context (eg location, codesystem support, billing systems, etc)
+// Disease Ontology - Look to Monarch Initiative for support 
 * code.coding[+]
   * code = #56342008
   * system = "http://snomed.info/sct"
   * display = "Temperature taking (procedure)"
+* code.coding[+]
+  * code = #1014526
+  * system = "http://www.ama-assn.org/go/cpt"
+  * display = "Physical examination"
 * bodySite.coding[+]
   * code = #74262004
   * system = "http://snomed.info/sct"
