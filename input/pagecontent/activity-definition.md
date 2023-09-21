@@ -1,4 +1,4 @@
 # Activity Definition Specification for Clinical Research
 
-Conventionally 
+Activities are the initiating 
 
