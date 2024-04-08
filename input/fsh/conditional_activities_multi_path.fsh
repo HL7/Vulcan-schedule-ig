@@ -1,0 +1,242 @@
+// This example details the scenario where all Planned Encounters are available in a single PD
+// and access to the encounter is controlled by the subject's actual comparison group/status
+// Status: Not complete
+
+Instance: RandArmA
+InstanceOf: Group
+Usage: #example
+* membership = #definitional
+* description = "Randomized to Cohort A"
+* type = #person
+* quantity = 50
+
+Instance: RandArmB
+InstanceOf: Group
+Usage: #example
+* membership = #definitional
+* description = "Randomized to Cohort B"
+* type = #person
+* quantity = 50
+
+Instance: JoeArmA
+InstanceOf: Patient
+Usage: #example
+
+
+Instance: JaneArmb
+InstanceOf: Patient
+Usage: #example
+
+Instance: JackNotRandomised
+InstanceOf: Patient
+Usage: #example
+
+
+Instance: MPResearchSubjectArmA
+InstanceOf: ResearchSubject
+Usage: #example
+* status = #active
+* subject = Reference(JoeArmA)
+* study = Reference(MPResearchStudy)
+* actualComparisonGroup = "RandArmA"
+* progress[+]
+  * type = #state
+  * subjectState = #on-study 
+
+Instance: MPResearchSubjectArmB
+InstanceOf: ResearchSubject
+Usage: #example
+* status = #active
+* subject = Reference(JaneArmB)
+* study = Reference(MPResearchStudy)
+* actualComparisonGroup = "RandArmB" 
+* progress[+]
+  * type = #state
+  * subjectState = #on-study 
+
+Instance: MPResearchSubjectNoArm
+InstanceOf: ResearchSubject
+Usage: #example
+* status = #active
+* subject = Reference(JackNotRandomised)
+* study = Reference(MPResearchStudy)
+* progress[+]
+  * type = #state
+  * subjectState = #on-study 
+
+Instance: MPResearchStudy
+InstanceOf: ResearchStudy
+Usage: #example
+* title = "Study Multi-path"
+* status = #active
+* protocol = Reference(StudyProtocolSoa/MPPlannedPath)
+
+// Group.membership in R6 requires 3 codes
+// enumerated (count and members), 
+// definitional (specifies the qualifications of a member of the group and individuals can be added), 
+// conceptual (model eligibility criteria for a group) - the Group.type not bound for FHIR  
+
+Instance: MPPlannedPath
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Planned Schedule Of Activities"
+* status = #active
+* description = "The planned schedule of activities for the study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPScreening"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayOne"
+  * condition[+]
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayArmAVisit2"
+  * subjectReference = Reference(RandArmA)
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Member of Arm A"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmA'"
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayArmAVisit3"
+  * subjectReference = Reference(RandArmA)
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Member of Arm A"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmA'"
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayArmBVisit2"
+  * subjectReference = Reference(RandArmB)
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Member of Arm B"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayArmBVisit3"
+  * subjectReference = Reference(RandArmB)
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Member of Arm B"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayArmBVisit4"
+  * subjectReference = Reference(RandArmB)
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Member of Arm B"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPDayArmBVisit5"
+  * subjectReference = Reference(RandArmB)
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Member of Arm B"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    * expression[+]
+      * description = "On Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status = #on-study"
+* action[+]
+  * definitionUri = "StudyProtocolSoa/MPEndOfStudy"
+  * condition[+]
+    * kind = #applicability
+    * expression[+]
+      * description = "Off Study"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.progress.status.in(#off-study, #withdrawn)"
+
+Instance: MPScreening
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Screening for the presence of a study protocol"
+* status = #active
+
+Instance: MPDayOne
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 1"
+* status = #active
+
+
+Instance: MPDayArmAVisit2
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 14"
+* status = #active
+
+Instance: MPDayArmAVisit3
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 28"
+* status = #active
+
+Instance: MPDayArmBVisit2
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 7"
+* status = #active
+
+Instance: MPDayArmBVisit3
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 14"
+* status = #active
+
+Instance: MPDayArmBVisit4
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 21"
+* status = #active
+
+Instance: MPDayArmBVisit5
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "Day 28"
+* status = #active
+
+Instance: MPEndOfStudy
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* title = "EOS"
+* status = #active
+
+
+
+
+
+
+
+
