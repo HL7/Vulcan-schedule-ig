@@ -27,6 +27,8 @@ pages:
     title: Core Schedule of Activities Model
   visit-windows.md:
     title: Visit Windowing
+  workflow.md:
+    title: Study Participant Workflow
   ip-administration.md:
     title: Investigational Product Administration
   activities.md:
