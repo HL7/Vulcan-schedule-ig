@@ -123,6 +123,15 @@ Usage: #example
     * kind = #applicability
     * expression
       * description = "CNS Imaging in the Last 12 Months"
+      * language = #text/fhirpath
+      // last 12 months
+      * expression = "ImagingStudy?subject=Patient/{{Patient.id}}&status=available"
+      //&status=available&modality=http://snomed.info/sct|816077007&body-structure:BodyStructure.includedStructure.structure=http://snomed.info/sct|404684003"
+      //* expression = "not exists ([ImagingStudy] I where I.status='available' and I.subject=Patient/{{Patient.id}} and I.started<=today() - 12 month and I.series.bodySite.coding.code='21483005'))"
+  * condition[+]
+    * kind = #applicability
+    * expression
+      * description = "CNS Imaging in the Last 12 Months"
       * language = #text/cql
       * expression = "not exists ([ImagingStudy] I where I.status='available' and I.subject=Patient/{{Patient.id}} and I.started<=today() - 12 month and I.series.bodySite.coding.code='21483005'))"
 * action[+]

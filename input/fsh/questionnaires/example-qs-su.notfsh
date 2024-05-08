@@ -1,0 +1,43 @@
+
+// this is done via FA?
+// ValueSet: CDASH-SU-Tobacco-Type
+// Id: cdash-su-tobacco-type
+// Title: "Substance Use - tobacco"
+// Description: "Type of tobacco used"
+// * ^url = "http://hl7.org/fhir/ValueSet/cdash-su-tobacco-type"
+// * experimental = true
+// * "Cigarettes"
+// * "e-Cigarettes"
+// * "Cigars"
+// * "Pipe"
+// * "Smokeless tobacco"
+
+ValueSet: CDASH-SU-NCF
+Id: cdash-su-never-current-former
+Title: "Substance Use - tobacco"
+Description: "Type of tobacco used"
+* ^url = "http://hl7.org/fhir/ValueSet/cdash-su-never-current-former"
+* experimental = true
+* NCIT#C25471 "Current"
+* NCIT#C25627 "Never"
+
+
+
+Instance: CDASH-SU-Tobacco
+InstanceOf: Questionnaire
+Usage: #example
+* status = #active
+* item[+]
+  * linkId = #1
+  * definition = "Do you currently smoke cigarettes?"
+  * type = #choice
+  * answerValueSet = "http://hl7.org/fhir/ValueSet/yesnodontknow"
+  * item[+]
+    * linkId = #1.1
+    * definition = "On average, how many cigarettes do you smoke per day?"
+    * type = #integer
+    * item[+]
+      * linkId = #1.1.1
+      * definition = "How many years have you smoked?"
+      * type = #integer
+

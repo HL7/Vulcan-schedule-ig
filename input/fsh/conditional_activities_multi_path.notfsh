@@ -96,87 +96,87 @@ Usage: #example
   * subjectReference = Reference(RandArmA)
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Member of Arm A"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmA'"
-    * expression[+]
-      * description = "On Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status = #on-study"
+    // * expression[+]
+    //   * description = "Member of Arm A"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.actualComparisonGroup = 'RandArmA'"
+    // * expression[+]
+    //   * description = "On Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status = #on-study"
 * action[+]
   * definitionUri = "StudyProtocolSoa/MPDayArmAVisit3"
   * subjectReference = Reference(RandArmA)
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Member of Arm A"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmA'"
-    * expression[+]
-      * description = "On Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status = #on-study"
+    // * expression[+]
+    //   * description = "Member of Arm A"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.actualComparisonGroup = 'RandArmA'"
+    // * expression[+]
+    //   * description = "On Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status = #on-study"
 * action[+]
   * definitionUri = "StudyProtocolSoa/MPDayArmBVisit2"
   * subjectReference = Reference(RandArmB)
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Member of Arm B"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
-    * expression[+]
-      * description = "On Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status = #on-study"
+    // * expression[+]
+    //   * description = "Member of Arm B"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    // * expression[+]
+    //   * description = "On Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status = #on-study"
 * action[+]
   * definitionUri = "StudyProtocolSoa/MPDayArmBVisit3"
   * subjectReference = Reference(RandArmB)
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Member of Arm B"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
-    * expression[+]
-      * description = "On Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status = #on-study"
+    // * expression[+]
+    //   * description = "Member of Arm B"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    // * expression[+]
+    //   * description = "On Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status = #on-study"
 * action[+]
   * definitionUri = "StudyProtocolSoa/MPDayArmBVisit4"
   * subjectReference = Reference(RandArmB)
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Member of Arm B"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
-    * expression[+]
-      * description = "On Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status = #on-study"
+    // * expression[+]
+    //   * description = "Member of Arm B"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    // * expression[+]
+    //   * description = "On Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status = #on-study"
 * action[+]
   * definitionUri = "StudyProtocolSoa/MPDayArmBVisit5"
   * subjectReference = Reference(RandArmB)
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Member of Arm B"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
-    * expression[+]
-      * description = "On Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status = #on-study"
+    // * expression[+]
+    //   * description = "Member of Arm B"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.actualComparisonGroup = 'RandArmB'"
+    // * expression[+]
+    //   * description = "On Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status = #on-study"
 * action[+]
   * definitionUri = "StudyProtocolSoa/MPEndOfStudy"
   * condition[+]
     * kind = #applicability
-    * expression[+]
-      * description = "Off Study"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.progress.status.in(#off-study, #withdrawn)"
+    // * expression[+]
+    //   * description = "Off Study"
+    //   * language = #text/fhirpath
+    //   * expression = "ResearchSubject.progress.status.in(#off-study, #withdrawn)"
 
 Instance: MPScreening
 InstanceOf: StudyProtocolSoa
