@@ -13,6 +13,18 @@ Usage: #example
   * title = "Record Visit Date"
   * definitionUri = "ActivityDefinition/SoA-PoC-Visit-Date"
 * action[+]
-  * id = "VISIT-1-SoA-PoC-PHQ-15"
+  * id = "VISIT-1-SoA-PoC-DMG"
+  * title = "Race, ethnicity, sex, primary language, disability - Health and Human Services (HHS) panel [HHS.ACA Section 4302]"
+  * definitionUri = "Questionnaire/Demographics-Questionnaire"
+* action[+]
+  * id = "VISIT-1-SoA-PoC-H-W"
+  * title = "Weight and Height tracking panel"
+  * definitionUri = "Questionnaire/Vulcan-SoA-Height-Weight-Panel"
+* action[+]
+  * id = "VISIT-1-SoA-PoC-VS"
+  * title = "Blood pressure panel mean systolic and mean diastolic"
+  * definitionUri = "Questionnaire/Vulcan-SoA-Blood-Pressure-Panel"
+* action[+]
+  * id = "VISIT-1-SoA-BP"
   * title = "PHQ-15 Questionnaire"
   * definitionUri = "Questionnaire/PHQ-15-Questionnaire"

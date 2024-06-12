@@ -13,5 +13,9 @@ Usage: #example
   * definitionUri = "ActivityDefinition/SoA-PoC-Visit-Date"
 * action[+]
   * id = "VISIT-4-SoA-PoC-PHQ-15"
+  * title = "Blood pressure panel mean systolic and mean diastolic"
+  * definitionUri = "Questionnaire/Vulcan-SoA-Blood-Pressure-Panel"
+* action[+]
+  * id = "VISIT-4-SoA-PoC-PHQ-15"
   * title = "PHQ-15 Questionnaire"
   * definitionUri = "Questionnaire/PHQ-15-Questionnaire"
