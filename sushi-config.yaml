@@ -39,6 +39,8 @@ pages:
     title: Downloads
   credits.md:
     title: Credits
+  dynamic.md:
+    title: Dynamic Features
 
 menu:
   Home: index.html
@@ -46,6 +48,7 @@ menu:
     Core Implementation Model: basic-structure.html
   Use Cases:
     Visit Windows: visit-windows.html
+    Dynamic Features: dynamic.html
     Investigational Product Administration: ip-administration.html
     CDISC ODM Integration: cdisc-odm.html
   Profiles: profiles.html
