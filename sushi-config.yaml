@@ -41,6 +41,12 @@ pages:
     title: Credits
   dynamic.md:
     title: Dynamic Features
+  dynamic-conditional-activities.md:
+    title: Conditional Activities
+  dynamic-visit-plans.md:
+    title: Dynamic Visit Plans
+  dynamic-unscheduled-visits.md:
+    title: Unscheduled Visits 
 
 menu:
   Home: index.html
@@ -48,7 +54,10 @@ menu:
     Core Implementation Model: basic-structure.html
   Use Cases:
     Visit Windows: visit-windows.html
-    Dynamic Features: dynamic.html
+    Dynamic Features: 
+      Conditional Activities: dynamic-conditional-activities.html
+      Dynamic Visit Plans: dynamic-visit-plans.html
+      Unscheduled Activities: dynamic-unscheduled-visits.html
     Investigational Product Administration: ip-administration.html
     CDISC ODM Integration: cdisc-odm.html
   Profiles: profiles.html
