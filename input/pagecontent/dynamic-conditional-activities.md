@@ -48,7 +48,10 @@ Some examples are shown here:
 
 Other factors come into consideration of an approach for conditional activities; these can include allocations to specific patient cohorts where the activities are dependent on specific patient characteristics or membership in a particular group (which may be related to protocol defined common characteristics).  
 
-We have chosen to make use of the existing patterns within the FHIR [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource to assist with the conditional activities defined according to patient characteristics.  The [PlanDefinition](https://hl7.org/fhir/plandefinition.html) predicate for child activities, [PlanDefinition.action](https://hl7.org/fhir/plandefinition-definitions.html#PlanDefinition.action) previously illustrated could be used.  We appreciate that there are a wide number of possible implementations for many patient characteristics; so we cannot provide a simple pattern to do this, instead we can provide some examplars for 
+We have chosen to make use of the existing patterns within the FHIR [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource to assist with the conditional activities defined according to patient characteristics.  The [PlanDefinition](https://hl7.org/fhir/plandefinition.html) predicate for child activities, [PlanDefinition.action](https://hl7.org/fhir/plandefinition-definitions.html#PlanDefinition.action) previously illustrated could be used.  
+
+We appreciate that there are a wide number of possible implementations for many patient characteristics; so we cannot provide a simple pattern to do this, instead we can provide some examples that show how logic can be applied to the scheduling of activities such that the conditionality expressed in the protocol can be adequately reflected in the planned study design.
+
 
 ```yaml
 Instance: SoA-PoC-Conditional-Visit-1
@@ -69,3 +72,5 @@ Usage: #inline
       * language = #text/fhirpath
       * expression = "Condition.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '73211009').exists()"
 ```
+In some cases, the conditionality can require resources to be asserted; an example is the case of "Female, of Child-bearing Potential"; a determination of the Patient sexual characteristics is accessible via the `Patient` resource
+
