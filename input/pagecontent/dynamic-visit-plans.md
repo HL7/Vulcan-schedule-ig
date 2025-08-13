@@ -10,8 +10,8 @@ graph LR;
   VisitN[Visit N]
   VisitNP[Visit N+1]
   VisitET[Early Termination]
-  VisitN-- Normal Progression -->VisitNP
-  VisitN-- Early Termination -->VisitET
+  VisitN--Normal Progression-->VisitNP
+  VisitN--Early Termination-->VisitET
 ```
 
 The execution of the plan would need to be able to be adapted to describe what transitions could occur (under what conditions); examples of the types of transitions:

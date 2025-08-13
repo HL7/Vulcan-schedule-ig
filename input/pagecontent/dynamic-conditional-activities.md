@@ -72,5 +72,26 @@ Usage: #inline
       * language = #text/fhirpath
       * expression = "Condition.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '73211009').exists()"
 ```
-In some cases, the conditionality can require resources to be asserted; an example is the case of "Female, of Child-bearing Potential"; a determination of the Patient sexual characteristics is accessible via the `Patient` resource
 
+In some cases, the conditionality can require resources to be asserted; an example is the case of "Female, of Child-bearing Potential"; a determination of the Patient sexual characteristics is accessible via the `Patient` resource, whereas the child-bearing potential for a female can be dependent on a number of factors reflected in a number of possible resources (eg infertility, surgical sterilisation).  In Case Report Forms, these are handled by a declaration made by the site staff based on medical records (which may or may not be electronic)
+
+It is also necessary to plan for events occurring in the conduct of a study, examples being:
+* Patient study discontinuation/withdrawal
+  * Serious Adverse Event (SAE)
+  * Patient withdrawal of consent
+  * Study Close-out
+* Patient study changes 
+  * Treatment changes (dose discontinuation, either temporary or permanent)
+  * Sub-study participation
+  * Adaptive Study Design with Arm discontinuation
+* Study discontinuation
+  * Study Close out down to therapeutic outcome
+
+How these activities can be enumerated vis a vis Patient participation, is something that needs to be accounted for; this can be mediated via process or automation.  For automation there could be something that our execution depend on such as a Patient status.  Implementations are: 
+* `ResearchSubject.status` (R4), 
+* `ResearchSubject.progress.subjectState` (R5) 
+* `ResearchSubject.subjectState` (R6)
+
+Patient's continued participation in the study/studyplan is dependent on the Patient `status`.  However, there needs to be some initiation in change in the Patient state and this would be down to the Clinical Trial Management System that is driving the research activities for the Patient; for example being having a defined enrollment process that creates the enrollment encounter, and based on the outcome updates the status of the patient.  
+
+Resources available for use
