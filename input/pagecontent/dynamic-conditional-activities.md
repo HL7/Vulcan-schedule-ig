@@ -87,7 +87,7 @@ It is also necessary to plan for events occurring in the conduct of a study, exa
 * Study discontinuation
   * Study Close out down to therapeutic outcome
 
-How these activities can be enumerated vis a vis Patient participation, is something that needs to be accounted for; this can be mediated via process or automation.  For automation there could be something that our execution depend on such as a Patient status.  Implementations are: 
+How these activities can be enumerated vis a vis Patient participation, is something that needs to be accounted for; this can be mediated via **process** or **automation**.  For automation there could be something that our execution depend on such as a Patient status.  Implementations are: 
 * `ResearchSubject.status` (R4), 
 * `ResearchSubject.progress.subjectState` (R5) 
 * `ResearchSubject.subjectState` (R6)
