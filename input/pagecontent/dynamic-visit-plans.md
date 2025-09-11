@@ -63,35 +63,53 @@ So, what needs to be defined for a given encounter forward in patient progressio
 
 To account for this, we define the following extension for summarising the next encounter and the characteristics under which the next encounter would occur.  Note, the criteria should never lead to a decision where there are multiple subsequent encounters without a way of determining the next encounter.  In all cases, the unscheduled encounter should be available, with the expectation that the possible exits are returning to the protocol path or leaving the study.
 
+
+First, we illustrate the use of the Exit to represent the paths in the following diagram (following a single schedule):
+
+```mermaid
+graph LR;
+  StudyVisit01[Screening]
+  StudyVisit03Day1[Treatment Day 1]
+  StudyVisit04Day15[Last Day]
+  StudyVisitEoS[End of Study]
+  StudyVisitFollowUp[Follow Up]
+  StudyVisit01-.->StudyVisit03Day1
+  StudyVisit03Day1-.->StudyVisit04Day15
+  StudyVisit04Day15-->StudyVisitEoS
+  StudyVisitEoS-->StudyVisitFollowUp
+  StudyVisit03Day1--Early Termination-->StudyVisitEoS
+  StudyVisit03Day1--Early Termination-->StudyVisitEoS
+```
+
 ```fsh
 Instance: StudyVisit01
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisitEoS)
   * condition = "Patient Discontinuation" 
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisit03Day1)
 
 Instance: StudyVisit03Day1
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisitEoS)
   * condition = "Patient Discontinuation" 
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisit04Day15)
 
 Instance: StudyVisit04Day15
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisitEoS)
 
 Instance: StudyVisitEoS
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisitFollowUp)
 
 Instance: StudyVisitFollowUp
@@ -99,42 +117,258 @@ InstanceOf: SoAVisitPlan
 Usage: #example
 ```
 
+In the following example we represent the case where there are multiple paths depending on a classification
+
+```mermaid
+graph LR;
+  Screening[Screening]
+  Baseline[Randomization]
+  TreatmentDay1ArmA["Day 1 (Arm A)"]
+  TreatmentDay2ArmA["Day 2 (Arm A)"]
+  TreatmentDay7ArmA["Day 7 (Arm A)"]
+  TreatmentDay15ArmA["Day 15 (Arm A)"]
+  TreatmentDay1ArmB["Day 1 (Arm B)"]
+  TreatmentDay7ArmB["Day 7 (Arm B)"]
+  TreatmentDay15ArmB["Day 15 (Arm B)"]
+  EndOfStudy["End of Study"]
+  Screening-->Baseline
+  Baseline-->TreatmentDay1ArmA
+  Baseline-->TreatmentDay1ArmB
+  TreatmentDay15ArmA-->EndOfStudy
+  TreatmentDay15ArmB-->EndOfStudy
+  subgraph Treatment
+    direction TB
+    subgraph ArmA
+      TreatmentDay1ArmA --> TreatmentDay2ArmA
+      TreatmentDay2ArmA --> TreatmentDay7ArmA
+      TreatmentDay7ArmA --> TreatmentDay15ArmA
+    end
+    subgraph "Arm B"
+      TreatmentDay1ArmB --> TreatmentDay7ArmB
+      TreatmentDay7ArmB --> TreatmentDay15ArmB
+    end
+  end
+```
+
+
 ```fsh
-Instance: StudyVisit01
+Instance: Screening
 InstanceOf: SoAVisitPlan
+Title: "Screening"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(StudyVisit03Day1)
 
-Instance: StudyVisit02
+Instance: Baseline
 InstanceOf: SoAVisitPlan
+Title: "Baseline/Randomisation"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
-  * destination = Reference(StudyVisit03Day1A)
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
+  * destination = Reference(TreatmentDay1ArmA)
   * condition = "ResearchSubject.assignedArm = A"
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
   * destination = Reference(StudyVisit03Day1B)
   * condition = "ResearchSubject.assignedArm = B"
 
-Instance: StudyVisit03Day1A
+Instance: TreatmentDay1ArmA
 InstanceOf: SoAVisitPlan
+Title: "Day 1"
 Usage: #example
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
-  * destination = Reference(StudyVisitEoS)
+  * destination = Reference(EndOfStudy)
   * condition = "Patient Discontinuation" 
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
-  * destination = Reference(StudyVisit04Day15)
+  * destination = Reference(TreatmentDay2ArmA)
 
-Instance: StudyVisit03Day1B
+Instance: TreatmentDay2ArmA
 InstanceOf: SoAVisitPlan
+Title: "Day 2"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(EndOfStudy)
+  * condition = "Patient Discontinuation" 
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(TreatmentDay7ArmA)
+
+Instance: TreatmentDay7ArmA
+InstanceOf: SoAVisitPlan
+Title: "Day 7"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(EndOfStudy)
+  * condition = "Patient Discontinuation" 
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(TreatmentDay15ArmA)
+
+Instance: TreatmentDay15ArmA
+InstanceOf: SoAVisitPlan
+Title: "Day 15"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(EndOfStudy)
+
+Instance: TreatmentDay1ArmB
+InstanceOf: SoAVisitPlan
+Title: "Day 1"
 Usage: #example
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
   * destination = Reference(StudyVisitEoS)
   * condition = "Patient Discontinuation" 
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
-  * destination = Reference(StudyVisit04Day15)
+  * destination = Reference(TreatmentDay7ArmB)
+
+Instance: TreatmentDay7ArmB
+InstanceOf: SoAVisitPlan
+Title: "Day 7"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(StudyVisitEoS)
+  * condition = "Patient Discontinuation" 
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(TreatmentDay15ArmB)
+
+Instance: TreatmentDay15ArmB
+InstanceOf: SoAVisitPlan
+Title: "Day 15"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(EndOfStudy)
+
+Instance: EndOfStudy
+InstanceOf: SoAVisitPlan
+Title: "End of Study"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Paths][+]
+  * destination = Reference(EndOfStudy)
 
 ```
+
+##### Treatment Cycles
+
+One of the more complex scenarios we need to deal with are [treatment cycles](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/treatment-cycle); these are repeatable episodic sets of encounters, usually in oncology studies.  The structure of cycles may change over the progression of the studies; where different encounters or activities are added based on the protocol; some examples are shown here:
+
+
+Examples of Oncology Cycles:
+
+* 3-Week Cycle (e.g., 1-5-9 Schedule)
+  * Treatment Period: A patient receives chemotherapy on days 1, 5, and 9. 
+  * Rest Period: Days 10 through 21 are a rest period. 
+  * Cycle Length: The entire period, from the start of treatment to the beginning of the next, lasts 21 days. 
+* 28-Day Cycle (e.g., Lonsurf®)
+  * Treatment Period: The drug Trifluridine-tipiracil hydrochloride is taken as a tablet twice a day. 
+  * Rest Period: A 28-day period encompasses the full cycle of treatment. 
+* Weekly Treatment with a Rest Period
+  * Treatment Period: A single dose of chemotherapy might be given once a week. 
+  * Rest Period: The remaining days of the week, or several weeks, are spent in rest. 
+  * Example: A week of daily chemotherapy followed by three weeks of no treatment constitutes one 4-week cycle. 
+
+The following diagram illustrates a typical oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
+
+```mermaid
+graph TD
+    %% Pre-treatment Phase
+    subgraph PreTreatment[" "]
+        direction TB
+        Screening[Screening] --> Randomization[Randomization]
+    end
+    
+    %% Cycle 1 (Odd cycle pattern)
+    subgraph Cycle1["🔄 Cycle 1 (Odd Pattern)"]
+        direction LR
+        C1D1[Day 1] --> C1D14[Day 14]
+        C1D14 --> C1D21[Day 21]
+    end
+    
+    %% Cycle 2 (Even cycle pattern)
+    subgraph Cycle2["🔄 Cycle 2 (Even Pattern)"]
+        direction LR
+        C2D1[Day 1] --> C2D7[Day 7]
+        C2D7 --> C2D14[Day 14]
+        C2D14 --> C2D21[Day 21]
+        C2D21 --> C2D28[Day 28]
+    end
+    
+    %% Cycle 3 (Odd cycle pattern)
+    subgraph Cycle3["🔄 Cycle 3 (Odd Pattern)"]
+        direction LR
+        C3D1[Day 1] --> C3D14[Day 14]
+        C3D14 --> C3D21[Day 21]
+    end
+    
+    %% Cycle 4 (Even cycle pattern)
+    subgraph Cycle4["🔄 Cycle 4 (Even Pattern)"]
+        direction LR
+        C4D1[Day 1] --> C4D7[Day 7]
+        C4D7 --> C4D14[Day 14]
+        C4D14 --> C4D21[Day 21]
+        C4D21 --> C4D28[Day 28]
+    end
+    
+    %% Additional Cycles Indicator
+    subgraph CycleContinuation["🔄 Additional Cycles"]
+        direction LR
+        MoreCycles[...Continue per protocol...]
+    end
+    
+    %% Post-treatment Phase
+    subgraph PostTreatment[" "]
+        direction TB
+        EndTreatment[End of Treatment] --> EOS[End of Study]
+    end
+    
+    %% Transitions between phases and cycles
+    PreTreatment --> Cycle1
+    Cycle1 -.-> Cycle2
+    Cycle2 -.-> Cycle3
+    Cycle3 -.-> Cycle4
+    Cycle4 -.-> CycleContinuation
+    CycleContinuation -.-> PostTreatment
+    
+    %% Early termination paths from any cycle
+    Cycle1 --Disease Progression/AE--> PostTreatment
+    Cycle2 --Disease Progression/AE--> PostTreatment
+    Cycle3 --Disease Progression/AE--> PostTreatment
+    Cycle4 --Disease Progression/AE--> PostTreatment
+    CycleContinuation --Disease Progression/AE--> PostTreatment
+    
+    %% Early termination from pre-treatment
+    Screening --Patient Withdrawal--> PostTreatment
+    Randomization --Patient Withdrawal--> PostTreatment
+    
+    %% Styling
+    classDef prePhase fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef oddCycleBox fill:#f3e5f5,stroke:#4a148c,stroke-width:3px
+    classDef evenCycleBox fill:#e8f5e8,stroke:#1b5e20,stroke-width:3px
+    classDef continueBox fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    classDef postPhase fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef encounter fill:#ffffff,stroke:#666666,stroke-width:1px
+    
+    class Screening,Randomization prePhase
+    class EndTreatment,EOS postPhase
+    class C1D1,C1D14,C1D21,C3D1,C3D14,C3D21 encounter
+    class C2D1,C2D7,C2D14,C2D21,C2D28,C4D1,C4D7,C4D14,C4D21,C4D28 encounter
+    class MoreCycles encounter
+```
+
+This diagram demonstrates:
+- **Pre-treatment Phase**: Screening and randomization as a distinct phase
+- **Cycle Entities**: Each treatment cycle is represented as a separate subgraph with internal encounter flow
+- **Odd Cycles** (1, 3, etc.): Three encounters per cycle on Days 1, 14, and 21
+- **Even Cycles** (2, 4, etc.): Five encounters per cycle on Days 1, 7, 14, 21, and 28
+- **Inter-cycle Transitions**: Clear transitions between cycles showing study progression
+- **Intra-cycle Transitions**: Encounter flow within each cycle following the protocol pattern
+- **Cycle Continuation**: Visual indication that additional cycles can continue per protocol
+- **Early Termination**: Exit paths from any cycle or phase for discontinuation scenarios
+- **Post-treatment Phase**: End of treatment and end of study as final phase
+
+The structure clearly separates:
+1. **Between-cycle transitions**: Moving from one cycle to the next
+2. **Within-cycle transitions**: Sequential encounters within each cycle
+3. **Phase transitions**: Moving between major study phases (pre-treatment → cycles → post-treatment)
+4. **Exception transitions**: Early termination paths from any point in the study
+
+Cycles present a challenge for modelling 
+
 
 TODO: Cycles
 
