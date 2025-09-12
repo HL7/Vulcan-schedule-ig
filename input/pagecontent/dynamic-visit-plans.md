@@ -61,7 +61,17 @@ The execution of the plan needs to be able to be adapted to describe what transi
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
 
-To account for this, we define the following extension for summarising the next encounter and the characteristics under which the next encounter would occur.  Note, the criteria should never lead to a decision where there are multiple subsequent encounters without a way of determining the next encounter.  In all cases, the unscheduled encounter should be available, with the expectation that the possible exits are returning to the protocol path or leaving the study.
+To account for this, we define the following extension for summarising the next encounters and the conditions under which the next encounter would occur.  For this we propose the following extension: [Exit](http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit) extension
+The [Exit] extension has the following characteristics:
+* an array with one item for each Exit
+* each item will have:
+  * a `destination` representing the next `SoAVisitPlan` (required)
+  * one or more `condition` statements representing a evaluation that, if true, tells the scheduler to `$apply` the next encounter (optional)
+    * if there are more than one `condition` statement, the evaluations should be `AND`ed together 
+* an item without a `condition` represents the default next `SoAVisitPlan`
+* there must be no more than one item that can apply at 
+
+Note, the criteria should never lead to a decision where there are multiple subsequent encounters without a way of determining the next encounter.  In all cases, the unscheduled encounter should be available, with the expectation that the possible exits are returning to the protocol path or leaving the study.
 
 
 First, we illustrate the use of the Exit to represent the paths in the following diagram (following a single schedule):
@@ -367,7 +377,9 @@ The structure clearly separates:
 3. **Phase transitions**: Moving between major study phases (pre-treatment → cycles → post-treatment)
 4. **Exception transitions**: Early termination paths from any point in the study
 
-Cycles present a challenge for modelling 
+Cycles present a challenge for modelling, there needs to be a way to represent transitions within and between cycles.  The IG has guidance for  
+
+
 
 
 TODO: Cycles

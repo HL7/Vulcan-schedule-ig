@@ -4,6 +4,7 @@ Unscheduled visits are encounters that are not part of the pre-defined schedule 
 
 From an implementation perspective, unscheduled visits are not represented as pre-defined actions within the study's `PlanDefinition`. Instead, they are instantiated as `Encounter` resources at the time they occur. To maintain the integrity of the study data, it is crucial to document the reason for the unscheduled visit. This can be achieved by populating the `Encounter.reasonCode` or `Encounter.reasonReference` elements, which can link the visit to a specific `AdverseEvent`, `Observation`, or `Condition` resource. This linkage provides the necessary context for the data collected during the visit, distinguishing it from data gathered during routine, scheduled encounters and allowing for proper analysis.
 
+Suggest that this is rolled up into applicability of parent plan -> child SoAVisit
 
 ```fsh
 Instance: UnscheduledStudyVisit01

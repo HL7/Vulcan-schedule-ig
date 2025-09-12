@@ -46,6 +46,8 @@ Some examples are shown here:
     AFP (for HCC) / CA125 (for EOC) 
     ```
 
+TODO: Add example FSH files for examples above
+
 Other factors come into consideration of an approach for conditional activities; these can include allocations to specific patient cohorts where the activities are dependent on specific patient characteristics or membership in a particular group (which may be related to protocol defined common characteristics).  
 
 We have chosen to make use of the existing patterns within the FHIR [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource to assist with the conditional activities defined according to patient characteristics.  The [PlanDefinition](https://hl7.org/fhir/plandefinition.html) predicate for child activities, [PlanDefinition.action](https://hl7.org/fhir/plandefinition-definitions.html#PlanDefinition.action) previously illustrated could be used.  
@@ -73,7 +75,9 @@ Usage: #inline
       * expression = "Condition.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '73211009').exists()"
 ```
 
-In some cases, the conditionality can require resources to be asserted; an example is the case of "Female, of Child-bearing Potential"; a determination of the Patient sexual characteristics is accessible via the `Patient` resource, whereas the child-bearing potential for a female can be dependent on a number of factors reflected in a number of possible resources (eg infertility, surgical sterilisation).  In Case Report Forms, these are handled by a declaration made by the site staff based on medical records (which may or may not be electronic)
+In some cases, the conditionality can require resources to be asserted; an example is the case of "Female, of Child-bearing Potential"; a determination of the Patient sexual characteristics is accessible via the `Patient` resource, whereas the child-bearing potential for a female can be dependent on a number of factors reflected in a number of possible resources (eg infertility, surgical sterilisation).  In Case Report Forms, these are handled by a declaration made by the site staff based on medical records (which may or may not be electronic).  
+
+The scheduling layer will need to provide the framework for collecting user input through a Questionnaire or similar to satisfy the requirements for the conditional activity (eg by asserting that the patient has been evaluated for child-bearing potential, and recording the outcome).
 
 It is also necessary to plan for events occurring in the conduct of a study, examples being:
 * Patient study discontinuation/withdrawal
@@ -94,4 +98,8 @@ How these activities can be enumerated vis a vis Patient participation, is somet
 
 Patient's continued participation in the study/studyplan is dependent on the Patient `status`.  However, there needs to be some initiation in change in the Patient state and this would be down to the Clinical Trial Management System that is driving the research activities for the Patient; for example being having a defined enrollment process that creates the enrollment encounter, and based on the outcome updates the status of the patient.  
 
-Resources available for use
+
+From Bryn
+Where this type of thing has come up the most is in computable clinical guideline representation.
+https://hl7.org/fhir/uv/cpg/examples-chf.html
+There are quite a few examples and discussion related to this type of computable workflow representation in that IG
