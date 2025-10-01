@@ -1,4 +1,5 @@
 #### Conditional Activities
+
 Conditional activities only occur based on some pre-existing state for the patient at the point of time the activity would be performed.  The invocation of conditional activities relies on an evaluation of the state at the point at which the activity would be planned to be performed.  These states can be characteristics of the patient (pre-entry states) or can be based on an emergent event.  
 
 Conditional classifications could include:
@@ -54,6 +55,7 @@ We have chosen to make use of the existing patterns within the FHIR [PlanDefinit
 
 We appreciate that there are a wide number of possible implementations for many patient characteristics; so we cannot provide a simple pattern to do this, instead we can provide some examples that show how logic can be applied to the scheduling of activities such that the conditionality expressed in the protocol can be adequately reflected in the planned study design.
 
+[TODO] - examples of "If clinically indicated", some activities can be 'skipped' based on Investigator or clinical evaluation.  It does not preclude the activity being done, in spite of evidence, but logistically there is a requirement that the pre-conditions for the activity are met (ie the device/consumables are available at site for the staff to use)
 
 ```yaml
 Instance: SoA-PoC-Conditional-Visit-1
@@ -99,7 +101,9 @@ How these activities can be enumerated vis a vis Patient participation, is somet
 Patient's continued participation in the study/studyplan is dependent on the Patient `status`.  However, there needs to be some initiation in change in the Patient state and this would be down to the Clinical Trial Management System that is driving the research activities for the Patient; for example being having a defined enrollment process that creates the enrollment encounter, and based on the outcome updates the status of the patient.  
 
 
-From Bryn
-Where this type of thing has come up the most is in computable clinical guideline representation.
-https://hl7.org/fhir/uv/cpg/examples-chf.html
-There are quite a few examples and discussion related to this type of computable workflow representation in that IG
+From Bryn:
+
+* Where this type of thing has come up the most is in computable clinical guideline representation. https://hl7.org/fhir/uv/cpg/examples-chf.html
+* There are quite a few examples and discussion related to this type of computable workflow representation in that IG
+
+
