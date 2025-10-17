@@ -263,10 +263,8 @@ Usage: #example
 
 One of the more complex scenarios we need to deal with are [treatment cycles](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/treatment-cycle); these are repeatable episodic sets of encounters, usually in oncology studies. The structure of cycles may change over the progression of the studies; different encounters or activities occur based on the protocol. The status of the patient is evaluated at the end of each cycle, usually against a standard criteria like RECIST. The progression of the disease is the key determinant to whether the patient will continue to stay in the study (alongside all other safety measures discussed).
 
-Some examples are shown here:
-[INSERT SAMPLE SOA here]
 
-Examples of Oncology Cycles:
+Some examples of Oncology Cycles:
 
 - 3-Week Cycle (e.g., 1-5-9 Schedule)
   - Treatment Period: A patient receives chemotherapy on days 1, 5, and 9.
@@ -280,7 +278,40 @@ Examples of Oncology Cycles:
   - Rest Period: The remaining days of the week, or several weeks, are spent in rest.
   - Example: A week of daily chemotherapy followed by three weeks of no treatment constitutes one 4-week cycle.
 
-The following diagram illustrates a typical oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
+The following illustrates a typical oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
+
+|  | **Screening** |  | **Cycle 1 (Odd)** |  |  | **Cycle 2 (Even)** |  |  |  |  | **Cycle 3 (Odd)** |  |  | **Cycle 4 (Even)** |  |  |  |  | **...** | **End of Treatment** | **Follow-up** |  |
+|--|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| **Visit** | **Screen** | **Rand** | **C1D1** | **C1D14** | **C1D28** | **C2D1** | **C2D7** | **C2D14** | **C2D21** | **C2D28** | **C3D1** | **C3D14** | **C3D28** | **C4D1** | **C4D7** | **C4D14** | **C4D21** | **C4D28** | **...** | **EOT** | **FU1** | **FU2** |
+| **Study Day** | -28 to -1 | 0 | 1 | 14 | 28 | 29 | 35 | 42 | 49 | 56 | 57 | 70 | 84 | 85 | 91 | 98 | 105 | 112 | ... | +30 | +90 | +180 |
+| **Window** | ±7d |  | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±7d | ±14d | ±14d |
+| **Activities** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Informed Consent | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Demographics | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Medical History | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Vital Signs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Height/Weight | ✓ |  |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ |  |  |
+| Performance Status | ✓ | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Laboratory Tests** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Liver Function | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  |
+| Coagulation | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  |  | ✓ |  | ✓ | ✓ |  |  |  |  | ✓ | ✓ |  |  |
+| Biomarkers | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Treatment** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Study Drug Admin |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
+| Pre-medication |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
+| **Imaging** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| CT/MRI Scan | ✓ |  |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Chest X-ray | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ✓ |  |  | ✓ |
+| Disease Response | ✓ |  |  |  |  |  |  |  |  | ✓ |  |  |  |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Assessments** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Quality of Life | ✓ |  | ✓ |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+This can be illustrated graphically as follows:
 
 ```mermaid
 graph TD
@@ -294,7 +325,7 @@ graph TD
     subgraph Cycle1["🔄 Cycle 1 (Odd Pattern)"]
         direction LR
         C1D1[Day 1] --> C1D14[Day 14]
-        C1D14 --> C1D21[Day 21]
+        C1D14 --> C1D28[Day 28]
     end
 
     %% Cycle 2 (Even cycle pattern)
@@ -310,7 +341,7 @@ graph TD
     subgraph Cycle3["🔄 Cycle 3 (Odd Pattern)"]
         direction LR
         C3D1[Day 1] --> C3D14[Day 14]
-        C3D14 --> C3D21[Day 21]
+        C3D14 --> C3D28[Day 28]
     end
 
     %% Cycle 4 (Even cycle pattern)
@@ -343,9 +374,9 @@ graph TD
     CycleContinuation -.-> PostTreatment
 
     %% Early termination paths from any cycle
-    Cycle1 --Disease Progression/AE--> PostTreatment
+    Cycle1 --AE--> PostTreatment
     Cycle2 --Disease Progression/AE--> PostTreatment
-    Cycle3 --Disease Progression/AE--> PostTreatment
+    Cycle3 --AE--> PostTreatment
     Cycle4 --Disease Progression/AE--> PostTreatment
     CycleContinuation --Disease Progression/AE--> PostTreatment
 
@@ -363,90 +394,134 @@ graph TD
 
     class Screening,Randomization prePhase
     class EndTreatment,EOS postPhase
-    class C1D1,C1D14,C1D21,C3D1,C3D14,C3D21 encounter
+    class C1D1,C1D14,C1D28,C3D1,C3D14,C3D28 encounter
     class C2D1,C2D7,C2D14,C2D21,C2D28,C4D1,C4D7,C4D14,C4D21,C4D28 encounter
     class MoreCycles encounter
 ```
 
-This diagram demonstrates:
+The presentation of a 'cycle' as a group of encounters illustrates that it can have semantics that are distinct from a StudyVisit; we propose adding a Profile for the the `StudyVisitGroupSoa`; this represents a identified set of encounters that have a protocol defined link eg, Cycle, Treatment Period.
 
-- **Pre-treatment Phase**: Screening and randomization as a distinct phase
-- **Cycle Entities**: Each treatment cycle is represented as a separate subgraph with internal encounter flow
-- **Odd Cycles** (1, 3, etc.): Three encounters per cycle on Days 1, 14, and 21
-- **Even Cycles** (2, 4, etc.): Five encounters per cycle on Days 1, 7, 14, 21, and 28
-- **Inter-cycle Transitions**: Clear transitions between cycles showing study progression
-- **Intra-cycle Transitions**: Encounter flow within each cycle following the protocol pattern
-- **Cycle Continuation**: Visual indication that additional cycles can continue per protocol
-- **Early Termination**: Exit paths from any cycle or phase for discontinuation scenarios
-- **Post-treatment Phase**: End of treatment and end of study as final phase
+Some examples of attributes that would be defined to represent protocol driven concepts include:
+* `Duration` - in oncology studies Cycles can have defined durations that are independent of encounters therein (eg Cycle length is 21 days), so for scheduling purposes Cycles would have offsets based on the cycle number, without requiring a Cycle N, Day 21 to actually exist.  The duration can have a value and may have a window.
+* `Washout Period` - protocol defined duration between encounter sets/cycles to avoid agent crossover or overdose, or to avoid impacts on the interventional agent.  These may precede or succeed a VisitGroup.  The washout period could have a duration (eg 28 days) and a window (eg 3-14 days).
+* `Exits` - representing patient paths from the current VisitGroup; these are similar to those defined above.  One function improvement for the use of VisitGroup can be defining common Stop criteria, such as Lost to Follow Up, Serious Adverse Event, etc.  This would cascade down to the Visit entities enclosed and allows study designers to not have to repeat these Stop criteria on every Visit. [THINK] can we use this for 'Epochs' such as Treatment
 
-The structure clearly separates:
 
-1. **Between-cycle transitions**: Moving from one cycle to the next
-2. **Within-cycle transitions**: Sequential encounters within each cycle
-3. **Phase transitions**: Moving between major study phases (pre-treatment → cycles → post-treatment)
-4. **Exception transitions**: Early termination paths from any point in the study
-
-Cycles present a challenge for modelling, there needs to be a way to represent transitions within and between cycles. The IG has guidance for
+Apply a stop criteria to the 'box' (eg Cycle) - this would remove the need to explicitly add to all the contained activities
+Contained resources can apply top down logic that can be applied across all the encounters; conditions are a continually applied scope for contained resources
 
 ```fsh
+Instance: StudyPlan
+InstanceOf: StudyProtocolSoa
+Title: "Study Plan"
+* actions[+]
+  * definitionCanonical = "PlanDefinition/Cycle1"
+
 Instance: Cycle1
-InstanceOf: SoAVisitPlan
+InstanceOf: SoAVisitGroupPlan
 Title: "Cycle 1"
 Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration] = 21 'd'
 * actions[+]
-  * definitionCanonical = "C1D1"
+  * definitionCanonical = "PlanDefinition/C1D1"
+  * relatedAction[+] 
+    * actionId = "StartOfCycle"
+    * relationship = #after
+    * offsetDuration = 0 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
 * actions[+]
-  * definitionCanonical = "C1D7"
+  * definitionCanonical = "PlanDefinition/C1D7"
+  * relatedAction[+] 
+    * actionId = "StartOfCycle"
+    * relationship = #after
+    * offsetDuration = 7 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
 * actions[+]
-  * definitionCanonical = "C1D14"
+  * definitionCanonical = "PlanDefinition/C1D14"
+  * relatedAction[+] 
+    * actionId = "StartOfCycle"
+    * relationship = #after
+    * offsetDuration = 14 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
+  * destination = Reference(PlanDefinition/EndOfStudy)
   * condition = "Patient Discontinuation"
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(CycleEven)
+  * destination = Reference(PlanDefinition/CycleEven)
+
+Instance: CycleEven
+InstanceOf: SoAVisitGroupPlan
+Title: "Cycle N (Odd)"
+Usage: #example
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration][+] = 21 'd'
+* actions[+]
+  * definitionCanonical = "PlanDefinition/CEvenD1"
+  * relatedAction[+] 
+    * actionId = "StartOfCycle"
+    * relationship = #after
+    * offsetDuration = 0 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
+* actions[+]
+  * definitionCanonical = "PlanDefinition/CEvenD7"
+  * relatedAction[+] 
+    * actionId = "StartOfCycle"
+    * relationship = #after
+    * offsetDuration = 7 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
+* actions[+]
+  * definitionCanonical = "PlanDefinition/CEvenD14"
+  * relatedAction[+] 
+    * actionId = "StartOfCycle"
+    * relationship = #after
+    * offsetDuration = 14 'd'
+    * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
+    * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
+  * destination = Reference(PlanDefinition/TreatmentDay15ArmA)
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
+  * destination = Reference(PlanDefinition/CycleOdd)
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
+  * destination = Reference(PlanDefinition/EndOfStudy)
+  * condition = "Patient Discontinuation"
 
 Instance: CycleOdd
 InstanceOf: SoAVisitPlan
 Title: "Cycle N (Odd)"
 Usage: #example
 * actions[+]
-  * definitionCanonical = "COddD1"
+  * definitionCanonical = "PlanDefinition/COddD1"
 * actions[+]
-  * definitionCanonical = "COddD7"
+  * definitionCanonical = "PlanDefinition/COddD7"
 * actions[+]
-  * definitionCanonical = "COddD14"
+  * definitionCanonical = "PlanDefinition/COddD14"
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
+  * destination = Reference(PlanDefinition/EndOfStudy)
   * condition = "Patient Discontinuation"
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(CycleEven)
-
-Instance: CycleEven
-InstanceOf: SoAVisitGroupPlan
-Title: "Cycle N (Odd)"
-Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay15ArmA)
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration][+]
-  * timingDuration = 21d
-* actions[+]
-  * definitionCanonical = "CEvenD1"
-* actions[+]
-  * definitionCanonical = "CEvenD7"
-* actions[+]
-  * definitionCanonical = "CEvenD14"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(CycleOdd)
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
-  * condition = "Patient Discontinuation"
+  * destination = Reference(PlanDefinition/CycleEven)
 
 Instance: COddD1
 InstanceOf: SoAVisitPlan
 Title: "Cycle N (Odd) - Day 1"
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
   * destination = Reference(COddD7)
+
+Instance: COddD7
+InstanceOf: SoAVisitPlan
+Title: "Cycle N (Odd) - Day 7"
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
+  * destination = Reference(COddD14)
+
+Instance: COddD14
+InstanceOf: SoAVisitPlan
+Title: "Cycle N (Odd) - Day 14"
+* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
+  * destination = Reference(COddD28)
 
 Instance: COddD28
 InstanceOf: SoAVisitPlan
@@ -462,6 +537,9 @@ Title: "Cycle N (Odd) - Day 28"
   * condition = "ResearchStudy.status.in("closed")"
 
 ```
+
+```
+
 
 Discussions:
 [Marks comment on petri nets]

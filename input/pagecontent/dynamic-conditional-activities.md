@@ -55,7 +55,8 @@ We have chosen to make use of the existing patterns within the FHIR [PlanDefinit
 
 We appreciate that there are a wide number of possible implementations for many patient characteristics; so we cannot provide a simple pattern to do this, instead we can provide some examples that show how logic can be applied to the scheduling of activities such that the conditionality expressed in the protocol can be adequately reflected in the planned study design.
 
-[TODO] - examples of "If clinically indicated", some activities can be 'skipped' based on Investigator or clinical evaluation.  It does not preclude the activity being done, in spite of evidence, but logistically there is a requirement that the pre-conditions for the activity are met (ie the device/consumables are available at site for the staff to use)
+[TODO] - examples of "If clinically indicated", some activities can be 'skipped' based on Investigator or clinical evaluation.  It does not preclude the activity being done, in spite of evidence, but logistically there is a requirement that the pre-conditions for the activity are met (ie the device/consumables are available at site for the staff to use).  
+[TODO] - Also look at CQL to see what can be done using that....
 
 ```yaml
 Instance: SoA-PoC-Conditional-Visit-1
@@ -102,7 +103,6 @@ Patient's continued participation in the study/studyplan is dependent on the Pat
 
 
 From Bryn:
-
 * Where this type of thing has come up the most is in computable clinical guideline representation. https://hl7.org/fhir/uv/cpg/examples-chf.html
 * There are quite a few examples and discussion related to this type of computable workflow representation in that IG
 
