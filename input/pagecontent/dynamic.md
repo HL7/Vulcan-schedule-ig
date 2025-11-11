@@ -10,3 +10,7 @@ We have partitioned the requirements as follows:
 * [Unscheduled Activities](./dynamic-unscheduled-visits.md) - providing a framework for incorporating emergent encounters
 
 Note, in discussion with the Clinical Decision Support workgroup we have determined that it is unlikely that the types of semantics needed to be supported are going to be available in any general purpose healthcare system.  It is expected that there would need to be an application (based on SMART-on-FHIR or similar) to interpret the guidance in this documentation; as such we will define some extensions that need to be interpreted by the management application (ideally providing the link between the intent of the guidance)
+
+Replace the current content with the :
+[Richardson A, Genyn P
+Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF)
