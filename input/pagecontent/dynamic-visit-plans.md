@@ -6,6 +6,34 @@ This drive for efficiency has given rise to adaptive designs and master protocol
 
 The goal of the IG will be to be able to define **enough** semantics to represent the encounters, activities and transitions between them. The FHIR Workflow pattern is useful for defining the structural layout for the encounters and activities; defining how the workflow is applied requires the use of an application layer.
 
+##### Multiple Designs
+
+Within the current implementation, it is possible to accommodate one or more schedules through use of the multiple entries in the `ResearchStudy.protocol` attribute based on the core `ResearchStudy` resource 
+
+```
+Instance: SampleMultiDesignStudy
+InstanceOf: ResearchStudy
+Usage: #example
+* title = "Sample Multi Design Study"
+* protocol[+] = Reference(PlanDefinition/StudyDesignA)
+* protocol[+] = Reference(PlanDefinition/StudyDesignB)
+
+Instance: StudyDesignA
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* status = #active
+* title = "Study Design A"
+
+Instance: StudyDesignB
+InstanceOf: StudyProtocolSoa
+Usage: #example
+* status = #active
+* title = "Study Design B"
+
+```
+
+Similarly, for an example of a [master protocol](https://www.sciencedirect.com/science/article/pii/S2451865420300521), the existing `ResearchStudy.partOf` predicate can be used
+
 ##### Transitions
 
 The modality of transitions are needed to represent a prospective plan for a ResearchSubject participating in a Clinical Trial; it supports planning and decision making. Generally, patients follow a protocol proscribed path through encounters and activities. We have previously described how activities within an encounter can be orchestrated; but this document is intended to summarise approaches for intra-encounter activities.
@@ -26,35 +54,13 @@ The Patient will progress from one encounter to the next based on directives or 
 The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
 
 Some scenarios to consider:
-
 - Normal progression based on allocation to an arm
 - Differentiated progression based on multiple arms in a study design
 - Lost to follow-up, the patient no longer responds to or attends scheduled encounters
 - In-study event, a Serious Adverse Event such as death leads to the patient discontinuing participation
 - Sponsors may choose to close a study based on pre-defined characteristics detailed in the protocol (eg Six months after the last patient in)
 
-Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator could update the ResearchSubject.status to be 'withdrawn'. That would lead to many of the study paths being closed down assuming progression is linked to the state being 'on-study', 'on-study-intervention' or similar. This is reliant on site staff or automation being able to update the characteristic, however processes for this already exist so could be applied to the execution of study activities. These are facile approaches, and will need to be refined (eg where there are multiple study periods, with the patient changing state between them).
-
-An example for this shown here; we define the applicability of a planned encounter based on the current `ResearchSubject.status` in R4. In later versions of FHIR, the value for the applicable research subject status at the time of the evaluation, should be aligned with the concordant intent shown below (eg in R6 using the value `ResearchSubject.subjectState`):
-
-```fsh
-Instance: StudyVisit01
-InstanceOf: SoAVisitPlan
-Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/ApplicableResearchSubjectStatus] = #screening
-
-Instance: StudyVisit03Day1
-InstanceOf: SoAVisitPlan
-Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/ApplicableResearchSubjectStatus] = #on-study
-
-Instance: StudyVisitEoS
-InstanceOf: SoAVisitPlan
-Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/ApplicableResearchSubjectStatus] = #withdrawn
-```
-
-This would need to be able to accommodate the different subject statuses and reflect the protocol (eg status of `#on-study`, `#on-study-intervention`, `#on-study-observation` may or may not be considered to be synonyms or not dependent on the study configuration) - the statuses should concur with the intent of the study design in the protocol and should reflect the state at the time of evaluation. In later versions of FHIR, the patient status is much more granular; insofar as the record on the ResearchSubject has all the current and former states, and would need to be referenced for the applicable time period.
+Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator/designated patient management system could update the ResearchSubject.status to be *withdrawn*. 
 
 The execution of the plan needs to be able to be adapted to describe what transitions could occur and describe any conditions under which the transitions might occur; examples of the types of transitions that could need to be represented:
 
@@ -64,22 +70,9 @@ The execution of the plan needs to be able to be adapted to describe what transi
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
 
-To account for this, we define the following extension for summarising the next encounters and the conditions under which the next encounter would occur.
+We have chosen to use the extensions proposed by [Richardson A, Genyn P
+Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS.  The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
 
-For this we propose the following extension: [Exit](http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit) extension
-The [Exit] extension has the following characteristics:
-
-- an array with one item for each Exit
-- each item will have:
-  - a `destination` representing the next `SoAVisitPlan` (required)
-    - There is no requirement that all exits lead to different next encounters
-  - one or more `condition` statements representing a evaluation that, if true, tells the scheduler to `$apply` the next encounter (optional)
-    - if there are more than one `condition` statement, the evaluations should be `OR` ed together
-    - expectation is that this should be similar to the `PlanDefinition.action.condition` predicate
-- an item without a `condition` represents the default next `SoAVisitPlan`
-- there must be no more than one item that can apply in any state
-
-Note, the criteria should never lead to a decision where there are multiple subsequent encounters without a way of determining the next encounter. In all cases, the unscheduled encounter should be available, with the expectation that the possible exits are returning to the protocol path or leaving the study.
 
 First, we illustrate the use of the Exit to represent the paths in the following diagram (following a single schedule):
 
@@ -98,40 +91,51 @@ graph LR;
 ```
 
 ```fsh
+Instance: ExamplePlan
+InstanceOf: SoAVisitPlan
+Usage: #example
+* title = "Sample study Plan"
+* status = #active
+* action[+]
+  * definitionCanonical = PlanDefinition/StudyVisit01
+* action[+]
+  * definitionCanonical = PlanDefinition/StudyVisit02
+* action[+]
+  * definitionCanonical = PlanDefinition/StudyVisit03Day1
+* action[+]
+  * definitionCanonical = PlanDefinition/StudyVisit04Day15
+* action[+]
+  * definitionCanonical = PlanDefinition/StudyVisitEoS
+
 Instance: StudyVisit01
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisitEoS)
-  * condition[+]
-    * expression = "Screen Failure"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisit03Day1)
+* status = #active
+
+Instance: StudyVisit02Baseline
+InstanceOf: SoAVisitPlan
+Usage: #example
+* status = #active
 
 Instance: StudyVisit03Day1
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisitEoS)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisit04Day15)
+* status = #active
 
 Instance: StudyVisit04Day15
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisitEoS)
+* status = #active
 
 Instance: StudyVisitEoS
 InstanceOf: SoAVisitPlan
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisitFollowUp)
+* status = #active
 
 Instance: StudyVisitFollowUp
 InstanceOf: SoAVisitPlan
 Usage: #example
+* status = #active
 ```
 
 In the following example we represent the case where there are multiple paths depending on a classification
@@ -172,90 +176,62 @@ Instance: Screening
 InstanceOf: SoAVisitPlan
 Title: "Screening"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisit03Day1)
+* status = #active
 
 Instance: Baseline
 InstanceOf: SoAVisitPlan
 Title: "Baseline/Randomisation"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay1ArmA)
-  * condition = "ResearchSubject.assignedArm = A"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisit03Day1B)
-  * condition = "ResearchSubject.assignedArm = B"
+* status = #active
+
 
 Instance: TreatmentDay1ArmA
 InstanceOf: SoAVisitPlan
 Title: "Day 1"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay2ArmA)
+* status = #active
 
 Instance: TreatmentDay2ArmA
 InstanceOf: SoAVisitPlan
 Title: "Day 2"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay7ArmA)
+* status = #active
 
 Instance: TreatmentDay7ArmA
 InstanceOf: SoAVisitPlan
 Title: "Day 7"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay15ArmA)
+* status = #active
 
 Instance: TreatmentDay15ArmA
 InstanceOf: SoAVisitPlan
 Title: "Day 15"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
+* status = #active
 
 Instance: TreatmentDay1ArmB
 InstanceOf: SoAVisitPlan
 Title: "Day 1"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisitEoS)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay7ArmB)
+* status = #active
 
 Instance: TreatmentDay7ArmB
 InstanceOf: SoAVisitPlan
 Title: "Day 7"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(StudyVisitEoS)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(TreatmentDay15ArmB)
+* status = #active
 
 Instance: TreatmentDay15ArmB
 InstanceOf: SoAVisitPlan
 Title: "Day 15"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
+* status = #active
 
 Instance: EndOfStudy
 InstanceOf: SoAVisitPlan
 Title: "End of Study"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EndOfStudy)
+* status = #active
 
 ```
 
@@ -399,29 +375,45 @@ graph TD
     class MoreCycles encounter
 ```
 
-The presentation of a 'cycle' as a group of encounters illustrates that it can have semantics that are distinct from a StudyVisit; we propose adding a Profile for the the `StudyVisitGroupSoa`; this represents a identified set of encounters that have a protocol defined link eg, Cycle, Treatment Period.
-
-Some examples of attributes that would be defined to represent protocol driven concepts include:
-* `Duration` - in oncology studies Cycles can have defined durations that are independent of encounters therein (eg Cycle length is 21 days), so for scheduling purposes Cycles would have offsets based on the cycle number, without requiring a Cycle N, Day 21 to actually exist.  The duration can have a value and may have a window.
-* `Washout Period` - protocol defined duration between encounter sets/cycles to avoid agent crossover or overdose, or to avoid impacts on the interventional agent.  These may precede or succeed a VisitGroup.  The washout period could have a duration (eg 28 days) and a window (eg 3-14 days).
-* `Exits` - representing patient paths from the current VisitGroup; these are similar to those defined above.  One function improvement for the use of VisitGroup can be defining common Stop criteria, such as Lost to Follow Up, Serious Adverse Event, etc.  This would cascade down to the Visit entities enclosed and allows study designers to not have to repeat these Stop criteria on every Visit. [THINK] can we use this for 'Epochs' such as Treatment
-
-
-Apply a stop criteria to the 'box' (eg Cycle) - this would remove the need to explicitly add to all the contained activities
-Contained resources can apply top down logic that can be applied across all the encounters; conditions are a continually applied scope for contained resources
-
 ```fsh
 Instance: StudyPlan
 InstanceOf: StudyProtocolSoa
 Title: "Study Plan"
+* status = #active
+* actions[+]
+  * definitionCanonical = "PlanDefinition/Screening"
+  * 
+* actions[+]
+  * definitionCanonical = "PlanDefinition/Baseline"
 * actions[+]
   * definitionCanonical = "PlanDefinition/Cycle1"
+* actions[+]
+  * definitionCanonical = "PlanDefinition/CycleEven"
+* actions[+]
+  * definitionCanonical = "PlanDefinition/CycleOdd"
+* actions[+]
+  * definitionCanonical = "PlanDefinition/EndOfTreatment"
+
+Instance: Screening
+InstanceOf: PlanDefinition
+Title: "Screening"
+Usage: #example
+* status = #active
+* action[+]
+  * definitionCanonical = 
+
+Instance: Baseline
+InstanceOf: PlanDefinition
+Title: "Baseline"
+Usage: #example
+* status = #active
+
 
 Instance: Cycle1
-InstanceOf: SoAVisitGroupPlan
+InstanceOf: PlanDefinition
 Title: "Cycle 1"
 Usage: #example
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration] = 21 'd'
+* status = #active
 * actions[+]
   * definitionCanonical = "PlanDefinition/C1D1"
   * relatedAction[+] 
@@ -446,16 +438,12 @@ Usage: #example
     * offsetDuration = 14 'd'
     * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
     * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/EndOfStudy)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/CycleEven)
 
 Instance: CycleEven
-InstanceOf: SoAVisitGroupPlan
+InstanceOf: PlanDefinition
 Title: "Cycle N (Odd)"
 Usage: #example
+* status = #active
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration][+] = 21 'd'
 * actions[+]
   * definitionCanonical = "PlanDefinition/CEvenD1"
@@ -481,65 +469,42 @@ Usage: #example
     * offsetDuration = 14 'd'
     * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
     * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/TreatmentDay15ArmA)
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/CycleOdd)
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/EndOfStudy)
-  * condition = "Patient Discontinuation"
 
 Instance: CycleOdd
-InstanceOf: SoAVisitPlan
+InstanceOf: PlanDefinition
 Title: "Cycle N (Odd)"
 Usage: #example
+* status = #active
 * actions[+]
   * definitionCanonical = "PlanDefinition/COddD1"
 * actions[+]
   * definitionCanonical = "PlanDefinition/COddD7"
 * actions[+]
   * definitionCanonical = "PlanDefinition/COddD14"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/EndOfStudy)
-  * condition = "Patient Discontinuation"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(PlanDefinition/CycleEven)
 
 Instance: COddD1
 InstanceOf: SoAVisitPlan
 Title: "Cycle N (Odd) - Day 1"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(COddD7)
+* status = #active
 
 Instance: COddD7
 InstanceOf: SoAVisitPlan
 Title: "Cycle N (Odd) - Day 7"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(COddD14)
+* status = #active
 
 Instance: COddD14
 InstanceOf: SoAVisitPlan
 Title: "Cycle N (Odd) - Day 14"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(COddD28)
+* status = #active
 
 Instance: COddD28
 InstanceOf: SoAVisitPlan
 Title: "Cycle N (Odd) - Day 28"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(CycleEven)
-  * condition = "Patient.DiseaseResponse.in("SD","PR")"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EOS)
-  * condition = "Patient.DiseaseResponse.in("PD")"
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Exit][+]
-  * destination = Reference(EOS)
-  * condition = "ResearchStudy.status.in("closed")"
+* status = #active
 
 ```
 
-```
-
+##### Scratchpad
 
 Discussions:
 [Marks comment on petri nets]
@@ -553,3 +518,8 @@ The fundamental problem, however, is the association between conditions and acti
   - do we have a PlanDefinition per 'Cohort';
     - remove the instance level conditionality
   -
+
+
+That would lead to many of the study paths being closed down assuming progression is linked to the state being 'on-study', 'on-study-intervention' or similar. This is reliant on site staff or automation being able to update the characteristic, however processes for this already exist so could be applied to the execution of study activities. These are facile approaches, and will need to be refined (eg where there are multiple study periods, with the patient changing state between them).
+
+Note, the criteria should never lead to a decision where there are multiple subsequent encounters without a way of determining the next encounter. In all cases, the unscheduled encounter should be available, with the expectation that the possible exits are returning to the protocol path or leaving the study.
