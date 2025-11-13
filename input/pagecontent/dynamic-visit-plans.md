@@ -32,7 +32,9 @@ Usage: #example
 
 ```
 
-Similarly, for an example of a [master protocol](https://www.sciencedirect.com/science/article/pii/S2451865420300521), the existing `ResearchStudy.partOf` predicate can be used
+The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs.  Some examples are shown below.
+
+For an example of a [master protocol](https://www.sciencedirect.com/science/article/pii/S2451865420300521), the existing `ResearchStudy.partOf` predicate can be used to nest the sub-studies beneath the master protocol itself, this allows for differentiation of eligibility criteria, lifecycle, etc.
 
 ##### Transitions
 
@@ -49,7 +51,160 @@ graph LR;
   VisitN--Normal Progression-->VisitNP
 ```
 
-The Patient will progress from one encounter to the next based on directives or conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data) or exogenous factors (eg randomization, sponsor decision).
+```fsh
+Instance: dynamic-visit-schedule-simple-example
+InstanceOf: PlanDefinition
+Usage: #example
+* meta.versionId = "0"
+* meta.lastUpdated = "2025-11-09T15:13:31Z"
+* identifier.system = "http://www.fhir4pharma.com/plandefinition"
+* identifier.value = "5c2a9671-1d0d-4b02-8f09-0e30d77411b2"
+* version = "V00"
+* name = "dynamic-visit-schedule-simple-example"
+* title = "dynamic-visit-schedule-simple-example"
+* type = $plan-definition-type#clinical-protocol
+* status = #active
+* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
+* description = "dynamic-visit-schedule-simple-example"
+* action[0]
+  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb"
+  * extension.extension[+]
+    * url = "soaPlannedTimePoint"
+    * valueQuantity = 0 's'
+  * extension.extension[+]
+    * url = "soaReferenceTimePoint"
+    * valueString = "Visit N"
+  * extension.extension[+]
+    * url = "soaRepeatAllowed"
+    * valueBoolean = false
+  * extension.extension[+]
+    * url = "soaPlannedDuration"
+    * valueDuration = 24 'h'
+  * extension.extension[+]
+    * url = "soaTimePointType"
+    * valueString = "Interaction"
+  * extension.extension[+]
+    * url = "soaPlannedRange"
+    * valueRange.low = 0 's'
+    * valueRange.high = 0 's'
+  * extension.extension[+]
+    * url = "soaRangeFromTimePoint"
+    * valueString = "Visit N"
+  * extension.extension
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Visit N"
+  * description = "Visit N"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "http://example.org/Encounter/Visit-N"
+* action[+]
+  * extension
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * extension[+]
+      * url = "soaTargetId"
+      * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 14 'd'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * condition
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression = "{'toNormalProgression':true}"
+  * action[+]
+    * extension
+      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * extension[+]
+        * url = "soaTargetId"
+        * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+      * extension[+]
+        * url = "soaTransitionType"
+        * valueString = "SS"
+      * extension[+]
+        * url = "soaTransitionDelay"
+        * valueDuration = 24 'h'
+      * extension[+]
+        * url = "soaTransitionRange"
+        * valueRange
+          * low = 0 's'
+          * high = 0 's'
+    * condition
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression
+          * expression = "{'toEarlyTermination':true}"
+* action[+]
+  * id = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+  * extension
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 14 'd'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Visit N"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Visit N"
+  * title = "Visit N+1"
+  * description = "Visit N+1"
+  * definitionCanonical = "http://example.org/Encounter/Visit-N+1"
+* action[+]
+  * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+  * title = "Early Termination"
+  * description = "Early Termination"
+  * definitionCanonical = "http://example.org/Encounter/Early-Termination"
+  * extension
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * extension[+]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 24 'h'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Visit N"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 0 's'
+        * high = 14 'd'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Visit N"
+```
+
+The Patient will progress from one encounter to the next based on directives and conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data/study design) or exogenous factors (eg randomization, sponsor decision).  Providing Decision Support for these systems requires a design that can reflect the different factors and outcomes.
 
 The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
 
