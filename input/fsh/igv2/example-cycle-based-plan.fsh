@@ -9,6 +9,8 @@ InstanceOf: StudyProtocolSoa
 Title: "Study Plan"
 * status = #active
 * actions[+]
+  * definitionCanonical = "ActivityDefinition/InteractionStart"
+* actions[+]
   * definitionCanonical = "PlanDefinition/Screening"
 * actions[+]
   * definitionCanonical = "PlanDefinition/Baseline"
@@ -20,6 +22,10 @@ Title: "Study Plan"
   * definitionCanonical = "PlanDefinition/CycleOdd"
 * actions[+]
   * definitionCanonical = "PlanDefinition/EndOfTreatment"
+* actions[+]
+  * definitionCanonical = "PlanDefinition/UnscheduledVisit"
+* actions[+]
+  * definitionCanonical = "ActivityDefinition/InteractionEnd"
 
 Instance: Screening
 InstanceOf: PlanDefinition
@@ -27,7 +33,7 @@ Title: "Screening"
 Usage: #example
 * status = #active
 * action[+]
-  * definitionCanonical = 
+  * definitionCanonical = "ActivityDefinition/ActivityScreeningVisit"
 
 Instance: Baseline
 InstanceOf: PlanDefinition
