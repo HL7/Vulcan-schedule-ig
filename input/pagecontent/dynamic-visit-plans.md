@@ -40,6 +40,10 @@ For an example of a [master protocol](https://www.sciencedirect.com/science/arti
 
 The modality of transitions are needed to represent a prospective plan for a ResearchSubject participating in a Clinical Trial; it supports planning and decision making. Generally, patients follow a protocol proscribed path through encounters and activities. We have previously described how activities within an encounter can be orchestrated; but this document is intended to summarise approaches for intra-encounter activities.
 
+We have chosen to use the extensions proposed by [Richardson A, Genyn P
+Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS.  The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
+
+
 If we take a simple example; the progression of a patient in a study design - the following example provides an illustration
 
 ```mermaid
@@ -51,6 +55,7 @@ graph LR;
   VisitN--Normal Progression-->VisitNP
 ```
 
+Here is a representation of this structure using the implementation details per above:
 ```fsh
 Instance: dynamic-visit-schedule-simple-example
 InstanceOf: PlanDefinition
@@ -203,30 +208,23 @@ Usage: #example
       * url = "soaRangeFromTimePoint"
       * valueString = "Visit N"
 ```
-
-The Patient will progress from one encounter to the next based on directives and conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data/study design) or exogenous factors (eg randomization, sponsor decision).  Providing Decision Support for these systems requires a design that can reflect the different factors and outcomes.
+The Patient will progress from one encounter to the next based on directives and conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data/study design) or exogenous factors (eg randomization, sponsor decision).  Providing Decision Support for these systems requires a design that can represent the different factors and outcomes.
 
 The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
 
-Some scenarios to consider:
-- Normal progression based on allocation to an arm
-- Differentiated progression based on multiple arms in a study design
-- Lost to follow-up, the patient no longer responds to or attends scheduled encounters
-- In-study event, a Serious Adverse Event such as death leads to the patient discontinuing participation
-- Sponsors may choose to close a study based on pre-defined characteristics detailed in the protocol (eg Six months after the last patient in)
 
-Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator/designated patient management system could update the ResearchSubject.status to be *withdrawn*. 
+Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator/designated patient management system could update the ResearchSubject.status to be *withdrawn*.
 
 The execution of the plan needs to be able to be adapted to describe what transitions could occur and describe any conditions under which the transitions might occur; examples of the types of transitions that could need to be represented:
 
-- Patients in different cohorts undergo different activities based on their cohort[insert diagram]
-- If the patient is a participant in an oncology study and the intervention is not showing therapeutic benefit (as ascertained by Disease Response Assessment/RECIST) then the patient should transition to End of Treatment and Follow-up
+- Patient populations in different cohorts undergo different activities based on their cohort
 - Normal per protocol transition from treatment encounter to encounter.
+- Patient discontinuing study based on outcomes
+- Patient lost to follow-up
+- If the patient is a participant in an oncology study and the intervention is not showing therapeutic benefit (eg as ascertained by a Disease Response Assessment/RECIST) then the patient should transition to End of Treatment and Follow-up
+- Sponsors may choose to close a study based on pre-defined characteristics detailed in the protocol (eg Six months after the last patient in)
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
-
-We have chosen to use the extensions proposed by [Richardson A, Genyn P
-Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS.  The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
 
 
 First, we illustrate the use of the Exit to represent the paths in the following diagram (following a single schedule):
@@ -245,52 +243,353 @@ graph LR;
   StudyVisit03Day1--Early Termination-->StudyVisitEoS
 ```
 
+Here is the representation using the design above:
 ```fsh
-Instance: ExamplePlan
-InstanceOf: SoAVisitPlan
+Instance: dynamic-visit-schedule-exit-example
+InstanceOf: PlanDefinition
 Usage: #example
-* title = "Sample study Plan"
+* meta
+  * versionId = "0"
+  * lastUpdated = "2025-11-11T18:30:41Z"
+* identifier
+  * system = "http://www.fhir4pharma.com/plandefinition"
+  * value = "6edf3bcf-d2d9-4f47-a0f4-4efe9c9cb265"
+* version = "V00"
+* name = "dynamic-visit-schedule-simple-example"
+* title = "dynamic-visit-schedule-simple-example"
 * status = #active
+* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
+* description = "dynamic-visit-schedule-simple-example"
+* action[0]
+  * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 24 'h'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Treatment Day 1"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 0 's'
+        * high = 14 'd'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Treatment Day 1"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Early Termination"
+  * description = "Early Termination"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "http://example.org/Encounter/Early-Termination"
+  * action.extension
+    * extension[0]
+      * url = "soaTargetId"
+      * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
 * action[+]
-  * definitionCanonical = PlanDefinition/StudyVisit01
+  * id = "d0dd287a-0a87-439d-95cc-8690e7abf0cb"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 28 'd'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Treatment Day 1"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Treatment Day 1"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Last Day"
+  * description = "Last Day"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "http://example.org/Encounter/Last-Day"
+  * action.extension
+    * extension[0]
+      * url = "soaTargetId"
+      * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 7 'd'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
 * action[+]
-  * definitionCanonical = PlanDefinition/StudyVisit02
+  * id = "a1806239-54f3-4762-af3f-edb9d80d29dc"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 0 's'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Screening"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Screening"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Treatment Day 1"
+  * description = "Treatment Day 1"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "http://example.org/Encounter/Treatment-Day-1"
+  * action[0].extension
+    * extension[0]
+      * url = "soaTargetId"
+      * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+  * action[+].extension
+    * extension[0]
+      * url = "soaTargetId"
+      * valueString = "d0dd287a-0a87-439d-95cc-8690e7abf0cb"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 28 'd'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
 * action[+]
-  * definitionCanonical = PlanDefinition/StudyVisit03Day1
+  * id = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 7 'd'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Last Day"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Last Day"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "End of Study"
+  * description = "End of Study"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "http://example.org/Encounter/End-of-Study"
+  * action.extension
+    * extension[0]
+      * url = "soaTargetId"
+      * valueString = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 28 'd'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
 * action[+]
-  * definitionCanonical = PlanDefinition/StudyVisit04Day15
+  * id = "0700e721-1f12-4998-89b8-6f4e649b62f7"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 0 's'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Screening"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Screening"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Screening"
+  * description = "Screening"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "http://example.org/Encounter/Screening"
+  * action.extension
+    * extension[0]
+      * url = "soaTargetId"
+      * valueString = "a1806239-54f3-4762-af3f-edb9d80d29dc"
+    * extension[+]
+      * url = "soaTransitionType"
+      * valueString = "SS"
+    * extension[+]
+      * url = "soaTransitionDelay"
+      * valueDuration = 0 's'
+    * extension[+]
+      * url = "soaTransitionRange"
+      * valueRange
+        * low = 0 's'
+        * high = 0 's'
+    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
 * action[+]
-  * definitionCanonical = PlanDefinition/StudyVisitEoS
-
+  * id = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 28 'd'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "End of Study"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "End of Study"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Follow Up"
+  * description = "Follow Up"
+  * definitionCanonical = "http://example.org/Encounter/Follow-Up"
+  
 Instance: StudyVisit01
 InstanceOf: SoAVisitPlan
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical = "ActivityDefinition/ScreeningVitals"
 
 Instance: StudyVisit02Baseline
 InstanceOf: SoAVisitPlan
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical = "ActivityDefinition/Vitals"
+* action[+]
+  * definitionCanonical = "ActivityDefinition/Randomization"
 
 Instance: StudyVisit03Day1
 InstanceOf: SoAVisitPlan
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical = "ActivityDefinition/Vitals"
 
 Instance: StudyVisit04Day15
 InstanceOf: SoAVisitPlan
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical = "ActivityDefinition/Vitals"
 
 Instance: StudyVisitEoS
 InstanceOf: SoAVisitPlan
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical = "ActivityDefinition/Vitals"
 
 Instance: StudyVisitFollowUp
 InstanceOf: SoAVisitPlan
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical = "ActivityDefinition/Vitals"
 ```
 
 In the following example we represent the case where there are multiple paths depending on a classification
@@ -326,7 +625,16 @@ graph LR;
   end
 ```
 
+The representation of this is shown here
+
 ```fsh
+Instance: Multi-Arm-Design
+InstanceOf: StudyProtocolSoa
+Title: "Multi-path based on Arm"
+Usage: #example 
+* status = #active
+
+
 Instance: Screening
 InstanceOf: SoAVisitPlan
 Title: "Screening"
@@ -345,6 +653,8 @@ InstanceOf: SoAVisitPlan
 Title: "Day 1"
 Usage: #example
 * status = #active
+* action[+]
+  * definitionCanonical
 
 Instance: TreatmentDay2ArmA
 InstanceOf: SoAVisitPlan
@@ -537,7 +847,9 @@ Title: "Study Plan"
 * status = #active
 * actions[+]
   * definitionCanonical = "PlanDefinition/Screening"
-  * 
+  * extensions[+]
+    * extension
+      * url = XXXX
 * actions[+]
   * definitionCanonical = "PlanDefinition/Baseline"
 * actions[+]
@@ -555,7 +867,15 @@ Title: "Screening"
 Usage: #example
 * status = #active
 * action[+]
-  * definitionCanonical = 
+  * definitionCanonical = ActivityDefinition/InformedConsent
+* action[+]
+  * definitionCanonical = ActivityDefinition/Demographics
+* action[+]
+  * definitionCanonical = ActivityDefinition/MedicalHistory
+* action[+]
+  * definitionCanonical = ActivityDefinition/PhysicalExaminationScreening
+* action[+]
+  * definitionCanonical = ActivityDefinition/VitalSigns
 
 Instance: Baseline
 InstanceOf: PlanDefinition
