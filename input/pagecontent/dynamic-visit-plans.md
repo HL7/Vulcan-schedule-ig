@@ -633,6 +633,7 @@ InstanceOf: StudyProtocolSoa
 Title: "Multi-path based on Arm"
 Usage: #example 
 * status = #active
+* action[]
 
 
 Instance: Screening
@@ -757,7 +758,7 @@ This can be illustrated graphically as follows:
 ```mermaid
 graph TD
     %% Pre-treatment Phase
-    subgraph PreTreatment[" "]
+    subgraph PreTreatment["Screening Period"]
         direction TB
         Screening[Screening] --> Randomization[Randomization]
     end
@@ -807,19 +808,18 @@ graph TD
     end
 
     %% Transitions between phases and cycles
-    PreTreatment --> Cycle1
+    Randomization -.-> Cycle1 
     Cycle1 -.-> Cycle2
     Cycle2 -.-> Cycle3
     Cycle3 -.-> Cycle4
     Cycle4 -.-> CycleContinuation
-    CycleContinuation -.-> PostTreatment
-
+    
     %% Early termination paths from any cycle
     Cycle1 --AE--> PostTreatment
     Cycle2 --Disease Progression/AE--> PostTreatment
     Cycle3 --AE--> PostTreatment
     Cycle4 --Disease Progression/AE--> PostTreatment
-    CycleContinuation --Disease Progression/AE--> PostTreatment
+    CycleContinuation --Disease Progression/AE/Study Completion--> PostTreatment
 
     %% Early termination from pre-treatment
     Screening --Patient Withdrawal--> PostTreatment
@@ -847,15 +847,20 @@ Title: "Study Plan"
 * status = #active
 * actions[+]
   * definitionCanonical = "PlanDefinition/Screening"
+  * title = "Screening"
   * extensions[+]
     * extension
       * url = XXXX
 * actions[+]
   * definitionCanonical = "PlanDefinition/Baseline"
+  * title = "Baseline/Randomization"
 * actions[+]
   * definitionCanonical = "PlanDefinition/Cycle1"
+  * title = "Cycle 1"
 * actions[+]
   * definitionCanonical = "PlanDefinition/CycleEven"
+  * title = "Cycle N"
+  * description = ""
 * actions[+]
   * definitionCanonical = "PlanDefinition/CycleOdd"
 * actions[+]
@@ -875,7 +880,7 @@ Usage: #example
 * action[+]
   * definitionCanonical = ActivityDefinition/PhysicalExaminationScreening
 * action[+]
-  * definitionCanonical = ActivityDefinition/VitalSigns
+  * definitionCanonical = ActivityDefinition/VitalSignsScreening
 
 Instance: Baseline
 InstanceOf: PlanDefinition
