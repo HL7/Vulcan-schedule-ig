@@ -14,3 +14,7 @@ Note, in discussion with the Clinical Decision Support workgroup we have determi
 Replace the current content with the :
 [Richardson A, Genyn P
 Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF)
+
+Links:
+* https://github.com/cqframework/clinical_quality_language/wiki/Community-Projects#content (example Projects that we can review)
+* https://github.com/WorldHealthOrganization?q=smart&type=all&language=&sort= (Computable Guideline )
