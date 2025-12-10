@@ -52,7 +52,7 @@ graph LR;
   VisitNP[Visit N+1]
   VisitET[Early Termination]
   VisitN--Early Termination-->VisitET
-  VisitN--Normal Progression-->VisitNP
+  VisitN--Normal Progression (48 days)-->VisitNP
 ```
 
 Here is a representation of this structure using the implementation details per above:
@@ -233,14 +233,18 @@ First, we illustrate the use of the Exit to represent the paths in the following
 graph LR;
   StudyVisit01[Screening]
   StudyVisit03Day1[Treatment Day 1]
-  StudyVisit04Day15[Last Day]
+  StudyVisit04Day7[Day 7]
+  StudyVisit05Day15[Day 15]
   StudyVisitEoS[End of Study]
   StudyVisitFollowUp[Follow Up]
   StudyVisit01-.->StudyVisit03Day1
-  StudyVisit03Day1-.->StudyVisit04Day15
-  StudyVisit04Day15-->StudyVisitEoS
+  StudyVisit03Day1-.->StudyVisit04Day7
+  StudyVisit04Day7-.->StudyVisit05Day15
+  StudyVisit05Day15-->StudyVisitEoS
   StudyVisitEoS-->StudyVisitFollowUp
   StudyVisit03Day1--Early Termination-->StudyVisitEoS
+  StudyVisit04Day7--Early Termination-->StudyVisitEoS
+  StudyVisit05Day15--Early Termination-->StudyVisitEoS
 ```
 
 Here is the representation using the design above:
@@ -611,9 +615,9 @@ graph LR;
   Baseline-->TreatmentDay1ArmB
   TreatmentDay15ArmA-->EndOfStudy
   TreatmentDay15ArmB-->EndOfStudy
-  subgraph Treatment
+  subgraph "Treatment (21 days)"
     direction TB
-    subgraph ArmA
+    subgraph "Arm A"
       TreatmentDay1ArmA --> TreatmentDay2ArmA
       TreatmentDay2ArmA --> TreatmentDay7ArmA
       TreatmentDay7ArmA --> TreatmentDay15ArmA
