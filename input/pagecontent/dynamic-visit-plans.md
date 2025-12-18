@@ -726,36 +726,36 @@ Some examples of Oncology Cycles:
 
 The following illustrates a typical oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
 
-|  | **Screening** |  | **Cycle 1 (Odd)** |  |  | **Cycle 2 (Even)** |  |  |  |  | **Cycle 3 (Odd)** |  |  | **Cycle 4 (Even)** |  |  |  |  | **...** | **End of Treatment** | **Follow-up** |  |
-|--|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| **Visit** | **Screen** | **Rand** | **C1D1** | **C1D14** | **C1D28** | **C2D1** | **C2D7** | **C2D14** | **C2D21** | **C2D28** | **C3D1** | **C3D14** | **C3D28** | **C4D1** | **C4D7** | **C4D14** | **C4D21** | **C4D28** | **...** | **EOT** | **FU1** | **FU2** |
-| **Study Day** | -28 to -1 | 0 | 1 | 14 | 28 | 29 | 35 | 42 | 49 | 56 | 57 | 70 | 84 | 85 | 91 | 98 | 105 | 112 | ... | +30 | +90 | +180 |
-| **Window** | ±7d |  | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±7d | ±14d | ±14d |
-| **Activities** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Informed Consent | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Demographics | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Medical History | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Vital Signs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Height/Weight | ✓ |  |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ |  |  |
-| Performance Status | ✓ | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Laboratory Tests** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Liver Function | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  |
-| Coagulation | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  |  | ✓ |  | ✓ | ✓ |  |  |  |  | ✓ | ✓ |  |  |
-| Biomarkers | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Treatment** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Study Drug Admin |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
-| Pre-medication |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
-| **Imaging** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| CT/MRI Scan | ✓ |  |  |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Chest X-ray | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ✓ |  |  | ✓ |
-| Disease Response | ✓ |  |  |  |  |  |  |  |  | ✓ |  |  |  |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Assessments** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Quality of Life | ✓ |  | ✓ |  | ✓ |  |  |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+|  | **Screening** |  | **Cycle N (Odd)** |  |  | **Cycle N+1 (Even)** |  |  |  |  | **...** | **End of Treatment** | **Follow-up** |  |
+|--|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| **Visit** | **Screen** | **Rand** | **D1** | **D14** | **D28** | **D1** | **D7** | **D14** | **D21** | **D28** | **...** | **EOT** | **FU1** | **FU2** |
+| **Study Day** | -28 to -1 | 0 | 1 | 14 | 28 | 29 | 35 | 42 | 49 | 56 | ... | +30 | +90 | +180 |
+| **Window** | ±7d |  | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±7d | ±14d | ±14d |
+| **Activities** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Informed Consent | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Demographics | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Medical History | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Vital Signs<sup>1</sup> | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Height/Weight | ✓ |  |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ |  |  |
+| Performance Status | ✓ | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Laboratory Tests** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Liver Function | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  |
+| Coagulation | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  |  | ✓ | ✓ |  |  |
+| Biomarkers | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Treatment** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Study Drug Admin |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
+| Pre-medication |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
+| **Imaging** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| CT/MRI Scan | ✓ |  |  |  |  |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Chest X-ray | ✓ |  |  |  |  |  |  |  |  |  | ✓ |  |  | ✓ |
+| Disease Response | ✓ |  |  |  |  |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Assessments** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Quality of Life | ✓ |  | ✓ |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 This can be illustrated graphically as follows:
 
@@ -768,66 +768,60 @@ graph TD
     end
 
     %% Cycle 1 (Odd cycle pattern)
-    subgraph Cycle1["🔄 Cycle 1 (Odd Pattern)"]
+    subgraph Cycle1["🔄 Cycle N (Odd Pattern)"]
         direction LR
         C1D1[Day 1] --> C1D14[Day 14]
         C1D14 --> C1D28[Day 28]
     end
 
     %% Cycle 2 (Even cycle pattern)
-    subgraph Cycle2["🔄 Cycle 2 (Even Pattern)"]
+    subgraph Cycle2["🔄 Cycle N+1 (Even Pattern)"]
         direction LR
         C2D1[Day 1] --> C2D7[Day 7]
         C2D7 --> C2D14[Day 14]
         C2D14 --> C2D21[Day 21]
-        C2D21 --> C2D28[Day 28]
-    end
-
-    %% Cycle 3 (Odd cycle pattern)
-    subgraph Cycle3["🔄 Cycle 3 (Odd Pattern)"]
-        direction LR
-        C3D1[Day 1] --> C3D14[Day 14]
-        C3D14 --> C3D28[Day 28]
-    end
-
-    %% Cycle 4 (Even cycle pattern)
-    subgraph Cycle4["🔄 Cycle 4 (Even Pattern)"]
-        direction LR
-        C4D1[Day 1] --> C4D7[Day 7]
-        C4D7 --> C4D14[Day 14]
-        C4D14 --> C4D21[Day 21]
-        C4D21 --> C4D28[Day 28]
+        C2D21 --> C2D28[Day 28 + Response]
     end
 
     %% Additional Cycles Indicator
     subgraph CycleContinuation["🔄 Additional Cycles"]
         direction LR
-        MoreCycles[...Continue per protocol...]
+        MoreCycles[Cycles continue<br/>alternating patterns]
     end
 
     %% Post-treatment Phase
-    subgraph PostTreatment[" "]
+    subgraph PostTreatment["End of Treatment"]
         direction TB
-        EndTreatment[End of Treatment] --> EOS[End of Study]
+        EndTreatment[End of Treatment<br/>Assessment]
     end
 
-    %% Transitions between phases and cycles
-    Randomization -.-> Cycle1 
-    Cycle1 -.-> Cycle2
-    Cycle2 -.-> Cycle3
-    Cycle3 -.-> Cycle4
-    Cycle4 -.-> CycleContinuation
+    %% Follow-up
+    subgraph FollowUp["Follow-up Period"]
+        direction TB
+        FU1[Follow-up 1<br/>+90 days] --> FU2[Follow-up 2<br/>+180 days]
+    end
     
-    %% Early termination paths from any cycle
-    Cycle1 --AE--> PostTreatment
-    Cycle2 --Disease Progression/AE--> PostTreatment
-    Cycle3 --AE--> PostTreatment
-    Cycle4 --Disease Progression/AE--> PostTreatment
-    CycleContinuation --Disease Progression/AE/Study Completion--> PostTreatment
+    subgraph EndStudy["Study Completion"]
+        direction TB
+        EndOfStudy[End of Study]
+    end
 
-    %% Early termination from pre-treatment
-    Screening --Patient Withdrawal--> PostTreatment
-    Randomization --Patient Withdrawal--> PostTreatment
+    %% Transitions between phases and cycles (vertical stacking)
+    PreTreatment --> Cycle1
+    Cycle1 --> Cycle2
+    Cycle2 --> CycleContinuation
+    CycleContinuation --> PostTreatment
+    PostTreatment --> FollowUp
+    FollowUp --> EndStudy
+    
+    %% Early termination paths
+    C2D28 --Progressive<br/>Disease--> PostTreatment
+    CycleContinuation --Study<br/>Completion--> PostTreatment
+    Screening --Screen<br/>Failure--> EndStudy
+    Randomization --Patient<br/>Withdrawal--> PostTreatment
+    Cycle1 --Adverse<br/>Event--> PostTreatment
+    Cycle2 --Adverse<br/>Event--> PostTreatment
+    PostTreatment --Lost to<br/>Follow-up--> EndStudy
 
     %% Styling
     classDef prePhase fill:#e1f5fe,stroke:#01579b,stroke-width:2px
@@ -835,13 +829,16 @@ graph TD
     classDef evenCycleBox fill:#e8f5e8,stroke:#1b5e20,stroke-width:3px
     classDef continueBox fill:#fff9c4,stroke:#f57f17,stroke-width:3px
     classDef postPhase fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef followupPhase fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
     classDef encounter fill:#ffffff,stroke:#666666,stroke-width:1px
 
     class Screening,Randomization prePhase
-    class EndTreatment,EOS postPhase
-    class C1D1,C1D14,C1D28,C3D1,C3D14,C3D28 encounter
-    class C2D1,C2D7,C2D14,C2D21,C2D28,C4D1,C4D7,C4D14,C4D21,C4D28 encounter
-    class MoreCycles encounter
+    class EndTreatment postPhase
+    class FU1,FU2 followupPhase
+    class C1D1,C1D14,C1D28 encounter
+    class C2D1,C2D7,C2D14,C2D21,C2D28 encounter
+    class MoreCycles continueBox
+    class EndOfStudy postPhase
 ```
 
 ```fsh
