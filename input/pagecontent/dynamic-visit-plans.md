@@ -55,6 +55,27 @@ graph LR;
   VisitN--Normal Progression (48 days)-->VisitNP
 ```
 
+The following table represents a schedule of activities for this simple progression example:
+
+|  | **Visit N** | **Visit N+1** | **Early Termination** |
+|--|:--:|:--:|:--:|
+| **Study Day** | 0 | 48 | Variable |
+| **Window** | ±3d | ±3d | As needed |
+| **Activities** |  |  |  |
+| Informed Consent | ✓ |  |  |
+| Physical Exam | ✓ | ✓ | ✓ |
+| Vital Signs | ✓ | ✓ | ✓ |
+| Laboratory Tests | ✓ | ✓ | ✓ |
+| Study Drug Admin | ✓ |  |  |
+| Adverse Events | ✓ | ✓ | ✓ |
+| Concomitant Meds | ✓ | ✓ | ✓ |
+| Discontinuation Reason |  |  | ✓ |
+
+This simple design illustrates:
+- **Visit N**: Baseline visit with treatment initiation
+- **Visit N+1**: Follow-up visit 48 days later
+- **Early Termination**: Can occur at any time if patient discontinues
+
 Here is a representation of this structure using the implementation details per above:
 ```fsh
 Instance: dynamic-visit-schedule-simple-example
@@ -246,6 +267,37 @@ graph LR;
   StudyVisit04Day7--Early Termination-->StudyVisitEoS
   StudyVisit05Day15--Early Termination-->StudyVisitEoS
 ```
+
+The following table represents the schedule of activities for this multiple path example:
+
+|  | **Screening** | **Treatment** |  |  | **End of Study** | **Follow-up** |
+|--|:--:|:--:|:--:|:--:|:--:|:--:|
+| **Visit** | **Screen** | **Day 1** | **Day 7** | **Day 15** | **EOS** | **FU** |
+| **Study Day** | -14 to -1 | 1 | 7 | 15 | Variable | +30 |
+| **Window** | ±7d | ±1d | ±1d | ±2d | As needed | ±7d |
+| **Activities** |  |  |  |  |  |  |
+| Informed Consent | ✓ |  |  |  |  |  |
+| Eligibility Assessment | ✓ |  |  |  |  |  |
+| Demographics | ✓ |  |  |  |  |  |
+| Medical History | ✓ |  |  |  |  |  |
+| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Vital Signs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Laboratory Tests** |  |  |  |  |  |  |
+| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ |  |
+| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ |  |
+| **Treatment** |  |  |  |  |  |  |
+| Study Drug Admin |  | ✓ |  |  |  |  |
+| **Assessments** |  |  |  |  |  |  |
+| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Discontinuation Reason |  |  |  |  | ✓ |  |
+| Follow-up Assessment |  |  |  |  |  | ✓ |
+
+This design illustrates:
+- **Sequential Treatment Visits**: Regular monitoring on Days 1, 7, and 15 post-treatment
+- **Multiple Exit Points**: Patient can discontinue from any treatment visit to End of Study
+- **Follow-up**: Structured follow-up after study completion
+- **Early Termination Paths**: Flexibility to exit treatment phase at multiple timepoints
 
 Here is the representation using the design above:
 ```fsh
@@ -628,6 +680,39 @@ graph LR;
     end
   end
 ```
+
+The following table represents the schedule of activities for this two-arm study design:
+
+|  | **Screening** | **Randomization** | **Arm A Treatment** |  |  |  | **Arm B Treatment** |  |  | **End of Study** |
+|--|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| **Visit** | **Screen** | **Baseline** | **Day 1** | **Day 2** | **Day 7** | **Day 15** | **Day 1** | **Day 7** | **Day 15** | **EOS** |
+| **Study Day** | -14 to -1 | 0 | 1 | 2 | 7 | 15 | 1 | 7 | 15 | 21 |
+| **Window** | ±7d |  | ±1d | ±1d | ±1d | ±2d | ±1d | ±1d | ±2d | ±3d |
+| **Activities** |  |  |  |  |  |  |  |  |  |  |
+| Informed Consent | ✓ |  |  |  |  |  |  |  |  |  |
+| Eligibility Assessment | ✓ |  |  |  |  |  |  |  |  |  |
+| Demographics | ✓ |  |  |  |  |  |  |  |  |  |
+| Medical History | ✓ |  |  |  |  |  |  |  |  |  |
+| Randomization |  | ✓ |  |  |  |  |  |  |  |  |
+| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Vital Signs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Laboratory Tests** |  |  |  |  |  |  |  |  |  |  |
+| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Treatment** |  |  |  |  |  |  |  |  |  |  |
+| Drug A Admin |  |  | ✓ | ✓ |  |  |  |  |  |  |
+| Drug B Admin |  |  |  |  |  |  | ✓ |  |  |  |
+| **Assessments** |  |  |  |  |  |  |  |  |  |  |
+| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Study Completion |  |  |  |  |  |  |  |  |  | ✓ |
+
+This two-arm design illustrates:
+- **Common Pre-treatment**: Screening and randomization procedures are identical for both arms
+- **Arm A**: More intensive monitoring with an additional Day 2 visit and Drug A administered on Days 1 and 2
+- **Arm B**: Standard monitoring with visits on Days 1, 7, and 15, and Drug B administered on Day 1 only
+- **Differential Visit Schedules**: Arm A has 4 treatment visits while Arm B has 3 treatment visits
+- **Common Endpoint**: Both arms converge at End of Study on Day 21
 
 The representation of this is shown here
 
