@@ -8,7 +8,7 @@ The goal of the IG will be to be able to define **enough** semantics to represen
 
 ##### Multiple Designs
 
-Within the current implementation, it is possible to accommodate one or more schedules through use of the multiple entries in the `ResearchStudy.protocol` attribute based on the core `ResearchStudy` resource 
+Within the current implementation, it is possible to accommodate one or more schedules through use of the multiple entries in the `ResearchStudy.protocol` attribute based on the core `ResearchStudy` resource
 
 ```
 Instance: SampleMultiDesignStudy
@@ -32,7 +32,7 @@ Usage: #example
 
 ```
 
-The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs.  Some examples are shown below.
+The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs. Some examples are shown below.
 
 For an example of a [master protocol](https://www.sciencedirect.com/science/article/pii/S2451865420300521), the existing `ResearchStudy.partOf` predicate can be used to nest the sub-studies beneath the master protocol itself, this allows for differentiation of eligibility criteria, lifecycle, etc.
 
@@ -41,8 +41,7 @@ For an example of a [master protocol](https://www.sciencedirect.com/science/arti
 The modality of transitions are needed to represent a prospective plan for a ResearchSubject participating in a Clinical Trial; it supports planning and decision making. Generally, patients follow a protocol proscribed path through encounters and activities. We have previously described how activities within an encounter can be orchestrated; but this document is intended to summarise approaches for intra-encounter activities.
 
 We have chosen to use the extensions proposed by [Richardson A, Genyn P
-Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS.  The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
-
+Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS. The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
 
 If we take a simple example; the progression of a patient in a study design - the following example provides an illustration
 
@@ -57,26 +56,28 @@ graph LR;
 
 The following table represents a schedule of activities for this simple progression example:
 
-|  | **Visit N** | **Visit N+1** | **Early Termination** |
-|--|:--:|:--:|:--:|
-| **Study Day** | 0 | 48 | Variable |
-| **Window** | ±3d | ±3d | As needed |
-| **Activities** |  |  |  |
-| Informed Consent | ✓ |  |  |
-| Physical Exam | ✓ | ✓ | ✓ |
-| Vital Signs | ✓ | ✓ | ✓ |
-| Laboratory Tests | ✓ | ✓ | ✓ |
-| Study Drug Admin | ✓ |  |  |
-| Adverse Events | ✓ | ✓ | ✓ |
-| Concomitant Meds | ✓ | ✓ | ✓ |
-| Discontinuation Reason |  |  | ✓ |
+|                        | **Visit N** | **Visit N+1** | **Early Termination** |
+| ---------------------- | :---------: | :-----------: | :-------------------: |
+| **Study Day**          |      0      |      48       |       Variable        |
+| **Window**             |     ±3d     |      ±3d      |       As needed       |
+| **Activities**         |             |               |                       |
+| Informed Consent       |      ✓      |               |                       |
+| Physical Exam          |      ✓      |       ✓       |           ✓           |
+| Vital Signs            |      ✓      |       ✓       |           ✓           |
+| Laboratory Tests       |      ✓      |       ✓       |           ✓           |
+| Study Drug Admin       |      ✓      |               |                       |
+| Adverse Events         |      ✓      |       ✓       |           ✓           |
+| Concomitant Meds       |      ✓      |       ✓       |           ✓           |
+| Discontinuation Reason |             |               |           ✓           |
 
 This simple design illustrates:
+
 - **Visit N**: Baseline visit with treatment initiation
 - **Visit N+1**: Follow-up visit 48 days later
 - **Early Termination**: Can occur at any time if patient discontinues
 
 Here is a representation of this structure using the implementation details per above:
+
 ```fsh
 Instance: dynamic-visit-schedule-simple-example
 InstanceOf: PlanDefinition
@@ -229,12 +230,12 @@ Usage: #example
       * url = "soaRangeFromTimePoint"
       * valueString = "Visit N"
 ```
-The Patient will progress from one encounter to the next based on directives and conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data/study design) or exogenous factors (eg randomization, sponsor decision).  Providing Decision Support for these systems requires a design that can represent the different factors and outcomes.
+
+The Patient will progress from one encounter to the next based on directives and conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data/study design) or exogenous factors (eg randomization, sponsor decision). Providing Decision Support for these systems requires a design that can represent the different factors and outcomes.
 
 The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
 
-
-Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator/designated patient management system could update the ResearchSubject.status to be *withdrawn*.
+Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator/designated patient management system could update the ResearchSubject.status to be _withdrawn_.
 
 The execution of the plan needs to be able to be adapted to describe what transitions could occur and describe any conditions under which the transitions might occur; examples of the types of transitions that could need to be represented:
 
@@ -246,7 +247,6 @@ The execution of the plan needs to be able to be adapted to describe what transi
 - Sponsors may choose to close a study based on pre-defined characteristics detailed in the protocol (eg Six months after the last patient in)
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
-
 
 First, we illustrate the use of the Exit to represent the paths in the following diagram (following a single schedule):
 
@@ -270,36 +270,38 @@ graph LR;
 
 The following table represents the schedule of activities for this multiple path example:
 
-|  | **Screening** | **Treatment** |  |  | **End of Study** | **Follow-up** |
-|--|:--:|:--:|:--:|:--:|:--:|:--:|
-| **Visit** | **Screen** | **Day 1** | **Day 7** | **Day 15** | **EOS** | **FU** |
-| **Study Day** | -14 to -1 | 1 | 7 | 15 | Variable | +30 |
-| **Window** | ±7d | ±1d | ±1d | ±2d | As needed | ±7d |
-| **Activities** |  |  |  |  |  |  |
-| Informed Consent | ✓ |  |  |  |  |  |
-| Eligibility Assessment | ✓ |  |  |  |  |  |
-| Demographics | ✓ |  |  |  |  |  |
-| Medical History | ✓ |  |  |  |  |  |
-| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Vital Signs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Laboratory Tests** |  |  |  |  |  |  |
-| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ |  |
-| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ |  |
-| **Treatment** |  |  |  |  |  |  |
-| Study Drug Admin |  | ✓ |  |  |  |  |
-| **Assessments** |  |  |  |  |  |  |
-| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Discontinuation Reason |  |  |  |  | ✓ |  |
-| Follow-up Assessment |  |  |  |  |  | ✓ |
+|                        | **Screening** | **Treatment** |           |            | **End of Study** | **Follow-up** |
+| ---------------------- | :-----------: | :-----------: | :-------: | :--------: | :--------------: | :-----------: |
+| **Visit**              |  **Screen**   |   **Day 1**   | **Day 7** | **Day 15** |     **EOS**      |    **FU**     |
+| **Study Day**          |   -14 to -1   |       1       |     7     |     15     |     Variable     |      +30      |
+| **Window**             |      ±7d      |      ±1d      |    ±1d    |    ±2d     |    As needed     |      ±7d      |
+| **Activities**         |               |               |           |            |                  |               |
+| Informed Consent       |       ✓       |               |           |            |                  |               |
+| Eligibility Assessment |       ✓       |               |           |            |                  |               |
+| Demographics           |       ✓       |               |           |            |                  |               |
+| Medical History        |       ✓       |               |           |            |                  |               |
+| Physical Exam          |       ✓       |       ✓       |     ✓     |     ✓      |        ✓         |       ✓       |
+| Vital Signs            |       ✓       |       ✓       |     ✓     |     ✓      |        ✓         |       ✓       |
+| **Laboratory Tests**   |               |               |           |            |                  |               |
+| Hematology             |       ✓       |       ✓       |     ✓     |     ✓      |        ✓         |               |
+| Chemistry Panel        |       ✓       |       ✓       |     ✓     |     ✓      |        ✓         |               |
+| **Treatment**          |               |               |           |            |                  |               |
+| Study Drug Admin       |               |       ✓       |           |            |                  |               |
+| **Assessments**        |               |               |           |            |                  |               |
+| Adverse Events         |       ✓       |       ✓       |     ✓     |     ✓      |        ✓         |       ✓       |
+| Concomitant Meds       |       ✓       |       ✓       |     ✓     |     ✓      |        ✓         |       ✓       |
+| Discontinuation Reason |               |               |           |            |        ✓         |               |
+| Follow-up Assessment   |               |               |           |            |                  |       ✓       |
 
 This design illustrates:
+
 - **Sequential Treatment Visits**: Regular monitoring on Days 1, 7, and 15 post-treatment
 - **Multiple Exit Points**: Patient can discontinue from any treatment visit to End of Study
 - **Follow-up**: Structured follow-up after study completion
 - **Early Termination Paths**: Flexibility to exit treatment phase at multiple timepoints
 
 Here is the representation using the design above:
+
 ```fsh
 Instance: dynamic-visit-schedule-exit-example
 InstanceOf: PlanDefinition
@@ -602,7 +604,7 @@ Usage: #example
   * title = "Follow Up"
   * description = "Follow Up"
   * definitionCanonical = "http://example.org/Encounter/Follow-Up"
-  
+
 Instance: StudyVisit01
 InstanceOf: SoAVisitPlan
 Usage: #example
@@ -683,31 +685,36 @@ graph LR;
 
 The following table represents the schedule of activities for this two-arm study design:
 
-|  | **Screening** | **Randomization** | **Arm A Treatment** |  |  |  | **Arm B Treatment** |  |  | **End of Study** |
-|--|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| **Visit** | **Screen** | **Baseline** | **Day 1** | **Day 2** | **Day 7** | **Day 15** | **Day 1** | **Day 7** | **Day 15** | **EOS** |
-| **Study Day** | -14 to -1 | 0 | 1 | 2 | 7 | 15 | 1 | 7 | 15 | 21 |
-| **Window** | ±7d |  | ±1d | ±1d | ±1d | ±2d | ±1d | ±1d | ±2d | ±3d |
-| **Activities** |  |  |  |  |  |  |  |  |  |  |
-| Informed Consent | ✓ |  |  |  |  |  |  |  |  |  |
-| Eligibility Assessment | ✓ |  |  |  |  |  |  |  |  |  |
-| Demographics | ✓ |  |  |  |  |  |  |  |  |  |
-| Medical History | ✓ |  |  |  |  |  |  |  |  |  |
-| Randomization |  | ✓ |  |  |  |  |  |  |  |  |
-| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Vital Signs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Laboratory Tests** |  |  |  |  |  |  |  |  |  |  |
-| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Treatment** |  |  |  |  |  |  |  |  |  |  |
-| Drug A Admin |  |  | ✓ | ✓ |  |  |  |  |  |  |
-| Drug B Admin |  |  |  |  |  |  | ✓ |  |  |  |
-| **Assessments** |  |  |  |  |  |  |  |  |  |  |
-| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Study Completion |  |  |  |  |  |  |  |  |  | ✓ |
+|                          | **Screening** | **Randomization** | **Treatment** |                       |           |            | **End of Study** |
+| ------------------------ | :-----------: | :---------------: | :-----------: | :-------------------: | :-------: | :--------: | :--------------: |
+| **Visit**                |  **Screen**   |   **Baseline**    |   **Day 1**   | **Day 2**<sup>1</sup> | **Day 7** | **Day 15** |     **EOS**      |
+| **Study Day**            |   -14 to -1   |         0         |       1       |           2           |     7     |     15     |        21        |
+| **Window**               |      ±7d      |                   |      ±1d      |          ±1d          |    ±1d    |    ±2d     |       ±3d        |
+| **Activities**           |               |                   |               |                       |           |            |                  |
+| Informed Consent         |       ✓       |                   |               |                       |           |            |                  |
+| Eligibility Assessment   |       ✓       |                   |               |                       |           |            |                  |
+| Demographics             |       ✓       |                   |               |                       |           |            |                  |
+| Medical History          |       ✓       |                   |               |                       |           |            |                  |
+| Randomization            |               |         ✓         |               |                       |           |            |                  |
+| Physical Exam            |       ✓       |         ✓         |       ✓       |     ✓<sup>1</sup>     |     ✓     |     ✓      |        ✓         |
+| Vital Signs              |       ✓       |         ✓         |       ✓       |     ✓<sup>1</sup>     |     ✓     |     ✓      |        ✓         |
+| **Laboratory Tests**     |               |                   |               |                       |           |            |                  |
+| Hematology               |       ✓       |         ✓         |       ✓       |     ✓<sup>1</sup>     |     ✓     |     ✓      |        ✓         |
+| Chemistry Panel          |       ✓       |         ✓         |       ✓       |     ✓<sup>1</sup>     |     ✓     |     ✓      |        ✓         |
+| **Treatment**            |               |                   |               |                       |           |            |                  |
+| Drug A Admin<sup>2</sup> |               |                   |       ✓       |           ✓           |           |            |                  |
+| Drug B Admin<sup>3</sup> |               |                   |       ✓       |                       |           |            |                  |
+| **Assessments**          |               |                   |               |                       |           |            |                  |
+| Adverse Events           |       ✓       |         ✓         |       ✓       |     ✓<sup>1</sup>     |     ✓     |     ✓      |        ✓         |
+| Concomitant Meds         |       ✓       |         ✓         |       ✓       |     ✓<sup>1</sup>     |     ✓     |     ✓      |        ✓         |
+| Study Completion         |               |                   |               |                       |           |            |        ✓         |
+
+<sup>1</sup> Arm A only  
+<sup>2</sup> Arm A only - administered on Days 1 and 2  
+<sup>3</sup> Arm B only - administered on Day 1 only
 
 This two-arm design illustrates:
+
 - **Common Pre-treatment**: Screening and randomization procedures are identical for both arms
 - **Arm A**: More intensive monitoring with an additional Day 2 visit and Drug A administered on Days 1 and 2
 - **Arm B**: Standard monitoring with visits on Days 1, 7, and 15, and Drug B administered on Day 1 only
@@ -720,7 +727,7 @@ The representation of this is shown here
 Instance: Multi-Arm-Design
 InstanceOf: StudyProtocolSoa
 Title: "Multi-path based on Arm"
-Usage: #example 
+Usage: #example
 * status = #active
 * action[]
 
@@ -794,7 +801,6 @@ Usage: #example
 
 One of the more complex scenarios we need to deal with are [treatment cycles](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/treatment-cycle); these are repeatable episodic sets of encounters, usually in oncology studies. The structure of cycles may change over the progression of the studies; different encounters or activities occur based on the protocol. The status of the patient is evaluated at the end of each cycle, usually against a standard criteria like RECIST. The progression of the disease is the key determinant to whether the patient will continue to stay in the study (alongside all other safety measures discussed).
 
-
 Some examples of Oncology Cycles:
 
 - 3-Week Cycle (e.g., 1-5-9 Schedule)
@@ -811,36 +817,36 @@ Some examples of Oncology Cycles:
 
 The following illustrates a typical oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
 
-|  | **Screening** |  | **Cycle N (Odd)** |  |  | **Cycle N+1 (Even)** |  |  |  |  | **...** | **End of Treatment** | **Follow-up** |  |
-|--|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| **Visit** | **Screen** | **Rand** | **D1** | **D14** | **D28** | **D1** | **D7** | **D14** | **D21** | **D28** | **...** | **EOT** | **FU1** | **FU2** |
-| **Study Day** | -28 to -1 | 0 | 1 | 14 | 28 | 29 | 35 | 42 | 49 | 56 | ... | +30 | +90 | +180 |
-| **Window** | ±7d |  | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±2d | ±7d | ±14d | ±14d |
-| **Activities** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Informed Consent | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Demographics | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Medical History | ✓ |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Physical Exam | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Vital Signs<sup>1</sup> | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Height/Weight | ✓ |  |  |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ |  |  |
-| Performance Status | ✓ | ✓ | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Laboratory Tests** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Hematology | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Chemistry Panel | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Liver Function | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  |
-| Coagulation | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  |  | ✓ | ✓ |  |  |
-| Biomarkers | ✓ |  | ✓ |  | ✓ | ✓ |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Treatment** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Study Drug Admin |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
-| Pre-medication |  |  | ✓ |  |  | ✓ |  |  |  |  | ✓ |  |  |  |
-| **Imaging** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| CT/MRI Scan | ✓ |  |  |  |  |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Chest X-ray | ✓ |  |  |  |  |  |  |  |  |  | ✓ |  |  | ✓ |
-| Disease Response | ✓ |  |  |  |  |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Assessments** |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Quality of Life | ✓ |  | ✓ |  | ✓ |  |  |  |  | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Adverse Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Concomitant Meds | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+|                         | **Screening** |          | **Cycle N (Odd)** |         |         | **Cycle N+1 (Even)** |        |         |         |         | **...** | **End of Treatment** | **Follow-up** |         |
+| ----------------------- | :-----------: | :------: | :---------------: | :-----: | :-----: | :------------------: | :----: | :-----: | :-----: | :-----: | :-----: | :------------------: | :-----------: | :-----: |
+| **Visit**               |  **Screen**   | **Rand** |      **D1**       | **D14** | **D28** |        **D1**        | **D7** | **D14** | **D21** | **D28** | **...** |       **EOT**        |    **FU1**    | **FU2** |
+| **Study Day**           |   -28 to -1   |    0     |         1         |   14    |   28    |          29          |   35   |   42    |   49    |   56    |   ...   |         +30          |      +90      |  +180   |
+| **Window**              |      ±7d      |          |        ±2d        |   ±2d   |   ±2d   |         ±2d          |  ±2d   |   ±2d   |   ±2d   |   ±2d   |   ±2d   |         ±7d          |     ±14d      |  ±14d   |
+| **Activities**          |               |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Informed Consent        |       ✓       |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Demographics            |       ✓       |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Medical History         |       ✓       |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Physical Exam           |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |        |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Vital Signs<sup>1</sup> |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Height/Weight           |       ✓       |          |                   |         |    ✓    |                      |        |         |         |    ✓    |    ✓    |          ✓           |               |         |
+| Performance Status      |       ✓       |    ✓     |         ✓         |         |    ✓    |          ✓           |        |         |         |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| **Laboratory Tests**    |               |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Hematology              |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Chemistry Panel         |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Liver Function          |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |         |
+| Coagulation             |       ✓       |          |         ✓         |         |    ✓    |          ✓           |        |         |         |         |    ✓    |          ✓           |               |         |
+| Biomarkers              |       ✓       |          |         ✓         |         |    ✓    |          ✓           |        |         |         |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| **Treatment**           |               |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Study Drug Admin        |               |          |         ✓         |         |         |          ✓           |        |         |         |         |    ✓    |                      |               |         |
+| Pre-medication          |               |          |         ✓         |         |         |          ✓           |        |         |         |         |    ✓    |                      |               |         |
+| **Imaging**             |               |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| CT/MRI Scan             |       ✓       |          |                   |         |         |                      |        |         |         |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Chest X-ray             |       ✓       |          |                   |         |         |                      |        |         |         |         |    ✓    |                      |               |    ✓    |
+| Disease Response        |       ✓       |          |                   |         |         |                      |        |         |         |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| **Assessments**         |               |          |                   |         |         |                      |        |         |         |         |         |                      |               |         |
+| Quality of Life         |       ✓       |          |         ✓         |         |    ✓    |                      |        |         |         |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Adverse Events          |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+| Concomitant Meds        |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
 
 This can be illustrated graphically as follows:
 
@@ -885,7 +891,7 @@ graph TD
         direction TB
         FU1[Follow-up 1<br/>+90 days] --> FU2[Follow-up 2<br/>+180 days]
     end
-    
+
     subgraph EndStudy["Study Completion"]
         direction TB
         EndOfStudy[End of Study]
@@ -898,7 +904,7 @@ graph TD
     CycleContinuation --> PostTreatment
     PostTreatment --> FollowUp
     FollowUp --> EndStudy
-    
+
     %% Early termination paths
     C2D28 --Progressive<br/>Disease--> PostTreatment
     CycleContinuation --Study<br/>Completion--> PostTreatment
@@ -982,28 +988,28 @@ Usage: #example
 * status = #active
 * actions[+]
   * definitionCanonical = "PlanDefinition/C1D1"
-  * relatedAction[+] 
+  * relatedAction[+]
     * actionId = "StartOfCycle"
     * relationship = #after
     * offsetDuration = 0 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
-    * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
+    * extension[acceptableOffsetRange].valueRange.low = 1 'd'
+    * extension[acceptableOffsetRange].valueRange.high = 1 'd'
 * actions[+]
   * definitionCanonical = "PlanDefinition/C1D7"
-  * relatedAction[+] 
+  * relatedAction[+]
     * actionId = "StartOfCycle"
     * relationship = #after
     * offsetDuration = 7 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
-    * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
+    * extension[acceptableOffsetRange].valueRange.low = 1 'd'
+    * extension[acceptableOffsetRange].valueRange.high = 1 'd'
 * actions[+]
   * definitionCanonical = "PlanDefinition/C1D14"
-  * relatedAction[+] 
+  * relatedAction[+]
     * actionId = "StartOfCycle"
     * relationship = #after
     * offsetDuration = 14 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 1 'd'    
-    * extension[acceptableOffsetRange].valueRange.high = 1 'd'    
+    * extension[acceptableOffsetRange].valueRange.low = 1 'd'
+    * extension[acceptableOffsetRange].valueRange.high = 1 'd'
 
 Instance: CycleEven
 InstanceOf: PlanDefinition
@@ -1013,28 +1019,28 @@ Usage: #example
 * extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration][+] = 21 'd'
 * actions[+]
   * definitionCanonical = "PlanDefinition/CEvenD1"
-  * relatedAction[+] 
+  * relatedAction[+]
     * actionId = "StartOfCycle"
     * relationship = #after
     * offsetDuration = 0 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
-    * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
+    * extension[acceptableOffsetRange].valueRange.low = 2 'd'
+    * extension[acceptableOffsetRange].valueRange.high = 2 'd'
 * actions[+]
   * definitionCanonical = "PlanDefinition/CEvenD7"
-  * relatedAction[+] 
+  * relatedAction[+]
     * actionId = "StartOfCycle"
     * relationship = #after
     * offsetDuration = 7 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
-    * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
+    * extension[acceptableOffsetRange].valueRange.low = 2 'd'
+    * extension[acceptableOffsetRange].valueRange.high = 2 'd'
 * actions[+]
   * definitionCanonical = "PlanDefinition/CEvenD14"
-  * relatedAction[+] 
+  * relatedAction[+]
     * actionId = "StartOfCycle"
     * relationship = #after
     * offsetDuration = 14 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 2 'd'    
-    * extension[acceptableOffsetRange].valueRange.high = 2 'd'    
+    * extension[acceptableOffsetRange].valueRange.low = 2 'd'
+    * extension[acceptableOffsetRange].valueRange.high = 2 'd'
 
 Instance: CycleOdd
 InstanceOf: PlanDefinition
@@ -1084,7 +1090,6 @@ The fundamental problem, however, is the association between conditions and acti
   - do we have a PlanDefinition per 'Cohort';
     - remove the instance level conditionality
   -
-
 
 That would lead to many of the study paths being closed down assuming progression is linked to the state being 'on-study', 'on-study-intervention' or similar. This is reliant on site staff or automation being able to update the characteristic, however processes for this already exist so could be applied to the execution of study activities. These are facile approaches, and will need to be refined (eg where there are multiple study periods, with the patient changing state between them).
 
