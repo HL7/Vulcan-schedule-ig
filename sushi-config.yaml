@@ -10,7 +10,7 @@ title: Clinical Study Schedule of Activities
 description: FHIR Implementation Guide representing a Clinical Study Schedule of Activities
 status: active # draft | active | retired | unknown
 version: 1.0.0
-fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+fhirVersion: 6.0.0-ballot3 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2022+
 releaseLabel: trial-use # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
