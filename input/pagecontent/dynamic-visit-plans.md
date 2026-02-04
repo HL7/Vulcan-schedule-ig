@@ -6,9 +6,11 @@ This drive for efficiency has given rise to adaptive designs and master protocol
 
 The goal of the IG will be to be able to define **enough** semantics to represent the encounters, activities and transitions between them. The FHIR Workflow pattern is useful for defining the structural layout for the encounters and activities; defining how the workflow is applied requires the use of an application layer.
 
-##### Multiple Designs
+##### Multiple Designs Per Protocol
 
-Within the current implementation, it is possible to accommodate one or more schedules through use of the multiple entries in the `ResearchStudy.protocol` attribute based on the core `ResearchStudy` resource
+Within the current implementation, it is possible to accommodate one or more schedules through use of the multiple entries in the `ResearchStudy.protocol` attribute based on the  `ResearchStudy` resource
+
+An illustration is shown here:
 
 ```
 Instance: SampleMultiDesignStudy
@@ -31,14 +33,15 @@ Usage: #example
 * title = "Study Design B"
 
 ```
+Alternatively, a single study plan with conditional elements to represent all the points at which a multi-design protocol changes can be used.  The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs. 
 
-The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs. Some examples are shown below.
-
-For an example of a [master protocol](https://www.sciencedirect.com/science/article/pii/S2451865420300521), the existing `ResearchStudy.partOf` predicate can be used to nest the sub-studies beneath the master protocol itself, this allows for differentiation of eligibility criteria, lifecycle, etc.
+For an example of a [master protocol](https://www.sciencedirect.com/science/article/pii/S2451865420300521), the existing `ResearchStudy.partOf` predicate can be used for the sub-studies as part of master protocol, this allows for differentiation of eligibility criteria, lifecycle, etc.
 
 ##### Transitions
 
 The modality of transitions are needed to represent a prospective plan for a ResearchSubject participating in a Clinical Trial; it supports planning and decision making. Generally, patients follow a protocol proscribed path through encounters and activities. We have previously described how activities within an encounter can be orchestrated; but this document is intended to summarise approaches for intra-encounter activities.
+
+The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
 
 We have chosen to use the extensions proposed by [Richardson A, Genyn P
 Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS. The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
@@ -76,7 +79,7 @@ This simple design illustrates:
 - **Visit N+1**: Follow-up visit 48 days later
 - **Early Termination**: Can occur at any time if patient discontinues
 
-Here is a representation of this structure using the implementation details per above:
+Here is a representation of this simple structure using the implementation details based on MMS:
 
 ```fsh
 Instance: dynamic-visit-schedule-simple-example
@@ -124,23 +127,23 @@ Usage: #example
   * groupingBehavior = #visual-group
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/Visit-N"
-* action[+]
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * extension[+]
-      * url = "soaTargetId"
-      * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 14 'd'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
+  * action[+]
+    * extension
+      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * extension[+]
+        * url = "soaTargetId"
+        * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+      * extension[+]
+        * url = "soaTransitionType"
+        * valueString = "SS"
+      * extension[+]
+        * url = "soaTransitionDelay"
+        * valueDuration = 14 'd'
+      * extension[+]
+        * url = "soaTransitionRange"
+        * valueRange
+          * low = 0 's'
+          * high = 0 's'
     * condition
       * kind = #start
       * expression
@@ -230,15 +233,20 @@ Usage: #example
       * url = "soaRangeFromTimePoint"
       * valueString = "Visit N"
 ```
+The extension `http://fhir4pharma.com/StructureDefinition/soaTransition` is key to defining the paths forward; 
+1. each `PlanDefinition.action` is assigned a unique identifier using `id` (this should be a UUID/GUID so as to ensure internal referential integrity)
+2. the `PlanDefinition.action` has a child `action` for each of the possible outcomes;
+  1. the `targetId` represents the identifier of the target action
+  2. the `soaTransitionType` value represents the type of transition (eg Start to Start = SS)
+  3. the `soaRepeatAllowed` value defines whether it is possible to revisit this target    
+  4. the `soaPlannedDuration` value specifies the duration at which this transition is expected to occur
+3. The `condition` attribute on the `PlanDefinition.action.action` is used to specify the 'logic' controlling the transition, and it follows the existing semantics of the `action.condition`.  
 
-The Patient will progress from one encounter to the next based on directives and conditions in the protocol; the conditions can be driven by endogenous (eg patient responses/data/study design) or exogenous factors (eg randomization, sponsor decision). Providing Decision Support for these systems requires a design that can represent the different factors and outcomes.
+In order to ensure that the transitions can be evaluable, for each action the evaluation of the `condition` should be a boolean, where true the transition should be allowed.  Any action without a condition is the default transition, and should be presented if no other actions are applicable.  A terminal activity will have no transitions available given all the conditions available.
 
-The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
-
-Many of these activities can be intuited from the `ResearchSubject.status` attribute; so if there are suitable systems that can update that status then the plan should work. As an example; in the case of patient being lost to follow-up the site coordinator/designated patient management system could update the ResearchSubject.status to be _withdrawn_.
+The `condition` can be implemented using any of current languages (eg CQL, FHIRPath), but should also support feedback or input by a site coordinator.  An example of where `condition` can be inferred from the healthcare system include a reference to the Subject milestones (eg`ResearchSubject.status` or `ResearchSubject.subjectState`/`ResearchSubject.subjectMilestone`), as discussed in [dynamics](dynamics.html) - eg performing a particular activity is conditional on a patient having completed informed consent, perhaps for an experimental arm.
 
 The execution of the plan needs to be able to be adapted to describe what transitions could occur and describe any conditions under which the transitions might occur; examples of the types of transitions that could need to be represented:
-
 - Patient populations in different cohorts undergo different activities based on their cohort
 - Normal per protocol transition from treatment encounter to encounter.
 - Patient discontinuing study based on outcomes
@@ -248,27 +256,9 @@ The execution of the plan needs to be able to be adapted to describe what transi
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
 
-First, we illustrate the use of the Exit to represent the paths in the following diagram (following a single schedule):
+##### Use Case 1 - Simple Linear design with Early Termination
 
-```mermaid
-graph LR;
-  StudyVisit01[Screening]
-  StudyVisit03Day1[Treatment Day 1]
-  StudyVisit04Day7[Day 7]
-  StudyVisit05Day15[Day 15]
-  StudyVisitEoS[End of Study]
-  StudyVisitFollowUp[Follow Up]
-  StudyVisit01-.->StudyVisit03Day1
-  StudyVisit03Day1-.->StudyVisit04Day7
-  StudyVisit04Day7-.->StudyVisit05Day15
-  StudyVisit05Day15-->StudyVisitEoS
-  StudyVisitEoS-->StudyVisitFollowUp
-  StudyVisit03Day1--Early Termination-->StudyVisitEoS
-  StudyVisit04Day7--Early Termination-->StudyVisitEoS
-  StudyVisit05Day15--Early Termination-->StudyVisitEoS
-```
-
-The following table represents the schedule of activities for this multiple path example:
+The following table represents the Schedule of Activities for a simple path example:
 
 |                        | **Screening** | **Treatment** |           |            | **End of Study** | **Follow-up** |
 | ---------------------- | :-----------: | :-----------: | :-------: | :--------: | :--------------: | :-----------: |
@@ -300,388 +290,37 @@ This design illustrates:
 - **Follow-up**: Structured follow-up after study completion
 - **Early Termination Paths**: Flexibility to exit treatment phase at multiple timepoints
 
-Here is the representation using the design above:
-
-```fsh
-Instance: dynamic-visit-schedule-exit-example
-InstanceOf: PlanDefinition
-Usage: #example
-* meta
-  * versionId = "0"
-  * lastUpdated = "2025-11-11T18:30:41Z"
-* identifier
-  * system = "http://www.fhir4pharma.com/plandefinition"
-  * value = "6edf3bcf-d2d9-4f47-a0f4-4efe9c9cb265"
-* version = "V00"
-* name = "dynamic-visit-schedule-simple-example"
-* title = "dynamic-visit-schedule-simple-example"
-* status = #active
-* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
-* description = "dynamic-visit-schedule-simple-example"
-* action[0]
-  * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 24 'h'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Treatment Day 1"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0 's'
-        * high = 14 'd'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Treatment Day 1"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "Early Termination"
-  * description = "Early Termination"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * definitionCanonical = "http://example.org/Encounter/Early-Termination"
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "d0dd287a-0a87-439d-95cc-8690e7abf0cb"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 28 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Treatment Day 1"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Treatment Day 1"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "Last Day"
-  * description = "Last Day"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * definitionCanonical = "http://example.org/Encounter/Last-Day"
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 7 'd'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "a1806239-54f3-4762-af3f-edb9d80d29dc"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Screening"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Screening"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "Treatment Day 1"
-  * description = "Treatment Day 1"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * definitionCanonical = "http://example.org/Encounter/Treatment-Day-1"
-  * action[0].extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-  * action[+].extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "d0dd287a-0a87-439d-95cc-8690e7abf0cb"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 28 'd'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 7 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Last Day"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Last Day"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "End of Study"
-  * description = "End of Study"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * definitionCanonical = "http://example.org/Encounter/End-of-Study"
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 28 'd'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "0700e721-1f12-4998-89b8-6f4e649b62f7"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Screening"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Screening"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "Screening"
-  * description = "Screening"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * definitionCanonical = "http://example.org/Encounter/Screening"
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "a1806239-54f3-4762-af3f-edb9d80d29dc"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "SS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0 's'
-        * high = 0 's'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 28 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "End of Study"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "End of Study"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "Follow Up"
-  * description = "Follow Up"
-  * definitionCanonical = "http://example.org/Encounter/Follow-Up"
-
-Instance: StudyVisit01
-InstanceOf: SoAVisitPlan
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = "ActivityDefinition/ScreeningVitals"
-
-Instance: StudyVisit02Baseline
-InstanceOf: SoAVisitPlan
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Vitals"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Randomization"
-
-Instance: StudyVisit03Day1
-InstanceOf: SoAVisitPlan
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Vitals"
-
-Instance: StudyVisit04Day15
-InstanceOf: SoAVisitPlan
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Vitals"
-
-Instance: StudyVisitEoS
-InstanceOf: SoAVisitPlan
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Vitals"
-
-Instance: StudyVisitFollowUp
-InstanceOf: SoAVisitPlan
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Vitals"
-```
-
-In the following example we represent the case where there are multiple paths depending on a classification
+This can be visualised as shown here:
 
 ```mermaid
 graph LR;
-  Screening[Screening]
-  Baseline[Randomization]
-  TreatmentDay1ArmA["Day 1 (Arm A)"]
-  TreatmentDay2ArmA["Day 2 (Arm A)"]
-  TreatmentDay7ArmA["Day 7 (Arm A)"]
-  TreatmentDay15ArmA["Day 15 (Arm A)"]
-  TreatmentDay1ArmB["Day 1 (Arm B)"]
-  TreatmentDay7ArmB["Day 7 (Arm B)"]
-  TreatmentDay15ArmB["Day 15 (Arm B)"]
-  EndOfStudy["End of Study"]
-  Screening-->Baseline
-  Baseline-->TreatmentDay1ArmA
-  Baseline-->TreatmentDay1ArmB
-  TreatmentDay15ArmA-->EndOfStudy
-  TreatmentDay15ArmB-->EndOfStudy
-  subgraph "Treatment (21 days)"
-    direction TB
-    subgraph "Arm A"
-      TreatmentDay1ArmA --> TreatmentDay2ArmA
-      TreatmentDay2ArmA --> TreatmentDay7ArmA
-      TreatmentDay7ArmA --> TreatmentDay15ArmA
-    end
-    subgraph "Arm B"
-      TreatmentDay1ArmB --> TreatmentDay7ArmB
-      TreatmentDay7ArmB --> TreatmentDay15ArmB
-    end
-  end
+  StudyVisit01[Screening]
+  StudyVisit03Day1[Treatment Day 1]
+  StudyVisit04Day7[Day 7]
+  StudyVisit05Day15[Day 15]
+  StudyVisitEoS[End of Study]
+  StudyVisitFollowUp[Follow Up]
+  StudyVisit01-.->StudyVisit03Day1
+  StudyVisit03Day1-.->StudyVisit04Day7
+  StudyVisit04Day7-.->StudyVisit05Day15
+  StudyVisit05Day15-->StudyVisitEoS
+  StudyVisitEoS-->StudyVisitFollowUp
+  StudyVisit03Day1--Early Termination-->StudyVisitEoS
+  StudyVisit04Day7--Early Termination-->StudyVisitEoS
+  StudyVisit05Day15--Early Termination-->StudyVisitEoS
 ```
+
+In each encounter there are two possible outcomes: 
+* normal progression along the protocol defined path, or 
+* following an early termination.  
+These decisions can be automated (ie detection of the presence of SAE or patient withdrawal) or prompted and selected by the user.
+
+Using the extensions as defined, the representation of the study plan can be seen [here](link-to-straight-through)
+
+
+##### Use Case 2 - Branched multi-path study design
+
+In this scenario, there is a design where the patients are randomised to one of two Arms; this example presents an asymmetric setup where the number of encounters differs for the two arms.
 
 The following table represents the schedule of activities for this two-arm study design:
 
@@ -721,83 +360,44 @@ This two-arm design illustrates:
 - **Differential Visit Schedules**: Arm A has 4 treatment visits while Arm B has 3 treatment visits
 - **Common Endpoint**: Both arms converge at End of Study on Day 21
 
-The representation of this is shown here
+This provides a visual representation of the encounters/transitions involved in the study design.
 
-```fsh
-Instance: Multi-Arm-Design
-InstanceOf: StudyProtocolSoa
-Title: "Multi-path based on Arm"
-Usage: #example
-* status = #active
-* action[]
-
-
-Instance: Screening
-InstanceOf: SoAVisitPlan
-Title: "Screening"
-Usage: #example
-* status = #active
-
-Instance: Baseline
-InstanceOf: SoAVisitPlan
-Title: "Baseline/Randomisation"
-Usage: #example
-* status = #active
-
-
-Instance: TreatmentDay1ArmA
-InstanceOf: SoAVisitPlan
-Title: "Day 1"
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical
-
-Instance: TreatmentDay2ArmA
-InstanceOf: SoAVisitPlan
-Title: "Day 2"
-Usage: #example
-* status = #active
-
-Instance: TreatmentDay7ArmA
-InstanceOf: SoAVisitPlan
-Title: "Day 7"
-Usage: #example
-* status = #active
-
-Instance: TreatmentDay15ArmA
-InstanceOf: SoAVisitPlan
-Title: "Day 15"
-Usage: #example
-* status = #active
-
-Instance: TreatmentDay1ArmB
-InstanceOf: SoAVisitPlan
-Title: "Day 1"
-Usage: #example
-* status = #active
-
-Instance: TreatmentDay7ArmB
-InstanceOf: SoAVisitPlan
-Title: "Day 7"
-Usage: #example
-* status = #active
-
-Instance: TreatmentDay15ArmB
-InstanceOf: SoAVisitPlan
-Title: "Day 15"
-Usage: #example
-* status = #active
-
-Instance: EndOfStudy
-InstanceOf: SoAVisitPlan
-Title: "End of Study"
-Usage: #example
-* status = #active
-
+```mermaid
+graph LR;
+  Screening[Screening]
+  Baseline[Randomization]
+  TreatmentDay1ArmA["Day 1 (Arm A)"]
+  TreatmentDay2ArmA["Day 2 (Arm A)"]
+  TreatmentDay7ArmA["Day 7 (Arm A)"]
+  TreatmentDay15ArmA["Day 15 (Arm A)"]
+  TreatmentDay1ArmB["Day 1 (Arm B)"]
+  TreatmentDay7ArmB["Day 7 (Arm B)"]
+  TreatmentDay15ArmB["Day 15 (Arm B)"]
+  EndOfStudy["End of Study"]
+  Screening-->Baseline
+  Baseline-->TreatmentDay1ArmA
+  Baseline-->TreatmentDay1ArmB
+  TreatmentDay15ArmA-->EndOfStudy
+  TreatmentDay15ArmB-->EndOfStudy
+  subgraph "Treatment (21 days)"
+    direction TB
+    subgraph "Arm A"
+      TreatmentDay1ArmA --> TreatmentDay2ArmA
+      TreatmentDay2ArmA --> TreatmentDay7ArmA
+      TreatmentDay7ArmA --> TreatmentDay15ArmA
+    end
+    subgraph "Arm B"
+      TreatmentDay1ArmB --> TreatmentDay7ArmB
+      TreatmentDay7ArmB --> TreatmentDay15ArmB
+    end
+  end
 ```
 
-##### Treatment Cycles
+Note; the decision made for randomization should only need to be done once; once a patient is following the path for the assigned arm, the decision support system should preclude the other path (while retaining the common exit paths).  The design should support 'common' planned encounters that can be used both before and after randomization.  The nature of the FHIR resources and relationships between them should be able to be used to be most efficient.
+
+The representation of this is shown [here](dynamic-visit-schedule-multiple-paths)
+
+##### Use Case 3 - Treatment Cycles
 
 One of the more complex scenarios we need to deal with are [treatment cycles](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/treatment-cycle); these are repeatable episodic sets of encounters, usually in oncology studies. The structure of cycles may change over the progression of the studies; different encounters or activities occur based on the protocol. The status of the patient is evaluated at the end of each cycle, usually against a standard criteria like RECIST. The progression of the disease is the key determinant to whether the patient will continue to stay in the study (alongside all other safety measures discussed).
 
@@ -815,7 +415,7 @@ Some examples of Oncology Cycles:
   - Rest Period: The remaining days of the week, or several weeks, are spent in rest.
   - Example: A week of daily chemotherapy followed by three weeks of no treatment constitutes one 4-week cycle.
 
-The following illustrates a typical oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
+The following illustrates an example oncology study design with repeating treatment cycles that have different visit patterns for even and odd cycles. The diagram shows cycles as distinct entities with clear transitions between cycles and within cycles:
 
 |                         | **Screening** |          | **Cycle N (Odd)** |         |         | **Cycle N+1 (Even)** |        |         |         |         | **...** | **End of Treatment** | **Follow-up** |         |
 | ----------------------- | :-----------: | :------: | :---------------: | :-----: | :-----: | :------------------: | :----: | :-----: | :-----: | :-----: | :-----: | :------------------: | :-----------: | :-----: |
@@ -847,6 +447,8 @@ The following illustrates a typical oncology study design with repeating treatme
 | Quality of Life         |       ✓       |          |         ✓         |         |    ✓    |                      |        |         |         |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
 | Adverse Events          |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
 | Concomitant Meds        |       ✓       |    ✓     |         ✓         |    ✓    |    ✓    |          ✓           |   ✓    |    ✓    |    ✓    |    ✓    |    ✓    |          ✓           |       ✓       |    ✓    |
+
+In this design we pivot between odd-numbered cycles (Cycle 1, 3, 5) and even-numbered cycles (Cycle 2, 4, 6); we have assigned a disease response activity at the end of the even numbered cycles - these could be aligned to any of the usual grading schemes (eg RECIST), with the outcome of the assessment feeding into the decision over continuing in treatment cycles or transitioning to end of Treatment/follow up.
 
 This can be illustrated graphically as follows:
 
@@ -932,165 +534,6 @@ graph TD
     class EndOfStudy postPhase
 ```
 
-```fsh
-Instance: StudyPlan
-InstanceOf: StudyProtocolSoa
-Title: "Study Plan"
-* status = #active
-* actions[+]
-  * definitionCanonical = "PlanDefinition/Screening"
-  * title = "Screening"
-  * extensions[+]
-    * extension
-      * url = XXXX
-* actions[+]
-  * definitionCanonical = "PlanDefinition/Baseline"
-  * title = "Baseline/Randomization"
-* actions[+]
-  * definitionCanonical = "PlanDefinition/Cycle1"
-  * title = "Cycle 1"
-* actions[+]
-  * definitionCanonical = "PlanDefinition/CycleEven"
-  * title = "Cycle N"
-  * description = ""
-* actions[+]
-  * definitionCanonical = "PlanDefinition/CycleOdd"
-* actions[+]
-  * definitionCanonical = "PlanDefinition/EndOfTreatment"
-
-Instance: Screening
-InstanceOf: PlanDefinition
-Title: "Screening"
-Usage: #example
-* status = #active
-* action[+]
-  * definitionCanonical = ActivityDefinition/InformedConsent
-* action[+]
-  * definitionCanonical = ActivityDefinition/Demographics
-* action[+]
-  * definitionCanonical = ActivityDefinition/MedicalHistory
-* action[+]
-  * definitionCanonical = ActivityDefinition/PhysicalExaminationScreening
-* action[+]
-  * definitionCanonical = ActivityDefinition/VitalSignsScreening
-
-Instance: Baseline
-InstanceOf: PlanDefinition
-Title: "Baseline"
-Usage: #example
-* status = #active
+The representation of this is shown [here](example-cycle-based-plan).
 
 
-Instance: Cycle1
-InstanceOf: PlanDefinition
-Title: "Cycle 1"
-Usage: #example
-* status = #active
-* actions[+]
-  * definitionCanonical = "PlanDefinition/C1D1"
-  * relatedAction[+]
-    * actionId = "StartOfCycle"
-    * relationship = #after
-    * offsetDuration = 0 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 1 'd'
-    * extension[acceptableOffsetRange].valueRange.high = 1 'd'
-* actions[+]
-  * definitionCanonical = "PlanDefinition/C1D7"
-  * relatedAction[+]
-    * actionId = "StartOfCycle"
-    * relationship = #after
-    * offsetDuration = 7 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 1 'd'
-    * extension[acceptableOffsetRange].valueRange.high = 1 'd'
-* actions[+]
-  * definitionCanonical = "PlanDefinition/C1D14"
-  * relatedAction[+]
-    * actionId = "StartOfCycle"
-    * relationship = #after
-    * offsetDuration = 14 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 1 'd'
-    * extension[acceptableOffsetRange].valueRange.high = 1 'd'
-
-Instance: CycleEven
-InstanceOf: PlanDefinition
-Title: "Cycle N (Odd)"
-Usage: #example
-* status = #active
-* extension[http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/Duration][+] = 21 'd'
-* actions[+]
-  * definitionCanonical = "PlanDefinition/CEvenD1"
-  * relatedAction[+]
-    * actionId = "StartOfCycle"
-    * relationship = #after
-    * offsetDuration = 0 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 2 'd'
-    * extension[acceptableOffsetRange].valueRange.high = 2 'd'
-* actions[+]
-  * definitionCanonical = "PlanDefinition/CEvenD7"
-  * relatedAction[+]
-    * actionId = "StartOfCycle"
-    * relationship = #after
-    * offsetDuration = 7 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 2 'd'
-    * extension[acceptableOffsetRange].valueRange.high = 2 'd'
-* actions[+]
-  * definitionCanonical = "PlanDefinition/CEvenD14"
-  * relatedAction[+]
-    * actionId = "StartOfCycle"
-    * relationship = #after
-    * offsetDuration = 14 'd'
-    * extension[acceptableOffsetRange].valueRange.low = 2 'd'
-    * extension[acceptableOffsetRange].valueRange.high = 2 'd'
-
-Instance: CycleOdd
-InstanceOf: PlanDefinition
-Title: "Cycle N (Odd)"
-Usage: #example
-* status = #active
-* actions[+]
-  * definitionCanonical = "PlanDefinition/COddD1"
-* actions[+]
-  * definitionCanonical = "PlanDefinition/COddD7"
-* actions[+]
-  * definitionCanonical = "PlanDefinition/COddD14"
-
-Instance: COddD1
-InstanceOf: SoAVisitPlan
-Title: "Cycle N (Odd) - Day 1"
-* status = #active
-
-Instance: COddD7
-InstanceOf: SoAVisitPlan
-Title: "Cycle N (Odd) - Day 7"
-* status = #active
-
-Instance: COddD14
-InstanceOf: SoAVisitPlan
-Title: "Cycle N (Odd) - Day 14"
-* status = #active
-
-Instance: COddD28
-InstanceOf: SoAVisitPlan
-Title: "Cycle N (Odd) - Day 28"
-* status = #active
-
-```
-
-##### Scratchpad
-
-Discussions:
-[Marks comment on petri nets]
-In FHIR, conditions are associated with a single action, as if the transition were associated with a place rather than an arc between two places. This means a single transition rule must be duplicated and expressed as two rules: a stop rule on the first activity, and a start rule on the second activity. Furthermore, there is an implicit rule that applies to all activities in FHIR: when an activity completes, all actions listing that activity as a relatedAction are triggered (with potential time delay), unless suppressed by a start condition.
-(In this discussion, I'm intentionally ignoring the fact there can be a delay between states. It doesn't matter in this analysis.)
-The problem with this design is revealed when there is inward or outward branching between activities. Inward branching leads to the downstream activity having two start conditions. Outward branching from an activity leads to the source activity having two stop criteria. Repeat activities, with self-transitions, end up with the same rule as both a start and a stop rule, or with no explicit self-transition rule if expressed as a repeated activity.
-According to FHIR, multiple rules of the same type “are combined using AND semantics, so the overall condition is true only if all the conditions are true.” This is simply wrong and would prevent valid transitions from happening. A partial fix would be to change the ‘AND’ to ‘OR’, thereby allowing transition to or from the state along alternative pathways when the condition for just that pathway evaluates to true.
-The fundamental problem, however, is the association between conditions and actions, rather than associating those conditions with pairs of actions, i.e. arcs. This could be fixed if conditions were defined at the level of action.relatedAction, since this is where two activities are related. Currently, the only configurable aspect is a delay between the actions, with no possibility of introducing logical expression. This must change for FHIR to be able to express complex SoAs.
-
-- For something complex (eg Sanofi Platform Trial)
-  - do we have a PlanDefinition per 'Cohort';
-    - remove the instance level conditionality
-  -
-
-That would lead to many of the study paths being closed down assuming progression is linked to the state being 'on-study', 'on-study-intervention' or similar. This is reliant on site staff or automation being able to update the characteristic, however processes for this already exist so could be applied to the execution of study activities. These are facile approaches, and will need to be refined (eg where there are multiple study periods, with the patient changing state between them).
-
-Note, the criteria should never lead to a decision where there are multiple subsequent encounters without a way of determining the next encounter. In all cases, the unscheduled encounter should be available, with the expectation that the possible exits are returning to the protocol path or leaving the study.

@@ -9,7 +9,6 @@ Existing FHIR semantics that can be used include the `trigger` attribute on the 
 Suggest that this is rolled up into applicability of parent plan -> child SoAVisit, either via an extension or an application of the trigger predicate.
 
 ```fsh
-
 Instance: StudyPlan
 InstanceOf: StudyProtocolSoa
 Usage: #example
@@ -35,7 +34,3 @@ Usage: #example
     * kind
 ```
 
-From Bryn:
-
-- Where this type of thing has come up the most is in computable clinical guideline representation. https://hl7.org/fhir/uv/cpg/examples-chf.html
-- There are quite a few examples and discussion related to this type of computable workflow representation in that IG
