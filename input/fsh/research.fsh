@@ -131,7 +131,13 @@ Description: "Provides an offset range that, along with offsetDuration, indicate
 
 Alias: UCUM  = http://unitsofmeasure.org
 
-// --- PlanDefinition Extensions 
+// --- Version 2 PlanDefinition Extensions 
+
+// Richardson A, Genyn P
+// Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study
+// JMIR Med Inform 2025;13:e71430
+// URL: https://medinform.jmir.org/2025/1/e71430
+// DOI: 10.2196/71430
 
 // --- SOA Time Point 
 //
