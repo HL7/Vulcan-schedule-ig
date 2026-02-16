@@ -12,9 +12,9 @@ Within a FHIR-Enabled EHR it would be expected that **unscheduled visits** would
 
 Within a FHIR-Enabled EHR it would be expected that **unscheduled visits** would be instantiated as `Encounter` resources at the time they occur based on a conditional trigger as discussed above. The `Encounter` can then be associated with the appropriate reasons for the visit, using, for example, the `Encounter.reasonCode` or `Encounter.reasonReference` elements, which in turn can be linked to specific `AdverseEvent`, `Observation`, or `Condition` resources. This linkage provides the necessary context for the data collected during the visit, distinguishing it from data gathered during routine, scheduled encounters and allowing for proper analysis. Existing FHIR resources and semantics can be used include the`action` `trigger` attribute that allows an action to be associated based on some event.
 
-[REVIEW...]
-Suggest that this is rolled up into applicability of parent plan -> child SoAVisit, either via an extension or an application of the trigger predicate.
-[...REVIEW]
+---
+
+##### IG Version 1
 
 The following FSH example shows how this is proposed to be used to specify the activities required for a suspected AE detected between planned visits.
 
@@ -43,7 +43,12 @@ Usage: #example
   * condition[+]
     * kind
 ```
-Version 2 of the IG implements an alternative method for recognising and managing **unscheduled visits** that can be specified within (or as extensions to) a primary schedule. This offers the possibility of specifying formally when *recognised* **unscheduled visits** are expected to occur, and more importantly, offers routes back, or to, other scheduled timepoints depending upon the event or the participant condition that has initiated the visit.  
+
+---
+
+##### IG Version 2
+
+**IG Version 2** implements an alternative method for recognising and managing **unscheduled visits** that can be specified within (or as extensions to) a primary schedule. This offers the possibility of specifying formally when *recognised* **unscheduled visits** are expected to occur, and more importantly, offers routes back, or to, other scheduled timepoints depending upon the event or the participant condition that has initiated the visit.  
 
 Assuming the **unscheduled visit** is defined once only (diagram), this then requires three `PlanDefinition` elements be in place:
 
@@ -53,17 +58,32 @@ Assuming the **unscheduled visit** is defined once only (diagram), this then req
 
 A set of typical paths to and from an **unscheduled visit** is shown in the diagram below. This shows that **unscheduled visits** may occur after V1 and from each subsequent scheduled visit. Following an **unscheduled visit** the subject is expected to either (a) return to following the primary schedule, or is withdrawn from the study (EOS - EndOfStudy) 
 
-[MERMAID DIAGRAM...]
+```mermaid
+graph LR
+Unscheduled
+Screening-.->V1
+V1==>V2
+V2==>V3
+V3-.->Vn
+Vn==>EOS
+V1-->Unscheduled--toV2-->V2
+V2-->Unscheduled--toV3-->V3
+V3-->Unscheduled--toVn-->Vn
+Unscheduled--withdrawn-->EOS
+```
 
+This figure accurately describes all paths to and from the **unscheduled visit**, but it is not the case that once instantiated all these paths should be available. For example, if V2 has already occured, returning to V2 is not appropriate; the next visit should either be V3 (next scheduled visit) or EOS (participant withdrawn).  
 
-[...MERMAID DIAGRAM]
+By defining conditions on each of the **FROM** paths for visit **Unscheduled** the implied behaviour can be explicity specified. This can be achieved as follows:
 
+- condition on edge [Unscheduled to EOS]  `if WITHDRAWN true`
+- condition on edge [Unscheduled to V2] `if EXISTS [SCREENING, V1,V2] if NOT EXISTS [V3, Vn.., EOS]`
+- condition on edge [Unscheduled to V3] `if EXISTS [SCREENING, V1,V2,V3] if NOT EXISTS [Vn.., EOS]`
+- condition on edge [Unscheduled to Vn..] `if EXISTS [SCREENING, V1,V2,V3,Vn] if NOT EXISTS [Vn+1.., EOS]`
 
-
-The following FSH shows how the routes to and from an **unscheduled visit** can be defined to ensure they behave correctly under the protocol terms of reference. 
+*PlanDefinition* FSH snippet below shows how the **unscheduled visit** options and conditions can be represented fully and accurately for visit **Unscheduled** using the **IG Version 2** `SOATimePoint` and `SOATransition` extensions.
 
 [FSH...]
 
 [...FSH]
-
 
