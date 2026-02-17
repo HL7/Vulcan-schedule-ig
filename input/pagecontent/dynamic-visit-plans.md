@@ -71,7 +71,7 @@ The following table represents a schedule of activities for this simple progress
 
 This simple design illustrates:
 
-- **Visit N**: Baseline visit with treatment initiation
+- **Visit N**: Example: Baseline visit with treatment initiation
 - **Visit N+1**: Follow-up visit 48 days later
 - **Early Termination**: Can occur at any time if patient discontinues
 
@@ -93,7 +93,9 @@ Usage: #example
 * publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
 * description = "dynamic-visit-schedule-simple-example"
 * action[0]
-  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb"
+  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb" // Visit N
+  * extension
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
   * extension.extension[+]
     * url = "soaPlannedTimePoint"
     * valueQuantity = 0 's'
@@ -116,8 +118,6 @@ Usage: #example
   * extension.extension[+]
     * url = "soaRangeFromTimePoint"
     * valueString = "Visit N"
-  * extension.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
   * title = "Visit N"
   * description = "Visit N"
   * groupingBehavior = #visual-group
@@ -128,7 +128,7 @@ Usage: #example
       * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
       * extension[+]
         * url = "soaTargetId"
-        * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+        * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3" // Visit N+1
       * extension[+]
         * url = "soaTransitionType"
         * valueString = "SS"
@@ -150,7 +150,7 @@ Usage: #example
       * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
       * extension[+]
         * url = "soaTargetId"
-        * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+        * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a" // Visit Early Termination
       * extension[+]
         * url = "soaTransitionType"
         * valueString = "SS"
@@ -166,8 +166,7 @@ Usage: #example
       * kind = #start
       * expression
         * language = #text/x-soa-expressionplain
-        * expression
-          * expression = "{'toEarlyTermination':true}"
+        * expression = "{'toEarlyTermination':true}"
 * action[+]
   * id = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
   * extension
