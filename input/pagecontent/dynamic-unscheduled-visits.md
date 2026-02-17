@@ -85,5 +85,161 @@ By defining conditions on each of the **FROM** paths for visit **Unscheduled** t
 
 [FSH...]
 
-[...FSH]
+```
 
+/* 
+
+This extract from a PlanDefinition for the schedule above 
+describes the Unscheduled visit, its specified paths to other a next visit 
+and the transition conditions that must be met for each path to be available.
+
+Unscheduled > V2 (if V1 exists and V2, V3, EOS do not exist)
+Unscheduled > V3 (if V1, V2 exist and V3, EOS do not exist)
+Unscheduled > EOS (if withdrawn = true)
+
+*/
+
+Instance: Vulcan-SoA-Unscheduled
+InstanceOf: PlanDefinition
+Usage: #example
+* meta
+  * versionId = "0"
+  * lastUpdated = "2026-02-17T14:04:13Z"
+* identifier
+  * system = "http://www.fhir4pharma.com/plandefinition"
+  * value = "c1b6cb89-6ccd-4b38-b0f5-6ceb7393da53"
+* version = "V00"
+* name = "Vulcan-SoA-Unscheduled"
+* title = "Vulcan-SoA-Unscheduled"
+* type = $plan-definition-type#clinical-protocol
+* status = #active
+* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
+* description = "Vulcan-SoA-Unscheduled"
+
+// ... Other Visit Definitions Here ....
+
+* action[+] // Unscheduled Visit 
+  * id = "8609c9f0-c7df-4527-b6e4-7bbdc0e69fb2"
+  * extension
+    * extension[0]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 28 'd'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "IS"
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = true
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
+      * url = "soaTimePointSubType"
+      * valueString = "V"
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 24 'h'
+        * high = 24 'h'
+    * extension[+]
+      * url = "soaRangeFromTimePoint"
+      * valueString = "IS"
+    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * title = "Unscheduled"
+  * description = "Unscheduled"
+  * groupingBehavior = #visual-group
+  * selectionBehavior = #exactly-one
+  * definitionCanonical = "PlanDefinition/Unscheduled"
+  * action[0] // Conditional Transition to EOS
+    * extension
+      * extension[0]
+        * url = "soaTargetId"
+        * valueString = "2cedc9ad-bfe6-4a08-8799-3b2fdf398a84"
+      * extension[+]
+        * url = "soaTransitionType"
+        * valueString = "FS"
+      * extension[+]
+        * url = "soaTransitionDelay"
+        * valueDuration = 7 'd'
+      * extension[+]
+        * url = "soaTransitionRange"
+        * valueRange
+          * low = 0 's'
+          * high = 0 's'
+      * extension[+]
+        * url = "soaTargetName"
+        * valueString = "EOS"
+      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * condition
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression = "{'withdrawn':true}"
+
+  * action[+] // Conditional Transition to V3
+    * extension
+      * extension[0]
+        * url = "soaTargetId"
+        * valueString = "e30a745d-5dd1-484e-a16d-d1b21c3c8d29"
+      * extension[+]
+        * url = "soaTransitionType"
+        * valueString = "FS"
+      * extension[+]
+        * url = "soaTransitionDelay"
+        * valueDuration = 0 's'
+      * extension[+]
+        * url = "soaTransitionRange"
+        * valueRange
+          * low = 0 's'
+          * high = 0 's'
+      * extension[+]
+        * url = "soaTargetName"
+        * valueString = "V3"
+      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * condition[0]
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression = "{'exists':['V1','V2'}"
+    * condition[+]
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression = "{'not_exist':['V3','EOS']}"
+
+  * action[+] // Conditional Transition to V2
+    * extension
+      * extension[0]
+        * url = "soaTargetId"
+        * valueString = "204b7d54-c0dc-43c3-ba43-0dedbfc04d94"
+      * extension[+]
+        * url = "soaTransitionType"
+        * valueString = "FS"
+      * extension[+]
+        * url = "soaTransitionDelay"
+        * valueDuration = 0 's'
+      * extension[+]
+        * url = "soaTransitionRange"
+        * valueRange
+          * low = 0 's'
+          * high = 0 's'
+      * extension[+]
+        * url = "soaTargetName"
+        * valueString = "V2"
+      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * condition[0]
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression = "{'exists':['V1'}"
+    * condition[+]
+      * kind = #start
+      * expression
+        * language = #text/x-soa-expressionplain
+        * expression = "{'not_exist':['V2','V3','EOS']}"
+
+```
+[...FSH]
