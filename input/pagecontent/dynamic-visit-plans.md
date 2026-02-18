@@ -78,6 +78,8 @@ This simple design illustrates:
 Here is a representation of this simple structure using the implementation details based on MMS:
 
 ```fsh
+Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-definition-type
+
 Instance: dynamic-visit-schedule-simple-example
 InstanceOf: PlanDefinition
 Usage: #example
