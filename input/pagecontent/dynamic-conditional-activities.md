@@ -37,13 +37,21 @@ Some examples taken from real protocols are shown here:
   HCC, hepatocellular carcinoma, requiring an MRI or CT scan and GBM, glioblastoma, requiring a Brain MRI
   ```
 
-We have used existing patterns within the FHIR [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource to assist with conditional activities defined according to patient characteristics. The [PlanDefinition](https://hl7.org/fhir/plandefinition.html) predicate for child activities, [PlanDefinition.action](https://hl7.org/fhir/plandefinition-definitions.html#PlanDefinition.action) provides a framework, however other approaches can be applied.  In our testing, some patterns that are handled within existing data collection strategies did not simply map across to existing examples.  Part of this may be down to the choice of [FHIRPath] for our testing, it may be possible to do more with [CQL].  
+We have used existing patterns within the FHIR [PlanDefinition](https://hl7.org/fhir/plandefinition.html) resource to assist with conditional activities defined according to patient characteristics. The [PlanDefinition](https://hl7.org/fhir/plandefinition.html) predicate for child activities, [PlanDefinition.action](https://hl7.org/fhir/plandefinition-definitions.html#PlanDefinition.action) provides a framework, however other approaches can be applied.  It is approached using the [condition](https://hl7.org/fhir/plandefinition-definitions.html#PlanDefinition.action.condition) attribute on the `action`; the `kind` predicate is set to `applicability` as this 
+
+In our testing, some patterns that are handled within existing data collection strategies did not simply map across to existing examples.  Examples 
 
 We appreciate that there are a wide number of possible implementations for many patient characteristics; so we cannot provide a simple pattern to do this, instead we can provide some examples that show how logic can be applied to the scheduling of activities such that the conditionality expressed in the protocol can be adequately reflected in the planned study design.
 
-Following are some samples
+Following are some samples:
 
-Example I: HBA1c in Type 1 Diabetes 
+##### Example I: HBA1c in Type 1 Diabetes 
+Given the following protocol design element,
+```
+If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained.
+```
+An example
+
 ```yaml
 Instance: SoA-PoC-Conditional-Visit-1
 InstanceOf: StudyVisitSoa
@@ -65,32 +73,40 @@ Usage: #inline
 ```
 This uses the FHIRPath statement to identify that the current Patient has evidence of a diagnosis of Type 1 Diabetes Mellitus; if this is true then the activity is applicable and should be performed.  Note, this is limiting the search to just a diagnosis code using SNOMED, whereas other coding systems may be in use dependent on the system and location.  This might be an example where CQL adds additional flexibility.  It should be up to the implementer and systems involved to ensure the requirement is communicated with sufficient clarity.
 
-Example II: HCG test for females of childbearing potential
+##### Example II: Patient has completed Inclusion/Exclusion
+Continued Study activities are dependent on ResearchSubject having completed all applicable Eligibility; assuming they have failed then the activities remaining would only be those that apply to a Screen Failure
+
 ```yaml
-Instance: SoA-PoC-Conditional-Visit-1
+Example here
+```
+
+
+##### Example III: Dose Titration
+Based on a Biomarker Value, the dose would change; the example should illustrate a change in Dosing (MedicationAdministration) - would this be the amount or activity?
+```yaml
+Instance: SoA-PoC-Conditional-Visit-4-Treatment
 InstanceOf: StudyVisitSoa
 Usage: #inline
 * status = #active
-* title = "Visit 1 - Screening"
+* title = "Visit 3 - Treatment"
 * action[+]
-  * definitionCanonical = "ActivityDefinition/PregnancyTest-ActivityDefinition"
-  * title = "Pregnancy Test"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Pregnancy test for Biological Females"
-      * language = #text/fhirpath
-      * expression = "Patient.gender='female'"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Evaluation of Fertility"
-      * language = #text/fhirpath
-      // 118183008 | Finding of fertility (finding) |
-      // 8619003 | Infertile (finding) |
-      * expression = "Observation.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '118183008').valueCodeableConcept!='http://snomed.info/sct|8619003'"
+  * definitionCanonical = "ActivityDefinition/PlannedDose-10mg"
+  * title = "Dose Administration - 10mg"
+  *
+* action[+]
+  * definitionCanonical = "ActivityDefinition/PlannedDose-20mg"
+  * title = "Dose Administration - 20mg"
+* action[+]
+  * definitionCanonical = "ActivityDefinition/PlannedDose-50mg"
+  * title = "Dose Administration - 50mg"
 ```
-This example uses multiple conditions to prove applicability of the HCG assessment; firstly the `Patient.gender` is checked; secondly the logic attempts to establish the state of 'child-bearing potential'.  Child-bearing potential for a female can be dependent on a number of factors reflected in a number of possible resources (eg infertility, surgical sterilisation). In CRFs, child-bearing potential is asserted by the Site Coordinator/Investigator - t are handled by a declaration made by the site staff based on medical records (which may or may not be electronic).
+
+##### Example IV: Parallel Imaging Study 
+Example of the Imaging for a Basket Stuyd
+
+
+
+#### General Comments:
 
 The scheduling layer will need to provide the framework for collecting user input through a Questionnaire or similar to satisfy the requirements for the conditional activity (eg by asserting that the patient has been evaluated for child-bearing potential, and recording the outcome).
 
@@ -115,10 +131,4 @@ How these activities can be enumerated vis a vis Patient participation, is somet
 
 Patient's continued participation in the study/studyplan is dependent on the Patient `status`. However, there needs to be some initiation in change in the Patient state and this would be down to the Clinical Trial Management System that is driving the research activities for the Patient; for example being having a defined enrollment process that creates the enrollment encounter, and based on the outcome updates the status of the patient.
 
-From Bryn:
-
-- Where this type of thing has come up the most is in computable clinical guideline representation. https://hl7.org/fhir/uv/cpg/examples-chf.html
-- There are quite a few examples and discussion related to this type of computable workflow representation in that IG
-
-[TODO] - examples of "If clinically indicated", some activities can be 'skipped' based on Investigator or clinical evaluation. It does not preclude the activity being done, in spite of evidence, but logistically there is a requirement that the pre-conditions for the activity are met (ie the device/consumables are available at site for the staff to use).  
-[TODO] - Also look at CQL to see what can be done using that....
+Mike's Link: [NCT02465060](https://cdn.clinicaltrials.gov/large-docs/60/NCT02465060/Prot_SAP_000.pdf)
