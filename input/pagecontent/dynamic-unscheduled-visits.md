@@ -8,47 +8,9 @@ These visits will typically be triggered by emergent events such as the occurren
 
 From an implementation perspective, unscheduled visits are not necessarily represented as pre-defined visits within a study's primary `PlanDefinition`. In IG Version 1 **unscheduled visits** can be specified using the *StudyVisitSoa* and *PlannedStudyVisitSoa* profiles, but not with integration in the primary study schedule.
 
-Within a FHIR-Enabled EHR it would be expected that **unscheduled visits** would be instantiated as `Encounter` resources at the time they occur based on a conditional trigger as discussed above, associated with the appropriate reasons for the visit, using for example, the `Encounter.reasonCode` or `Encounter.reasonReference` elements, which can in their turn be linked to specific `AdverseEvent`, `Observation`, or `Condition` resources. This linkage provides the necessary context for the data collected during the visit, distinguishing it from data gathered during routine, scheduled encounters and allowing for proper analysis. Existing FHIR resources and semantics can be used include the`action
+Within a FHIR-Enabled EHR it would be expected that **unscheduled visits** would be instantiated as `Encounter` resources at the time they occur based on a conditional trigger as discussed above, associated with the appropriate reasons for the visit, using for example, the `Encounter.reasonCode` or `Encounter.reasonReference` elements, which can in their turn be linked to specific `AdverseEvent`, `Observation`, or `Condition` resources. This linkage provides the necessary context for the data collected during the visit, distinguishing it from data gathered during routine, scheduled encounters and allowing for proper analysis. Existing FHIR resources and semantics can be used include the `action` - `trigger` attribute that allows an action to be associated based on some event.
 
-Within a FHIR-Enabled EHR it would be expected that **unscheduled visits** would be instantiated as `Encounter` resources at the time they occur based on a conditional trigger as discussed above. The `Encounter` can then be associated with the appropriate reasons for the visit, using, for example, the `Encounter.reasonCode` or `Encounter.reasonReference` elements, which in turn can be linked to specific `AdverseEvent`, `Observation`, or `Condition` resources. This linkage provides the necessary context for the data collected during the visit, distinguishing it from data gathered during routine, scheduled encounters and allowing for proper analysis. Existing FHIR resources and semantics can be used include the`action` `trigger` attribute that allows an action to be associated based on some event.
-
----
-
-##### IG Version 1
-
-The following FSH example shows how this is proposed to be used to specify the activities required for a suspected AE detected between planned visits.
-
-```fsh
-Instance: StudyPlan
-InstanceOf: StudyProtocolSoa
-Usage: #example
-* title = "Study Plan"
-* action[+]
-  * id = "Screening"
-* action[+]
-  * id = "UnscheduledStudyVisitSuspectedAE"
-  * definition = "StudyVisitSoa UnscheduledStudyVisitSuspectedAE"
-  * trigger[+]
-    * type = #named-event
-    * name = "Suspected AE"
-    * data
-
-Instance: UnscheduledStudyVisitSuspectedAE
-InstanceOf: StudyVisitSoa
-Usage: #example
-* action[+]
-  * id = "Record-Visit-Date"
-* action[+]
-  * id = "Review-AE"
-  * condition[+]
-    * kind
-```
-
----
-
-##### IG Version 2
-
-**IG Version 2** implements an alternative method for recognising and managing **unscheduled visits** that can be specified within (or as extensions to) a primary schedule. This offers the possibility of specifying formally when *recognised* **unscheduled visits** are expected to occur, and more importantly, offers routes back, or to, other scheduled timepoints depending upon the event or the participant condition that has initiated the visit.  
+In this version we implement an alternative method for recognising and managing **unscheduled visits** that can be specified within (or as extensions to) a primary schedule. This offers the possibility of specifying formally when *recognised* **unscheduled visits** are expected to occur, and more importantly, offers routes back, or to, other scheduled timepoints depending upon the event or the participant condition that has initiated the visit.  
 
 Assuming the **unscheduled visit** is defined once only (diagram), this then requires three `PlanDefinition` elements be in place:
 
