@@ -95,36 +95,36 @@ Usage: #example
 * publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
 * description = "dynamic-visit-schedule-simple-example"
 * action[0]
-  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb" // Visit N
+  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb"
+  * title = "Visit N"
+  * description = "Visit N"
+  * definitionCanonical = "http://example.org/Encounter/Visit-N"
   * extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+  * extension.extension[0]
+    * url = "soaTimePointType"
+    * valueString = "Interaction"
   * extension.extension[+]
     * url = "soaPlannedTimePoint"
-    * valueQuantity = 0 's'
+    * valueQuantity = 0 'd'
+  * extension.extension[+]
+    * url = "soaPlannedRange"
+    * valueRange.low = 0 'd'
+    * valueRange.high = 0 'd'
   * extension.extension[+]
     * url = "soaReferenceTimePoint"
     * valueString = "Visit N"
   * extension.extension[+]
-    * url = "soaRepeatAllowed"
-    * valueBoolean = false
+    * url = "soaRangeFromTimePoint"
+    * valueString = "Visit N"
   * extension.extension[+]
     * url = "soaPlannedDuration"
     * valueDuration = 24 'h'
   * extension.extension[+]
-    * url = "soaTimePointType"
-    * valueString = "Interaction"
-  * extension.extension[+]
-    * url = "soaPlannedRange"
-    * valueRange.low = 0 's'
-    * valueRange.high = 0 's'
-  * extension.extension[+]
-    * url = "soaRangeFromTimePoint"
-    * valueString = "Visit N"
-  * title = "Visit N"
-  * description = "Visit N"
+    * url = "soaRepeatAllowed"
+    * valueBoolean = false
   * groupingBehavior = #visual-group
   * selectionBehavior = #exactly-one
-  * definitionCanonical = "http://example.org/Encounter/Visit-N"
   * action[+]
     * extension
       * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -133,15 +133,15 @@ Usage: #example
         * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3" // Visit N+1
       * extension[+]
         * url = "soaTransitionType"
-        * valueString = "SS"
+        * valueString = "FS"
       * extension[+]
         * url = "soaTransitionDelay"
-        * valueDuration = 14 'd'
+        * valueDuration = 48 'd'
       * extension[+]
         * url = "soaTransitionRange"
         * valueRange
-          * low = 0 's'
-          * high = 0 's'
+          * low = 3 'd'
+          * high = 3 'd'
     * condition
       * kind = #start
       * expression
@@ -171,34 +171,34 @@ Usage: #example
         * expression = "{'toEarlyTermination':true}"
 * action[+]
   * id = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+  * title = "Visit N+1"
+  * description = "Visit N+1"
+  * definitionCanonical = "http://example.org/Encounter/Visit-N+1"
   * extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
     * extension[0]
+      * url = "soaTimePointType"
+      * valueString = "Interaction"
+    * extension[+]
       * url = "soaPlannedTimePoint"
-      * valueQuantity = 14 'd'
+      * valueQuantity = 48 'd'
+    * extension[+]
+      * url = "soaPlannedRange"
+      * valueRange
+        * low = 3 'd'
+        * high = 3 'd'
     * extension[+]
       * url = "soaReferenceTimePoint"
       * valueString = "Visit N"
     * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * url = "soaRangeFromTimePoint"
+      * valueString = "Visit N"
     * extension[+]
       * url = "soaPlannedDuration"
       * valueDuration = 24 'h'
     * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Visit N"
-  * title = "Visit N+1"
-  * description = "Visit N+1"
-  * definitionCanonical = "http://example.org/Encounter/Visit-N+1"
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
 * action[+]
   * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
   * title = "Early Termination"
@@ -207,28 +207,28 @@ Usage: #example
   * extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
     * extension[+]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 24 'h'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
       * url = "soaTimePointType"
       * valueString = "Interaction"
+    * extension[+]
+      * url = "soaPlannedTimePoint"
+      * valueQuantity = 24 'h'
     * extension[+]
       * url = "soaPlannedRange"
       * valueRange
         * low = 0 's'
-        * high = 14 'd'
+        * high = 48 'd'
+    * extension[+]
+      * url = "soaReferenceTimePoint"
+      * valueString = "Visit N"
     * extension[+]
       * url = "soaRangeFromTimePoint"
       * valueString = "Visit N"
+    * extension[+]
+      * url = "soaPlannedDuration"
+      * valueDuration = 24 'h'
+    * extension[+]
+      * url = "soaRepeatAllowed"
+      * valueBoolean = false
 ```
 The extension `http://fhir4pharma.com/StructureDefinition/soaTransition` is key to defining the paths forward; 
 1. each `PlanDefinition.action` is assigned a unique identifier using `id` (this should be a UUID/GUID so as to ensure internal referential integrity)
@@ -260,8 +260,8 @@ The following table represents the Schedule of Activities for a simple path exam
 |                        | **Screening** | **Treatment** |           |            | **End of Study** | **Follow-up** |
 | ---------------------- | :-----------: | :-----------: | :-------: | :--------: | :--------------: | :-----------: |
 | **Visit**              |  **Screen**   |   **Day 1**   | **Day 7** | **Day 15** |     **EOS**      |    **FU**     |
-| **Study Day**          |   -14 to -1   |       1       |     7     |     15     |     Variable     |      +30      |
-| **Window**             |      ±7d      |      ±1d      |    ±1d    |    ±2d     |    As needed     |      ±7d      |
+| **Study Day**          |   -14 to -1   |       1       |     7     |     15     |        21        |      +30      |
+| **Window**             |               |               |    ±1d    |    ±2d     |       ±1d        |      ±7d      |
 | **Activities**         |               |               |           |            |                  |               |
 | Informed Consent       |       ✓       |               |           |            |                  |               |
 | Eligibility Assessment |       ✓       |               |           |            |                  |               |
@@ -298,13 +298,12 @@ graph LR;
   StudyVisitEoS[End of Study]
   StudyVisitFollowUp[Follow Up]
   StudyVisit01-.->StudyVisit03Day1
-  StudyVisit03Day1-.->StudyVisit04Day7
-  StudyVisit04Day7-.->StudyVisit05Day15
+  StudyVisit03Day1-->StudyVisit04Day7
+  StudyVisit04Day7-->StudyVisit05Day15
   StudyVisit05Day15-->StudyVisitEoS
   StudyVisitEoS-->StudyVisitFollowUp
   StudyVisit03Day1--Early Termination-->StudyVisitEoS
   StudyVisit04Day7--Early Termination-->StudyVisitEoS
-  StudyVisit05Day15--Early Termination-->StudyVisitEoS
 ```
 
 In each encounter there are two possible outcomes: 
@@ -325,7 +324,7 @@ The following table represents the schedule of activities for this two-arm study
 | ------------------------ | :-----------: | :---------------: | :-----------: | :-------------------: | :-------: | :--------: | :--------------: |
 | **Visit**                |  **Screen**   |   **Baseline**    |   **Day 1**   | **Day 2**<sup>1</sup> | **Day 7** | **Day 15** |     **EOS**      |
 | **Study Day**            |   -14 to -1   |         0         |       1       |           2           |     7     |     15     |        21        |
-| **Window**               |      ±7d      |                   |      ±1d      |          ±1d          |    ±1d    |    ±2d     |       ±3d        |
+| **Window**               |               |                   |      ±1d      |          ±1d          |    ±1d    |    ±2d     |       ±3d        |
 | **Activities**           |               |                   |               |                       |           |            |                  |
 | Informed Consent         |       ✓       |                   |               |                       |           |            |                  |
 | Eligibility Assessment   |       ✓       |                   |               |                       |           |            |                  |

@@ -1,3 +1,5 @@
+Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-definition-type
+
 Instance: dynamic-visit-schedule-multiple-paths
 InstanceOf: PlanDefinition
 Usage: #example
