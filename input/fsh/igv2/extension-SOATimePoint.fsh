@@ -20,6 +20,6 @@ Description: "SoA TimePoint Attribute Extension"
 * extension[soaPlannedTimePoint].value[x] only SimpleQuantity // visit day etc.
 * extension[soaPlannedRange].value[x] only Range              // visit window
 * extension[soaReferenceTimePoint].value[x] only string       // reference visit for planned time
-* extension[soaRangeFromTimePoint].value[x] only string       // calculate visit window from timepoint X
+* extension[soaRangeFromTimePoint].value[x] only string       // timepoint from which to calculate visit window using soaPlannedRange
 * extension[soaPlannedDuration].value[x] only Duration        // duration of the visit (1d, 1w) once started
 * extension[soaRepeatAllowed].value[x] only boolean           // whether the timepoint can be repeated (e.g. for missed visits)
