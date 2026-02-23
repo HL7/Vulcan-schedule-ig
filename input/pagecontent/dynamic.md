@@ -11,7 +11,7 @@ This drive for efficiency has given rise to adaptive designs and master protocol
 The goal of the IG will be to be able to define **enough** semantics to represent the encounters, activities and transitions between them. The FHIR Workflow pattern is useful for defining the structural layout for the encounters and activities; defining how the workflow is applied requires the use of an application layer.
 
 For describing the work in the updated IG, we have partitioned the use cases and requirements as follows:
-* [Conditional Activities](./dynamic-conditional-activities.html) - activities within PlanDefinitions are able to be added or removed based on current patient or study status
+* [Conditional Activities](./dynamic-conditional-activities.md) - activities within PlanDefinitions are able to be added or removed based on current patient or study status
 * [Dynamic Visit Plans](./dynamic-conditional-activities.html) - allowing for multiple paths that a patient can follow based on the Protocol
 * [Unscheduled Activities](./dynamic-unscheduled-visits.md) - providing a framework for incorporating emergent encounters
 
