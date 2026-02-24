@@ -208,7 +208,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action.extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -256,7 +256,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action.extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -304,7 +304,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action[0]
     * condition
@@ -402,7 +402,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action.extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -450,7 +450,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action.extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -498,7 +498,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action.extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -546,7 +546,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action.extension
     * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
@@ -594,7 +594,7 @@ Usage: #example
       * valueDuration = 24 'h'
     * extension[+]
       * url = "soaRepeatAllowed"
-      * valueBoolean = false
+      * valueBoolean = true
   * groupingBehavior = #visual-group
   * action[0]
     * condition
