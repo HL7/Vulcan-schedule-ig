@@ -45,7 +45,7 @@ We appreciate that there are a wide number of possible implementations for many 
 
 Following are some samples:
 
-##### Example I: HBA1c in Type 1 Diabetes 
+##### Example I: HBA1c in Diabetes Mellitus
 Given the following protocol design element,
 ```
 If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained.
@@ -71,7 +71,7 @@ Usage: #inline
       * language = #text/fhirpath
       * expression = "Condition.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '46635009').exists()"
 ```
-This uses the FHIRPath statement to identify that the current Patient has evidence of a diagnosis of Type 1 Diabetes Mellitus; if this is true then the activity is applicable and should be performed.  Note, this is limiting the search to just a diagnosis code using SNOMED, whereas other coding systems may be in use dependent on the system and location.  This might be an example where CQL adds additional flexibility.  It should be up to the implementer and systems involved to ensure the requirement is communicated with sufficient clarity.
+This uses the FHIRPath statement to identify that the current Patient has evidence of a diagnosis of Diabetes Mellitus; if this is true then the activity is applicable and should be performed.  Note, this is limiting the search to just a diagnosis code using SNOMED, whereas other coding systems may be in use dependent on the system and location.  This might be an example where CQL adds additional flexibility.  It should be up to the implementer and systems involved to ensure the requirement is communicated with sufficient clarity.
 
 ##### Example II: Patient has completed Inclusion/Exclusion
 Continued Study activities are dependent on ResearchSubject having completed all applicable Eligibility; assuming they have failed then the activities remaining would only be those that apply to a Screen Failure
