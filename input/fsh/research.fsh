@@ -8,23 +8,9 @@ Description: "A profile that lists the data elements of a Research Study that mu
 * status MS
 * primaryPurposeType MS
 * phase MS
-* category MS
-* focus MS
 * condition MS
-* contact MS
-* relatedArtifact MS
 * keyword MS
 * description MS
-* sponsor MS
-* principalInvestigator MS
-* reasonStopped MS
-* arm MS
-  * name MS
-  * type MS
-  * description MS
-* objective MS
-  * name MS
-  * type MS
 
 Profile: StudyProtocolSoa
 Parent: PlanDefinition
@@ -40,7 +26,7 @@ Description: "A profile that lists the data elements of a PlanDefinition that mu
   * code MS
   * trigger MS
   * relatedAction MS
-    * actionId MS
+    * targetId MS
     * relationship MS
     * offset[x] MS
     * extension contains AcceptableOffsetRangeSoa named acceptableOffsetRange 0..1
@@ -63,7 +49,7 @@ Description: "An abstract profile that lists the data elements of a PlanDefiniti
   * code MS
   * trigger MS
   * relatedAction MS
-    * actionId MS
+    * targetId MS
     * relationship MS
     * offset[x] MS
     * extension contains AcceptableOffsetRangeSoa named acceptableOffsetRange 0..1
@@ -87,7 +73,7 @@ Description: "An abstract profile that lists the data elements of a PlanDefiniti
   * code MS
   * trigger MS
   * relatedAction MS
-    * actionId MS
+    * targetId MS
     * relationship MS
     * offset[x] MS
     * extension contains AcceptableOffsetRangeSoa named acceptableOffsetRange 0..1
@@ -154,13 +140,15 @@ Description: "SoA TimePoint Attribute Extension"
     soaPlannedRange 0..1 and
     soaReferenceTimePoint 0..1 and
     soaRangeFromTimePoint 0..1 and 
-    soaPlannedDuration 0..1
+    soaPlannedDuration 0..1 and 
+    soaRepeatAllowed 0..1
 * extension[soaTimePointType].value[x] only string // interaction or activity
 * extension[soaPlannedTimePoint].value[x] only SimpleQuantity // visit day etc.
 * extension[soaPlannedRange].value[x] only Range // visit window
 * extension[soaReferenceTimePoint].value[x] only string // reference visit for planned time
 * extension[soaRangeFromTimePoint].value[x] only string  // calculate visit window from timepoint X
 * extension[soaPlannedDuration].value[x] only Duration // duration of the visit (1d, 1w) once started
+* extension[soaRepeatAllowed].value[x] only boolean           // whether the timepoint can be repeated (e.g. for missed visits)
 
 // --- SOA Transition
 //
@@ -175,11 +163,11 @@ Description: "Specifies SoA Transition Attributes"
     soaTargetId 0..1 and 
     soaTransitionType 0..1 and
     soaTransitionDelay 0..1 and
-    soaTransitionRange 0..1 
+    soaTransitionRange 0..1
 * extension[soaTargetId].value[x] only string // transition target UUID
 * extension[soaTransitionType].value[x] only string // calculate transition wait from - to
 * extension[soaTransitionDelay].value[x] only Duration  // wait time between states
-
+* extension[soaTransitionRange].value[x] only Range  // transition permitted window
 
 // --- SOA PlanDefinition Profile
 //
