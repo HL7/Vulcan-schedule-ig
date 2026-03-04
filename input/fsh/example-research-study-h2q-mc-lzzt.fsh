@@ -56,7 +56,7 @@ Usage: #example
   * value = PUBCHEM#60809
 * title = "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer’s Disease"
 * protocol[StudyProtocolSoa] = Reference(PlanDefinition/H2Q-MC-LZZT-ProtocolDesign)
-* status = #completed
+* status = #retired
 * primaryPurposeType = http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type#treatment
 * phase = http://terminology.hl7.org/CodeSystem/research-study-phase#phase-3
 // * category[0] = NCIT#C98388 "Interventional Study"
