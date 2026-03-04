@@ -54,10 +54,10 @@ menu:
     Core Implementation Model: basic-structure.html
   Use Cases:
     Visit Windows: visit-windows.html
-    Dynamic Features: 
-      Conditional Activities: dynamic-conditional-activities.html
-      Dynamic Visit Plans: dynamic-visit-plans.html
-      Unscheduled Activities: dynamic-unscheduled-visits.html
+    Dynamic Features: dynamic.html
+    Conditional Activities: dynamic-conditional-activities.html
+    Dynamic Visit Plans: dynamic-visit-plans.html
+    Unscheduled Activities: dynamic-unscheduled-visits.html
     Investigational Product Administration: ip-administration.html
     CDISC ODM Integration: cdisc-odm.html
   Profiles: profiles.html
