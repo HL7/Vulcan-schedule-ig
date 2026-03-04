@@ -4,26 +4,36 @@ This Implementation Guide was developed under the auspices of the HL7 Vulcan Sch
 
 Contributing individuals and organisations are:
 
-Current work group co-chairs: 
+Workgroup co-chairs: 
 
-* **Michael Ward** - TransCelerate Biopharma / Eli Lilly & Company
 * **Geoff Low** - Medidata/3DS
+* **Michael Buckley** - Memorial Sloan Kettering Cancer Centre
 
 Core work group members:
 
+Key Contributors
+* **Andy Richardson** - FHIR4Pharma
+* **Patrick Genyn** - FHIR4Pharma
+
+Contributors
 * **Jean Duteau**  - Duteau Design
 * **Rebecca Baker** - CDISC
-* **Andy Richardson** - Zenetar
-* **Rahul Thandavan** - Roche
-* **Jeffrey Abolofia** - Pinnacle 21
-* **Mike Hamidi** - Pfizer
-* **Hugh Glover** - Bluewave Informatics/HL7 BR&R
+* **Mike Hamidi** - Walmart
+* **** - 
 
 Project Management:
+* **Filippo Napoli** Vulcan
 
-* **Katie Warren** PHUSE  
+Former co-chairs
+* **Michael Ward** - TransCelerate Biopharma / Eli Lilly & Company
+
+Former Contributors
+* **Rahul Thandavan** - Roche
+* **Jeffrey Abolofia** - Pinnacle 21
+* **Hugh Glover** - Bluewave Informatics/HL7 BR&R
 * **Shani Sampson** Vulcan
 * **Michael Van Campen** Vulcan
+* **Katie Warren** PHUSE  
 
 With contributions from other members who have from time to time, or quietly, participated in meetings, attended conference calls, and supported the core team during the development process.
 
