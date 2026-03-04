@@ -311,7 +311,7 @@ In each encounter there are two possible outcomes:
 * following an early termination.  
 These decisions can be automated (ie detection of the presence of SAE or patient withdrawal) or prompted and selected by the user.
 
-Using the extensions as defined, the representation of the study plan can be seen [here](link-to-straight-through)
+Using the extensions as defined, the representation of the study plan can be seen [here](PlanDefinition-dynamic-visit-schedule-exit-example-PlanDefinition.html)
 
 
 ##### Use Case 2 - Branched multi-path study design
@@ -391,7 +391,7 @@ graph LR;
 
 Note; the decision made for randomization should only need to be done once; once a patient is following the path for the assigned arm, the decision support system should preclude the other path (while retaining the common exit paths).  The design should support 'common' planned encounters that can be used both before and after randomization.  The nature of the FHIR resources and relationships between them should be able to be used to be most efficient.
 
-The representation of this is shown [here](dynamic-visit-schedule-multiple-paths)
+The representation of this is shown [here](PlanDefinition-dynamic-visit-schedule-multiple-paths.html)
 
 ##### Use Case 3 - Treatment Cycles
 
@@ -530,7 +530,7 @@ graph TD
     class EndOfStudy postPhase
 ```
 
-The representation of this is shown [here](example-cycle-based-plan).
+The representation of this is shown [here](PlanDefinition-dynamic-visit-schedules-cycles-scheduled-interactions.html).
 
 ##### Summary
 
