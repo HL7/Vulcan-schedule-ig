@@ -146,6 +146,8 @@ Usage: #inline
     * kind = #applicability
     * expression
       * description = "Check allocation to Arm with GBM"
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(comparisonGroup.name="GBM").exists()"
 * action[+]
   * definitionCanonical = "ActivityDefinition/Liver-CT-MRI"
   * title = "Imaging Study - Liver CT/MRI"
@@ -153,6 +155,7 @@ Usage: #inline
     * kind = #applicability
     * expression
       * description = "Check allocation to Arm with RCC"
+      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(comparisonGroup.name="RCC").exists()"
 ```
 * Perhaps the type of imaging could be driven by site capabilities (eg CT vs MRI).
 * This could be an enabling capability, where the concept of Imaging is key; but how the imaging is performed would differ
