@@ -41,7 +41,7 @@ By defining conditions on each of the **FROM** paths for visit **Unscheduled** t
 - condition on edge [Unscheduled to EOS]  `if WITHDRAWN true`
 - condition on edge [Unscheduled to V2] `if EXISTS [SCREENING, V1] if NOT EXISTS [V2, V3, Vn.., EOS]`
 - condition on edge [Unscheduled to V3] `if EXISTS [SCREENING, V1,V2] if NOT EXISTS [V3,Vn.., EOS]`
-- condition on edge [Unscheduled to Vn..] `if EXISTS [SCREENING, V1,V2,V3] if NOT EXISTS [Vn+1.., EOS]`
+- condition on edge [Unscheduled to Vn..] `if EXISTS [SCREENING, V1,V2,..Vn-1] if NOT EXISTS [Vn.., EOS]`
 
 *PlanDefinition* FSH snippet below shows how the **unscheduled visit** options and conditions can be represented fully and accurately for visit **Unscheduled** using the **IG Version 2** `SOATimePoint` and `SOATransition` extensions.
 

@@ -95,7 +95,7 @@ Usage: #inline
       * description = "Record Screen Failure Reason"
       * refer to ResearchSubject.subjectState
 * action[+]
-  ... default study activitie
+  ... default study activities
 ```
 
 ##### Example III: Dose Titration

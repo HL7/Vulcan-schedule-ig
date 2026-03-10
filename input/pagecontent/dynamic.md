@@ -28,6 +28,6 @@ This IG will define extensions that can be interpreted by the management applica
 * Strategic Support:
   * Supporting Study Plan Queries, eg how many VS assessments are to be done, what types of lab tests are involved.  
 
-The application should support interactions with the ResearchSubject resource, to support recording Subject and Trial Milestones (eg Informed Consent, Randomization).  This faciltates the conduct, as well as providing support for logical pre-conditions used in Study Plans.
+The application should support interactions with the ResearchSubject resource, to support recording Subject and Trial States (eg On-Study, Off-study, In-Screening) and Milestones (eg Informed Consent, Randomization).  This faciltates the conduct, as well as providing support for logical pre-conditions used in Study Plans.
 
 
