@@ -9,8 +9,8 @@ name: StudyScheduleOfActivities
 title: Clinical Study Schedule of Activities
 description: FHIR Implementation Guide representing a Clinical Study Schedule of Activities
 status: active # draft | active | retired | unknown
-version: 1.0.0
-fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+version: 2.0.0
+fhirVersion: 6.0.0-ballot3 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2022+
 releaseLabel: trial-use # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
@@ -39,6 +39,14 @@ pages:
     title: Downloads
   credits.md:
     title: Credits
+  dynamic.md:
+    title: Dynamic Features
+  dynamic-conditional-activities.md:
+    title: Conditional Activities
+  dynamic-visit-plans.md:
+    title: Dynamic Visit Plans
+  dynamic-unscheduled-visits.md:
+    title: Unscheduled Visits 
 
 menu:
   Home: index.html
@@ -46,6 +54,10 @@ menu:
     Core Implementation Model: basic-structure.html
   Use Cases:
     Visit Windows: visit-windows.html
+    Dynamic Features: dynamic.html
+    Conditional Activities: dynamic-conditional-activities.html
+    Dynamic Visit Plans: dynamic-visit-plans.html
+    Unscheduled Activities: dynamic-unscheduled-visits.html
     Investigational Product Administration: ip-administration.html
     CDISC ODM Integration: cdisc-odm.html
   Profiles: profiles.html
