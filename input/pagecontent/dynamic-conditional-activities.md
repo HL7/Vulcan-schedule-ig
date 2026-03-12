@@ -44,8 +44,9 @@ In our testing, some patterns that are handled within existing data collection s
 We appreciate that there are a wide number of possible implementations for many patient characteristics; so we cannot provide a simple pattern to do this, instead we can provide some examples that show how logic can be applied to the scheduling of activities such that the conditionality expressed in the protocol can be adequately reflected in the planned study design.
 
 
-##### Example I: HBA1c in Type 1 Diabetes 
+##### Example I: HBA1c in Diabetes Mellitus 
 Given the following protocol design element,
+
 ```
 If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained.
 ```
@@ -87,16 +88,18 @@ Usage: #inline
   * definitionCanonical = "ActivityDefinition/Eligibility-Evaluation"
   * description = "Evaluate the Patient eligibility status"
 * action[+]
-  * definitionCanonical = "ActivityDefinition/Collect-Screen-Fail"
+  * definitionCanonical = "Questionnaire/Collect-Screen-Fail"
   * description = "Complete the Primary Reason for Screen Failure"
   * condition[+]
     * kind = #applicability
     * expression
       * description = "Record Screen Failure Reason"
-      * refer to ResearchSubject.subjectState
+      * language = #text/fhirpath
+      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(study.name = 'RESEARCHSTUDY').subjectState.coding.where(code = 'ineligible').exists()"
 * action[+]
   ... default study activities
 ```
+In this example we assume that patient failing screening would have a `subjectState` of [*ineligible*](https://terminology.hl7.org/7.1.0/en/CodeSystem-research-subject-state.html#research-subject-state-ineligible); if the FHIRPath matches then the Questionnaire to record the primary reason for Screen Failure should be shown.  If the patient is eligible then the normal study progression would occur (there are better implementations of this using the [dynamic visit plans](dynamic-visit-plans.html), this is purely illustrative).
 
 ##### Example III: Dose Titration
 Based on a Biomarker Value, the dose would change; the example should illustrate a change in Dosing (MedicationAdministration) - would this be the amount or activity?
@@ -134,6 +137,19 @@ Usage: #inline
 In the following example we have a scenario where there is a need for Disease Response assessment by Imaging Study.  Dependent on the disease type and location the type of imaging required will differ.  The conditionality here allows for the requisite activities to be scheduled and the unnecessary activities to be skipped.
 
 ```yaml
+Instance: GBM-Arm
+InstanceOf: Group
+Usage: #inline
+* name = "GBM"
+
+
+Instance: RCC-Arm
+InstanceOf: Group
+Usage: #inline
+* name = "RCC"
+
+
+
 Instance: SoA-PoC-Conditional-Imaging
 InstanceOf: StudyVisitSoa
 Usage: #inline
@@ -147,7 +163,7 @@ Usage: #inline
     * expression
       * description = "Check allocation to Arm with GBM"
       * language = #text/fhirpath
-      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(comparisonGroup.name="GBM").exists()"
+      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(study.name = 'RESEARCHSTUDY').where(comparisonGroup.name="GBM").exists()"
 * action[+]
   * definitionCanonical = "ActivityDefinition/Liver-CT-MRI"
   * title = "Imaging Study - Liver CT/MRI"
@@ -155,10 +171,9 @@ Usage: #inline
     * kind = #applicability
     * expression
       * description = "Check allocation to Arm with RCC"
-      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(comparisonGroup.name="RCC").exists()"
+      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(study.name = 'RESEARCHSTUDY').where(comparisonGroup.name="RCC").exists()"
 ```
-* Perhaps the type of imaging could be driven by site capabilities (eg CT vs MRI).
-* This could be an enabling capability, where the concept of Imaging is key; but how the imaging is performed would differ
+In this scenario, the procedure needed to do the imaging depends on the location of the target body system.  This could be based on a Condition match (similarly to the Diabetes example above), but in this case we want to illustrate the use of allocation to a particular arm.  The approach should be pragmatic and implementable.
 
 #### General Comments:
 

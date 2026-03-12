@@ -44,14 +44,7 @@ Clinical Trial Schedule of Activities Specification Using Fast Healthcare Intero
 
 If we take a simple example; the progression of a patient in a study design - the following example provides an illustration
 
-```mermaid
-graph LR;
-  VisitN[Visit N]
-  VisitNP[Visit N+1]
-  VisitET[Early Termination]
-  VisitN--Early Termination-->VisitET
-  VisitN--Normal Progression (48 days)-->VisitNP
-```
+<img src="dynamic-visit-schedule-simple-example.png" alt="Dynamic Schedules - Simple Example" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The following table represents a schedule of activities for this simple progression example:
 
@@ -289,22 +282,7 @@ This design illustrates:
 
 This can be visualised as shown here:
 
-```mermaid
-graph LR;
-  StudyVisit01[Screening]
-  StudyVisit03Day1[Treatment Day 1]
-  StudyVisit04Day7[Day 7]
-  StudyVisit05Day15[Day 15]
-  StudyVisitEoS[End of Study]
-  StudyVisitFollowUp[Follow Up]
-  StudyVisit01-.->StudyVisit03Day1
-  StudyVisit03Day1-->StudyVisit04Day7
-  StudyVisit04Day7-->StudyVisit05Day15
-  StudyVisit05Day15-->StudyVisitEoS
-  StudyVisitEoS-->StudyVisitFollowUp
-  StudyVisit03Day1--Early Termination-->StudyVisitEoS
-  StudyVisit04Day7--Early Termination-->StudyVisitEoS
-```
+<img src="dynamic-visit-schedule-exit-example.png" alt="Dynamic Schedules - Linear Design" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 In each encounter there are two possible outcomes: 
 * normal progression along the protocol defined path, or 
@@ -358,36 +336,8 @@ This two-arm design illustrates:
 
 This provides a visual representation of the encounters/transitions involved in the study design.
 
-```mermaid
-graph LR;
-  Screening[Screening]
-  Baseline[Randomization]
-  TreatmentDay1ArmA["Day 1 (Arm A)"]
-  TreatmentDay2ArmA["Day 2 (Arm A)"]
-  TreatmentDay7ArmA["Day 7 (Arm A)"]
-  TreatmentDay15ArmA["Day 15 (Arm A)"]
-  TreatmentDay1ArmB["Day 1 (Arm B)"]
-  TreatmentDay7ArmB["Day 7 (Arm B)"]
-  TreatmentDay15ArmB["Day 15 (Arm B)"]
-  EndOfStudy["End of Study"]
-  Screening-->Baseline
-  Baseline-->TreatmentDay1ArmA
-  Baseline-->TreatmentDay1ArmB
-  TreatmentDay15ArmA-->EndOfStudy
-  TreatmentDay15ArmB-->EndOfStudy
-  subgraph "Treatment (21 days)"
-    direction TB
-    subgraph "Arm A"
-      TreatmentDay1ArmA --> TreatmentDay2ArmA
-      TreatmentDay2ArmA --> TreatmentDay7ArmA
-      TreatmentDay7ArmA --> TreatmentDay15ArmA
-    end
-    subgraph "Arm B"
-      TreatmentDay1ArmB --> TreatmentDay7ArmB
-      TreatmentDay7ArmB --> TreatmentDay15ArmB
-    end
-  end
-```
+<img src="dynamic-visit-schedule-multiple-paths-example.png" alt="Dynamic Schedules - Multiple Paths" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
+
 
 Note; the decision made for randomization should only need to be done once; once a patient is following the path for the assigned arm, the decision support system should preclude the other path (while retaining the common exit paths).  The design should support 'common' planned encounters that can be used both before and after randomization.  The nature of the FHIR resources and relationships between them should be able to be used to be most efficient.
 
@@ -448,87 +398,8 @@ In this design we pivot between odd-numbered cycles (Cycle 1, 3, 5) and even-num
 
 This can be illustrated graphically as follows:
 
-```mermaid
-graph TD
-    %% Pre-treatment Phase
-    subgraph PreTreatment["Screening Period"]
-        direction TB
-        Screening[Screening] --> Randomization[Randomization]
-    end
+<img src="dynamic-schedules-cycles-example.png" alt="Dynamic Schedules - Cycles" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-    %% Cycle 1 (Odd cycle pattern)
-    subgraph Cycle1["🔄 Cycle N (Odd Pattern)"]
-        direction LR
-        C1D1[Day 1] --> C1D14[Day 14]
-        C1D14 --> C1D28[Day 28]
-    end
-
-    %% Cycle 2 (Even cycle pattern)
-    subgraph Cycle2["🔄 Cycle N+1 (Even Pattern)"]
-        direction LR
-        C2D1[Day 1] --> C2D7[Day 7]
-        C2D7 --> C2D14[Day 14]
-        C2D14 --> C2D21[Day 21]
-        C2D21 --> C2D28[Day 28 + Response]
-    end
-
-    %% Additional Cycles Indicator
-    subgraph CycleContinuation["🔄 Additional Cycles"]
-        direction LR
-        MoreCycles[Cycles continue<br/>alternating patterns]
-    end
-
-    %% Post-treatment Phase
-    subgraph PostTreatment["End of Treatment"]
-        direction TB
-        EndTreatment[End of Treatment<br/>Assessment]
-    end
-
-    %% Follow-up
-    subgraph FollowUp["Follow-up Period"]
-        direction TB
-        FU1[Follow-up 1<br/>+90 days] --> FU2[Follow-up 2<br/>+180 days]
-    end
-
-    subgraph EndStudy["Study Completion"]
-        direction TB
-        EndOfStudy[End of Study]
-    end
-
-    %% Transitions between phases and cycles (vertical stacking)
-    PreTreatment --> Cycle1
-    Cycle1 --> Cycle2
-    Cycle2 --> CycleContinuation
-    CycleContinuation --> PostTreatment
-    PostTreatment --> FollowUp
-    FollowUp --> EndStudy
-
-    %% Early termination paths
-    C2D28 --Progressive<br/>Disease--> PostTreatment
-    CycleContinuation --Study<br/>Completion--> PostTreatment
-    Screening --Screen<br/>Failure--> EndStudy
-    Randomization --Patient<br/>Withdrawal--> PostTreatment
-    Cycle1 --Adverse<br/>Event--> PostTreatment
-    Cycle2 --Adverse<br/>Event--> PostTreatment
-    PostTreatment --Lost to<br/>Follow-up--> EndStudy
-
-    %% Styling
-    classDef prePhase fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef oddCycleBox fill:#f3e5f5,stroke:#4a148c,stroke-width:3px
-    classDef evenCycleBox fill:#e8f5e8,stroke:#1b5e20,stroke-width:3px
-    classDef continueBox fill:#fff9c4,stroke:#f57f17,stroke-width:3px
-    classDef postPhase fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef followupPhase fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
-    classDef encounter fill:#ffffff,stroke:#666666,stroke-width:1px
-
-    class Screening,Randomization prePhase
-    class EndTreatment postPhase
-    class FU1,FU2 followupPhase
-    class C1D1,C1D14,C1D28 encounter
-    class C2D1,C2D7,C2D14,C2D21,C2D28 encounter
-    class MoreCycles continueBox
-    class EndOfStudy postPhase
-```
 
 The representation of this is shown [here](PlanDefinition-dynamic-visit-schedules-cycles-scheduled-interactions.html).
 
