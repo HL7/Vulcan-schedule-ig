@@ -2005,7 +2005,7 @@ Usage: #inline
 
 Instance: SoA-PoC-Conditional-Imaging
 InstanceOf: StudyVisitSoa
-Usage: #inline
+Usage: #example
 * status = #active
 * title = "Imaging"
 * action[+]
