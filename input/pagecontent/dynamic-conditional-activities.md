@@ -52,24 +52,38 @@ If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained.
 ```
 For an example, see the following sample:
 
-```yaml
-Instance: SoA-PoC-Conditional-Visit-1
-InstanceOf: StudyVisitSoa
-Usage: #inline
-* status = #active
-* title = "Visit 1 - Screening"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/BloodChemistry-ActivityDefinition"
-  * title = "Blood Chemistry"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/BloodChemistry-HBA1C-ActivityDefinition"
-  * title = "Blood Chemistry - Diabetic"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Blood Chemistry with HbA1c"
-      * language = #text/fhirpath
-      * expression = "Condition.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '46635009').exists()"
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "SoA-PoC-Conditional-Visit-1",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/StudyVisitSoa"
+    ]
+  },
+  "status": "active",
+  "title": "Visit 1 - Screening",
+  "action": [
+    {
+      "definitionCanonical": "ActivityDefinition/BloodChemistry-ActivityDefinition",
+      "title": "Blood Chemistry"
+    },
+    {
+      "definitionCanonical": "ActivityDefinition/BloodChemistry-HBA1C-ActivityDefinition",
+      "title": "Blood Chemistry - Diabetic",
+      "condition": [
+        {
+          "kind": "applicability",
+          "expression": {
+            "description": "Blood Chemistry with HbA1c",
+            "language": "text/fhirpath",
+            "expression": "Condition.where(subject.reference = 'Patient/' + Id).where(code.coding.system = 'http://snomed.info/sct' and code.coding.code = '46635009').exists()"
+          }
+        }
+      ]
+    }
+  ]
+}
 ```
 This uses the [FHIRPath](https://build.fhir.org/fhirpath.html) statement to identify that the current Patient has evidence of a diagnosis of Diabetes Mellitus; if this is true then the activity is applicable and should be performed.  Note, this is limiting the search to just a diagnosis code using SNOMED, whereas other coding systems may be in use dependent on the system and location.  
 
@@ -78,24 +92,39 @@ This might be an example where the use of [Clinical Quality Language](https://bu
 ##### Example II: Patient has completed Inclusion/Exclusion
 Continued Study activities are dependent on ResearchSubject having completed all applicable Eligibility; assuming they have failed then the activities remaining would only be those that apply to a Screen Failure
 
-```yaml
-Instance: SoA-PoC-Conditional-Screening-Eligibility
-InstanceOf: StudyVisitSoa
-Usage: #inline
-* status = #active
-* title = "Visit 1 - Screening"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/Eligibility-Evaluation"
-  * description = "Evaluate the Patient eligibility status"
-* action[+]
-  * definitionCanonical = "Questionnaire/Collect-Screen-Fail"
-  * description = "Complete the Primary Reason for Screen Failure"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Record Screen Failure Reason"
-      * language = #text/fhirpath
-      * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(study.name = 'RESEARCHSTUDY').subjectState.coding.where(code = 'ineligible').exists()"
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "SoA-PoC-Conditional-Screening-Eligibility",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/StudyVisitSoa"
+    ]
+  },
+  "status": "active",
+  "title": "Visit 1 - Screening",
+  "action": [
+    {
+      "definitionCanonical": "ActivityDefinition/Eligibility-Evaluation",
+      "description": "Evaluate the Patient eligibility status"
+    },
+    {
+      "definitionCanonical": "Questionnaire/Collect-Screen-Fail",
+      "description": "Complete the Primary Reason for Screen Failure",
+      "condition": [
+        {
+          "kind": "applicability",
+          "expression": {
+            "description": "Record Screen Failure Reason",
+            "language": "text/fhirpath",
+            "expression": "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(study.name = 'RESEARCHSTUDY').subjectState.coding.where(code = 'ineligible').exists()"
+          }
+        }
+      ]
+    }
+  ]
+}
+
 ```
 In this example we assume that patient failing screening would have a `subjectState` of [*ineligible*](https://terminology.hl7.org/7.1.0/en/CodeSystem-research-subject-state.html#research-subject-state-ineligible); if the FHIRPath matches then the Questionnaire to record the primary reason for Screen Failure should be shown.  If the patient is eligible then the normal study progression would occur (there are better implementations of this using the [dynamic visit plans](dynamic-visit-plans.html), this is purely illustrative).
 
