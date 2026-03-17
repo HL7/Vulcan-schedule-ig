@@ -36,8 +36,8 @@ Usage: #example
     * extension[+]
       * url = "soaPlannedRange"
       * valueRange
-        * low = 13 'd'
-        * high = 0 'd'
+        * low = 0 'd'
+        * high = 13 'd'
     * extension[+]
       * url = "soaReferenceTimePoint"
       * valueString = "Treatment Day 1"
@@ -302,7 +302,7 @@ Usage: #example
       * url = "soaTransitionRange"
       * valueRange
         * low = 7 'd'
-        * high = 7 'd '
+        * high = 7 'd'
 * action[+] // Follow Up
   * id = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5"
   * title = "Follow Up"
@@ -333,3 +333,5 @@ Usage: #example
       * valueBoolean = false
   * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-Follow-Up-PlanDefinition"
   * description = "Follow Up"
+
+

@@ -1,6 +1,6 @@
 ### Supporting Conditional Features of Modern Protocols
 
-The [basic structure](./base-structure.html) provides a structure for simple study designs.
+The [basic structure](basic-structure.html) provides a structure for simple study designs.
 
 Based on feedback from implementers of the first release of the Implementation Guide, it is necessary to extend the Schedule of Activities to incorporate recommendations that are necessary to account for more complex study designs.
 

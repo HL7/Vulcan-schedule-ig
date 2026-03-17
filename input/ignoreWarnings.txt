@@ -1,11 +1,41 @@
 == Suppressed Messages ==
 
-# Add warning and/or information messages here after you've confirmed that they aren't really a problem
-# (And include comments like this justifying why)
-# See https://github.com/FHIR/sample-ig/blob/master/input/ignoreWarnings.txt for examples
+# Value sets and code systems defined in the base FHIR R6 specification
+Reference to deprecated ValueSet http://hl7.org/fhir/ValueSet/jurisdiction|6.0.0-ballot3
+Reference to experimental CodeSystem http://hl7.org/fhir/CodeSystem/fhirpath-types|6.0.0-ballot3
 
-# Sample code systems that are unknown to the validator
-# NCI Meta-Thesaurus - URL is defined at http://hl7.org/fhir/ncimeta.html
-Code System URI 'http://ncimeta.nci.nih.gov' is unknown so the code cannot be validated
-# MeSH - URL is defined by HTA at https://confluence.hl7.org/pages/viewpage.action?pageId=109544219
-Code System URI 'https://www.nlm.nih.gov/mesh' is unknown so the code cannot be validated
+# Bindings that are found in the base FHIR R6 specification
+Constraint failed: eld-31: 'additionalBindings should have a key (key.exists())' (defined in http://hl7.org/fhir/StructureDefinition/ElementDefinition) (Best Practice Recommendation)
+Constraint failed: eld-33: 'If there's more than one bindable type, it's usually an error for there to be a binding (type.where(code in 'code' | 'Coding' | 'CodeableConcept' | 'CodeableReference' | 'uri' | 'string' | 'Quantity').count() > 1 implies binding.empty())' (defined in http://hl7.org/fhir/StructureDefinition/ElementDefinition)
+
+
+# This extension is being injected by the publisher
+The extension http://hl7.org/fhir/StructureDefinition/structuredefinition-implements could not be found so is not allowed here
+No definition could be found for URL value 'http://hl7.org/fhir/StructureDefinition/structuredefinition-implements'
+
+# This is an example Research Study
+No definition could be found for URL value 'https://clinicaltrials.gov/show/'
+A definition for CodeSystem 'https://www.nlm.nih.gov/mesh' could not be found, so the code cannot be validated
+
+# FHIR4Pharma.com and aidbox extensions are used extensively in the examples
+No definition could be found for URL value 'http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint'
+No definition could be found for URL value 'http://fhir4pharma.com/StructureDefinition/soaTransition'
+No definition could be found for URL value 'https://fhir.aidbox.app/fhir/StructureDefinition/created-at'
+No definition could be found for URL value 'http://www.fhir4pharma.com/plandefinition'
+The extension http://fhir4pharma.com/StructureDefinition/%
+The extension https://fhir.aidbox.app/fhir/StructureDefinition%
+
+# We have a number of example Definition resources that are not actually defined but use canonicals as if they were
+No definition could be found for URL value 'ActivityDefinition/H2Q-MC-LZZT%
+No definition could be found for URL value 'PlanDefinition/H2Q-MC-LZZT%
+A definition could not be found for Canonical URL 'PlanDefinition/dynamic-visit-schedule-exit-example%
+A definition could not be found for Canonical URL 'PlanDefinition/dynamic-visit-schedules-cycles-scheduled-interactions-%
+Canonical URLs must be absolute URLs if they are not fragment references%
+Constraint failed: cnl-0: 'Name should be usable as an identifier for the module by machine processing applications such as code generation (name.exists() implies name.matches('^[A-Z]([A-Za-z0-9_]){1,254}$'))' (defined in http://hl7.org/fhir/StructureDefinition/PlanDefinition)
+
+# We are using FHIR R6 but the publisher includes R5 packages
+This IG is version 6.0.0-ballot3, while the IG 'hl7.terminology.r5' is from version 5.0.0
+This IG is version 6.0.0-ballot3, while the IG 'hl7.fhir.uv.extensions.r5' is from version 5.0.0
+This IG is version 6.0.0-ballot3, while the IG 'hl7.fhir.uv.tools.r5' is from version 5.0.0
+The ImplementationGuide is based on FHIR version 6.0.0-ballot3 but package hl7.terminology.r5#7.1.0 is based on FHIR version 5.0.0. In general, this version mismatch should be avoided - some tools will try to make this work with variable degrees of success, but others will not even try
+The canonical URL http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions points to the package hl7.fhir.uv.extensions which is inconsistent with the stated packageId of hl7.fhir.uv.extensions.r5

@@ -86,6 +86,10 @@ Profile: PlannedStudyVisitSoa
 Parent: StudyVisitSoa
 Description: "A profile that further qualifies the StudyVisitSoa profile so that it can represent a planned visit."
 
+Profile: PlannedStudyVisitGroupSoa
+Parent: StudyVisitGroupSoa
+Description: "A profile that further qualifies the StudyVisitGroupSoa profile so that it can represent a planned visit."
+
 // Profile: UnplannedStudyVisitSoa
 // Parent: StudyVisitSoa
 // Description: "A profile that further qualifies the StudyVisitSoa profile so that it can represent an unplanned visit."

@@ -43,8 +43,8 @@ Usage: #example
     * extension[+]
       * url = "soaPlannedRange"
       * valueRange
-        * low = 13 'd'
-        * high = 0 'd'
+        * low = 0 'd'
+        * high = 13 'd'
     * extension[+]
       * url = "soaRepeatAllowed"
       * valueBoolean = false
@@ -62,8 +62,8 @@ Usage: #example
     * extension[+]
       * url = "soaTransitionRange"
       * valueRange
-        * low = 13 'd'
-        * high = 0 'd'
+        * low = 0 'd'
+        * high = 13 'd'
 * action[+] // Baseline
   * id = "ca0f638b-0d7a-450a-8613-0b74c9ab93c4"
   * title = "Baseline"
