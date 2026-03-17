@@ -16,9 +16,17 @@ releaseLabel: trial-use # ci-build | draft | qa-preview | ballot | trial-use | r
 license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
-  name: HL7 International - Biomedical Research & Regulation Work Group
-  url: http://hl7.org/Special/committees/rcrim
+  name: HL7 International / Biomedical Research and Regulation
+  url: http://www.hl7.org/Special/committees/rcrim
+  email: biomedrr@lists.hl7.org
   # email: test@example.org
+extension:
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+    valueCode: trial-use
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm
+    valueInteger: 2
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-wg
+    valueCode: brr
 
 pages:
   index.md:
@@ -66,4 +74,14 @@ menu:
   Credits: credits.html
 
 parameters:
+  show-inherited-invariants: false
+  apply-publisher: true
+  apply-contact: true
+  globals-in-artifacts: true
+  pin-canonicals: pin-multiples
+  version-comparison: 
+   - 1.0.0
+  shownav: true
+  toggle-changes: true
   jira-code: uv-vulcan-schedule
+  auto-oid-root: 2.16.840.1.113883.4.642.40.64
