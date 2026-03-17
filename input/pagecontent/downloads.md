@@ -4,6 +4,6 @@ This implementation guide is web-based and is intended to be browsed online. How
 
 * This [full IG](full-ig.zip)
 * The [resource definitions](definitions.json.zip)  from this IG for use with the FHIR validator (see below)
-* The full FHIR [R4]({{site.data.fhir.path}}fhir-spec.zip) specifications
+* The full FHIR [R6]({{site.data.fhir.path}}fhir-spec.zip) specifications
 * A FHIR validator can be used to check FHIR resource instance validity - download and instructions for use can be found [here](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) 
 

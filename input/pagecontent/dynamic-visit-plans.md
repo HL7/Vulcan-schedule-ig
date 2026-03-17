@@ -400,12 +400,11 @@ This can be illustrated graphically as follows:
 
 <img src="dynamic-schedules-cycles-example.png" alt="Dynamic Schedules - Cycles" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
-
 The representation of this is shown [here](PlanDefinition-dynamic-visit-schedules-cycles-scheduled-interactions.html).
 
 ##### Summary
 
-Using the extensions we can represent the SoA as a Graph[ref fhir4pharma paper] - this is key to being able to provide decision support in a prospective manner for a user utilising a healthcare system to manage the execution of a clinical trial.  There are analogues to the implementation of Timelines in the CDISC [Unified Study Design Model (USDM)](https://www.cdisc.org/ddf); so transformations between representations of Study Designs should be mappable between the standards. [add example, maybe]
+Using the extensions we can represent the SoA as a Graph - this is key to being able to provide decision support in a prospective manner for a user utilising a healthcare system to manage the execution of a clinical trial.  There are analogues to the implementation of Timelines in the CDISC [Unified Study Design Model (USDM)](https://www.cdisc.org/ddf); so transformations between representations of Study Designs should be mappable between the standards. 
 
 The complexity of the FHIR study plan will be concordant with the complexity of the study design.  The bias should always be towards implementation; working through an a
 

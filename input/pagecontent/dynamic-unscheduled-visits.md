@@ -4,7 +4,7 @@ The possibility exists in any clincal trial that a research participant cannot o
 
 Defined **unscheduled visits** will be encounters that are not part of the per-protocol schedule of activities. Standard **unscheduled activities** will usually include reviews of adverse events and concomitant medication (for the proper management and safety of a study participant), and any appropriate study specific activities.
 
-These visits will typically be triggered by emergent events such as the occurrence of an adverse event (AE) that requires medical evaluation, or participant problems such as missing a planned visit. Other triggers can include a clinical need to follow up on abnormal laboratory results, the initiation of a new concomitant medication, or other intercurrent events that could impact the study's integrity or the participant's well-being. The timing of these visits is, by definition, not planned, and they will be used repeatably as required. It is not umcommon to find that many of an **unscheduled visits**  **unscheduled activities** may be conditional (i.e., based on patient needs or investigator clinical discretion).
+These visits will typically be triggered by emergent events such as the occurrence of an adverse event (AE) that requires medical evaluation, or participant problems such as missing a planned visit. Other triggers can include a clinical need to follow up on abnormal laboratory results, the initiation of a new concomitant medication, or other intercurrent events that could impact the study's integrity or the participant's well-being. The timing of these visits is, by definition, not planned, and they will be used repeatably as required. It is not uncommon to find that many of an **unscheduled visits**  **unscheduled activities** may be conditional (i.e., based on patient needs or investigator clinical discretion).
 
 From an implementation perspective, unscheduled visits are not necessarily represented as pre-defined visits within a study's primary `PlanDefinition`. In IG Version 1 **unscheduled visits** can be specified using the *StudyVisitSoa* and *PlannedStudyVisitSoa* profiles, but not with integration in the primary study schedule.
 
@@ -47,8 +47,7 @@ By defining conditions on each of the **FROM** paths for visit **Unscheduled** t
 
 [FSH...]
 
-```
-
+```yaml
 /* 
 
 This extract from a PlanDefinition for the schedule above 

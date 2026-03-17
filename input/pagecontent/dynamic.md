@@ -1,6 +1,6 @@
 ### Supporting Conditional Features of Modern Protocols
 
-The [basic structure](base-structure.html) provides a structure for simple study designs.
+The [basic structure](./base-structure.html) provides a structure for simple study designs.
 
 Based on feedback from implementers of the first release of the Implementation Guide, it is necessary to extend the Schedule of Activities to incorporate recommendations that are necessary to account for more complex study designs.
 
@@ -12,8 +12,8 @@ The goal of the IG will be to be able to define **enough** semantics to represen
 
 For describing the work in the updated IG, we have partitioned the use cases and requirements as follows:
 * [Conditional Activities](./dynamic-conditional-activities.html) - activities within PlanDefinitions are able to be added or removed based on current patient or study status
-* [Dynamic Visit Plans](./dynamic-conditional-activities.html) - allowing for multiple paths that a patient can follow based on the Protocol
-* [Unscheduled Activities](./dynamic-unscheduled-visits.md) - providing a framework for incorporating emergent encounters
+* [Dynamic Visit Plans](./dynamic-visit-plans.html) - allowing for multiple paths that a patient can follow based on the Protocol
+* [Unscheduled Activities](./dynamic-unscheduled-visits.html) - providing a framework for incorporating emergent encounters
 
 #### Implementation Details 
 
