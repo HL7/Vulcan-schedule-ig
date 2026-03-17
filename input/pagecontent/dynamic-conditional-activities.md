@@ -96,8 +96,6 @@ Usage: #inline
       * description = "Record Screen Failure Reason"
       * language = #text/fhirpath
       * expression = "ResearchSubject.where(subject.reference = 'Patient/' + Id).where(study.name = 'RESEARCHSTUDY').subjectState.coding.where(code = 'ineligible').exists()"
-* action[+]
-  ... default study activities
 ```
 In this example we assume that patient failing screening would have a `subjectState` of [*ineligible*](https://terminology.hl7.org/7.1.0/en/CodeSystem-research-subject-state.html#research-subject-state-ineligible); if the FHIRPath matches then the Questionnaire to record the primary reason for Screen Failure should be shown.  If the patient is eligible then the normal study progression would occur (there are better implementations of this using the [dynamic visit plans](dynamic-visit-plans.html), this is purely illustrative).
 
@@ -132,347 +130,695 @@ graph LR;
 ```
 The Baseline, Titration-Review, Maintenance-Review schedule defined using IG 2 extension is shown below.
 
-```yaml
-Instance: Levothroxine-Monitoring-Schedule
-InstanceOf: PlanDefinition
-Usage: #example
-* meta
-  * versionId = "0"
-  * lastUpdated = "2026-03-11T15:57:04Z"
-* identifier
-  * system = "http://www.fhir4pharma.com/plandefinition"
-  * value = "71379aa0-f176-4138-b54a-d40c1ef56137"
-* version = "V00"
-* name = "Levothroxine-Monitoring"
-* title = "Levothroxine-Monitoring"
-* type = $plan-definition-type#clinical-protocol
-* status = #active
-* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
-* description = "Levothroxine-Monitoring"
-* action[0]
-  * id = "81b27f5e-ea81-46de-8e87-311254f3f2d5"
-  * definitionCanonical = "Encounter/Levothroxine-Monitoring-IS"
-  * title = "IS"
-  * description = "Interactions Start"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "IS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "IS"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24.0 'h'
-        * high = 24.0 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "IS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "2980bedf-c17f-44be-8ee3-c4a00fa54f93"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 6.0 'wk'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "Baseline"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "2980bedf-c17f-44be-8ee3-c4a00fa54f93"
-  * definitionCanonical = "Encounter/Levothroxine-Monitoring-Baseline"
-  * title = "Baseline"
-  * description = "Baseline"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "IS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "true"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "V"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "IS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 6.0 'wk'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "Titration-Review"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
-  * definitionCanonical = "Encounter/Levothroxine-Monitoring-Titration-Review"
-  * title = "Titration-Review"
-  * description = "Titration-Review"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 6.0 'wk'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Baseline"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "true"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "V"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 14.0 'd'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Baseline"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action[0]
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "80bc5ed4-81f5-4c79-b93d-589f26017dc7"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0.0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0.0 's'
-          * high = 0.0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "Maintenance-Review"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'TSH Stabalised':'true','operation':'=='}"
-  * action[+]
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "SS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0.0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 7.0 'd'
-          * high = 7.0 'd'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "Titration-Review"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'TSH  Stabalised':'false','operation':'=='}"
-* action[+]
-  * id = "80bc5ed4-81f5-4c79-b93d-589f26017dc7"
-  * definitionCanonical = "Encounter/Levothroxine-Monitoring-Maintenance-Review"
-  * title = "Maintenance-Review"
-  * description = "Maintenance-Review"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Titration-Review"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "true"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "V"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Titration-Review"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action[0].extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "aa84af94-f8f5-44bb-aef9-ca50e0bfc94c"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "IF"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-  * action[+].extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "80bc5ed4-81f5-4c79-b93d-589f26017dc7"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "Maintenance-Review"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-  * action[+]
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0.0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0.0 's'
-          * high = 0.0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "Titration-Review"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'TSH In Range':'false','operation':'=='}"
-* action[+]
-  * id = "aa84af94-f8f5-44bb-aef9-ca50e0bfc94c"
-  * definitionCanonical = "Encounter/Levothroxine-Monitoring-IF"
-  * title = "IF"
-  * description = "Interactions Finish"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "IS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "IF"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24.0 'h'
-        * high = 24.0 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "IS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "Levothroxine-Monitoring-Schedule",
+  "meta": {
+    "versionId": "0",
+    "lastUpdated": "2026-03-11T15:57:04Z"
+  },
+  "identifier": [
+    {
+      "system": "http://www.fhir4pharma.com/plandefinition",
+      "value": "71379aa0-f176-4138-b54a-d40c1ef56137"
+    }
+  ],
+  "version": "V00",
+  "name": "Levothroxine-Monitoring",
+  "title": "Levothroxine-Monitoring",
+  "status": "active",
+  "publisher": "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]",
+  "description": "Levothroxine-Monitoring",
+  "action": [
+    {
+      "id": "81b27f5e-ea81-46de-8e87-311254f3f2d5",
+      "definitionCanonical": "Encounter/Levothroxine-Monitoring-IS",
+      "title": "IS",
+      "description": "Interactions Start",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "IS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "IS"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "IS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "2980bedf-c17f-44be-8ee3-c4a00fa54f93"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 6,
+                    "code": "wk",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Baseline"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2980bedf-c17f-44be-8ee3-c4a00fa54f93",
+      "definitionCanonical": "Encounter/Levothroxine-Monitoring-Baseline",
+      "title": "Baseline",
+      "description": "Baseline",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "IS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "V"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "IS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 6,
+                    "code": "wk",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Titration-Review"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1",
+      "definitionCanonical": "Encounter/Levothroxine-Monitoring-Titration-Review",
+      "title": "Titration-Review",
+      "description": "Titration-Review",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 6,
+                "code": "wk",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Baseline"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "V"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 14,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Baseline"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "80bc5ed4-81f5-4c79-b93d-589f26017dc7"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Maintenance-Review"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'TSH Stabalised':'true','operation':'=='}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "SS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 7,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 7,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Titration-Review"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'TSH  Stabalised':'false','operation':'=='}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "80bc5ed4-81f5-4c79-b93d-589f26017dc7",
+      "definitionCanonical": "Encounter/Levothroxine-Monitoring-Maintenance-Review",
+      "title": "Maintenance-Review",
+      "description": "Maintenance-Review",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Titration-Review"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "V"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Titration-Review"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "aa84af94-f8f5-44bb-aef9-ca50e0bfc94c"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "IF"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "80bc5ed4-81f5-4c79-b93d-589f26017dc7"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Maintenance-Review"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "ce8c2cb1-db3a-4d03-8e59-0a7c50d027e1"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Titration-Review"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'TSH In Range':'false','operation':'=='}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aa84af94-f8f5-44bb-aef9-ca50e0bfc94c",
+      "definitionCanonical": "Encounter/Levothroxine-Monitoring-IF",
+      "title": "IF",
+      "description": "Interactions Finish",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "IS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "IF"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "IS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 The table below shows the key associated activities, where TSH and other relevant laboratory parameters are measured and then clinically reviewed to determine the required dose escalation or reduction.
@@ -491,544 +837,1095 @@ The table below shows the key associated activities, where TSH and other relevan
 
 The Titration-Review activities defined using the IG 2.0 extensions is shown below.
 
-```yaml
-Instance: Levothroxine-Monitoring-Titration-Activities
-InstanceOf: PlanDefinition
-Usage: #example
-* meta
-  * versionId = "0"
-  * lastUpdated = "2026-03-11T16:01:52Z"
-* identifier
-  * system = "http://www.fhir4pharma.com/plandefinition"
-  * value = "c4ef9bcf-718f-421a-984e-45dae567935e"
-* version = "V00"
-* name = "Levothroxine-Monitoring"
-* title = "Levothroxine-Monitoring"
-* type = $plan-definition-type#clinical-protocol
-* status = #active
-* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
-* description = "Levothroxine-Monitoring"
-* action[0]
-  * id = "0088a1c5-86ff-4081-b8ac-d0ec38c31f40"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "AS"
-  * description = "Activity Start"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 30.0 'min'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "82f88cb2-d416-4e67-8753-e24b55186873"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "Blood Sample"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "82f88cb2-d416-4e67-8753-e24b55186873"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "Blood Sample"
-  * description = "Blood Sample"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 30.0 'min'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "de868321-2d8c-4ca5-9aa2-8268ecbdc18a"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "TSH Measurement"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "de868321-2d8c-4ca5-9aa2-8268ecbdc18a"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "TSH Measurement"
-  * description = "TSH Measurement"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 30.0 'min'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "f63d8cb3-8589-4877-83fa-0e514398e785"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "Clinical Review"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "f63d8cb3-8589-4877-83fa-0e514398e785"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "Clinical Review"
-  * description = "Clinical Review"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 30.0 'min'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action[0]
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "cabec7fd-917f-4d90-a294-cd3cddeb2d72"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0.0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0.0 's'
-          * high = 0.0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "Increase Dose"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'TSH >4.6mU/L':'true','operation':'=='}"
-  * action[+]
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "dfa9adda-33fd-4a78-b8b7-ba28aa807fe1"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0.0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0.0 's'
-          * high = 0.0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "No Dose Change"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'TSH 0.4-4.6mU/L':'true','operation':'=='}"
-  * action[+]
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "0b1f8a61-d934-428a-887e-e4e5bfb834e1"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0.0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0.0 's'
-          * high = 0.0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "Decrease Dose"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'TSH <0.4mU/L':'true','operation':'=='}"
-* action[+]
-  * id = "3933c464-4863-491c-9c3b-df96d294f0e8"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "MedicationRequest"
-  * description = "MedicationRequest"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 30.0 'min'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "85593dcf-a301-4857-a906-16a0984916d9"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "AF"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "85593dcf-a301-4857-a906-16a0984916d9"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "AF"
-  * description = "Activity Finish"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 30.0 'min'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "AF"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-* action[+]
-  * id = "cabec7fd-917f-4d90-a294-cd3cddeb2d72"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "Increase Dose"
-  * description = "Increase Dose"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24.0 'h'
-        * high = 24.0 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "3933c464-4863-491c-9c3b-df96d294f0e8"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "MedicationRequest"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "dfa9adda-33fd-4a78-b8b7-ba28aa807fe1"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "No Dose Change"
-  * description = "No Dose Change"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24.0 'h'
-        * high = 24.0 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "3933c464-4863-491c-9c3b-df96d294f0e8"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "MedicationRequest"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-* action[+]
-  * id = "0b1f8a61-d934-428a-887e-e4e5bfb834e1"
-  * definitionCanonical = "http://fhir4pharma.com/ActivityDefinition/*|*"
-  * title = "Decrease Dose"
-  * description = "Decrease Dose"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 0.0 's'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "AS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = "false"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24.0 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Activity"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "A"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24.0 'h'
-        * high = 24.0 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "AS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action.extension
-    * extension[0]
-      * url = "soaTargetId"
-      * valueString = "3933c464-4863-491c-9c3b-df96d294f0e8"
-    * extension[+]
-      * url = "soaTransitionType"
-      * valueString = "FS"
-    * extension[+]
-      * url = "soaTransitionDelay"
-      * valueDuration = 0.0 's'
-    * extension[+]
-      * url = "soaTransitionRange"
-      * valueRange
-        * low = 0.0 's'
-        * high = 0.0 's'
-    * extension[+]
-      * url = "soaTargetName"
-      * valueString = "MedicationRequest"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "Levothroxine-Monitoring-Titration-Activities",
+  "meta": {
+    "versionId": "0",
+    "lastUpdated": "2026-03-11T16:01:52Z"
+  },
+  "identifier": [
+    {
+      "system": "http://www.fhir4pharma.com/plandefinition",
+      "value": "c4ef9bcf-718f-421a-984e-45dae567935e"
+    }
+  ],
+  "version": "V00",
+  "name": "Levothroxine-Monitoring",
+  "title": "Levothroxine-Monitoring",
+  "status": "active",
+  "publisher": "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]",
+  "description": "Levothroxine-Monitoring",
+  "action": [
+    {
+      "id": "0088a1c5-86ff-4081-b8ac-d0ec38c31f40",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "AS",
+      "description": "Activity Start",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 30,
+                "code": "min",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "82f88cb2-d416-4e67-8753-e24b55186873"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Blood Sample"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "82f88cb2-d416-4e67-8753-e24b55186873",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "Blood Sample",
+      "description": "Blood Sample",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 30,
+                "code": "min",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "de868321-2d8c-4ca5-9aa2-8268ecbdc18a"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "TSH Measurement"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "de868321-2d8c-4ca5-9aa2-8268ecbdc18a",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "TSH Measurement",
+      "description": "TSH Measurement",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 30,
+                "code": "min",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "f63d8cb3-8589-4877-83fa-0e514398e785"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Clinical Review"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f63d8cb3-8589-4877-83fa-0e514398e785",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "Clinical Review",
+      "description": "Clinical Review",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 30,
+                "code": "min",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "cabec7fd-917f-4d90-a294-cd3cddeb2d72"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Increase Dose"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'TSH >4.6mU/L':'true','operation':'=='}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "dfa9adda-33fd-4a78-b8b7-ba28aa807fe1"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "No Dose Change"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'TSH 0.4-4.6mU/L':'true','operation':'=='}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "0b1f8a61-d934-428a-887e-e4e5bfb834e1"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "Decrease Dose"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'TSH <0.4mU/L':'true','operation':'=='}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3933c464-4863-491c-9c3b-df96d294f0e8",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "MedicationRequest",
+      "description": "MedicationRequest",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 30,
+                "code": "min",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "85593dcf-a301-4857-a906-16a0984916d9"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "AF"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "85593dcf-a301-4857-a906-16a0984916d9",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "AF",
+      "description": "Activity Finish",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 30,
+                "code": "min",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "AF"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ]
+    },
+    {
+      "id": "cabec7fd-917f-4d90-a294-cd3cddeb2d72",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "Increase Dose",
+      "description": "Increase Dose",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "3933c464-4863-491c-9c3b-df96d294f0e8"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "MedicationRequest"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dfa9adda-33fd-4a78-b8b7-ba28aa807fe1",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "No Dose Change",
+      "description": "No Dose Change",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "3933c464-4863-491c-9c3b-df96d294f0e8"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "MedicationRequest"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0b1f8a61-d934-428a-887e-e4e5bfb834e1",
+      "definitionCanonical": "http://fhir4pharma.com/ActivityDefinition/*|*",
+      "title": "Decrease Dose",
+      "description": "Decrease Dose",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "s",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "AS"
+            },
+            {
+              "url": "soaRepeatAllowed"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Activity"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "A"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "AS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "3933c464-4863-491c-9c3b-df96d294f0e8"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "MedicationRequest"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 ---
 Based on a Biomarker Value, the dose would change; the example should illustrate a change in Dosing (MedicationAdministration) - would this be the amount or activity?
@@ -1076,8 +1973,6 @@ Instance: RCC-Arm
 InstanceOf: Group
 Usage: #inline
 * name = "RCC"
-
-
 
 Instance: SoA-PoC-Conditional-Imaging
 InstanceOf: StudyVisitSoa

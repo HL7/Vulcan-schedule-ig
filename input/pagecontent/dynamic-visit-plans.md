@@ -8,26 +8,20 @@ Within the current implementation, it is possible to accommodate one or more sch
 
 An illustration is shown here:
 
-```
-Instance: SampleMultiDesignStudy
-InstanceOf: ResearchStudy
-Usage: #example
-* title = "Sample Multi Design Study"
-* protocol[+] = Reference(PlanDefinition/StudyDesignA)
-* protocol[+] = Reference(PlanDefinition/StudyDesignB)
-
-Instance: StudyDesignA
-InstanceOf: StudyProtocolSoa
-Usage: #example
-* status = #active
-* title = "Study Design A"
-
-Instance: StudyDesignB
-InstanceOf: StudyProtocolSoa
-Usage: #example
-* status = #active
-* title = "Study Design B"
-
+```json
+{
+  "resourceType": "ResearchStudy",
+  "id": "SampleMultiDesignStudy",
+  "title": "Sample Multi Design Study",
+  "protocol": [
+    {
+      "reference": "PlanDefinition/StudyDesignA"
+    },
+    {
+      "reference": "PlanDefinition/StudyDesignB"
+    }
+  ]
+}
 ```
 Alternatively, a single study plan with conditional elements to represent all the points at which a multi-design protocol changes can be used.  The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs. 
 
@@ -70,158 +64,319 @@ This simple design illustrates:
 
 Here is a representation of this simple structure using the implementation details based on MMS:
 
-```fsh
-Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-definition-type
-
-Instance: dynamic-visit-schedule-simple-example
-InstanceOf: PlanDefinition
-Usage: #example
-* meta.versionId = "0"
-* meta.lastUpdated = "2025-11-09T15:13:31Z"
-* identifier.system = "http://www.fhir4pharma.com/plandefinition"
-* identifier.value = "5c2a9671-1d0d-4b02-8f09-0e30d77411b2"
-* version = "V00"
-* name = "dynamic-visit-schedule-simple-example"
-* title = "dynamic-visit-schedule-simple-example"
-* type = $plan-definition-type#clinical-protocol
-* status = #active
-* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
-* description = "dynamic-visit-schedule-simple-example"
-* action[0]
-  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb"
-  * title = "Visit N"
-  * description = "Visit N"
-  * definitionCanonical = "http://example.org/Encounter/Visit-N"
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * extension.extension[0]
-    * url = "soaTimePointType"
-    * valueString = "Interaction"
-  * extension.extension[+]
-    * url = "soaPlannedTimePoint"
-    * valueQuantity = 0 'd'
-  * extension.extension[+]
-    * url = "soaPlannedRange"
-    * valueRange.low = 0 'd'
-    * valueRange.high = 0 'd'
-  * extension.extension[+]
-    * url = "soaReferenceTimePoint"
-    * valueString = "Visit N"
-  * extension.extension[+]
-    * url = "soaRangeFromTimePoint"
-    * valueString = "Visit N"
-  * extension.extension[+]
-    * url = "soaPlannedDuration"
-    * valueDuration = 24 'h'
-  * extension.extension[+]
-    * url = "soaRepeatAllowed"
-    * valueBoolean = false
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action[+]
-    * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-      * extension[+]
-        * url = "soaTargetId"
-        * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3" // Visit N+1
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 48 'd'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 3 'd'
-          * high = 3 'd'
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'toNormalProgression':true}"
-  * action[+]
-    * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-      * extension[+]
-        * url = "soaTargetId"
-        * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a" // Visit Early Termination
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "SS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 24 'h'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0 'd'
-          * high = 47 'd'
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'toEarlyTermination':true}"
-* action[+]
-  * id = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
-  * title = "Visit N+1"
-  * description = "Visit N+1"
-  * definitionCanonical = "http://example.org/Encounter/Visit-N+1"
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-    * extension[0]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 48 'd'
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 3 'd'
-        * high = 3 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-* action[+]
-  * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
-  * title = "Early Termination"
-  * description = "Early Termination"
-  * definitionCanonical = "http://example.org/Encounter/Early-Termination"
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 24 'h'
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0 's'
-        * high = 48 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "dynamic-visit-schedule-simple-example",
+  "meta": {
+    "versionId": "0",
+    "lastUpdated": "2025-11-09T15:13:31Z"
+  },
+  "identifier": [
+    {
+      "system": "http://www.fhir4pharma.com/plandefinition",
+      "value": "5c2a9671-1d0d-4b02-8f09-0e30d77411b2"
+    }
+  ],
+  "version": "V00",
+  "name": "dynamic-visit-schedule-simple-example",
+  "title": "dynamic-visit-schedule-simple-example",
+  "type": {
+    "coding": [
+      {
+        "code": "clinical-protocol",
+        "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type"
+      }
+    ]
+  },
+  "status": "active",
+  "publisher": "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]",
+  "description": "dynamic-visit-schedule-simple-example",
+  "action": [
+    {
+      "id": "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb",
+      "title": "Visit N",
+      "description": "Visit N",
+      "definitionCanonical": "http://example.org/Encounter/Visit-N",
+      "extension": [
+        {
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint",
+          "extension": [
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "d",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition",
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 48,
+                    "code": "d",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 3,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 3,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'toNormalProgression':true}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition",
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "SS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 24,
+                    "code": "h",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 47,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'toEarlyTermination':true}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c25995f4-be76-47fa-ae90-a46100f8cfb3",
+      "title": "Visit N+1",
+      "description": "Visit N+1",
+      "definitionCanonical": "http://example.org/Encounter/Visit-N+1",
+      "extension": [
+        {
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint",
+          "extension": [
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 48,
+                "code": "d",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 3,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 3,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "349447c3-8ad4-4034-8c31-c3d96dcc5f9a",
+      "title": "Early Termination",
+      "description": "Early Termination",
+      "definitionCanonical": "http://example.org/Encounter/Early-Termination",
+      "extension": [
+        {
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint",
+          "extension": [
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 48,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 The extension `http://fhir4pharma.com/StructureDefinition/soaTransition` is key to defining the paths forward; 
 1. each `PlanDefinition.action` is assigned a unique identifier using `id` (this should be a UUID/GUID so as to ensure internal referential integrity)
