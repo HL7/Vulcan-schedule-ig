@@ -63,7 +63,7 @@ menu:
   Profiles: profiles.html
   Examples: examples.html
   Downloads: downloads.html
-  Credits: credits.html
+  Acknowledgements: credits.html
 
 parameters:
   jira-code: uv-vulcan-schedule
