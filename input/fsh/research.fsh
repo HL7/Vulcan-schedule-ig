@@ -58,41 +58,9 @@ Description: "An abstract profile that lists the data elements of a PlanDefiniti
   * cardinalityBehavior MS
   * definition[x] MS
 
-Profile: StudyVisitGroupSoa
-Parent: PlanDefinition
-Description: "An abstract profile that lists the data elements of a PlanDefinition that must be supported so that it can represent a Study Visit Group (eg Cycle, Period)."
-* ^abstract = true
-* url MS
-* name MS
-* title MS
-* status MS
-* subject[x] MS
-* description MS
-* action MS
-  * title MS
-  * code MS
-  * trigger MS
-  * relatedAction MS
-    * targetId MS
-    * relationship MS
-    * offset[x] MS
-    * extension contains AcceptableOffsetRangeSoa named acceptableOffsetRange 0..1
-  * timing[x] MS
-  * requiredBehavior MS
-  * cardinalityBehavior MS
-  * definition[x] MS
-
 Profile: PlannedStudyVisitSoa
 Parent: StudyVisitSoa
 Description: "A profile that further qualifies the StudyVisitSoa profile so that it can represent a planned visit."
-
-Profile: PlannedStudyVisitGroupSoa
-Parent: StudyVisitGroupSoa
-Description: "A profile that further qualifies the StudyVisitGroupSoa profile so that it can represent a planned visit."
-
-// Profile: UnplannedStudyVisitSoa
-// Parent: StudyVisitSoa
-// Description: "A profile that further qualifies the StudyVisitSoa profile so that it can represent an unplanned visit."
 
 Profile: StudyActivitySoa
 Parent: ActivityDefinition

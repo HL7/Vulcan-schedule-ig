@@ -1,13 +1,13 @@
 Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-definition-type
 
 Instance: dynamic-visit-schedule-multiple-paths
-InstanceOf: PlanDefinition
+InstanceOf: SOAPlanDefinition
 Usage: #example
 * meta
   * versionId = "0"
   * lastUpdated = "2025-11-19T17:32:42Z"
 * identifier
-  * system = "http://www.fhir4pharma.com/plandefinition"
+  * system = "http://example.org/plandefinition"
   * value = "eaa6324c-6103-452e-b82a-6ba910e7a3b2"
 * version = "V00"
 * name = "dynamic-visit-schedule-multiple-paths"
@@ -24,7 +24,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/Screening"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -49,7 +49,7 @@ Usage: #example
       * url = "soaRepeatAllowed"
       * valueBoolean = false
   * action.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "ca0f638b-0d7a-450a-8613-0b74c9ab93c4" // Baseline  
@@ -72,7 +72,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/Baseline"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -98,7 +98,7 @@ Usage: #example
       * valueBoolean = false
   * action[0]
     * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
       * extension[0]
         * url = "soaTargetId"
         * valueString = "d32e1a5e-e9d6-4548-9937-a6cf05d8557e" // D1
@@ -121,7 +121,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/D1"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -152,7 +152,7 @@ Usage: #example
         * language = #text/x-soa-expressionplain
         * expression = "{'Randomised to Arm-A':'true'}"
     * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
       * extension[0]
         * url = "soaTargetId"
         * valueString = "739689ca-cdea-46d4-babf-9affcddd8234" // D2
@@ -174,7 +174,7 @@ Usage: #example
         * language = #text/x-soa-expressionplain
         * expression = "{'Randomised to Arm-B':'true'}"
     * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
       * extension[0]
         * url = "soaTargetId"
         * valueString = "4e8e51fc-d850-483d-9eac-d721acc819a4" // D7
@@ -197,7 +197,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/D2"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -236,7 +236,7 @@ Usage: #example
       * valueRange
         * low = 1 'd'
         * high = 1 'd'
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
 * action[+] // D7
   * id = "4e8e51fc-d850-483d-9eac-d721acc819a4"
   * title = "D7"
@@ -245,7 +245,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/D7"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -270,7 +270,7 @@ Usage: #example
       * url = "soaRepeatAllowed"
       * valueBoolean = false
   * action.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "b840d1a0-5604-4707-b65a-090ecd6faf87" // D15
@@ -293,7 +293,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/D15"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -318,7 +318,7 @@ Usage: #example
       * url = "soaPlannedDuration"
       * valueDuration = 24 'h'
   * action.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "b4b8c5ea-88f1-46c9-abfc-df698548640d" // End of Study
@@ -341,7 +341,7 @@ Usage: #example
   * selectionBehavior = #exactly-one
   * definitionCanonical = "http://example.org/Encounter/End-of-Study"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"

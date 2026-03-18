@@ -1,7 +1,7 @@
 Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-definition-type
 
 Instance: dynamic-visit-schedule-exit-example-PlanDefinition
-InstanceOf: PlanDefinition
+InstanceOf: SOAPlanDefinition
 Usage: #example
 * name = "dynamic-visit-schedule-exit-example-PlanDefinition"
 * title = "dynamic-visit-schedule-exit-example-PlanDefinition"
@@ -15,15 +15,15 @@ Usage: #example
 * status = #active
 * identifier
   * value = "12c63d44-415f-4834-bd6c-630790711d4b"
-  * system = "http://www.fhir4pharma.com/plandefinition"
+  * system = "http://example.org/plandefinition"
 * action[0] // Screening
   * id = "0700e721-1f12-4998-89b8-6f4e649b62f7"
   * description = "Screening"
-  * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-Screening-PlanDefinition"
+  * definitionCanonical = "http://example.org/PlanDefinition/dynamic-visit-schedule-exit-example-Screening-PlanDefinition"
   * title = "Screening"
   * selectionBehavior = #exactly-one
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -49,7 +49,7 @@ Usage: #example
       * valueBoolean = false
   * groupingBehavior = #visual-group
   * action.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "a1806239-54f3-4762-af3f-edb9d80d29dc" // Treatment Day 1
@@ -67,11 +67,11 @@ Usage: #example
 * action[+] // Treatment Day 1
   * id = "a1806239-54f3-4762-af3f-edb9d80d29dc"
   * description = "Treatment Day 1"
-  * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-Treatment-Day-1-PlanDefinition"
+  * definitionCanonical = "http://example.org/PlanDefinition/dynamic-visit-schedule-exit-example-Treatment-Day-1-PlanDefinition"
   * title = "Treatment Day 1"
   * selectionBehavior = #exactly-one
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -97,7 +97,7 @@ Usage: #example
       * valueBoolean = false
   * groupingBehavior = #visual-group
   * action[0].extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a" // Day 7
@@ -119,7 +119,7 @@ Usage: #example
         * language = #text/x-soa-expressionplain
         * expression = "{'withdraw':True, 'operation': '=='}"
     * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
       * extension[0]
         * url = "soaTargetId"
         * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef" // End of Study
@@ -137,11 +137,11 @@ Usage: #example
 * action[+] // Day 7
   * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
   * description = "Day 7"
-  * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-Day-7-PlanDefinition"
+  * definitionCanonical = "http://example.org/PlanDefinition/dynamic-visit-schedule-exit-example-Day-7-PlanDefinition"
   * title = "Day 7"
   * selectionBehavior = #exactly-one
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -173,7 +173,7 @@ Usage: #example
         * language = #text/x-soa-expressionplain
         * expression = "{'withdraw':True, 'operation': '=='}"
     * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+      * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
       * extension[0]
         * url = "soaTargetId"
         * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef" // End of Study
@@ -189,7 +189,7 @@ Usage: #example
           * low = 1 'd'
           * high = 1 'd'
   * action[+].extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "d0dd287a-0a87-439d-95cc-8690e7abf0cb" // Day 15
@@ -207,11 +207,11 @@ Usage: #example
 * action[+] // Day 15
   * id = "d0dd287a-0a87-439d-95cc-8690e7abf0cb"
   * description = "Day 15"
-  * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-Day-15-PlanDefinition"
+  * definitionCanonical = "http://example.org/PlanDefinition/dynamic-visit-schedule-exit-example-Day-15-PlanDefinition"
   * title = "Day 15"
   * selectionBehavior = #exactly-one
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -237,7 +237,7 @@ Usage: #example
       * valueBoolean = false
   * groupingBehavior = #visual-group
   * action.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef" // End of Study
@@ -255,11 +255,11 @@ Usage: #example
 * action[+] // End of Study 
   * id = "dbc35dee-a5f2-473f-b9b1-bb14b2a1c9ef"
   * description = "End of Study"
-  * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-End-of-Study-PlanDefinition"
+  * definitionCanonical = "http://example.org/PlanDefinition/dynamic-visit-schedule-exit-example-End-of-Study-PlanDefinition"
   * title = "End of Study"
   * selectionBehavior = #exactly-one
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -285,7 +285,7 @@ Usage: #example
       * valueBoolean = false
   * groupingBehavior = #visual-group
   * action.extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
     * extension[0]
       * url = "soaTargetId"
       * valueString = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5" // Follow Up
@@ -304,7 +304,7 @@ Usage: #example
   * id = "76fb46ca-2a08-4421-8ce9-b8d412db2fb5"
   * title = "Follow Up"
   * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+    * url = "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
     * extension[0]
       * url = "soaTimePointType"
       * valueString = "Interaction"
@@ -328,7 +328,7 @@ Usage: #example
     * extension[+]
       * url = "soaRepeatAllowed"
       * valueBoolean = false
-  * definitionCanonical = "PlanDefinition/dynamic-visit-schedule-exit-example-Follow-Up-PlanDefinition"
+  * definitionCanonical = "http://example.org/PlanDefinition/dynamic-visit-schedule-exit-example-Follow-Up-PlanDefinition"
   * description = "Follow Up"
 
 
