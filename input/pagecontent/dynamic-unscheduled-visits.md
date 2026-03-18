@@ -4,7 +4,7 @@ The possibility exists in any clincal trial that a research participant cannot o
 
 Defined **unscheduled visits** will be encounters that are not part of the per-protocol schedule of activities. Standard **unscheduled activities** will usually include reviews of adverse events and concomitant medication (for the proper management and safety of a study participant), and any appropriate study specific activities.
 
-These visits will typically be triggered by emergent events such as the occurrence of an adverse event (AE) that requires medical evaluation, or participant problems such as missing a planned visit. Other triggers can include a clinical need to follow up on abnormal laboratory results, the initiation of a new concomitant medication, or other intercurrent events that could impact the study's integrity or the participant's well-being. The timing of these visits is, by definition, not planned, and they will be used repeatably as required. It is not umcommon to find that many of an **unscheduled visits**  **unscheduled activities** may be conditional (i.e., based on patient needs or investigator clinical discretion).
+These visits will typically be triggered by emergent events such as the occurrence of an adverse event (AE) that requires medical evaluation, or participant problems such as missing a planned visit. Other triggers can include a clinical need to follow up on abnormal laboratory results, the initiation of a new concomitant medication, or other intercurrent events that could impact the study's integrity or the participant's well-being. The timing of these visits is, by definition, not planned, and they will be used repeatably as required. It is not uncommon to find that many of an **unscheduled visits**  **unscheduled activities** may be conditional (i.e., based on patient needs or investigator clinical discretion).
 
 From an implementation perspective, unscheduled visits are not necessarily represented as pre-defined visits within a study's primary `PlanDefinition`. In IG Version 1 **unscheduled visits** can be specified using the *StudyVisitSoa* and *PlannedStudyVisitSoa* profiles, but not with integration in the primary study schedule.
 
@@ -43,12 +43,11 @@ By defining conditions on each of the **FROM** paths for visit **Unscheduled** t
 - condition on edge [Unscheduled to V3] `if EXISTS [SCREENING, V1,V2] if NOT EXISTS [V3,Vn.., EOS]`
 - condition on edge [Unscheduled to Vn..] `if EXISTS [SCREENING, V1,V2,..Vn-1] if NOT EXISTS [Vn.., EOS]`
 
-*PlanDefinition* FSH snippet below shows how the **unscheduled visit** options and conditions can be represented fully and accurately for visit **Unscheduled** using the **IG Version 2** `SOATimePoint` and `SOATransition` extensions.
+*PlanDefinition* snippet below shows how the **unscheduled visit** options and conditions can be represented fully and accurately for visit **Unscheduled** using the **IG Version 2** `SOATimePoint` and `SOATransition` extensions.
 
 [FSH...]
 
-```
-
+```json
 /* 
 
 This extract from a PlanDefinition for the schedule above 
@@ -60,148 +59,268 @@ Unscheduled > V3 (if V1, V2 exist and V3, EOS do not exist)
 Unscheduled > EOS (if withdrawn = true)
 
 */
-
-Instance: Vulcan-SoA-Unscheduled
-InstanceOf: PlanDefinition
-Usage: #example
-* meta
-  * versionId = "0"
-  * lastUpdated = "2026-02-17T14:04:13Z"
-* identifier
-  * system = "http://www.fhir4pharma.com/plandefinition"
-  * value = "c1b6cb89-6ccd-4b38-b0f5-6ceb7393da53"
-* version = "V00"
-* name = "Vulcan-SoA-Unscheduled"
-* title = "Vulcan-SoA-Unscheduled"
-* type = $plan-definition-type#clinical-protocol
-* status = #active
-* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
-* description = "Vulcan-SoA-Unscheduled"
-
-// ... Other Visit Definitions Here ....
-
-* action[+] // Unscheduled Visit 
-  * id = "8609c9f0-c7df-4527-b6e4-7bbdc0e69fb2"
-  * extension
-    * extension[0]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 28 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "IS"
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = true
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaTimePointSubType"
-      * valueString = "V"
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 24 'h'
-        * high = 24 'h'
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "IS"
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * title = "Unscheduled"
-  * description = "Unscheduled"
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * definitionCanonical = "PlanDefinition/Unscheduled"
-  * action[0] // Conditional Transition to EOS
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "2cedc9ad-bfe6-4a08-8799-3b2fdf398a84"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 7 'd'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0 's'
-          * high = 0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "EOS"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'withdrawn':true}"
-
-  * action[+] // Conditional Transition to V3
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "e30a745d-5dd1-484e-a16d-d1b21c3c8d29"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0 's'
-          * high = 0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "V3"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition[0]
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'exists':['V1','V2'}"
-    * condition[+]
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'not_exist':['V3','EOS']}"
-
-  * action[+] // Conditional Transition to V2
-    * extension
-      * extension[0]
-        * url = "soaTargetId"
-        * valueString = "204b7d54-c0dc-43c3-ba43-0dedbfc04d94"
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 0 's'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0 's'
-          * high = 0 's'
-      * extension[+]
-        * url = "soaTargetName"
-        * valueString = "V2"
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-    * condition[0]
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'exists':['V1'}"
-    * condition[+]
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'not_exist':['V2','V3','EOS']}"
-
+{
+  "resourceType": "PlanDefinition",
+  "id": "Vulcan-SoA-Unscheduled",
+  "meta": {
+    "versionId": "0",
+    "lastUpdated": "2026-02-17T14:04:13Z"
+  },
+  "identifier": [
+    {
+      "system": "http://www.fhir4pharma.com/plandefinition",
+      "value": "c1b6cb89-6ccd-4b38-b0f5-6ceb7393da53"
+    }
+  ],
+  "version": "V00",
+  "name": "Vulcan-SoA-Unscheduled",
+  "title": "Vulcan-SoA-Unscheduled",
+  "status": "active",
+  "publisher": "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]",
+  "description": "Vulcan-SoA-Unscheduled",
+  "action": [
+    {
+      "id": "8609c9f0-c7df-4527-b6e4-7bbdc0e69fb2",
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 28,
+                "code": "d",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "IS"
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": true
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaTimePointSubType",
+              "valueString": "V"
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 24,
+                  "code": "h",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "IS"
+            }
+          ],
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
+        }
+      ],
+      "title": "Unscheduled",
+      "description": "Unscheduled",
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "definitionCanonical": "PlanDefinition/Unscheduled",
+      "action": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "2cedc9ad-bfe6-4a08-8799-3b2fdf398a84"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 7,
+                    "code": "d",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "EOS"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'withdrawn':true}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "e30a745d-5dd1-484e-a16d-d1b21c3c8d29"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "V3"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'exists':['V1','V2'}"
+              }
+            },
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'not_exist':['V3','EOS']}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "204b7d54-c0dc-43c3-ba43-0dedbfc04d94"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 0,
+                    "code": "s",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 0,
+                      "code": "s",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                },
+                {
+                  "url": "soaTargetName",
+                  "valueString": "V2"
+                }
+              ],
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'exists':['V1'}"
+              }
+            },
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'not_exist':['V2','V3','EOS']}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 [...FSH]

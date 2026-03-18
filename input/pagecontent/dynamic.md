@@ -12,8 +12,8 @@ The goal of the IG will be to be able to define **enough** semantics to represen
 
 For describing the work in the updated IG, we have partitioned the use cases and requirements as follows:
 * [Conditional Activities](./dynamic-conditional-activities.html) - activities within PlanDefinitions are able to be added or removed based on current patient or study status
-* [Dynamic Visit Plans](./dynamic-conditional-activities.html) - allowing for multiple paths that a patient can follow based on the Protocol
-* [Unscheduled Activities](./dynamic-unscheduled-visits.md) - providing a framework for incorporating emergent encounters
+* [Dynamic Visit Plans](./dynamic-visit-plans.html) - allowing for multiple paths that a patient can follow based on the Protocol
+* [Unscheduled Activities](./dynamic-unscheduled-visits.html) - providing a framework for incorporating emergent encounters
 
 #### Implementation Details 
 
@@ -28,6 +28,6 @@ This IG will define extensions that can be interpreted by the management applica
 * Strategic Support:
   * Supporting Study Plan Queries, eg how many VS assessments are to be done, what types of lab tests are involved.  
 
-The application should support interactions with the ResearchSubject resource, to support recording Subject and Trial States (eg On-Study, Off-study, In-Screening) and Milestones (eg Informed Consent, Randomization).  This faciltates the conduct, as well as providing support for logical pre-conditions used in Study Plans.
+The application should support interactions with the ResearchSubject resource, to support recording Subject and Trial States (eg On-Study, Off-study, In-Screening) and Milestones (eg Informed Consent, Randomization).  This facilitates the conduct, as well as providing support for logical pre-conditions used in Study Plans.
 
 

@@ -8,26 +8,20 @@ Within the current implementation, it is possible to accommodate one or more sch
 
 An illustration is shown here:
 
-```
-Instance: SampleMultiDesignStudy
-InstanceOf: ResearchStudy
-Usage: #example
-* title = "Sample Multi Design Study"
-* protocol[+] = Reference(PlanDefinition/StudyDesignA)
-* protocol[+] = Reference(PlanDefinition/StudyDesignB)
-
-Instance: StudyDesignA
-InstanceOf: StudyProtocolSoa
-Usage: #example
-* status = #active
-* title = "Study Design A"
-
-Instance: StudyDesignB
-InstanceOf: StudyProtocolSoa
-Usage: #example
-* status = #active
-* title = "Study Design B"
-
+```json
+{
+  "resourceType": "ResearchStudy",
+  "id": "SampleMultiDesignStudy",
+  "title": "Sample Multi Design Study",
+  "protocol": [
+    {
+      "reference": "PlanDefinition/StudyDesignA"
+    },
+    {
+      "reference": "PlanDefinition/StudyDesignB"
+    }
+  ]
+}
 ```
 Alternatively, a single study plan with conditional elements to represent all the points at which a multi-design protocol changes can be used.  The designer will need to determine whether there needs to be separate protocol plan element, or whether a multi-design study should just be included within a single plan and use dynamic features to switch on and off parts of the study designs. 
 
@@ -44,14 +38,7 @@ Clinical Trial Schedule of Activities Specification Using Fast Healthcare Intero
 
 If we take a simple example; the progression of a patient in a study design - the following example provides an illustration
 
-```mermaid
-graph LR;
-  VisitN[Visit N]
-  VisitNP[Visit N+1]
-  VisitET[Early Termination]
-  VisitN--Early Termination-->VisitET
-  VisitN--Normal Progression (48 days)-->VisitNP
-```
+<img src="dynamic-visit-schedule-simple-example.png" alt="Dynamic Schedules - Simple Example" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The following table represents a schedule of activities for this simple progression example:
 
@@ -77,158 +64,319 @@ This simple design illustrates:
 
 Here is a representation of this simple structure using the implementation details based on MMS:
 
-```fsh
-Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-definition-type
-
-Instance: dynamic-visit-schedule-simple-example
-InstanceOf: PlanDefinition
-Usage: #example
-* meta.versionId = "0"
-* meta.lastUpdated = "2025-11-09T15:13:31Z"
-* identifier.system = "http://www.fhir4pharma.com/plandefinition"
-* identifier.value = "5c2a9671-1d0d-4b02-8f09-0e30d77411b2"
-* version = "V00"
-* name = "dynamic-visit-schedule-simple-example"
-* title = "dynamic-visit-schedule-simple-example"
-* type = $plan-definition-type#clinical-protocol
-* status = #active
-* publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
-* description = "dynamic-visit-schedule-simple-example"
-* action[0]
-  * id = "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb"
-  * title = "Visit N"
-  * description = "Visit N"
-  * definitionCanonical = "http://example.org/Encounter/Visit-N"
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-  * extension.extension[0]
-    * url = "soaTimePointType"
-    * valueString = "Interaction"
-  * extension.extension[+]
-    * url = "soaPlannedTimePoint"
-    * valueQuantity = 0 'd'
-  * extension.extension[+]
-    * url = "soaPlannedRange"
-    * valueRange.low = 0 'd'
-    * valueRange.high = 0 'd'
-  * extension.extension[+]
-    * url = "soaReferenceTimePoint"
-    * valueString = "Visit N"
-  * extension.extension[+]
-    * url = "soaRangeFromTimePoint"
-    * valueString = "Visit N"
-  * extension.extension[+]
-    * url = "soaPlannedDuration"
-    * valueDuration = 24 'h'
-  * extension.extension[+]
-    * url = "soaRepeatAllowed"
-    * valueBoolean = false
-  * groupingBehavior = #visual-group
-  * selectionBehavior = #exactly-one
-  * action[+]
-    * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-      * extension[+]
-        * url = "soaTargetId"
-        * valueString = "c25995f4-be76-47fa-ae90-a46100f8cfb3" // Visit N+1
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "FS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 48 'd'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 3 'd'
-          * high = 3 'd'
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'toNormalProgression':true}"
-  * action[+]
-    * extension
-      * url = "http://fhir4pharma.com/StructureDefinition/soaTransition"
-      * extension[+]
-        * url = "soaTargetId"
-        * valueString = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a" // Visit Early Termination
-      * extension[+]
-        * url = "soaTransitionType"
-        * valueString = "SS"
-      * extension[+]
-        * url = "soaTransitionDelay"
-        * valueDuration = 24 'h'
-      * extension[+]
-        * url = "soaTransitionRange"
-        * valueRange
-          * low = 0 'd'
-          * high = 47 'd'
-    * condition
-      * kind = #start
-      * expression
-        * language = #text/x-soa-expressionplain
-        * expression = "{'toEarlyTermination':true}"
-* action[+]
-  * id = "c25995f4-be76-47fa-ae90-a46100f8cfb3"
-  * title = "Visit N+1"
-  * description = "Visit N+1"
-  * definitionCanonical = "http://example.org/Encounter/Visit-N+1"
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-    * extension[0]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 48 'd'
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 3 'd'
-        * high = 3 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
-* action[+]
-  * id = "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
-  * title = "Early Termination"
-  * description = "Early Termination"
-  * definitionCanonical = "http://example.org/Encounter/Early-Termination"
-  * extension
-    * url = "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint"
-    * extension[+]
-      * url = "soaTimePointType"
-      * valueString = "Interaction"
-    * extension[+]
-      * url = "soaPlannedTimePoint"
-      * valueQuantity = 24 'h'
-    * extension[+]
-      * url = "soaPlannedRange"
-      * valueRange
-        * low = 0 's'
-        * high = 48 'd'
-    * extension[+]
-      * url = "soaReferenceTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaRangeFromTimePoint"
-      * valueString = "Visit N"
-    * extension[+]
-      * url = "soaPlannedDuration"
-      * valueDuration = 24 'h'
-    * extension[+]
-      * url = "soaRepeatAllowed"
-      * valueBoolean = false
+```json
+{
+  "resourceType": "PlanDefinition",
+  "id": "dynamic-visit-schedule-simple-example",
+  "meta": {
+    "versionId": "0",
+    "lastUpdated": "2025-11-09T15:13:31Z"
+  },
+  "identifier": [
+    {
+      "system": "http://www.fhir4pharma.com/plandefinition",
+      "value": "5c2a9671-1d0d-4b02-8f09-0e30d77411b2"
+    }
+  ],
+  "version": "V00",
+  "name": "dynamic-visit-schedule-simple-example",
+  "title": "dynamic-visit-schedule-simple-example",
+  "type": {
+    "coding": [
+      {
+        "code": "clinical-protocol",
+        "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type"
+      }
+    ]
+  },
+  "status": "active",
+  "publisher": "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]",
+  "description": "dynamic-visit-schedule-simple-example",
+  "action": [
+    {
+      "id": "ac4d0cb9-f2bd-49c1-8b28-42d5cd04b4fb",
+      "title": "Visit N",
+      "description": "Visit N",
+      "definitionCanonical": "http://example.org/Encounter/Visit-N",
+      "extension": [
+        {
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint",
+          "extension": [
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 0,
+                "code": "d",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 0,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ],
+      "groupingBehavior": "visual-group",
+      "selectionBehavior": "exactly-one",
+      "action": [
+        {
+          "extension": [
+            {
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition",
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "c25995f4-be76-47fa-ae90-a46100f8cfb3"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "FS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 48,
+                    "code": "d",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 3,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 3,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'toNormalProgression':true}"
+              }
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "url": "http://fhir4pharma.com/StructureDefinition/soaTransition",
+              "extension": [
+                {
+                  "url": "soaTargetId",
+                  "valueString": "349447c3-8ad4-4034-8c31-c3d96dcc5f9a"
+                },
+                {
+                  "url": "soaTransitionType",
+                  "valueString": "SS"
+                },
+                {
+                  "url": "soaTransitionDelay",
+                  "valueDuration": {
+                    "value": 24,
+                    "code": "h",
+                    "system": "http://unitsofmeasure.org"
+                  }
+                },
+                {
+                  "url": "soaTransitionRange",
+                  "valueRange": {
+                    "low": {
+                      "value": 0,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    },
+                    "high": {
+                      "value": 47,
+                      "code": "d",
+                      "system": "http://unitsofmeasure.org"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "condition": [
+            {
+              "kind": "start",
+              "expression": {
+                "language": "text/x-soa-expressionplain",
+                "expression": "{'toEarlyTermination':true}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c25995f4-be76-47fa-ae90-a46100f8cfb3",
+      "title": "Visit N+1",
+      "description": "Visit N+1",
+      "definitionCanonical": "http://example.org/Encounter/Visit-N+1",
+      "extension": [
+        {
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint",
+          "extension": [
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 48,
+                "code": "d",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 3,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 3,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "349447c3-8ad4-4034-8c31-c3d96dcc5f9a",
+      "title": "Early Termination",
+      "description": "Early Termination",
+      "definitionCanonical": "http://example.org/Encounter/Early-Termination",
+      "extension": [
+        {
+          "url": "http://fhir4pharma.com/StructureDefinition/soaPlannedTimepoint",
+          "extension": [
+            {
+              "url": "soaTimePointType",
+              "valueString": "Interaction"
+            },
+            {
+              "url": "soaPlannedTimePoint",
+              "valueQuantity": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaPlannedRange",
+              "valueRange": {
+                "low": {
+                  "value": 0,
+                  "code": "s",
+                  "system": "http://unitsofmeasure.org"
+                },
+                "high": {
+                  "value": 48,
+                  "code": "d",
+                  "system": "http://unitsofmeasure.org"
+                }
+              }
+            },
+            {
+              "url": "soaReferenceTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaRangeFromTimePoint",
+              "valueString": "Visit N"
+            },
+            {
+              "url": "soaPlannedDuration",
+              "valueDuration": {
+                "value": 24,
+                "code": "h",
+                "system": "http://unitsofmeasure.org"
+              }
+            },
+            {
+              "url": "soaRepeatAllowed",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 The extension `http://fhir4pharma.com/StructureDefinition/soaTransition` is key to defining the paths forward; 
 1. each `PlanDefinition.action` is assigned a unique identifier using `id` (this should be a UUID/GUID so as to ensure internal referential integrity)
@@ -289,22 +437,7 @@ This design illustrates:
 
 This can be visualised as shown here:
 
-```mermaid
-graph LR;
-  StudyVisit01[Screening]
-  StudyVisit03Day1[Treatment Day 1]
-  StudyVisit04Day7[Day 7]
-  StudyVisit05Day15[Day 15]
-  StudyVisitEoS[End of Study]
-  StudyVisitFollowUp[Follow Up]
-  StudyVisit01-.->StudyVisit03Day1
-  StudyVisit03Day1-->StudyVisit04Day7
-  StudyVisit04Day7-->StudyVisit05Day15
-  StudyVisit05Day15-->StudyVisitEoS
-  StudyVisitEoS-->StudyVisitFollowUp
-  StudyVisit03Day1--Early Termination-->StudyVisitEoS
-  StudyVisit04Day7--Early Termination-->StudyVisitEoS
-```
+<img src="dynamic-visit-schedule-exit-example.png" alt="Dynamic Schedules - Linear Design" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 In each encounter there are two possible outcomes: 
 * normal progression along the protocol defined path, or 
@@ -358,36 +491,8 @@ This two-arm design illustrates:
 
 This provides a visual representation of the encounters/transitions involved in the study design.
 
-```mermaid
-graph LR;
-  Screening[Screening]
-  Baseline[Randomization]
-  TreatmentDay1ArmA["Day 1 (Arm A)"]
-  TreatmentDay2ArmA["Day 2 (Arm A)"]
-  TreatmentDay7ArmA["Day 7 (Arm A)"]
-  TreatmentDay15ArmA["Day 15 (Arm A)"]
-  TreatmentDay1ArmB["Day 1 (Arm B)"]
-  TreatmentDay7ArmB["Day 7 (Arm B)"]
-  TreatmentDay15ArmB["Day 15 (Arm B)"]
-  EndOfStudy["End of Study"]
-  Screening-->Baseline
-  Baseline-->TreatmentDay1ArmA
-  Baseline-->TreatmentDay1ArmB
-  TreatmentDay15ArmA-->EndOfStudy
-  TreatmentDay15ArmB-->EndOfStudy
-  subgraph "Treatment (21 days)"
-    direction TB
-    subgraph "Arm A"
-      TreatmentDay1ArmA --> TreatmentDay2ArmA
-      TreatmentDay2ArmA --> TreatmentDay7ArmA
-      TreatmentDay7ArmA --> TreatmentDay15ArmA
-    end
-    subgraph "Arm B"
-      TreatmentDay1ArmB --> TreatmentDay7ArmB
-      TreatmentDay7ArmB --> TreatmentDay15ArmB
-    end
-  end
-```
+<img src="dynamic-visit-schedule-multiple-paths-example.png" alt="Dynamic Schedules - Multiple Paths" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
+
 
 Note; the decision made for randomization should only need to be done once; once a patient is following the path for the assigned arm, the decision support system should preclude the other path (while retaining the common exit paths).  The design should support 'common' planned encounters that can be used both before and after randomization.  The nature of the FHIR resources and relationships between them should be able to be used to be most efficient.
 
@@ -448,93 +553,13 @@ In this design we pivot between odd-numbered cycles (Cycle 1, 3, 5) and even-num
 
 This can be illustrated graphically as follows:
 
-```mermaid
-graph TD
-    %% Pre-treatment Phase
-    subgraph PreTreatment["Screening Period"]
-        direction TB
-        Screening[Screening] --> Randomization[Randomization]
-    end
-
-    %% Cycle 1 (Odd cycle pattern)
-    subgraph Cycle1["🔄 Cycle N (Odd Pattern)"]
-        direction LR
-        C1D1[Day 1] --> C1D14[Day 14]
-        C1D14 --> C1D28[Day 28]
-    end
-
-    %% Cycle 2 (Even cycle pattern)
-    subgraph Cycle2["🔄 Cycle N+1 (Even Pattern)"]
-        direction LR
-        C2D1[Day 1] --> C2D7[Day 7]
-        C2D7 --> C2D14[Day 14]
-        C2D14 --> C2D21[Day 21]
-        C2D21 --> C2D28[Day 28 + Response]
-    end
-
-    %% Additional Cycles Indicator
-    subgraph CycleContinuation["🔄 Additional Cycles"]
-        direction LR
-        MoreCycles[Cycles continue<br/>alternating patterns]
-    end
-
-    %% Post-treatment Phase
-    subgraph PostTreatment["End of Treatment"]
-        direction TB
-        EndTreatment[End of Treatment<br/>Assessment]
-    end
-
-    %% Follow-up
-    subgraph FollowUp["Follow-up Period"]
-        direction TB
-        FU1[Follow-up 1<br/>+90 days] --> FU2[Follow-up 2<br/>+180 days]
-    end
-
-    subgraph EndStudy["Study Completion"]
-        direction TB
-        EndOfStudy[End of Study]
-    end
-
-    %% Transitions between phases and cycles (vertical stacking)
-    PreTreatment --> Cycle1
-    Cycle1 --> Cycle2
-    Cycle2 --> CycleContinuation
-    CycleContinuation --> PostTreatment
-    PostTreatment --> FollowUp
-    FollowUp --> EndStudy
-
-    %% Early termination paths
-    C2D28 --Progressive<br/>Disease--> PostTreatment
-    CycleContinuation --Study<br/>Completion--> PostTreatment
-    Screening --Screen<br/>Failure--> EndStudy
-    Randomization --Patient<br/>Withdrawal--> PostTreatment
-    Cycle1 --Adverse<br/>Event--> PostTreatment
-    Cycle2 --Adverse<br/>Event--> PostTreatment
-    PostTreatment --Lost to<br/>Follow-up--> EndStudy
-
-    %% Styling
-    classDef prePhase fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef oddCycleBox fill:#f3e5f5,stroke:#4a148c,stroke-width:3px
-    classDef evenCycleBox fill:#e8f5e8,stroke:#1b5e20,stroke-width:3px
-    classDef continueBox fill:#fff9c4,stroke:#f57f17,stroke-width:3px
-    classDef postPhase fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef followupPhase fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
-    classDef encounter fill:#ffffff,stroke:#666666,stroke-width:1px
-
-    class Screening,Randomization prePhase
-    class EndTreatment postPhase
-    class FU1,FU2 followupPhase
-    class C1D1,C1D14,C1D28 encounter
-    class C2D1,C2D7,C2D14,C2D21,C2D28 encounter
-    class MoreCycles continueBox
-    class EndOfStudy postPhase
-```
+<img src="dynamic-schedules-cycles-example.png" alt="Dynamic Schedules - Cycles" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The representation of this is shown [here](PlanDefinition-dynamic-visit-schedules-cycles-scheduled-interactions.html).
 
 ##### Summary
 
-Using the extensions we can represent the SoA as a Graph[ref fhir4pharma paper] - this is key to being able to provide decision support in a prospective manner for a user utilising a healthcare system to manage the execution of a clinical trial.  There are analogues to the implementation of Timelines in the CDISC [Unified Study Design Model (USDM)](https://www.cdisc.org/ddf); so transformations between representations of Study Designs should be mappable between the standards. [add example, maybe]
+Using the extensions we can represent the SoA as a Graph - this is key to being able to provide decision support in a prospective manner for a user utilising a healthcare system to manage the execution of a clinical trial.  There are analogues to the implementation of Timelines in the CDISC [Unified Study Design Model (USDM)](https://www.cdisc.org/ddf); so transformations between representations of Study Designs should be mappable between the standards. 
 
 The complexity of the FHIR study plan will be concordant with the complexity of the study design.  The bias should always be towards implementation; working through an a
 
