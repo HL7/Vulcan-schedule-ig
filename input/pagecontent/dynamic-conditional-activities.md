@@ -128,7 +128,9 @@ Continued Study activities are dependent on ResearchSubject having completed all
 ```
 In this example we assume that patient failing screening would have a `subjectState` of [*ineligible*](https://terminology.hl7.org/7.1.0/en/CodeSystem-research-subject-state.html#research-subject-state-ineligible); if the FHIRPath matches then the Questionnaire to record the primary reason for Screen Failure should be shown.  If the patient is eligible then the normal study progression would occur (there are better implementations of this using the [dynamic visit plans](dynamic-visit-plans.html), this is purely illustrative).
 
-Dose titration is used to establish the lowest effective dose that provides the patient with an optimal therapeutic effect with minimal side effects (ref). The key principles of dose titration are:
+##### Example III: Dose Titration with Maximum Ascending Dose
+
+Dose titration is used to establish the lowest effective dose that provides the patient with an optimal therapeutic effect with minimal side effects ([C90475](https://evsexplore.semantics.cancer.gov/evsexplore/concept/ncit/C90475)). The key principles of dose titration are:
 
 - establish a baseline measurement relevant to the medication's purpose
 - start medication with the lowest effective dose as recommended in clinical guidelines
@@ -1959,35 +1961,6 @@ The Titration-Review activities defined using the IG 2.0 extensions is shown bel
 ---
 Based on a Biomarker Value, the dose would change; the example should illustrate a change in Dosing (MedicationAdministration) - would this be the amount or activity?
 
-```yaml
-Instance: SoA-PoC-Conditional-Visit-4-Treatment
-InstanceOf: StudyVisitSoa
-Usage: #inline
-* status = #active
-* title = "Visit 3 - Treatment"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/PlannedDose-10mg"
-  * title = "Dose Administration - 10mg"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Determine applicability to 10mg arm"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/PlannedDose-20mg"
-  * title = "Dose Administration - 20mg"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Determine applicability to 20mg arm"
-* action[+]
-  * definitionCanonical = "ActivityDefinition/PlannedDose-50mg"
-  * title = "Dose Administration - 50mg"
-  * condition[+]
-    * kind = #applicability
-    * expression
-      * description = "Determine applicability to 50mg arm"
-```
-
 ##### Example V: Study Imaging 
 In the following example we have a scenario where there is a need for Disease Response assessment by Imaging Study.  Dependent on the disease type and location the type of imaging required will differ.  The conditionality here allows for the requisite activities to be scheduled and the unnecessary activities to be skipped.
 
@@ -1996,12 +1969,14 @@ Instance: GBM-Arm
 InstanceOf: Group
 Usage: #inline
 * name = "GBM"
+* description = "Glioblastoma Multiforme Cohort"
 
 
 Instance: RCC-Arm
 InstanceOf: Group
 Usage: #inline
 * name = "RCC"
+* description = "Renal Cell Carcinoma Cohort"
 
 Instance: SoA-PoC-Conditional-Imaging
 InstanceOf: StudyVisitSoa
