@@ -11,9 +11,6 @@ Usage: #example
 * meta
   * lastUpdated = "2026-01-09T20:46:14.391964Z"
   * versionId = "711"
-  * extension
-    * url = "https://fhir.aidbox.app/fhir/StructureDefinition/created-at"
-    * valueInstant = "2026-01-08T16:43:50.193978Z"
 * description = "dynamic-visit-schedule-exit-example-PlanDefinition"
 * status = #active
 * identifier
