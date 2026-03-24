@@ -12,6 +12,8 @@
 <artifact id="Organization/EliLillyAndCompany" key="Organization-EliLillyAndCompany" name="Eli Lilly and Company"/>
 <artifact id="PlanDefinition/H2Q-MC-LZZT-ProtocolDesign" key="PlanDefinition-H2Q-MC-LZZT-ProtocolDesign" name="H2Q-MC-LZZT Protocol Schedule of Activities"/>
 <artifact id="ResearchStudy/H2Q-MC-LZZT-ResearchStudy" key="ResearchStudy-H2Q-MC-LZZT-ResearchStudy" name="H2Q-MC-LZZT Research Study"/>
+<artifact id="PlanDefinition/Levothroxine-Monitoring-Schedule" key="PlanDefinition-Levothroxine-Monitoring-Schedule" name="Levothroxine-Monitoring-Schedule"/>
+<artifact id="PlanDefinition/Levothroxine-Monitoring-Titration-Activities" key="PlanDefinition-Levothroxine-Monitoring-Titration-Activities" name="Levothroxine-Monitoring-Titration-Activities"/>
 <artifact id="StructureDefinition/PlannedStudyVisitSoa" key="StructureDefinition-PlannedStudyVisitSoa" name="PlannedStudyVisitSoa"/>
 <artifact id="StructureDefinition/ResearchStudySoa" key="StructureDefinition-ResearchStudySoa" name="ResearchStudySoa"/>
 <artifact id="StructureDefinition/soaPlanDefinition" key="StructureDefinition-soaPlanDefinition" name="SOA PlanDefinition"/>

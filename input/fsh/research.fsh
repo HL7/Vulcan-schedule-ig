@@ -108,6 +108,7 @@ Description: "SoA TimePoint Attribute Extension"
 * ^context[=].expression = "PlanDefinition.action"
 * extension contains 
     soaTimePointType 0..1 and
+    soaTimePointSubType 0..1 and
     soaPlannedTimePoint 0..1 and
     soaPlannedRange 0..1 and
     soaReferenceTimePoint 0..1 and
@@ -115,6 +116,7 @@ Description: "SoA TimePoint Attribute Extension"
     soaPlannedDuration 0..1 and 
     soaRepeatAllowed 0..1
 * extension[soaTimePointType].value[x] only string // interaction or activity
+* extension[soaTimePointSubType].value[x] only string // interaction or activity
 * extension[soaPlannedTimePoint].value[x] only SimpleQuantity // visit day etc.
 * extension[soaPlannedRange].value[x] only Range // visit window
 * extension[soaReferenceTimePoint].value[x] only string // reference visit for planned time
@@ -133,10 +135,12 @@ Description: "Specifies SoA Transition Attributes"
 * ^context[=].expression = "PlanDefinition.action.action"
 * extension contains 
     soaTargetId 0..1 and 
+    soaTargetName 0..1 and
     soaTransitionType 0..1 and
     soaTransitionDelay 0..1 and
     soaTransitionRange 0..1
 * extension[soaTargetId].value[x] only string // transition target UUID
+* extension[soaTargetName].value[x] only string // transition target UUID
 * extension[soaTransitionType].value[x] only string // calculate transition wait from - to
 * extension[soaTransitionDelay].value[x] only Duration  // wait time between states
 * extension[soaTransitionRange].value[x] only Range  // transition permitted window
