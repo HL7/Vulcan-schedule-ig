@@ -3,7 +3,6 @@ Alias: $plan-definition-type = http://terminology.hl7.org/CodeSystem/plan-defini
 Instance: dynamic-visit-schedules-cycles-scheduled-interactions
 InstanceOf: PlanDefinition
 Usage: #example
-* id = "3f8af28a-6333-45d6-ad9b-2a11982061cd"
 * name = "dynamic-visit-schedules-cycles-scheduled-interactions"
 * status = #active
 * identifier
@@ -12,9 +11,6 @@ Usage: #example
 * meta
   * lastUpdated = "2026-01-15T13:31:12.670673Z"
   * versionId = "3473"
-  * extension
-    * url = "https://fhir.aidbox.app/fhir/StructureDefinition/created-at"
-    * valueInstant = "2026-01-12T16:15:28.561043Z"
 * title = "dynamic-visit-schedules-cycles-scheduled-interactions"
 * type = $plan-definition-type#clinical-protocol
 * publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
