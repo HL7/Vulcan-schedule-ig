@@ -48,17 +48,6 @@ By defining conditions on each of the **FROM** paths for visit **Unscheduled** t
 [FSH...]
 
 ```json
-/* 
-
-This extract from a PlanDefinition for the schedule above 
-describes the Unscheduled visit, its specified paths to other a next visit 
-and the transition conditions that must be met for each path to be available.
-
-Unscheduled > V2 (if V1 exists and V2, V3, EOS do not exist)
-Unscheduled > V3 (if V1, V2 exist and V3, EOS do not exist)
-Unscheduled > EOS (if withdrawn = true)
-
-*/
 {
   "resourceType": "PlanDefinition",
   "id": "Vulcan-SoA-Unscheduled",
@@ -323,4 +312,9 @@ Unscheduled > EOS (if withdrawn = true)
   ]
 }
 ```
-[...FSH]
+This extract from a PlanDefinition for the schedule above describes the Unscheduled visit, its specified paths to other a next visit and the transition conditions that must be met for each path to be available.
+
+* Unscheduled > V2 (if V1 exists and V2, V3, EOS do not exist)
+* Unscheduled > V3 (if V1, V2 exist and V3, EOS do not exist)
+* Unscheduled > EOS (if withdrawn = true)
+
