@@ -17,6 +17,8 @@ The following extensions are defined to enable data elements that are not curren
 |**Extension**|**Context**|**Description**|
 |---|---|---|
 |[AcceptableOffsetRange](StructureDefinition-AcceptableOffsetRangeSoa.html)|PlanDefinition.action.relatedAction|Provides an offset range that, along with offsetDuration, indicates an acceptable range of dates for a related action, i.e. +10-15 days|
+|[soaTransition](StructureDefinition-soaTransition.html)|PlanDefinition.action|Provides decision support on transitions between planned Activities|
+|[soaTimepoint](StructureDefinition-soaTimepoint.html)|PlanDefinition.action|Provides enhanced structures for representing Activity Timepoints|
 {: .grid }
 
 ### Global Profiles
