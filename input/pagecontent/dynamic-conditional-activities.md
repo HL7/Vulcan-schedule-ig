@@ -17,10 +17,12 @@ Conditional classifications could include:
 
 Some examples taken from real protocols are shown here:
 - Patients who are diabetics should have hemoglobin A1c tests
+
   ```
   If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained.
   ```
 - Evidence of suspected liver damage
+
   ```
   The following criteria have been developed to monitor hepatic function.
     * Patients with ALT/SGPT levels >120 IU will be retested weekly.
@@ -29,10 +31,12 @@ Some examples taken from real protocols are shown here:
       retested within 2 days...
   ```
 - Pregnancy tests for females of child-bearing potential
+
   ```
   Serum (at baseline) or urine human chorionic gonadotropin (hCG) pregnancy test (as needed for females of childbearing potential). (urine pregnancy test on Day 1 of each cycle, EOT visit, and every 30±7 days until 5 months after last dose of study treatment)
   ```
 - Disease Response assessment based on the type and location of the disease under treatment:
+
   ```
   HCC, hepatocellular carcinoma, requiring an MRI or CT scan and GBM, glioblastoma, requiring a Brain MRI
   ```
