@@ -29,6 +29,14 @@ The key consideration for the SoA is the collection of data to support the hypot
 * the **outcomes** from those activities, and potentially
 * **who** is to perform/undertake the activities
 
+### Representation of Study Designs as Graphs
+While the SoA is represented in the Protocol as a Table, it is helpful to think about how the implementation of a Study Design for a patient could be represented as a graph; with encounters and activities as nodes, and transitions between them as edges.[^1]  The edges can be determined purely by sequencing (activities) or based on conditions described in the protocol (often using footnotes or narrative). 
+
+Both representations are equatable, the tabular representation appeal to human consumers and the graphical representation being more computable.  Thinking about study design as a graph is very aligned with an executable schedule of activities; with transitions representing decisions (and thereby decision support) for users who interact with patients participating in studies. 
+
+The implementation examples in the updated IG lean more towards graph-like representations; however, this does not imply a transition or wholesale recommendation of this approach over the existing approach in the first IG.  Adoption should reflect the capabilities of systems and stakeholders.
+
+
 ### Implementing a SoA using FHIR Resources
 The FHIR standard (Fast Healthcare Interoperability Resources) is designed to support the exchange of electronic health records. The 'Definitional Artifacts' section of the 'Specialized' FHIR Resources category provides a set of FHIR Resources that are designed to enable research specifications such as those in a SoA to be represented in a standard format that can consumed by  eHR systems to plan and execute research protocols directly. 
 
@@ -52,7 +60,7 @@ The high-level points are as follows:
 * Under the Study Definition there are references to each of the planned encounters/visits through the _action_ predicate (linking to the [PlanDefinition](http://hl7.org/fhir/PlanDefinition) instance for the encounter),  
 * Within a planned encounter/visit, the planned activities are represented through the _action_ predicate linking to the [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) or [Questionnaire](http://hl7.org/fhir/ActivityDefinition) representing the activity.
 
-Many activities are event or pre-condition based. The _action.relatedAction_ predicate is used to represent the relationships between activities.  This specifies what activities are to be done and when they are planned to be done (relative to a reference or pivot event).
+Many activities are event or pre-condition based. The _action.relatedAction_ predicate is used to represent the relationships between activities (refer to [Conditional Activities](./dynamic-conditional-activities.html) for further examples).  This specifies what activities are to be done and when they are planned to be done (relative to a reference or pivot event).
 
 The following example illustrates this for a flow of Study Visits:
 
@@ -87,3 +95,5 @@ The SDC workgroup represents a implementation for Research based on the collecti
 
 The SoA FHIR IG assumes that how activities/tasks get executed is dependent on their respective services, procedures, and administrative mechanisms. The working group has assumed that it will vary dependent on the scenario and how each system, application, device, etc. are setup.
 
+#### References
+[^1] [Richardson, A., (2024) “Representing Clinical Study Schedule of Activities as FHIR Resources: Required Characteristic Attributes”, Journal of the Society for Clinical Data Management 4(2)](https://doi.org/10.47912/jscdm.266)
