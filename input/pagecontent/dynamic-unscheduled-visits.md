@@ -20,19 +20,8 @@ Assuming the **unscheduled visit** is defined once only (diagram), this then req
 
 A set of typical paths to and from an **unscheduled visit** is shown in the diagram below. This shows that **unscheduled visits** may occur after V1 and from each subsequent scheduled visit. Following an **unscheduled visit** the subject is expected to either (a) return to following the primary schedule, or is withdrawn from the study (EOS - EndOfStudy) 
 
-```mermaid
-graph LR
-Unscheduled
-Screening-.->V1
-V1==>V2
-V2==>V3
-V3-.->Vn
-Vn==>EOS
-V1-->Unscheduled--toV2-->V2
-V2-->Unscheduled--toV3-->V3
-V3-->Unscheduled--toVn-->Vn
-Unscheduled--withdrawn-->EOS
-```
+<img src="unscheduled-visits.jpeg" style="float:none; margin: 0px 0px 0px 0px;" width="650px">
+
 
 This figure accurately describes all paths to and from the **unscheduled visit**, but it is not the case that once instantiated all these paths should be available. For example, if V2 has already occured, returning to V2 is not appropriate; the next visit should either be V3 (next scheduled visit) or EOS (participant withdrawn).  
 
@@ -44,8 +33,6 @@ By defining conditions on each of the **FROM** paths for visit **Unscheduled** t
 - condition on edge [Unscheduled to Vn..] `if EXISTS [SCREENING, V1,V2,..Vn-1] if NOT EXISTS [Vn.., EOS]`
 
 *PlanDefinition* snippet below shows how the **unscheduled visit** options and conditions can be represented fully and accurately for visit **Unscheduled** using the **IG Version 2** `SOATimePoint` and `SOATransition` extensions.
-
-[FSH...]
 
 ```json
 {
