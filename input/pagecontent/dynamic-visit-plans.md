@@ -387,7 +387,7 @@ The extension `http://fhir4pharma.com/StructureDefinition/soaTransition` is key 
   4. the `soaPlannedDuration` value specifies the duration at which this transition is expected to occur
 3. The `condition` attribute on the `PlanDefinition.action.action` is used to specify the 'logic' controlling the transition, and it follows the existing semantics of the `action.condition`.  
 
-For a deeper discussion and definition of this, please refer to the source paper here: [UPDATE]()
+For a deeper discussion and definition of this, please refer to the source paper here: [Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study](https://medinform.jmir.org/2025/1/e71430).
 
 In order to ensure that the transitions can be evaluable, for each action the evaluation of the `condition` should be a boolean, where true the transition should be allowed.  Any action without a condition is the default transition, and should be presented if no other actions are applicable.  A terminal activity will have no transitions available given all the conditions available.
 
