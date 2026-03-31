@@ -35,6 +35,14 @@ pages:
     title: Core Schedule of Activities Model
   visit-windows.md:
     title: Visit Windowing
+  dynamic.md:
+    title: Dynamic Features
+  dynamic-conditional-activities.md:
+    title: Conditional Activities
+  dynamic-visit-plans.md:
+    title: Dynamic Visit Plans
+  dynamic-unscheduled-visits.md:
+    title: Unscheduled Visits 
   ip-administration.md:
     title: Investigational Product Administration
   cdisc-odm.md:
@@ -45,16 +53,10 @@ pages:
     title: Examples
   downloads.md:
     title: Downloads
+  changes.md:
+    title: Changes
   credits.md:
-    title: Acknowledgements
-  dynamic.md:
-    title: Dynamic Features
-  dynamic-conditional-activities.md:
-    title: Conditional Activities
-  dynamic-visit-plans.md:
-    title: Dynamic Visit Plans
-  dynamic-unscheduled-visits.md:
-    title: Unscheduled Visits 
+    title: Credits
 
 menu:
   Home: index.html
@@ -71,6 +73,7 @@ menu:
   Profiles: profiles.html
   Examples: examples.html
   Downloads: downloads.html
+  Change Log: changes.html
   Acknowledgements: credits.html
 
 parameters:
