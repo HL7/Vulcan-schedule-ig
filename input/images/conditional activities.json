@@ -1,0 +1,1142 @@
+{
+  "resourceType" : "PlanDefinition",
+  "id" : "Levothroxine-Monitoring-Titration-Activities",
+  "meta" : {
+    "versionId" : "0",
+    "lastUpdated" : "2026-03-11T16:01:52Z"
+  },
+  "language" : "en",
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n<div>\n    <table class=\"grid dict\">\n        \n        <tr>\n            <th scope=\"row\"><b>Id: </b></th>\n            <td style=\"padding-left: 4px;\">Levothroxine-Monitoring-Titration-Activities</td>\n        </tr>\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Url: </b></th>\n            <td style=\"padding-left: 4px;\"><a href=\"PlanDefinition-Levothroxine-Monitoring-Titration-Activities.html\">Levothroxine-Monitoring-Titration-Activities</a></td>\n        </tr>\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Version: </b></th>\n            <td style=\"padding-left: 4px;\">2.0.0-ballot</td>\n        </tr>\n        \n\n        \n        <tr>\n            <th scope=\"row\">\n                <b>\n                    \n                        \n                    \n                </b>\n            </th>\n            <td style=\"padding-left: 4px;\">\n                \n                <p style=\"margin-bottom: 5px;\">\n                    <span>c4ef9bcf-718f-421a-984e-45dae567935e</span>\n                </p>\n                \n            </td>\n        </tr>\n        \n        <tr>\n            <th scope=\"row\">\n                <b>\n                    \n                        \n                    \n                </b>\n            </th>\n            <td style=\"padding-left: 4px;\">\n                \n                <p style=\"margin-bottom: 5px;\">\n                    <span>urn:oid:2.16.840.1.113883.4.642.40.64.34.9</span>\n                </p>\n                \n            </td>\n        </tr>\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Title: </b></th>\n            <td style=\"padding-left: 4px;\">Levothroxine-Monitoring-Titration-Activities</td>\n        </tr>\n        \n\n        \n\n        \n\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Type: </b></th>\n            <td style=\"padding-left: 4px;\">\n                \n                    \n                        \n                        <p style=\"margin-bottom: 5px;\">\n                            <b>system: </b> <span><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-plan-definition-type.html\">http://terminology.hl7.org/CodeSystem/plan-definition-type</a></span>\n                        </p>\n                        \n                        \n                        <p style=\"margin-bottom: 5px;\">\n                            <b>code: </b> <span>clinical-protocol</span>\n                        </p>\n                        \n                        \n                    \n                \n                \n            </td>\n        </tr>\n        \n\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Date: </b></th>\n            <td style=\"padding-left: 4px;\">2026-03-24 21:36:22+0000</td>\n        </tr>\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Publisher: </b></th>\n            <td style=\"padding-left: 4px;\">HL7 International / Biomedical Research and Regulation</td>\n        </tr>\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Description: </b></th>\n            <td style=\"padding-left: 4px;\"><div><p>Levothroxine-Monitoring</p>\n</div></td>\n        </tr>\n        \n\n        \n\n        \n\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Jurisdiction: </b></th>\n            <td style=\"padding-left: 4px;\">001</td>\n        </tr>\n        \n\n        \n\n        \n\n        \n\n        \n\n        \n\n        \n\n        \n\n        \n\n        \n        <tr>\n            <th scope=\"row\"><b>Actions: </b></th>\n            <td style=\"padding-left: 4px;\">\n                <table class=\"grid-dict\">\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> AS:</b> <div><p>Activity Start</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> Blood Sample:</b> <div><p>Blood Sample</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> TSH Measurement:</b> <div><p>TSH Measurement</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> Clinical Review:</b> <div><p>Clinical Review</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        <b>If:</b>\n                                        \n                                        <i>Start:</i>\n                                        \n                                        <i>({'TSH &gt;4.6mU/L':'true','operation':'=='})</i>\n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        <b>If:</b>\n                                        \n                                        <i>Start:</i>\n                                        \n                                        <i>({'TSH 0.4-4.6mU/L':'true','operation':'=='})</i>\n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        <b>If:</b>\n                                        \n                                        <i>Start:</i>\n                                        \n                                        <i>({'TSH &lt;0.4mU/L':'true','operation':'=='})</i>\n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> MedicationRequest:</b> <div><p>MedicationRequest</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> AF:</b> <div><p>Activity Finish</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            \n                            <b>Then:</b> <i>Definition:</i> <code>http://example.org/ActivityDefinition/ActivityFinish</code><br/>\n                            \n                            \n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> Increase Dose:</b> <div><p>Increase Dose</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> No Dose Change:</b> <div><p>No Dose Change</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                    <tr>\n                        <td>\n                            \n                            <b> Decrease Dose:</b> <div><p>Decrease Dose</p>\n</div>\n                            \n                            <br/>\n                            \n                            \n                            \n                            <b>Then:</b>\n                            <table class=\"grid-dict\">\n                                \n                                <tr>\n                                    <td>\n                                        \n                                        <b> :</b>\n                                        \n                                        \n                                        <br/>\n                                        \n                                        \n                                        \n                                        \n                                        \n                                    </td>\n                                </tr>\n                                \n                            </table>\n                            \n                        </td>\n                    </tr>\n                    \n                </table>\n            </td>\n        </tr>\n        \n    </table>\n</div>\n</div>"
+  },
+  "url" : "http://hl7.org/fhir/uv/vulcan-schedule/PlanDefinition/Levothroxine-Monitoring-Titration-Activities",
+  "identifier" : [
+    {
+      "system" : "http://example.org/plandefinition",
+      "value" : "c4ef9bcf-718f-421a-984e-45dae567935e"
+    },
+    {
+      "system" : "urn:ietf:rfc:3986",
+      "value" : "urn:oid:2.16.840.1.113883.4.642.40.64.34.9"
+    }
+  ],
+  "version" : "2.0.0-ballot",
+  "name" : "Levothroxine-Monitoring-Titration-Activities",
+  "title" : "Levothroxine-Monitoring-Titration-Activities",
+  "type" : {
+    "coding" : [
+      {
+        "system" : "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+        "code" : "clinical-protocol"
+      }
+    ]
+  },
+  "status" : "active",
+  "date" : "2026-03-24T21:36:22+00:00",
+  "publisher" : "HL7 International / Biomedical Research and Regulation",
+  "contact" : [
+    {
+      "name" : "HL7 International / Biomedical Research and Regulation",
+      "telecom" : [
+        {
+          "system" : "url",
+          "value" : "http://www.hl7.org/Special/committees/rcrim"
+        },
+        {
+          "system" : "email",
+          "value" : "biomedrr@lists.hl7.org"
+        }
+      ]
+    }
+  ],
+  "description" : "Levothroxine-Monitoring",
+  "jurisdiction" : [
+    {
+      "coding" : [
+        {
+          "system" : "http://unstats.un.org/unsd/methods/m49/m49.htm",
+          "code" : "001",
+          "display" : "World"
+        }
+      ]
+    }
+  ],
+  "action" : [
+    {
+      "id" : "0088a1c5-86ff-4081-b8ac-d0ec38c31f40",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 30,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "min"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                },
+                "high" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "AS",
+      "description" : "Activity Start",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/start",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "82f88cb2-d416-4e67-8753-e24b55186873"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "Blood Sample"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "82f88cb2-d416-4e67-8753-e24b55186873",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 30,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "min"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                },
+                "high" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "Blood Sample",
+      "description" : "Blood Sample",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/BloodSample",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "de868321-2d8c-4ca5-9aa2-8268ecbdc18a"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "TSH Measurement"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "de868321-2d8c-4ca5-9aa2-8268ecbdc18a",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 30,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "min"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                },
+                "high" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "TSH Measurement",
+      "description" : "TSH Measurement",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/TSHMeasurement",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "f63d8cb3-8589-4877-83fa-0e514398e785"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "Clinical Review"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "f63d8cb3-8589-4877-83fa-0e514398e785",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 30,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "min"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                },
+                "high" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "Clinical Review",
+      "description" : "Clinical Review",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/ClinicalReview",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "cabec7fd-917f-4d90-a294-cd3cddeb2d72"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "Increase Dose"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition" : [
+            {
+              "kind" : "start",
+              "expression" : {
+                "language" : "text/x-soa-expressionplain",
+                "expression" : "{’TSH’: 0.4 ‘mU/L’, operation = ‘<‘}"
+              }
+            }
+          ]
+        },
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "dfa9adda-33fd-4a78-b8b7-ba28aa807fe1"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "No Dose Change"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition" : [
+            {
+              "kind" : "start",
+              "expression" : {
+                "language" : "text/x-soa-expressionplain",
+                "expression" : "{’TSH’: 0.4 ‘mU/L’, operation = ‘>=’} | {’TSH’: 4.6 ‘mU/L, operation = ‘<=’}"
+              }
+            }
+          ]
+        },
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "0b1f8a61-d934-428a-887e-e4e5bfb834e1"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "Decrease Dose"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ],
+          "condition" : [
+            {
+              "kind" : "start",
+              "expression" : {
+                "language" : "text/x-soa-expressionplain",
+                "expression" : "{’TSH’: 4.6 ‘mU/L’, operation = ‘>’}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "3933c464-4863-491c-9c3b-df96d294f0e8",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 30,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "min"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                },
+                "high" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "MedicationRequest",
+      "description" : "MedicationRequest",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/MedicationRequest",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "85593dcf-a301-4857-a906-16a0984916d9"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "AF"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "85593dcf-a301-4857-a906-16a0984916d9",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 30,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "min"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "AF"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                },
+                "high" : {
+                  "value" : 0,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "s"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "AF",
+      "description" : "Activity Finish",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/ActivityFinish"
+    },
+    {
+      "id" : "cabec7fd-917f-4d90-a294-cd3cddeb2d72",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 24,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "h"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 24,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "h"
+                },
+                "high" : {
+                  "value" : 24,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "h"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "Increase Dose",
+      "description" : "Increase Dose",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/IncreaseDose",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "3933c464-4863-491c-9c3b-df96d294f0e8"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "MedicationRequest"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "dfa9adda-33fd-4a78-b8b7-ba28aa807fe1",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 24,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "h"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 24,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "h"
+                },
+                "high" : {
+                  "value" : 24,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "h"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "No Dose Change",
+      "description" : "No Dose Change",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/NoDoseChange",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "3933c464-4863-491c-9c3b-df96d294f0e8"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "MedicationRequest"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "0b1f8a61-d934-428a-887e-e4e5bfb834e1",
+      "extension" : [
+        {
+          "extension" : [
+            {
+              "url" : "soaPlannedTimePoint",
+              "valueQuantity" : {
+                "value" : 0,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "s"
+              }
+            },
+            {
+              "url" : "soaReferenceTimePoint",
+              "valueString" : "AS"
+            },
+            {
+              "url" : "soaRepeatAllowed",
+              "valueBoolean" : false
+            },
+            {
+              "url" : "soaPlannedDuration",
+              "valueDuration" : {
+                "value" : 24,
+                "system" : "http://unitsofmeasure.org",
+                "code" : "h"
+              }
+            },
+            {
+              "url" : "soaTimePointType",
+              "valueString" : "Activity"
+            },
+            {
+              "url" : "soaTimePointSubType",
+              "valueString" : "A"
+            },
+            {
+              "url" : "soaPlannedRange",
+              "valueRange" : {
+                "low" : {
+                  "value" : 24,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "h"
+                },
+                "high" : {
+                  "value" : 24,
+                  "system" : "http://unitsofmeasure.org",
+                  "code" : "h"
+                }
+              }
+            },
+            {
+              "url" : "soaRangeFromTimePoint",
+              "valueString" : "AS"
+            }
+          ],
+          "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTimepoint"
+        }
+      ],
+      "title" : "Decrease Dose",
+      "description" : "Decrease Dose",
+      "groupingBehavior" : "visual-group",
+      "selectionBehavior" : "exactly-one",
+      "definitionCanonical" : "http://example.org/ActivityDefinition/DecreaseDose",
+      "action" : [
+        {
+          "extension" : [
+            {
+              "extension" : [
+                {
+                  "url" : "soaTargetId",
+                  "valueString" : "3933c464-4863-491c-9c3b-df96d294f0e8"
+                },
+                {
+                  "url" : "soaTransitionType",
+                  "valueString" : "FS"
+                },
+                {
+                  "url" : "soaTransitionDelay",
+                  "valueDuration" : {
+                    "value" : 0,
+                    "system" : "http://unitsofmeasure.org",
+                    "code" : "s"
+                  }
+                },
+                {
+                  "url" : "soaTransitionRange",
+                  "valueRange" : {
+                    "low" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    },
+                    "high" : {
+                      "value" : 0,
+                      "system" : "http://unitsofmeasure.org",
+                      "code" : "s"
+                    }
+                  }
+                },
+                {
+                  "url" : "soaTargetName",
+                  "valueString" : "MedicationRequest"
+                }
+              ],
+              "url" : "http://hl7.org/fhir/uv/vulcan-schedule/StructureDefinition/soaTransition"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
