@@ -403,6 +403,8 @@ The execution of the plan needs to be able to be adapted to describe what transi
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
 
+---
+
 ##### Use Case 1 - Simple Linear design with Early Termination
 
 The following table represents the Schedule of Activities for a simple path example:
@@ -448,6 +450,7 @@ These decisions can be automated (ie detection of the presence of SAE or patient
 
 Using the extensions as defined, the representation of the study plan can be seen [here](PlanDefinition-dynamic-visit-schedule-exit-example-PlanDefinition.html)
 
+---
 
 ##### Use Case 2 - Branched multi-path study design
 
@@ -499,6 +502,8 @@ This provides a visual representation of the encounters/transitions involved in 
 Note; the decision made for randomization should only need to be done once; once a patient is following the path for the assigned arm, the decision support system should preclude the other path (while retaining the common exit paths).  The design should support 'common' planned encounters that can be used both before and after randomization.  The nature of the FHIR resources and relationships between them should be able to be used to be most efficient.
 
 The representation of this is shown [here](PlanDefinition-dynamic-visit-schedule-multiple-paths.html)
+
+---
 
 ##### Use Case 3 - Treatment Cycles
 
