@@ -32,7 +32,7 @@ The key consideration for the SoA is the collection of data to support the hypot
 ### Representation of Study Designs as Graphs
 While the SoA is represented in the Protocol as a Table, it is helpful to think about how the implementation of a Study Design for a patient could be represented as a graph; with encounters and activities as nodes, and transitions between them as edges.[^1]  The edges can be determined purely by sequencing (activities) or based on conditions described in the protocol (often using footnotes or narrative). 
 
-Both representations are equatable, the tabular representation appeal to human consumers and the graphical representation being more computable.  Thinking about study design as a graph is very aligned with an executable schedule of activities; with transitions representing decisions (and thereby decision support) for users who interact with patients participating in studies. 
+Both representations are equatable, the tabular representation appeal to human consumers and the graphical representation being more computable.  Thinking about study design as a graph is very aligned with an executable schedule of activities; with transitions representing decisions (and thereby decision support) for users who interact with patients participating in studies.  
 
 The implementation examples in the updated IG lean more towards graph-like representations; however, this does not imply a transition or wholesale recommendation of this approach over the existing approach in the first IG.  Adoption should reflect the capabilities of systems and stakeholders.
 
@@ -96,4 +96,4 @@ The SDC workgroup represents a implementation for Research based on the collecti
 The SoA FHIR IG assumes that how activities/tasks get executed is dependent on their respective services, procedures, and administrative mechanisms. The working group has assumed that it will vary dependent on the scenario and how each system, application, device, etc. are setup.
 
 #### References
-[^1] [Richardson, A., (2024) “Representing Clinical Study Schedule of Activities as FHIR Resources: Required Characteristic Attributes”, Journal of the Society for Clinical Data Management 4(2)](https://doi.org/10.47912/jscdm.266)
+[^1]: [Richardson, A., (2024) “Representing Clinical Study Schedule of Activities as FHIR Resources: Required Characteristic Attributes”, Journal of the Society for Clinical Data Management 4(2)](https://doi.org/10.47912/jscdm.266)
