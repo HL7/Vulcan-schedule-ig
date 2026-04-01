@@ -14,7 +14,7 @@
 ##### Breaking Changes:
 * Update Base FHIR R4 to FHIR R6
 
-#### 1.0
+### Version = 1.0
 * Original Release
 
 
