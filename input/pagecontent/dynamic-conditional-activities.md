@@ -17,10 +17,12 @@ Conditional classifications could include:
 
 Some examples taken from real protocols are shown here:
 - Patients who are diabetics should have hemoglobin A1c tests
+
   ```
   If patients are insulin dependent diabetics, a hemoglobin A1c will be obtained.
   ```
 - Evidence of suspected liver damage
+
   ```
   The following criteria have been developed to monitor hepatic function.
     * Patients with ALT/SGPT levels >120 IU will be retested weekly.
@@ -29,10 +31,12 @@ Some examples taken from real protocols are shown here:
       retested within 2 days...
   ```
 - Pregnancy tests for females of child-bearing potential
+
   ```
   Serum (at baseline) or urine human chorionic gonadotropin (hCG) pregnancy test (as needed for females of childbearing potential). (urine pregnancy test on Day 1 of each cycle, EOT visit, and every 30±7 days until 5 months after last dose of study treatment)
   ```
 - Disease Response assessment based on the type and location of the disease under treatment:
+
   ```
   HCC, hepatocellular carcinoma, requiring an MRI or CT scan and GBM, glioblastoma, requiring a Brain MRI
   ```
@@ -141,24 +145,9 @@ Dose titration is used to establish the lowest effective dose that provides the 
 
 **Levothyroxine** is primarily prescribed to treat hypothyroidism and should be monitored regularly following establishing an effective dose to maintain T4 and TSH within the normal range. The flowchart below shows the basic approach to establish an initial acceptable dose, and thereafter monitoring the thyroxine therapy(adapted from ...).   
 
-```mermaid
-graph LR;
-  Baseline[Baseline]
-  tTSHMeasured["TSH Measured"]
-  DoseReduction["Dose Reduction"]
-  NoDoseChange["No Dose Change"]
-  DoseIncrease["Dose Increase"]
-  mTSHMeasured["TSH Measured"]
-  Baseline--6-8 weeks-->tTSHMeasured
-  tTSHMeasured--<0.4 mU/L-->DoseReduction
-  DoseReduction--6-8 weeks-->tTSHMeasured
-  tTSHMeasured--<0.4 mU/L-->DoseIncrease
-  DoseIncrease--6-8 weeks-->tTSHMeasured
-  tTSHMeasured--0.4 4.6 mU/L-->NoDoseChange
-  NoDoseChange--6-8 weeks-->tTSHMeasured
-  NoDoseChange--1 year--> mTSHMeasured
-  mTSHMeasured--1 year-->mTSHMeasured
-```
+<img src="conditional-activities.jpeg" alt="Dynamic Schedules - Conditional Activities" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
+
+
 The Baseline, Titration-Review, Maintenance-Review schedule defined using IG 2 extension is shown in the following examples:
 * [Levothroxine-Monitoring-Schedule](PlanDefinition-Levothroxine-Monitoring-Schedule.html)
 

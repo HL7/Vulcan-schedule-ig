@@ -1,6 +1,6 @@
 ### Acknowledgements
 
-This Implementation Guide was developed under the auspices of the HL7 Vulcan Schedule of Activities work group, and builds on the IG work published previously [Vulcan Schedule of Study Activities FHIR Implementation Guide](index.html). 
+This Implementation Guide was developed under the auspices of the HL7 Vulcan Schedule of Activities work group, and builds on the IG work published previously (1.0.0). 
 
 Contributing individuals and organisations are:
 

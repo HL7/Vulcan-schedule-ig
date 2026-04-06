@@ -10,7 +10,7 @@ Usage: #example
 * version = "V00"
 * name = "Levothroxine-Monitoring-Schedule"
 * title = "Levothroxine-Monitoring-Schedule"
-* type = $plan-definition-type#clinical-protocol
+* type = #clinical-protocol
 * status = #active
 * publisher = "fhir4pharma [Richardson & Genyn, JMIR Med Inform 2025;13:e71430, DOI: 10.2196/71430]"
 * description = "Levothroxine-Monitoring"

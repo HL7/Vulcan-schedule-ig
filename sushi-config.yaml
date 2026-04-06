@@ -56,7 +56,7 @@ pages:
   changes.md:
     title: Changes
   credits.md:
-    title: Credits
+    title: Acknowledgements
 
 menu:
   Home: index.html

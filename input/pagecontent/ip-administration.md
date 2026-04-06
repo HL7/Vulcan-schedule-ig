@@ -78,6 +78,7 @@ The case here illustrates the use of the medication resources when changes in IP
 Illustrated here is the relationship between a clinical event (in this case an _Observation_) that requires IP administration to be delayed. If such study events are recognised in the study protocol, and are (a) critical to patient safety or (b) would compromise protocol compliance, SoA _PlanDefinition.trigger_ relations can be used to define the rules for delaying the associated _PlanDefinition.action.timing[x]_ that will be linked to the [MedicationAdministration](https://hl7.org/fhir/medicationadministration.html) record. Situations that might require these revisions include out of range laboratory values, or the use of a contra-indicated medication prior to the study visit.
 
 ---
+
 ###### IP Administration at home
 
 <img src="ip-admin-home-dose.png" alt="Home Dosing" width="1000px" style="float:none; margin: 0px 0px 0px 0px;" />
@@ -85,8 +86,14 @@ Illustrated here is the relationship between a clinical event (in this case an _
 Many studies require IP to be self-administered, and to continue thereafter 'at home'. The diagram here shows how IP self-administration might be recorded in an eHR. In this case the IP is initially taken during the clinic visit generating a _MedicationAdminstration.status_ record of 'completed' (solid circle) and four 'in progress' records reflecting the protocol expectation. [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) resources can then be used to confirm compliance.
 
 ---
-#### Issues for resolution
-* [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) for planned dosing events expect a link to a [Medication](https://hl7.org/fhir/medication.html) record as well as a reason for dosing, etc.  In the case of a blinded clinical study the [Medication](https://hl7.org/fhir/medication.html) could be the study IP or could be placebo; this introduces an issue for retrospective review of subject medication records.  
-  * Solution used was to define a mock [Medication](https://hl7.org/fhir/medication.html) using the Protocol Identifier plus the Compound identifier.
-* In FHIR R5 the [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) has been replaced by the [MedicationUsage](https://hl7.org/fhir/medicationusage.html) resource.  This has not currently been modelled.
+
+#### Issues for consideration
+* [ActivityDefinition](https://hl7.org/fhir/activitydefinition.html) for planned dosing events expect a link to a [Medication](https://hl7.org/fhir/medication.html) record as well as a reason for dosing, etc.  In the case of a blinded clinical study the [Medication](https://hl7.org/fhir/medication.html) could be **study IP** or **placebo**.
+  * For testing we defined a mock [Medication](https://hl7.org/fhir/medication.html) using the Protocol Identifier plus the Compound identifier to represent the intervention,
+  * In the context of EHR data systems, this introduces an issue for retrospective review of subject medication records.  A study close-out activity may be required to unblind the treatment and retrospectively patch the Medication record  
+* Changes to the [MedicationStatement](https://hl7.org/fhir/medicationstatement.html) resource:
+  * In FHIR R5/R6 the [MedicationUsage](https://hl7.org/fhir/medicationusage.html) resource is used.  Consider the changes to the resources when adopting this pattern; ensure that the semantic intent is reflected.
+
+
+
  

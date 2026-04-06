@@ -38,7 +38,7 @@ Clinical Trial Schedule of Activities Specification Using Fast Healthcare Intero
 
 If we take a simple example; the progression of a patient in a study design - the following example provides an illustration
 
-<img src="dynamic-visit-schedule-simple-example.png" alt="Dynamic Schedules - Simple Example" width="800px" style="float:none; margin: 0px 0px 0px 0px;" />
+<img src="dynamic-visit-schedule-simple-example.png" alt="Dynamic Schedules - Simple Example" width="300px" style="float:none; margin: 0px 0px 0px 0px;" />
 
 The following table represents a schedule of activities for this simple progression example:
 
@@ -387,6 +387,8 @@ The extension `http://fhir4pharma.com/StructureDefinition/soaTransition` is key 
   4. the `soaPlannedDuration` value specifies the duration at which this transition is expected to occur
 3. The `condition` attribute on the `PlanDefinition.action.action` is used to specify the 'logic' controlling the transition, and it follows the existing semantics of the `action.condition`.  
 
+For a deeper discussion and definition of this, please refer to the source paper here: [Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study](https://medinform.jmir.org/2025/1/e71430).
+
 In order to ensure that the transitions can be evaluable, for each action the evaluation of the `condition` should be a boolean, where true the transition should be allowed.  Any action without a condition is the default transition, and should be presented if no other actions are applicable.  A terminal activity will have no transitions available given all the conditions available.
 
 The `condition` can be implemented using any of current languages (eg CQL, FHIRPath), but should also support feedback or input by a site coordinator.  An example of where `condition` can be inferred from the healthcare system include a reference to the Subject milestones (eg`ResearchSubject.status` or `ResearchSubject.subjectState`/`ResearchSubject.subjectMilestone`), as discussed in [dynamics](dynamic.html) - eg performing a particular activity is conditional on a patient having completed informed consent, perhaps for an experimental arm.
@@ -400,6 +402,8 @@ The execution of the plan needs to be able to be adapted to describe what transi
 - Sponsors may choose to close a study based on pre-defined characteristics detailed in the protocol (eg Six months after the last patient in)
 
 So, what needs to be defined for a given encounter forward in patient progression based on what activities are planned to occur next based on the protocol; some are common such as the Early Termination path; based on outcomes from the study (eg Serious Adverse Event, Lost to Follow-up), others can be be more complicated.
+
+---
 
 ##### Use Case 1 - Simple Linear design with Early Termination
 
@@ -446,6 +450,7 @@ These decisions can be automated (ie detection of the presence of SAE or patient
 
 Using the extensions as defined, the representation of the study plan can be seen [here](PlanDefinition-dynamic-visit-schedule-exit-example-PlanDefinition.html)
 
+---
 
 ##### Use Case 2 - Branched multi-path study design
 
@@ -497,6 +502,8 @@ This provides a visual representation of the encounters/transitions involved in 
 Note; the decision made for randomization should only need to be done once; once a patient is following the path for the assigned arm, the decision support system should preclude the other path (while retaining the common exit paths).  The design should support 'common' planned encounters that can be used both before and after randomization.  The nature of the FHIR resources and relationships between them should be able to be used to be most efficient.
 
 The representation of this is shown [here](PlanDefinition-dynamic-visit-schedule-multiple-paths.html)
+
+---
 
 ##### Use Case 3 - Treatment Cycles
 

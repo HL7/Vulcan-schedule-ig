@@ -56,3 +56,5 @@ As discussed above the issue with the FHIR Definition resources ([PlanDefinition
 An [extension](StructureDefinition-AcceptableOffsetRangeSoa.html) has been added to permit `acceptableOffsetRange` to the __relatedAction__ element; using this element it is possible to define an acceptable range for an action that can be used for scheduling and reviewing. 
 
 Examples of the use of the extension can be seen in the [Protocol Design Example](PlanDefinition-H2Q-MC-LZZT-ProtocolDesign.html).
+
+With the updated IG (2.0), we have added a new extension to manage timepoints ([soaTimepoint](./StructureDefinition-soaTimepoint.html)), this allows for more sophisticated timing of encounters and activities when compared to the base revision.  This is more strongly aligned with the idea of Study Designs being able to be represented as a graph.
