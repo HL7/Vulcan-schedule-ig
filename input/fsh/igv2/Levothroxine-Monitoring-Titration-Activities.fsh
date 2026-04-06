@@ -17,7 +17,7 @@ Usage: #example
 * version = "2.0.0-ballot"
 * name = "Levothroxine-Monitoring-Titration-Activities"
 * title = "Levothroxine-Monitoring-Titration-Activities"
-* type = #clinical-protocol
+* type = http://terminology.hl7.org/CodeSystem/plan-definition-type#clinical-protocol
 * status = #active
 * date = "2026-03-24T21:36:22+00:00"
 * publisher = "HL7 International / Biomedical Research and Regulation"
