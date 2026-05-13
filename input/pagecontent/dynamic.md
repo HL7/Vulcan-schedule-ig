@@ -4,7 +4,7 @@ The [basic structure](basic-structure.html) provides a structure for simple stud
 
 Based on feedback from implementers of the first release of the Implementation Guide, it is necessary to extend the Schedule of Activities to incorporate recommendations that are necessary to account for more complex study designs.
 
-One of the factors influencing the move towards more complex study designs is the escalating cost of conducting clinical research[citation?]. As drug development becomes more expensive, sponsors are increasingly motivated to maximize the scientific and commercial value from each study. This has led to a shift away from traditional, linear study designs towards more intricate protocols that can answer multiple questions simultaneously, evaluate several treatments, or study various patient populations within a single trial framework.
+One of the factors influencing the move towards more complex study designs is the escalating cost of conducting clinical research. As drug development becomes more expensive, sponsors are increasingly motivated to maximize the scientific and commercial value from each study. This has led to a shift away from traditional, linear study designs towards more intricate protocols that can answer multiple questions simultaneously, evaluate several treatments, or study various patient populations within a single trial framework.
 
 This drive for efficiency has given rise to adaptive designs and master protocols, such as [platform](https://en.wikipedia.org/wiki/Platform_trial), [basket](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/basket-trial), and [umbrella](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/umbrella-trial) trials. These modern approaches often incorporate conditional logic, where the study path for a participant can change based on interim results, biomarker status, or other criteria. Consequently, the schedule of activities is no longer a static table but a dynamic plan with branching pathways and conditional events. While these designs can accelerate drug development and reduce overall costs, they introduce significant complexity in defining, implementing, and managing the schedule of activities across different systems. Additionally, under the guise of [Adaptive Trial Design](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-018-1017-7) the implementation of the study can change significantly for a patient.
 
@@ -14,6 +14,8 @@ For describing the work in the updated IG, we have partitioned the use cases and
 * [Conditional Activities](./dynamic-conditional-activities.html) - activities within PlanDefinitions are able to be added or removed based on current patient or study status
 * [Dynamic Visit Plans](./dynamic-visit-plans.html) - allowing for multiple paths that a patient can follow based on the Protocol
 * [Unscheduled Activities](./dynamic-unscheduled-visits.html) - providing a framework for incorporating emergent encounters
+
+Current approaches primarily handle simple schedules and do not adequately capture complex requirements such as conditional branching, repeat cycles, or unscheduled events—features essential for many study designs, particularly in oncology, for an examination of how the use of FHIR resources can be used to address these topics refer to [^1].  WORDSMITH this
 
 #### Implementation Details 
 
@@ -30,4 +32,5 @@ This IG will define extensions that can be interpreted by the management applica
 
 The application should support interactions with the ResearchSubject resource, to support recording Subject and Trial States (eg On-Study, Off-study, In-Screening) and Milestones (eg Informed Consent, Randomization).  This facilitates the conduct, as well as providing support for logical pre-conditions used in Study Plans.
 
-
+#### References
+[^1]: [JMIR Medical Informatics - Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study](https://medinform.jmir.org/2025/1/e71430)

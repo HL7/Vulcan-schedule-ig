@@ -58,7 +58,7 @@ The high-level points are as follows:
 
 * The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) has at least one _protocol_ reference to a [PlanDefinition](https://hl7.org/fhir/plandefinition.html) for the Study Definition,
 * Under the Study Definition there are references to each of the planned encounters/visits through the _action_ predicate (linking to the [PlanDefinition](http://hl7.org/fhir/PlanDefinition) instance for the encounter),  
-* Within a planned encounter/visit, the planned activities are represented through the _action_ predicate linking to the [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) or [Questionnaire](http://hl7.org/fhir/ActivityDefinition) representing the activity.
+* Within a planned encounter/visit, the planned activities are represented through the _action_ predicate linking to the [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) or [Questionnaire](http://hl7.org/fhir/Questionnaire) representing the activity.
 
 Many activities are event or pre-condition based. The _action.relatedAction_ predicate is used to represent the relationships between activities (refer to [Conditional Activities](./dynamic-conditional-activities.html) for further examples).  This specifies what activities are to be done and when they are planned to be done (relative to a reference or pivot event).
 

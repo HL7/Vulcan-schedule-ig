@@ -11,7 +11,7 @@ Conditional classifications could include:
 - Study Characteristics
   - pre-determined changes to the operation of the study, 
     - activities that depend on site location (eg sites requiring specific constraints based on local regulations)
-    - activities with with specific consent requirements (eg Exploratory activities requiring extended consent) 
+    - activities with specific consent requirements (eg Exploratory activities requiring extended consent) 
 - Operational Requirements
   - Activities that have a pre-requisite on site capabilities (eg requiring a MRI scan could preclude a site from meeting Site requirements)
 
@@ -149,11 +149,11 @@ Dose titration is used to establish the lowest effective dose that provides the 
 
 
 The Baseline, Titration-Review, Maintenance-Review schedule defined using IG 2 extension is shown in the following examples:
-* [Levothroxine-Monitoring-Schedule](PlanDefinition-Levothroxine-Monitoring-Schedule.html)
+* [Levothyroxine-Monitoring-Schedule](PlanDefinition-Levothroxine-Monitoring-Schedule.html)
 
 The table below shows the key associated activities, where TSH and other relevant laboratory parameters are measured and then clinically reviewed to determine the required dose escalation or reduction.
 
-##### Schedule of Activities: Levothroxine Monitoring [Table]
+##### Schedule of Activities: Levothyroxine Monitoring [Table]
 
 |                   | Baseline   | Titration-Review   | Maintenance-Review   |
 |:------------------|:-----------|:-------------------|:---------------------|
@@ -166,7 +166,7 @@ The table below shows the key associated activities, where TSH and other relevan
 | MedicationRequest | X          | X                  | X                    |
 
 The Titration-Review activities defined using the IG 2.0 extensions is shown in the following examples:
-* [Levothroxine-Monitoring-Titration-Activities](PlanDefinition-Levothroxine-Monitoring-Titration-Activities.html)
+* [Levothyroxine-Monitoring-Titration-Activities](PlanDefinition-Levothroxine-Monitoring-Titration-Activities.html)
 
 
 ---
