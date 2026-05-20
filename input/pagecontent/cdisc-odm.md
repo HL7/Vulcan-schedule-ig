@@ -1,8 +1,12 @@
 ### Alignment between the CDISC Operational Data Model (ODM) and the FHIR SoA Model
 
-The CDISC Operational Data Model (ODM) structure is a common model for representing defined, planned and performed activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management Systems (CTMS).  It is the de facto standard for exchanging data and metadata between clinical data management systems. 
+The CDISC Operational Data Model (ODM) structure is a common model for representing defined, planned and performed activities in Clinical Data Management Systems (CDMS, EDC, etc.) and Clinical Trial Management Systems (CTMS).  It is the de-facto standard for exchanging data and metadata between clinical data management systems.  
 
-Having a standard alignment between the ODM and FHIR will enable rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
+Having a standard alignment between the ODM and FHIR enables rapid and reproducible system builds using standardised interfaces. Whether the initial study design is developed in the ODM/XML formats or using FHIR Resources, each EHR system should then be able to use the study design as part of study start up activities by a Study Builder.  There will need to be some augmentation of the process to make best use of transportable concepts (e.g., test codes, procedure codes, etc.) but it is hoped the work here will be able to be used as a core implementation model.  
+
+We present this illustration of the alignment between core concepts used in ODM and the SoA implementation using FHIR. This is primarily for informational purposes only; the decision regarding messaging between systems should support the best possible standard that supports outcomes based on strong semantic alignment. In the case of healthcare systems this would be FHIR, in the case of Clinical Trial Management Systems ODM is a candidate.
+
+The Vulcan Interoperability Bridge[^1] event showed that FHIR can also be used for Sponsor-Sponsor, Sponsor-Site, etc communication.   
  
 #### CDISC Operational Data Model (ODM)
 
@@ -31,6 +35,7 @@ Data collection is driven by Forms; forms group activities by type (ie all the V
 The ODM specification is distributed as an XML document, and as such can be extended through the use of vendor namespaces; examples where this has been done include:
 * Study Design Model - extensions to cover topics such as workflow, study design concepts
 * Dataset-XML - extensions to use for transporting datasets
+NOTE: The examples shown here reflect the ODM 1.3 version, ODM 2.0 uses different elements in many scenarios.  ODM 2.0 also supports the transport of FHIR resources as a sample use case.
 
 The implementation of the Study Metadata follows a DEF-REF pattern.  We define a type of element (eg Visit, Form, Field) and then reference it one or more times within the corresponding element; as an example:
 ```xml
@@ -245,3 +250,6 @@ An example is shown here:
 }
 ```
 A sample ODM has a __StudyEventDef__ with an OID `SE.SCREENING_VISIT`; the [PlanDefinition](https://hl7.org/fhir/plandefinition.html) has an _identifier_ that links the planned event in the FHIR design back to the definition in the ODM.  This resource could then be requested using the following URL `/PlanDefinition?identifier=http://www.cdisc.org/ns/odm/v1.3/StudyDef|SE.SCREENING_VISIT`
+
+#### References
+[^1]: [https://hl7vulcan.org/](HL7 Vulcan)
