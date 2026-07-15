@@ -44,7 +44,8 @@
 <page key="ip-administration" name="Investigational Product Administration"/>
 <page key="profiles" name="Profiles"/>
 <page key="toc" name="Table of Contents"/>
+<page key="usdm-alignment" name="USDM Alignment"/>
 <page key="dynamic-unscheduled-visits" name="Unscheduled Visits"/>
-<page key="cdisc-odm" name="Use case for integration using CDISC ODM"/>
+<page deprecated="true" key="cdisc-odm" name="Use case for integration using CDISC ODM"/>
 <page key="visit-windows" name="Visit Windowing"/>
 </specification>

@@ -1,5 +1,6 @@
 ### Version = 2.0.0-ballot
-##### New Features/Clarifications and Documentation Improvements:
+
+#### New Features/Clarifications and Documentation Improvements:
 * Dynamic Features Use Cases based on feedback to 1.0
   * Added Conditional Activities Use Cases
   * Added Dynamic Encounter Use Cases
@@ -11,7 +12,7 @@
 * Simplified [Core Schedule of Activities Model](basic-structure.html) to remove suggested implementation
 * Updated [Visit Window](visit-windows.html) to reflect new extension
 
-##### Breaking Changes:
+#### Breaking Changes:
 * Update Base FHIR R4 to FHIR R6
 
 ### Version = 1.0

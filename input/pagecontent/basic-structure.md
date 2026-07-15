@@ -58,7 +58,7 @@ The high-level points are as follows:
 
 * The [ResearchStudy](https://hl7.org/fhir/researchstudy.html) has at least one _protocol_ reference to a [PlanDefinition](https://hl7.org/fhir/plandefinition.html) for the Study Definition,
 * Under the Study Definition there are references to each of the planned encounters/visits through the _action_ predicate (linking to the [PlanDefinition](http://hl7.org/fhir/PlanDefinition) instance for the encounter),  
-* Within a planned encounter/visit, the planned activities are represented through the _action_ predicate linking to the [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) or [Questionnaire](http://hl7.org/fhir/ActivityDefinition) representing the activity.
+* Within a planned encounter/visit, the planned activities are represented through the _action_ predicate linking to the [ActivityDefinition](http://hl7.org/fhir/ActivityDefinition) or [Questionnaire](http://hl7.org/fhir/Questionnaire) representing the activity.
 
 Many activities are event or pre-condition based. The _action.relatedAction_ predicate is used to represent the relationships between activities (refer to [Conditional Activities](./dynamic-conditional-activities.html) for further examples).  This specifies what activities are to be done and when they are planned to be done (relative to a reference or pivot event).
 
@@ -74,7 +74,7 @@ This is also illustrated within an encounter in the [Visit 1](PlanDefinition-H2Q
 
 #### Observations on how the SoA can be implemented
 
-Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Healthcare Record System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.  
+Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Health Record (EHR) System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.  
 
 Having a standard like FHIR does not imply a standard approach to workflow in EHR systems.  How a Study Plan is executed within the context of a EHR system can vary a great deal; the implementation may not actually exist within the EHR system itself, rather through an external platform (perhaps based on SMART-on-FHIR).  For the purposes of testing the IG, the following implementation was executed using an external orchestration:
 
