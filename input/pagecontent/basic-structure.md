@@ -74,7 +74,7 @@ This is also illustrated within an encounter in the [Visit 1](PlanDefinition-H2Q
 
 #### Observations on how the SoA can be implemented
 
-Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Healthcare Record System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.  
+Given the structure discussed above, consideration has been given to how best to implement/use the planned activities within an Electronic Health Record (EHR) System; particularly how they can be used to manage the progress of a [ResearchSubject](http://hl7.org/fhir/ResearchSubject) through the study.  
 
 Having a standard like FHIR does not imply a standard approach to workflow in EHR systems.  How a Study Plan is executed within the context of a EHR system can vary a great deal; the implementation may not actually exist within the EHR system itself, rather through an external platform (perhaps based on SMART-on-FHIR).  For the purposes of testing the IG, the following implementation was executed using an external orchestration:
 

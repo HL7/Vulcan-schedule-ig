@@ -29,12 +29,10 @@ For an example of a [master protocol](https://www.sciencedirect.com/science/arti
 
 ##### Transitions
 
-The modality of transitions are needed to represent a prospective plan for a ResearchSubject participating in a Clinical Trial; it supports planning and decision making. Generally, patients follow a protocol proscribed path through encounters and activities. We have previously described how activities within an encounter can be orchestrated; but this document is intended to summarise approaches for intra-encounter activities.
+The modality of transitions are needed to represent a prospective plan for a ResearchSubject participating in a Clinical Trial; it supports planning and decision making. Generally, patients follow a protocol proscribed path through encounters and activities. We have previously described how activities within an encounter can be orchestrated; but this document is intended to summarise approaches for inter-encounter activities.  The approaches detailed in the first release of the implementation guide dealt with comparatively simple schedules and did not adequately capture complex requirements such as conditional branching, repeat cycles, or unscheduled events—features essential for many study designs, particularly in oncology.
 
 The designs should incorporate these directives in such a way that an application could interpret them to make decisions about the transitions; and thereby create the required resources (eg Encounter, Appointment, ServiceRequest). The challenge we have is that in CTMS systems, that are built around common conceptual understandings of how clinical trials work, the functions to drive these transitions are out of the box, whereas finding a common representation using FHIR resources may be challenging.
 
-We have chosen to use the extensions proposed by [Richardson A, Genyn P
-Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study JMIR Med Inform 2025;13:e71430](https://medinform.jmir.org/2025/1/e71430/PDF) - henceforth referred to as MMS. The authors have kindly agreed for their work to be utilised as part of the IG, with the qualification that full recognition for the work shall remain theirs alone.
 
 If we take a simple example; the progression of a patient in a study design - the following example provides an illustration
 
@@ -62,7 +60,7 @@ This simple design illustrates:
 - **Visit N+1**: Follow-up visit 48 days later
 - **Early Termination**: Can occur at any time if patient discontinues
 
-Here is a representation of this simple structure using the implementation details based on MMS:
+Here is a representation of this simple structure using the implementation details based on **MMS**:
 
 ```json
 {
@@ -570,3 +568,5 @@ Using the extensions we can represent the SoA as a Graph - this is key to being 
 
 The complexity of the FHIR study plan will be concordant with the complexity of the study design.  The bias should always be towards implementation.
 
+#### References
+[^1]: [JMIR Medical Informatics - Clinical Trial Schedule of Activities Specification Using Fast Healthcare Interoperability Resources Definitional Resources: Mixed Methods Study](https://medinform.jmir.org/2025/1/e71430)
