@@ -5,7 +5,7 @@ This requires the clear specifications of when to provide, administer and record
 
 - IP Administration is core to prospective research protocols​
 - All other observations support the efficacy and safety of the IP administration​
-- IP administration activities must be well defined in the SOA
+- IP administration activities must be well defined in the SoA
 
 The set of FHIR medication resources have been used to review how to incorporate IP administration and record keeping into FHIR specified SoA.
 ​

@@ -4,7 +4,7 @@
 The core of this project is to define a usable pattern for a Clinical Trial Schedule of Activities structure using FHIR Resources and Processes, such that:
 * it can be shared
 * it can be interpreted, and 
-* it can be implemented in healthcare systems (such as EHR or PHR systems) and/or clinical research systems 
+* it can be implemented in healthcare systems, such as electronic health record (EHR)/personal health record (PHR) systems and/or clinical research systems 
 
 The conduct of Clinical Trials are guided by the International Conference on Harmonization (ICH) guidelines for Good Clinical Practice (GCP) E6 (R2).[^1]  Core to this is the writing of a Clinical Trial Protocol, a document intended to describe the objectives, design, methodology, statistical considerations and aspects related to the organization of the clinical trial. 
 
@@ -19,14 +19,19 @@ The NCI Controlled Vocabulary definition of the Schedule of Activities is: [^2]
 
 It is a focused section of the Protocol Document that lays out what activities are expected, and structurally when they are expected to occur.  It is a design that is interpreted by the stakeholders to drive how the study is defined, planned and performed.
 
+One of the factors influencing the move towards more complex study designs is the escalating cost of conducting clinical research. As drug development becomes more expensive, sponsors are increasingly motivated to maximize the scientific and commercial value from each study. This has led to a shift away from traditional, linear study designs towards more intricate protocols that can answer multiple questions simultaneously, evaluate several treatments, or study various patient populations within a single trial framework.
+
+This drive for efficiency has given rise to adaptive designs and master protocols, such as [platform](https://en.wikipedia.org/wiki/Platform_trial), [basket](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/basket-trial), and [umbrella](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/umbrella-trial) trials. These modern approaches often incorporate conditional logic, where the study path for a participant can change based on interim results, biomarker status, or other criteria. Consequently, the schedule of activities is no longer a static table but a dynamic plan with branching pathways and conditional events. While these designs can accelerate drug development and reduce overall costs, they introduce significant complexity in defining, implementing, and managing the schedule of activities across different systems. Additionally, under the guise of [Adaptive Trial Design](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-018-1017-7) the implementation of the study can change significantly for patients as the trial progresses.  
+
 #### Vulcan SoA Implementation Guide (IG)
-This IG is intended to provide a roadmap for adopters looking to use FHIR resources in order to support the planning and implementing Clinical Research designs.  The Schedule of Activities is defined ​in a clinical trial as a standardised representation of planned activities, including interventions (e.g., administering drug, surgery), studying administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) and assessments.​
+This IG is intended to provide a roadmap for adopters looking to use FHIR resources in order to support the planning and implementing Clinical Research designs.  The Schedule of Activities is defined ​in a clinical trial as a standardised representation of planned activities, including interventions (e.g., administering drug, surgery), study administrative activities (e.g., obtaining informed consent, distributing clinical trial material and diaries, randomization) and assessments.​
 
 ​The purpose of the Schedule of Activities is to communicate the scheduling of the planned activities required to support the research objectives of the study to enable operational implementation.​
 
-Within the Vulcan SoA project we have considered two principal study types:
-* Prospective – e.g., randomized clinical trials (RCT), concurrent cohort studies, observational studies, epidemiology, real world evidence (RWE) 
-* Retrospective – e.g., cohort studies, case-control studies, real world evidence
+Within the Vulcan SoA project we have considered the following study types:
+* Prospective – e.g., randomized clinical trials (RCT), concurrent cohort studies, observational studies, epidemiology, real world evidence (RWE) studies, pragmatic clinical trials 
+* Retrospective – e.g., cohort studies, case-control studies, real world evidence (RWE)
+* Hybrid - combining both prospective + retrospective components
 
 Examples of positive outcomes for this project include:
 * Participant identification – feasibility , inclusion/exclusion criteria (prospective/retrospective)​
@@ -38,18 +43,17 @@ Examples of positive outcomes for this project include:
 * Protocol adherence – streamlined deployment of protocol updates
 * Portfolio management – reporting consistency across sites
 * Site operational efficiency – task automation (e.g. order entry, reminders, etc) based on SoA
-* Digital SOA can "serve as single source of truth" and be re-purposed downstream 
+* Digital SoA can "serve as single source of truth" and be re-purposed downstream 
     * Automate creation of EDC specification 
     * Automate creation of SDTM datasets (especially trial design domains) 
 * Help/automate sites set up a study leading a reduced site burden 
 * Help sites run a study (scheduling, procedures to be performed) 
 * Help ensure compliance with a protocol 
-* Ensure SOA/protocol is implemented uniformly across sites 
+* Ensure SoA/protocol is implemented uniformly across sites 
 
-This iteration of the IG is designed to provide directional guidance and not be a prescriptive instruction of how to exactly implement SOA across all systems. As we learn more about how the different systems work and can be interfaced, we will continue to improve the IG to accommodate more use cases; iteratively working towards a solution that will be both functional and scalable.
+This iteration of the IG is designed to provide directional guidance and not be a prescriptive instruction of how to exactly implement SoA across all systems. As we learn more about how the different systems work and can be interfaced, we will continue to improve the IG to accommodate more use cases; iteratively working towards a solution that will be both functional and scalable.
 
 The ICH Clinical Electronic Structured Harmonised Protocol[^3] (M11) has provided a standardised structure for Clinical Trial Protocols.  The HL7 Vulcan [Utilising the Digital Protocol](https://build.fhir.org/ig/HL7/vulcan-udp-ig/en/) (UDP) IG is providing a framework for representing a Digital Protocol using FHIR resources.  The Vulcan Schedule of Activities project can be used to represent the Schedule of Activities from the digital protocol as part of the UDP IG.  The projects are aligned and are intended to be reviewed together; however the Schedule of Activities IG can be reviewed and used independently of the UDP IG.
-
 
 #### Future elements for the Implementation Guide
 
