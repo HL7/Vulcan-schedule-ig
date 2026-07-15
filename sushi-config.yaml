@@ -45,8 +45,8 @@ pages:
     title: Unscheduled Visits 
   ip-administration.md:
     title: Investigational Product Administration
-  cdisc-odm.md:
-    title: Use case for integration using CDISC ODM
+  usdm-alignment.md:
+    title: USDM Alignment
   profiles.md:
     title: Profiles
   examples.md:
@@ -69,7 +69,7 @@ menu:
     Dynamic Visit Plans: dynamic-visit-plans.html
     Unscheduled Activities: dynamic-unscheduled-visits.html
     Investigational Product Administration: ip-administration.html
-    CDISC ODM Integration: cdisc-odm.html
+    USDM Alignment: usdm-alignment.html
   Profiles: profiles.html
   Examples: examples.html
   Downloads: downloads.html
