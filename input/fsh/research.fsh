@@ -21,6 +21,7 @@ Description: "A profile that lists the data elements of a PlanDefinition that mu
 * status MS
 * subject[x] MS
 * description MS
+* version MS
 * action MS
   * title MS
   * code MS
@@ -44,6 +45,7 @@ Description: "An abstract profile that lists the data elements of a PlanDefiniti
 * status MS
 * subject[x] MS
 * description MS
+* version MS
 * action MS
   * title MS
   * code MS
