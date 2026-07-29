@@ -11,8 +11,7 @@ Definitional Resources*, JMIR Med Inform 2025;13:e71430).
 
 It is written as a **reference for implementers** — the mapping rules, algorithms, and
 known limitations described here are stack-independent. The reference implementation
-(`scripts/usdm_to_soa.py`, Python 3 stdlib only) is one realization of this approach; see
-the [USDM Transform](usdm.html) page for how to run it against this IG's example study.
+(`scripts/usdm_to_soa.py`, Python 3 stdlib only) is one realization of this approach.
 
 #### 1. The two models being reconciled
 
@@ -308,8 +307,6 @@ target stack, the mapping reduces to five ordered steps:
 
 #### 10. Further reading
 
-- [USDM Transform](usdm.html) — how to run the reference pipeline against this IG's
-  example study, including regeneration commands and CSV catalog formats
 - `input/fsh/SoA-Profiles.fsh` (source tree) — the target profile and extension
   definitions referenced throughout this page (`SOAPlanDefinition`, `SOATimePoint`,
   `SOATransition`, `StudyProtocolSoa`, `StudyVisitSoa`, `StudyActivitySoa`)

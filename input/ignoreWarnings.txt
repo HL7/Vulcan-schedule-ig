@@ -8,15 +8,11 @@ Reference to experimental CodeSystem http://hl7.org/fhir/CodeSystem/fhirpath-typ
 Constraint failed: eld-31: 'additionalBindings should have a key (key.exists())' (defined in http://hl7.org/fhir/StructureDefinition/ElementDefinition) (Best Practice Recommendation)
 Constraint failed: eld-33: 'If there's more than one bindable type, it's usually an error for there to be a binding (type.where(code in 'code' | 'Coding' | 'CodeableConcept' | 'CodeableReference' | 'uri' | 'string' | 'Quantity').count() > 1 implies binding.empty())' (defined in http://hl7.org/fhir/StructureDefinition/ElementDefinition)
 
-# 03 - This is a new extension for R6 that the publisher is not finding
-The extension http://hl7.org/fhir/StructureDefinition/structuredefinition-implements could not be found so is not allowed here
-No definition could be found for URL value 'http://hl7.org/fhir/StructureDefinition/structuredefinition-implements'
-
 # 04 - We are using FHIR R6 but the publisher includes R5 packages
 This IG is version 6.0.0-ballot3, while the IG 'hl7.terminology.r5' is from version 5.0.0
 This IG is version 6.0.0-ballot3, while the IG 'hl7.fhir.uv.extensions.r5' is from version 5.0.0
 This IG is version 6.0.0-ballot3, while the IG 'hl7.fhir.uv.tools.r5' is from version 5.0.0
-The ImplementationGuide is based on FHIR version 6.0.0-ballot3 but package hl7.terminology.r5#7.1.0 is based on FHIR version 5.0.0. In general, this version mismatch should be avoided - some tools will try to make this work with variable degrees of success, but others will not even try
+The ImplementationGuide is based on FHIR version 6.0.0-ballot3 but package hl7.terminology.r5#7.3.0 is based on FHIR version 5.0.0. In general, this version mismatch should be avoided - some tools will try to make this work with variable degrees of success, but others will not even try
 The canonical URL http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions points to the package hl7.fhir.uv.extensions which is inconsistent with the stated packageId of hl7.fhir.uv.extensions.r5
 
 # 05 - This is an example Research Study and we are using some example URLs
@@ -29,3 +25,7 @@ A definition for CodeSystem 'https://www.nlm.nih.gov/mesh' could not be found, s
 No definition could be found for URL value 'ActivityDefinition/H2Q-MC-LZZT%
 No definition could be found for URL value 'PlanDefinition/H2Q-MC-LZZT%
 Constraint failed: cnl-0: 'Name should be usable as an identifier for the module by machine processing applications such as code generation (name.exists() implies name.matches('^[A-Z]([A-Za-z0-9_]){1,254}$'))' (defined in http://hl7.org/fhir/StructureDefinition/PlanDefinition)
+None of the codings provided are in the value set 'Research Study Primary Purpose Type' (http://hl7.org/fhir/ValueSet/research-study-prim-purp-type|6.0.0-ballot3), and a coding is recommended to come from this value set (codes = http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type#treatment)
+None of the codings provided are in the value set 'Research Study Trial Phase' (http://hl7.org/fhir/ValueSet/research-study-trial-phase|6.0.0-ballot3), and a coding is recommended to come from this value set (codes = http://terminology.hl7.org/CodeSystem/research-study-phase#phase-3)
+None of the codings provided are in the value set 'Research Study Objective Type' (http://hl7.org/fhir/ValueSet/research-study-objective-type|6.0.0-ballot3), and a coding is recommended to come from this value set (codes = http://terminology.hl7.org/CodeSystem/research-study-objective-type#primary)
+None of the codings provided are in the value set 'Research Study Objective Type' (http://hl7.org/fhir/ValueSet/research-study-objective-type|6.0.0-ballot3), and a coding is recommended to come from this value set (codes = http://terminology.hl7.org/CodeSystem/research-study-objective-type#secondary)
