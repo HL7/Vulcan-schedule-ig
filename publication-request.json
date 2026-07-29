@@ -1,9 +1,9 @@
 {
   "package-id" : "hl7.fhir.uv.vulcan-schedule",
-  "version" : "2.0.0-ballot",
-  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/2026May",
-  "status" : "ballot",
+  "version" : "2.0.0",
+  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/2.0.0",
+  "status" : "trial-use",
   "sequence" : "STU2",
-  "mode": "working",
-  "desc" : "This is the balloted version of the first release in the STU2 sequence."
+  "mode": "milestone",
+  "desc" : "This is the published version of the STU2 version of the guide."
 }
