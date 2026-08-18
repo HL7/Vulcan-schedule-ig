@@ -1,3 +1,16 @@
+### Version = 2.0.0-snapshot
+
+#### New Features and Model Updates:
+* Updated profile requirements in [research.fsh](artifacts.html) so `version` is now Must Support for relevant PlanDefinition-based profiles
+
+#### Documentation and Navigation Improvements:
+* Removed legacy ODM narrative page and replaced navigation references with USDM alignment content
+* Added a new [USDM Alignment](usdm-alignment.html) page with mapping methodology from CDISC USDM to Vulcan SoA/FHIR artifacts
+* Various typographical and reference updates
+
+#### Technical and Packaging Updates:
+* renamed primaryPurposeType to purposeType (R6-ballot5)
+
 ### Version = 2.0.0-ballot
 
 #### New Features and Model Updates:
@@ -8,11 +21,8 @@
 * Added and documented extension-driven dynamic semantics
   * [soaTransition](StructureDefinition-soaTransition.html)
   * [soaTimepoint](StructureDefinition-soaTimepoint.html)
-* Updated profile requirements in [research.fsh](artifacts.html) so `version` is now Must Support for relevant PlanDefinition-based profiles
 
 #### Documentation and Navigation Improvements:
-* Added a new [USDM Alignment](usdm-alignment.html) page with mapping methodology from CDISC USDM to Vulcan SoA/FHIR artifacts
-* Removed legacy ODM narrative page and replaced navigation references with USDM alignment content
 * Updated [Home](index.html) and dynamic pages to improve rationale, references, and terminology consistency
 * Simplified [Core Schedule of Activities Model](basic-structure.html) narrative and corrected example naming/content
 * Updated selected narrative text in [Examples](examples.html) and [Investigational Product Administration](ip-administration.html)
