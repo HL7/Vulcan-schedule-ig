@@ -6,7 +6,7 @@ Description: "A profile that lists the data elements of a Research Study that mu
 * protocol MS
 * protocol only Reference(StudyProtocolSoa)
 * status MS
-* primaryPurposeType MS
+* purposeType MS
 * phase MS
 * condition MS
 * keyword MS
