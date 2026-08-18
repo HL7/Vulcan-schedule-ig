@@ -1,31 +1,23 @@
 == Suppressed Messages ==
 
 # 01 - Value sets and code systems defined in the base FHIR R6 specification
-Reference to deprecated ValueSet http://hl7.org/fhir/ValueSet/jurisdiction|6.0.0-ballot3
-Reference to experimental CodeSystem http://hl7.org/fhir/CodeSystem/fhirpath-types|6.0.0-ballot3
+Reference to experimental CodeSystem http://hl7.org/fhir/CodeSystem/fhirpath-types|6.0.0-ballot5
 
 # 02 - Bindings that are found in the base FHIR R6 specification
 Constraint failed: eld-31: 'additionalBindings should have a key (key.exists())' (defined in http://hl7.org/fhir/StructureDefinition/ElementDefinition) (Best Practice Recommendation)
 Constraint failed: eld-33: 'If there's more than one bindable type, it's usually an error for there to be a binding (type.where(code in 'code' | 'Coding' | 'CodeableConcept' | 'CodeableReference' | 'uri' | 'string' | 'Quantity').count() > 1 implies binding.empty())' (defined in http://hl7.org/fhir/StructureDefinition/ElementDefinition)
 
-# 03 - This is a new extension for R6 that the publisher is not finding
-The extension http://hl7.org/fhir/StructureDefinition/structuredefinition-implements could not be found so is not allowed here
-No definition could be found for URL value 'http://hl7.org/fhir/StructureDefinition/structuredefinition-implements'
-
-# 04 - We are using FHIR R6 but the publisher includes R5 packages
-This IG is version 6.0.0-ballot3, while the IG 'hl7.terminology.r5' is from version 5.0.0
-This IG is version 6.0.0-ballot3, while the IG 'hl7.fhir.uv.extensions.r5' is from version 5.0.0
-This IG is version 6.0.0-ballot3, while the IG 'hl7.fhir.uv.tools.r5' is from version 5.0.0
-The ImplementationGuide is based on FHIR version 6.0.0-ballot3 but package hl7.terminology.r5#7.1.0 is based on FHIR version 5.0.0. In general, this version mismatch should be avoided - some tools will try to make this work with variable degrees of success, but others will not even try
-The canonical URL http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions points to the package hl7.fhir.uv.extensions which is inconsistent with the stated packageId of hl7.fhir.uv.extensions.r5
-
-# 05 - This is an example Research Study and we are using some example URLs
+# 03 - This is an example Research Study and we are using some example URLs and codes
 No definition could be found for URL value 'https://clinicaltrials.gov/show/'
+None of the codings provided are in the value set 'ResearchStudyPurposeType' (http://terminology.hl7.org/ValueSet/research-study-purpose-type|2.0.0), and a coding is recommended to come from this value set (codes = http://terminology.hl7.org/CodeSystem/research-study-prim-purp-type#treatment)
 
-# 06 - This is the CodeSystem URL - see https://terminology.hl7.org/en/ECS_MR-MeSH.html
+# 04 - This is the CodeSystem URL - see https://terminology.hl7.org/en/ECS_MR-MeSH.html
 A definition for CodeSystem 'https://www.nlm.nih.gov/mesh' could not be found, so the code cannot be validated
 
-# 07 - We have a number of example Definition resources that use example URLs and names
+# 05 - We have a number of example Definition resources that use example URLs and names
 No definition could be found for URL value 'ActivityDefinition/H2Q-MC-LZZT%
 No definition could be found for URL value 'PlanDefinition/H2Q-MC-LZZT%
 Constraint failed: cnl-0: 'Name should be usable as an identifier for the module by machine processing applications such as code generation (name.exists() implies name.matches('^[A-Z]([A-Za-z0-9_]){1,254}$'))' (defined in http://hl7.org/fhir/StructureDefinition/PlanDefinition)
+
+# 06 - This is a code system used in the license field of the created IG resource, i.e. not specified by our artifacts directly
+Reference to draft CodeSystem http://hl7.org/fhir/spdx-license|84728b7

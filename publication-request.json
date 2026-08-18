@@ -1,9 +1,9 @@
 {
   "package-id" : "hl7.fhir.uv.vulcan-schedule",
-  "version" : "2.0.0-ballot",
-  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/2026May",
-  "status" : "ballot",
+  "version" : "2.0.0-snapshot",
+  "path" : "http://hl7.org/fhir/uv/vulcan-schedule/2.0.0-snapshot",
+  "status" : "preview",
   "sequence" : "STU2",
   "mode": "working",
-  "desc" : "This is the balloted version of the first release in the STU2 sequence."
+  "desc" : "STU 2.0.0 preview snapshot - based on FHIR R6 ballot 5, waiting for official FHIR 6 release."
 }

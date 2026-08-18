@@ -1,4 +1,4 @@
-# USDM to FHIR SoA Mapping
+### USDM to FHIR SoA Mapping
 
 This page documents the **mapping methodology** for transforming the Schedule of
 Activities portion of a CDISC Unified Study Definitions Model (USDM) source document
@@ -9,7 +9,7 @@ Vulcan Schedule of Activities specification.
 It is written as a **stack-independent reference for implementers** evaluating or
 adopting this IG — the mapping rules and structural principles described here apply
 regardless of the language, tooling, or ETL approach used to carry them out. A worked
-implementation is available for reference (§8).
+implementation is available for reference (9.8).
 
 This page is scoped to the **schedule of activities** itself — timelines, encounters,
 and activities. Mapping USDM's study-identity, design-metadata, and eligibility
@@ -18,7 +18,7 @@ the Digital Protocol (UDP) project's mapping guidance, not here.
 
 Note; the USDM is intended to represent the design of a Study; the Vulcan SoA is intentionally targeted towards operational outcomes.  This is a mismatch that needs to be accounted for when transforming the designs.
 
-## 1. The two models being reconciled
+### The two models being reconciled
 
 | | USDM | This IG's SoA profiles |
 |---|---|---|
@@ -26,14 +26,14 @@ Note; the USDM is intended to represent the design of a Study; the Vulcan SoA is
 | Root construct | `Study` → `StudyVersion` → `StudyDesign` | `ResearchStudy` + a tree of `PlanDefinition` instances |
 | Visit timing | `Encounter.scheduledAtId` → `Timing` (ISO 8601 durations, relative to another encounter) or `ScheduledActivityInstance` → `Encounter` and `Timing`  | `PlanDefinition.action.extension` (`soaTimepoint`) — absolute-from-anchor `Quantity`/`Range`, `relatedAction` |
 | Activity/visit linkage | `ScheduleTimeline` linked lists of `ScheduledActivityInstance` and `ScheduledDecisionInstance` nodes | `PlanDefinition.action` graph with `action.action` sub-actions and `relatedAction` or  `soaTransition` extension |
-| Activities | `Activity` classified indirectly via `BiomedicalConcept` / `BiomedicalConceptSurrogate` / `Procedures` | `ActivityDefinition` / `ObservationDefinition` / `Questionnaire`, selected by archetype (§4) |
+| Activities | `Activity` classified indirectly via `BiomedicalConcept` / `BiomedicalConceptSurrogate` / `Procedures` | `ActivityDefinition` / `ObservationDefinition` / `Questionnaire`, selected by archetype |
 
 Both models can describe the same clinical trial schedule but organize it around different
 primitives — USDM around **study design metadata with duration-based timing**, FHIR SoA
 around a **PlanDefinition action graph with day-offset timing extensions**. The mapping
 below is the reconciliation between the two.
 
-## 2. General transformation approach
+### General transformation approach
 
 Regardless of implementation stack, mapping a USDM schedule of activities into this
 IG's SoA profiles involves the same five conceptual steps:
@@ -44,11 +44,11 @@ IG's SoA profiles involves the same five conceptual steps:
    structures, and nearly every step below needs to resolve one.
 2. **Resolve encounter timing.** For each `ScheduledActivityInstance`, determine whether it is a
    timeline anchor or is timed relative to another scheduled instance/encounter, and convert its `Timing`
-   into the day-offset form the target extensions expect (§3).
+   into the day-offset form the target extensions expect (9.3).
 3. **Classify activities.** Assign each USDM `Activity` to one of the FHIR resource
-   archetypes it should be expressed as (§4).
+   archetypes it should be expressed as (9.4).
 4. **Traverse the schedule timeline** to build the visit × activity matrix — which
-   activities occur at which encounters (§5).
+   activities occur at which encounters (9.5).
 5. **Emit FHIR resources** — `PlanDefinition` per visit and for the master schedule,
    `ActivityDefinition` / `ObservationDefinition` / `Questionnaire` per classified
    activity — using the results of steps 2–4.
@@ -59,7 +59,7 @@ idempotent and safe to re-run as the source protocol changes.
 
 The USDM structure supports a native graph-based view of the encounters and activities; this leans into the representation suggested elsewhere in the IG.
 
-## 3. Encounters and visit timing
+### Encounters and visit timing
 
 This is the most structurally different part of the two models and the part most likely to need careful porting.  
 
@@ -67,7 +67,7 @@ It is important to make clear that the FHIR `Encounter` and USDM `Encounter` exi
 * USDM's `Encounter` is a planned, definitional visit: it lives inside a StudyDesign, has no subject, no actual date, no status. It describes what the protocol says will happen.
 * FHIR's `Encounter` resource is an execution-time record: Encounter.status (planned | in-progress | finished | …) and Encounter.subject are central to it. It describes what actually happened (or is currently happening) to one specific person.
 
-### 3.1 The `soaTimepoint` extension
+#### The `soaTimepoint` extension
 
 Visit timing is carried on `PlanDefinition.action.extension` using the `SOATimePoint`
 extension (`SoA-Profiles.fsh`), whose sub-extensions are the mapping target for USDM's
@@ -76,7 +76,7 @@ extension (`SoA-Profiles.fsh`), whose sub-extensions are the mapping target for 
 | `soaTimepoint` sub-extension | Type | Populated from |
 |---|---|---|
 | `soaTimePointType` | `string` | fixed `"interaction"` for encounter-level actions |
-| `soaTimePointSubType` | `string` | derived from `encounter.label` (see §3.4) |
+| `soaTimePointSubType` | `string` | derived from `encounter.label` (see 9.3.4) |
 | `soaPlannedTimePoint` | `SimpleQuantity` | `Timing.value` (ISO 8601 duration → days) |
 | `soaPlannedRange` | `Range` | `Timing.windowLower` / `Timing.windowUpper` (ISO 8601 → days) |
 | `soaReferenceTimePoint` | `string` | the **name** of the encounter the timing is relative to |
@@ -86,14 +86,14 @@ extension (`SoA-Profiles.fsh`), whose sub-extensions are the mapping target for 
 
 The `PlanDefinition.action.relatedAction` extension `AcceptableOffsetRangeSoa` can be also used; the semantics are much less expressive so the `soaTimepoint` is generally recommended.
 
-### 3.2 Resolution approach
+#### Resolution approach
 
 Scan through the `Timing` instances for the main timeline in the USDM to identify any fixed timepoints (called anchors in the USDM IG) and 
 look for the relevant `ScheduledActivityInstance` instances that reference the fixed timings (using the `Timing.relativeFromScheduledInstance` and 
 `Timing.type`).  From these, link to related `Encounter` to establish the timings.  Evaluate the `ScheduledActivityInstance.next` to evaluate the 
 next encounters/activities.  Also consider any `Encounter.scheduledAt` direct references to `Timing`.
 
-### 3.3 ISO 8601 duration conversion
+#### ISO 8601 duration conversion
 
 | Format | Example | Conversion |
 |---|---|---|
@@ -107,7 +107,7 @@ window) and must resolve to fractional-day `Quantity`/`Range` values rather than
 rejected — the target extensions use UCUM `d` throughout for a single consistent unit.  
 Follow the ordering from the `ScheduledActivityInstance.activityIds` as applicable.
 
-### 3.4 Timepoint Epoch Derivation
+#### Timepoint Epoch Derivation
 
 USDM uses the `StudyEpoch` class to represent groups of study encounters (via the `ScheduledActivityInstance`).  
 
@@ -120,9 +120,9 @@ The `StudyEpoch.type` can be used to represent the typeA representative mapping:
 | "Treatment Epoch" | `treatment` |
 | *(anything else)* | `planned` |
 
-The [`groupingBehaviour`](https://build.fhir.org/plandefinition-definitions.html#PlanDefinition.action.groupingBehavior) can be used to support the intended usage of the `StudyEpoch` (the default value of `locgical-group` will suffice for most scenarios) 
+The [`groupingBehaviour`](https://build.fhir.org/plandefinition-definitions.html#PlanDefinition.action.groupingBehavior) can be used to support the intended usage of the `StudyEpoch` (the default value of `logical-group` will suffice for most scenarios) 
 
-### 3.5 Transitions between visits
+#### Transitions between visits
 
 Graph edges between consecutive visits (used for scheduling logic beyond the simple
 `relatedAction` offset — e.g. conditional wait rules) are carried as a sub-action using
@@ -139,12 +139,12 @@ the `SOATransition` extension:
 These should all be based on asserted edges from the source USDM document; through linked `ScheduledActivityInstance` and `ScheduledDecisionInstance` instances.  The batching of activities within the `ScheduledActivityInstance`
 fits the workflow based view of the SoA driven by this IG; this is one of the powerful advantages of the FHIR workflow patterns that could reflect operations at healthcare sites.
 
-### 3.6 Dynamic scheduling: decision nodes and conditions
+#### Dynamic scheduling: decision nodes and conditions
 
 Not every fork in a schedule is a simple sequential visit-to-visit transition. USDM
 represents conditional branching within a `ScheduleTimeline` using a second node type,
 `ScheduledDecisionInstance`, interleaved with the `ScheduledActivityInstance` nodes
-covered in §5. A decision instance is not itself a visit or an activity — it carries no
+covered in 9.5. A decision instance is not itself a visit or an activity — it carries no
 `encounterId` and no `activityIds` — it is purely a fork in the graph:
 
 - `defaultConditionId` on the decision node names the default (unconditional) next node
@@ -165,7 +165,7 @@ redistribute its branching semantics onto the actions on either side of it:
   unconditioned, since it is the pathway taken when no alternate condition applies.
   Note: the `Condition.text` could be transformed to FHIR evaluations using [FHIRPath](https://www.hl7.org/fhir/fhirpath.html) or [CQL](https://build.fhir.org/ig/HL7/cql/)
 - **Graph connectivity through the fork is still carried as a `relatedAction` /
-  `soaTransition` edge**, as in §3.5 — but pointing from the pre-decision action
+  `soaTransition` edge**, as in 9.3.5 — but pointing from the pre-decision action
   directly to each downstream branch target, skipping the decision node's own id.
   Implementers may want to distinguish these edges from ordinary sequential
   transitions (for example, a dedicated `soaTransitionType` value rather than the
@@ -178,7 +178,7 @@ redistribute its branching semantics onto the actions on either side of it:
   condition as descriptive rather than assuming it is machine-evaluable without further
   authoring, unless the source study supplies a more structured expression.
 
-## 4. Activity expansion and classification
+### Activity expansion and classification
 
 Each USDM `Activity` maps to one of three FHIR resource shapes, chosen by a strict
 precedence order:
@@ -188,7 +188,7 @@ precedence order:
   `BiomedicalConcept`.
 - **Else has `bcSurrogateIds`?** → archetype = **instrument**. Emit a `Questionnaire`
   shell plus a scored `ObservationDefinition`. USDM carries no machine-readable
-  PRO/ClinRO flag, so the respondent type (§4.2) must come from an external source.
+  PRO/ClinRO flag, so the respondent type (9.4.2) must come from an external source.
 - **Else has a `definedProcedures` entry with a non-null code?** → archetype =
   **procedure**. Emit an `ActivityDefinition` only (no
   `observationResultRequirement`).
@@ -200,7 +200,7 @@ present on the same activity (this happens for procedures with an associated res
 e.g. a physical examination), `biomedicalConceptIds` wins and the activity is treated
 as a measurement.
 
-### 4.1 Biomedical concept expansion: `observationResultRequirement`
+#### Biomedical concept expansion: `observationResultRequirement`
 
 A single `BiomedicalConcept` usually decomposes into more than one discrete result, and
 that granularity matters: it is what lets a consumer know exactly what data an activity
@@ -232,7 +232,7 @@ performed — a precondition, not a result. The two elements should be populated
 independently even where, for a given activity, the answer happens to involve the same
 underlying concept.
 
-### 4.2 PRO vs. clinician-rated instruments
+#### PRO vs. clinician-rated instruments
 
 `instrument`-archetype activities all emit a `Questionnaire`, but downstream consumers
 need to know **who answers it** — a self-report Patient-Reported Outcome behaves
@@ -248,7 +248,7 @@ approach, not a normative vocabulary:
 | `practitioner` | Clinician-administered scale | MMSE, Hachinski Ischemic Scale, ADAS-Cog, CIBIC+, Demographics, Apo E Genotype |
 | `related-person` | Caregiver/informant-completed | DAD, NPI-X |
 
-### 4.3 Code enrichment
+#### Code enrichment
 
 USDM-sourced codes should be treated as the **primary** `ActivityDefinition.code.coding[]`
 / `ObservationDefinition.code.coding[]` entry. Supplementary codes (typically SNOMED CT
@@ -268,14 +268,14 @@ looks. One illustrative way to track this, useful for reviewer visibility:
 | `manual` | No confident match; a human must supply or verify the code |
 | `skipped` | Administrative activity; no clinical code expected (e.g. "Patient number assigned") |
 
-## 5. Visit × activity schedule construction
+### Visit × activity schedule construction
 
 1. **Primary mechanism** — traverse `ScheduleTimeline.instances[]`
    (`ScheduledActivityInstance` and `ScheduledDecisionInstance` nodes) on the timeline
    flagged `mainTimeline = true`, starting at `ScheduleTimeline.entryId`. Nodes are
    chained via `defaultConditionId` — each node names the id of the next node in
    sequence — rather than the `previousId`/`nextId` pair used for the `Encounter`
-   chain (§3.2); do not assume the two chains use the same linking fields. Each
+   chain (9.3.2); do not assume the two chains use the same linking fields. Each
    `ScheduledActivityInstance`'s `encounterId` and `activityIds[]` together say which
    activities are scheduled at which encounter. **Multiple nodes can point at the same
    encounter** (e.g. a base visit node plus a sub-node for a conditional assessment) —
@@ -292,13 +292,13 @@ looks. One illustrative way to track this, useful for reviewer visibility:
 4. **Decision nodes** (`ScheduledDecisionInstance` — no `encounterId`/`activityIds` of
    its own) are not visit or activity nodes and get no `PlanDefinition.action`.
    Traverse through them transparently, redistributing their branch conditions onto
-   the downstream actions as described in §3.6, rather than letting the branch
+   the downstream actions as described in 9.3.6, rather than letting the branch
    silently disappear.
 5. Track — but do not fail the mapping on — any catalog activity that resolves to
    zero encounters; an activity with no scheduled occurrence anywhere is very likely a
    data problem in the source, not a valid case to encode.
 
-## 6. Known gaps and dispositions
+### Known gaps and dispositions
 
 Some USDM constructs relevant to the schedule of activities have no direct home in the
 current SoA profiles. These are not defects in the mapping — they are places where the
@@ -310,11 +310,11 @@ USDM can express. Each should be revisited as the profiles mature.
 | `encounter.contactModes[]` (e.g. IN PERSON, TELEPHONE CALL) | Workaround: encode as `action.code` using the source coded value; flag at the point of use | No element for contact mode exists on `SOAPlanDefinition` today. **Proposed for a future profile version:** a `soaContactMode` sub-extension on `SOATimePoint`. |
 | Early Termination visit with no `Encounter` object | Synthesize a visit from the ET timeline's activity list, with no timing extension values, and record that it was synthesized | ET is expressed in USDM as a timeline exit path, not a scheduled encounter, but every implementation needs an ET visit artifact to reference |
 | Retreatment visit with no USDM data at all | Do not generate; keep any existing hand-authored equivalent as the source of truth for that visit | There is nothing in USDM to derive it from |
-| `ScheduledDecisionInstance` branching nodes | Skip the decision node itself in timeline traversal (§3.6, §5.4); represent each branch's condition via `action.condition[+].kind = #applicability` on the downstream action | No FHIR timeline-node equivalent for the decision node itself; the condition it carries does map |
+| `ScheduledDecisionInstance` branching nodes | Skip the decision node itself in timeline traversal (9.3.6, 9.5.4); represent each branch's condition via `action.condition[+].kind = #applicability` on the downstream action | No FHIR timeline-node equivalent for the decision node itself; the condition it carries does map |
 | Intra-visit sub-timings (sub-minute/sub-hour procedure sequencing within a single visit) | Out of scope for visit-level mapping; belongs in a sub-`PlanDefinition` scoped to the procedure | Visit-level timing extensions are not designed to carry procedure-sequencing detail |
 | `BiomedicalConceptCategory` (panels grouping several concepts, e.g. a chemistry panel) | Map to a panel-kind `ObservationDefinition` with member analytes referencing it via `hasMember` | Matches the existing FHIR panel pattern |
 
-## 7. General implementation guidance
+### General implementation guidance
 
 For an implementer porting this approach to a different USDM source or a different
 target stack, the mapping reduces to five ordered principles:
@@ -342,7 +342,7 @@ target stack, the mapping reduces to five ordered principles:
    human-reviewed.** Never let an automated terminology match silently become an
    activity's primary code.
 
-## 8. Further reading
+### Further reading
 
 - [phuse-org/fhir-schedule-of-activities-ig](https://github.com/phuse-org/fhir-schedule-of-activities-ig)
   — sample transform implementation (`scripts/usdm_to_soa.py`) for a worked example of
