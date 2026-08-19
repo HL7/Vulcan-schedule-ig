@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<specification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ballotUrl="http://hl7.org/fhir/uv/vulcan-schedule/2026May" ciUrl="https://build.fhir.org/ig/HL7/Vulcan-schedule-ig" defaultVersion="1.0.0" defaultWorkgroup="brr" gitUrl="https://github.com/HL7/Vulcan-schedule-ig" url="http://hl7.org/fhir/uv/vulcan-schedule">
+<specification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ballotUrl="http://hl7.org/fhir/uv/vulcan-schedule/2026May" ciUrl="https://build.fhir.org/ig/HL7/Vulcan-schedule-ig" defaultVersion="2.0.0" defaultWorkgroup="brr" gitUrl="https://github.com/HL7/Vulcan-schedule-ig" url="http://hl7.org/fhir/uv/vulcan-schedule">
 <version code="current" url="https://build.fhir.org/ig/HL7/Vulcan-schedule-ig"/>
 <version code="2.0.0-snapshot" url="http://hl7.org/fhir/uv/vulcan-schedule/2.0.0-snapshot"/>
 <version code="2.0.0-ballot" deprecated="true" url="http://hl7.org/fhir/uv/vulcan-schedule/2026May"/>
