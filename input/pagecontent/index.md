@@ -1,3 +1,6 @@
+>This is a snapshot of v2.0.0 of the Schedule of Activities FHIR Specification.  It has been developed against FHIR R6 ballot 5.  As such time that FHIR R6 becomes an offical HL7 specification, this snapshot will be converted to depend on the official FHIR R6 and this snapshot will no longer be available.
+{: .stu-note}
+
 ### Background
 
 #### Vulcan Schedule of Activities (SoA) Project
